@@ -11,6 +11,7 @@ export default class CreateCharacter extends Component {
     name: "",
     level: 1,
     race: "",
+    size: "",
     background: {
       title: "",
       characteristic: "",
@@ -26,6 +27,11 @@ export default class CreateCharacter extends Component {
       max: 0,
       current: 0,
       temp: 0,
+    },
+    defenses: {
+      resistances: "",
+      immunities: "",
+      vulnerabilities: ""
     },
     death_saves: {
       pass: 0,
@@ -144,9 +150,15 @@ export default class CreateCharacter extends Component {
       name,
       level,
       race,
+      size,
       background: { title, characteristic },
       class: [{ main, class_level, subclass }],
       hp: { max, current, temp },
+      defenses: {
+        resistances,
+        immunities,
+        vulnerabilities
+      },
       death_saves: { pass, fail },
       ac,
       speed,
@@ -196,6 +208,7 @@ export default class CreateCharacter extends Component {
       name,
       level,
       race,
+      size,
       background: { title, characteristic },
       class: [
         {
@@ -205,6 +218,11 @@ export default class CreateCharacter extends Component {
         },
       ],
       hp: { max, current, temp },
+      defenses: {
+        resistances,
+        immunities,
+        vulnerabilities
+      },
       death_saves: { pass, fail },
       ac,
       speed,

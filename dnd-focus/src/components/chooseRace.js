@@ -24,7 +24,8 @@ const ChooseRace = ({ nextStep, handleChange, values }) => {
             defaultValue={values.name}
             required
           />
-          <InputLabel id="level-select-label">Age</InputLabel>
+
+          <InputLabel id="level-select-label">Level</InputLabel>
           <Select
             labelId="level-select-label"
             id="level-select"
@@ -55,6 +56,36 @@ const ChooseRace = ({ nextStep, handleChange, values }) => {
             <MenuItem value={19}>19</MenuItem>
             <MenuItem value={20}>20</MenuItem>
           </Select>
+
+          <InputLabel id="race-text-label">Race</InputLabel>
+          <TextField
+          labelId="race-text-label"
+          id="race-text"
+            placeholder="Race"
+            onChange={handleChange("race")}
+            defaultValue={values.race}
+            required
+          />
+
+          <InputLabel id="speed-text-label">Speed</InputLabel>
+          <TextField
+          labelId="speed-text-label"
+          id="speed-text"
+            placeholder="Speed"
+            onChange={handleChange("speed")}
+            defaultValue={values.speed}
+            required
+          />
+
+<InputLabel id="size-text-label">Size</InputLabel>
+          <TextField
+          labelId="size-text-label"
+          id="size-text"
+            placeholder="Size"
+            onChange={handleChange("size")}
+            defaultValue={values.size}
+            required
+          />
       </form>
       <div>
         <Button variant="contained" onClick={Continue}>
@@ -67,5 +98,114 @@ const ChooseRace = ({ nextStep, handleChange, values }) => {
 
 export default ChooseRace;
 
-//https://blog.devgenius.io/create-a-multi-step-form-with-reactjs-322aa97a2968#7406
-// step 7a
+//     background: {
+//       title: "",
+//       characteristic: "",
+//     },
+//     class: [
+//       {
+//         main: true,
+//         class_level: 1,
+//         subclass: "",
+//       },
+//     ],
+//     hp: {
+//       max: 0,
+//       current: 0,
+//       temp: 0,
+//     },
+// defenses: {
+//   resistances,
+//   immunities,
+//   vulnerabilities
+//     death_saves: {
+//       pass: 0,
+//       fail: 0,
+//     },
+//     ac: 10,
+//     initiative: 0,
+//     proficiency_bonus: 2,
+//     stats: {
+//       str: 10,
+//       temp_str: 10,
+//       agi: 10,
+//       temp_agi: 10,
+//       con: 10,
+//       temp_con: 10,
+//       int: 10,
+//       temp_int: 10,
+//       wis: 10,
+//       temp_wis: 10,
+//       cha: 10,
+//       temp_cha: 10,
+//     },
+//     saves: {
+//       str_save: 10,
+//       agi_save: 10,
+//       con_save: 10,
+//       int_save: 10,
+//       wis_save: 10,
+//       cha_save: 10,
+//     },
+//     skills: {
+//       all: ["athletics"],
+//       proficient: ["acrobatics"],
+//       expert: ["stealth"],
+//     },
+//     passives: {
+//       perception: 10,
+//       investigation: 10,
+//       insight: 10,
+//     },
+//     features: [
+//       {
+//         feature_name: "",
+//         source: "",
+//         description: "",
+//         uses: "",
+//         recharge: "",
+//       },
+//     ],
+//     attacks: [
+//       {
+//         weapon: "",
+//         attack_bonus: 0,
+//         damage_bonus: 0,
+//         damage: "1d6",
+//         damage_type: "",
+//         range: "",
+//         tags: "",
+//       },
+//     ],
+//     magic: {
+//       save_dc: 10,
+//       spell_attack_bonus: 0,
+//       ability: "",
+//     },
+//     items: [
+//       {
+//         item_name: "",
+//         quantity: 1,
+//         value_each: 1,
+//         value_total: 1,
+//       },
+//     ],
+//     proficiencies: {
+//       languages: "",
+//       weapons: "",
+//       armour: "",
+//       other: "",
+//     },
+//     equipment: [
+//       {
+//         equipment_name: "",
+//         desc: "",
+//       },
+//     ],
+//     personality: {
+//       trait1: "",
+//       trait2: "",
+//       ideal: "",
+//       bond: "",
+//       flaw: "",
+//     },
