@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import CreateCharacter from "./components/createCharacter";
+import CreatePage from "./components/CharacterCreate/createPage";
 import { Container } from "@material-ui/core";
 
 function App() {
+
   return (
     <div className="App">
       <Container maxWidth="sm">
         <h1>App</h1>
-        <CreateCharacter />
+        <CreatePage />
       </Container>
     </div>
   );

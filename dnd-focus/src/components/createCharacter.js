@@ -6,126 +6,140 @@ import ChooseRace from "./chooseRace";
 import Success from "./success";
 
 export default class CreateCharacter extends Component {
-  state = {
-    step: 1,
-    name: "",
-    level: 1,
-    race: "",
-    size: "",
-    background: {
-      title: "",
-      characteristic: "",
-    },
-    class: [
-      {
-        main: true,
-        class_level: 1,
-        subclass: "",
+  constructor(props) {
+    super(props);
+    this.state = {
+      step: 1,
+      name: "",
+      level: 1,
+      race: "",
+      size: "",
+      alignment: "",
+      background: {
+        title: "",
+        characteristic: "",
       },
-    ],
-    hp: {
-      max: 0,
-      current: 0,
-      temp: 0,
-    },
-    defenses: {
-      resistances: "",
-      immunities: "",
-      vulnerabilities: ""
-    },
-    death_saves: {
-      pass: 0,
-      fail: 0,
-    },
-    ac: 10,
-    speed: 30,
-    initiative: 0,
-    proficiency_bonus: 2,
-    stats: {
-      str: 10,
-      temp_str: 10,
-      agi: 10,
-      temp_agi: 10,
-      con: 10,
-      temp_con: 10,
-      int: 10,
-      temp_int: 10,
-      wis: 10,
-      temp_wis: 10,
-      cha: 10,
-      temp_cha: 10,
-    },
-    saves: {
-      str_save: 10,
-      agi_save: 10,
-      con_save: 10,
-      int_save: 10,
-      wis_save: 10,
-      cha_save: 10,
-    },
-    skills: {
-      all: ["athletics"],
-      proficient: ["acrobatics"],
-      expert: ["stealth"],
-    },
-    passives: {
-      perception: 10,
-      investigation: 10,
-      insight: 10,
-    },
-    features: [
-      {
-        feature_name: "",
-        source: "",
-        description: "",
-        uses: "",
-        recharge: "",
+      classes: [
+        {
+          class_id: 1,
+          main: true,
+          class_level: 1,
+          subclass: "",
+        },
+      ],
+      hp: {
+        max: 0,
+        current: 0,
+        temp: 0,
       },
-    ],
-    attacks: [
-      {
-        weapon: "",
-        attack_bonus: 0,
-        damage_bonus: 0,
-        damage: "1d6",
-        damage_type: "",
-        range: "",
-        tags: "",
+      defenses: {
+        resistances: "none",
+        immunities: "none",
+        vulnerabilities: "none",
       },
-    ],
-    magic: {
-      save_dc: 10,
-      spell_attack_bonus: 0,
-      ability: "",
-    },
-    items: [
-      {
-        item_name: "",
-        quantity: 1,
-        value_each: 1,
-        value_total: 1,
+      death_saves: {
+        pass: 0,
+        fail: 0,
       },
-    ],
-    proficiencies: {
-      languages: "",
-      weapons: "",
-      armour: "",
-      other: "",
-    },
-    equipment: [
-      {
-        equipment_name: "",
-        desc: "",
+      ac: 10,
+      speed: 30,
+      initiative: 0,
+      proficiency_bonus: 2,
+      stats: {
+        str: 10,
+        temp_str: 10,
+        agi: 10,
+        temp_agi: 10,
+        con: 10,
+        temp_con: 10,
+        int: 10,
+        temp_int: 10,
+        wis: 10,
+        temp_wis: 10,
+        cha: 10,
+        temp_cha: 10,
       },
-    ],
-    personality: {
-      trait1: "",
-      trait2: "",
-      ideal: "",
-      bond: "",
-      flaw: "",
-    },
+      saves: {
+        save_str: 10,
+        save_agi: 10,
+        save_con: 10,
+        save_int: 10,
+        save_wis: 10,
+        save_cha: 10,
+      },
+      skills: {
+        all: ["athletics"],
+        proficient: ["acrobatics"],
+        expert: ["stealth"],
+      },
+      passives: {
+        senses: "Darkvision 60ft",
+        perception: 10,
+        investigation: 10,
+        insight: 10,
+      },
+      features: [
+        {
+          feature_id: 1,
+          feature_name: "1",
+          source: "race",
+          description: "racial",
+          uses: "1",
+          recharge: "rest",
+        },
+      ],
+      attacks: [
+        {
+          attack_id: 1,
+          weapon: "",
+          attack_bonus: 0,
+          damage_bonus: 0,
+          damage: "1d6",
+          damage_type: "",
+          range: "",
+          tags: "",
+        },
+      ],
+      magic: {
+        save_dc: 10,
+        spell_attack_bonus: 0,
+        ability: "",
+      },
+      items: [
+        {
+          item_id: 1,
+          item_name: "",
+          quantity: 1,
+          value_each: 1,
+          value_total: 1,
+        },
+      ],
+      proficiencies: {
+        languages: "",
+        weapons: "",
+        armour: "",
+        other: "",
+      },
+      equipment: [
+        {
+          equipment_id: 1,
+          equipment_name: "",
+          desc: "",
+        },
+      ],
+      personality: {
+        trait1: "",
+        trait2: "",
+        ideal: "",
+        bond: "",
+        flaw: "",
+      },
+    };
+    this.handleChange = this.handleChange.bind(this)
+    console.log("set state:", this.state);
   }
+
+  
 
   // go to previous step
   prevStep = () => {
@@ -140,51 +154,85 @@ export default class CreateCharacter extends Component {
   };
 
   // handle field change
-  handleChange = (input) => (e) => {
+  handleChange = (input) => (e) => {    
     this.setState({ [input]: e.target.value });
-  };
+    };
+
+  //   console.log("handle target: ", e.target.value);
+  //   console.log("handle input: ", input);
+  //   // console.log(this.state.character);
+  //   // console.log(this.character);
+  //   console.log("handle state:", this.state);
+  //   // console.log("state: " + this.state);
+  //   console.log("handle step: " + this.state.step);
+  // };
+
+  // handleAddToArray = (input) => (e) => {
+  //   this.setState({
+  //     ...this.state,
+  //     [input]: e.target.value,
+  //   });
+  // };
+
+  // handleAllChange(e) {
+  //   setCharacter({
+  //     ...character,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // }
 
   render() {
+    console.log("render state", this.state);
+    // const [character, setCharacter] = useState({});
+    
+
     const { step } = this.state;
     const {
       name,
       level,
       race,
       size,
-      background: { title, characteristic },
+      alignment,
+      background: { background_title, background_characteristic },
       class: [{ main, class_level, subclass }],
-      hp: { max, current, temp },
-      defenses: {
-        resistances,
-        immunities,
-        vulnerabilities
-      },
-      death_saves: { pass, fail },
+      hp: { hp_max, 
+        hp_current, 
+        hp_temp, },
+      defenses: { defenses_resistances,
+        defenses_immunities,
+        defenses_vulnerabilities, },
+      death_saves: { death_saves_pass, 
+        death_saves_fail, },
       ac,
       speed,
       initiative,
       proficiency_bonus,
       stats: {
-        str,
+        stats_str,
         temp_str,
-        agi,
+        stats_agi,
         temp_agi,
-        con,
+        stats_con,
         temp_con,
-        int,
+        stats_int,
         temp_int,
-        wis,
+        stats_wis,
         temp_wis,
-        cha,
+        stats_cha,
         temp_cha,
       },
-      saves: { str_save, agi_save, con_save, int_save, wis_save, cha_save },
+      saves: { saves_str, 
+        saves_agi, 
+        saves_con, 
+        saves_int, 
+        saves_wis, 
+        saves_cha, },
       skills: {
         all: [],
         proficient: [],
         expert: [],
       },
-      passives: { perception, investigation, insight },
+      passives: { perception, investigation, insight, senses },
       features: [{ feature_name, source, description, uses, recharge }],
       attacks: [
         {
@@ -204,51 +252,52 @@ export default class CreateCharacter extends Component {
       personality: { trait1, trait2, ideal, bond, flaw },
     } = this.state;
 
-    const values = {
+    const character = {
       name,
       level,
       race,
       size,
-      background: { title, characteristic },
-      class: [
-        {
-          main,
-          class_level,
-          subclass,
-        },
-      ],
-      hp: { max, current, temp },
-      defenses: {
-        resistances,
-        immunities,
-        vulnerabilities
-      },
-      death_saves: { pass, fail },
+      alignment,
+      background: { background_title, background_characteristic },
+      class: [{ main, class_level, subclass }],
+      hp: { hp_max, 
+        hp_current, 
+        hp_temp, },
+      defenses: { defenses_resistances,
+        defenses_immunities,
+        defenses_vulnerabilities, },
+      death_saves: { death_saves_pass, 
+        death_saves_fail, },
       ac,
       speed,
       initiative,
       proficiency_bonus,
       stats: {
-        str,
+        stats_str,
         temp_str,
-        agi,
+        stats_agi,
         temp_agi,
-        con,
+        stats_con,
         temp_con,
-        int,
+        stats_int,
         temp_int,
-        wis,
+        stats_wis,
         temp_wis,
-        cha,
+        stats_cha,
         temp_cha,
       },
-      saves: { str_save, agi_save, con_save, int_save, wis_save, cha_save },
+      saves: { saves_str, 
+        saves_agi, 
+        saves_con, 
+        saves_int, 
+        saves_wis, 
+        saves_cha, },
       skills: {
         all: [],
         proficient: [],
         expert: [],
       },
-      passives: { perception, investigation, insight },
+      passives: { perception, investigation, insight, senses },
       features: [{ feature_name, source, description, uses, recharge }],
       attacks: [
         {
@@ -268,13 +317,17 @@ export default class CreateCharacter extends Component {
       personality: { trait1, trait2, ideal, bond, flaw },
     };
 
+    console.log("render character", character);
+
     switch (step) {
       case 1:
         return (
           <ChooseRace
             nextStep={this.nextStep}
             handleChange={this.handleChange}
-            values={values}
+            handleAllChange={this.handleAllChange}
+            handleAddToArray={this.handleAddToArray}
+            character={character}
           />
         );
       case 2:
@@ -283,7 +336,9 @@ export default class CreateCharacter extends Component {
             prevStep={this.prevStep}
             nextStep={this.nextStep}
             handleChange={this.handleChange}
-            values={values}
+            handleAllChange={this.handleAllChange}
+            handleAddToArray={this.handleAddToArray}
+            character={character}
           />
         );
       case 3:
@@ -292,7 +347,7 @@ export default class CreateCharacter extends Component {
             prevStep={this.prevStep}
             nextStep={this.nextStep}
             handleChange={this.handleChange}
-            values={values}
+            character={character}
           />
         );
       case 4:
@@ -300,7 +355,7 @@ export default class CreateCharacter extends Component {
           <CharacterConfirm
             prevStep={this.prevStep}
             nextStep={this.nextStep}
-            values={values}
+            character={character}
           />
         );
       case 5:

@@ -1,7 +1,7 @@
 import React from "react";
 import { ButtonGroup, TextField, Button, FormControl } from "@material-ui/core";
 
-const ChooseBackground = ({ prevStep, nextStep, handleChange, values }) => {
+const ChooseBackground = ({ prevStep, nextStep, handleChange, character }) => {
   const Continue = (e) => {
     e.preventDefault();
     nextStep();
@@ -19,7 +19,7 @@ const ChooseBackground = ({ prevStep, nextStep, handleChange, values }) => {
           placeholder="Name"
           label="Name"
           onChange={handleChange("name")}
-          defaultValue={values.name}
+          defaultValue={character.name}
         />
       </FormControl>
       <ButtonGroup variant="contained">
