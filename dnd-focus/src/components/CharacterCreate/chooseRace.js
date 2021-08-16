@@ -29,6 +29,15 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
     nextStep();
   };
 
+  const getModifier = (stat) => {
+    let mod = Math.floor((stat - 10) / 2);
+    if (mod > 0) {
+      return "+" + mod;
+    } else {
+      return mod;
+    }
+  };
+
   return (
     <div>
       {/* <AddFeatureModal /> */}
@@ -45,6 +54,11 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
         </a>
       </p>
       <Box sx={{ flexGrow: 2 }}>
+        <div>
+          <Button variant="contained" onClick={Continue}>
+            Next
+          </Button>
+        </div>
         {/* <Grid container spacing={2}> */}
         <FormControl margin="normal">
           <Grid item xs={12} md={6}>
@@ -116,7 +130,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
             <h3>Ability Scores</h3>
             {/* <Grid item xs={4} md={2}> */}
             <Item>
-              <label htmlFor="str">Strength:</label>
+              <label>Strength:</label>
               <input
                 type="number"
                 id="str"
@@ -126,11 +140,12 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
                 size="3"
                 required
               />
+              <span>&emsp; {getModifier(character.stats.str)}</span>
             </Item>
             {/* </Grid> */}
             {/* <Grid item xs={4} md={2}> */}
             <Item>
-              <label htmlFor="dex">Dexterity:</label>
+              <label>Dexterity:</label>
               <input
                 type="number"
                 id="dex"
@@ -140,6 +155,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
                 size="3"
                 required
               />
+              <span>&emsp; {getModifier(character.stats.dex)}</span>
             </Item>
             {/* </Grid> */}
             {/* <Grid item xs={4} md={2}> */}
@@ -154,6 +170,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
                 size="3"
                 required
               />
+              <span>&emsp; {getModifier(character.stats.con)}</span>
             </Item>
             {/* </Grid> */}
             {/* <Grid item xs={4} md={2}> */}
@@ -168,6 +185,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
                 size="3"
                 required
               />
+              <span>&emsp; {getModifier(character.stats.int)}</span>
             </Item>
             {/* </Grid> */}
             {/* <Grid item xs={4} md={2}> */}
@@ -182,6 +200,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
                 size="3"
                 required
               />
+              <span>&emsp; {getModifier(character.stats.wis)}</span>
             </Item>
             {/* </Grid> */}
             {/* <Grid item xs={4} md={2}> */}
@@ -196,6 +215,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
                 size="3"
                 required
               />
+              <span>&emsp; {getModifier(character.stats.cha)}</span>
             </Item>
             {/* </Grid> */}
           </Item>
@@ -246,8 +266,8 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
             <Item>
               <AddFeatureModal
                 addFeature={addFeature}
-                featureLength={character.features.length}
               />
+              <h3>Features & abilities</h3>
               {character.features.map((feature) => (
                 <h4 key={feature.feature_id + feature.feature_name}>
                   {feature.feature_name}
@@ -256,7 +276,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
             </Item>
           </Grid>
           <Item>
-            <label>Defences</label>
+            <h3>Defences</h3>
             <Item>
               <label>
                 Resistances:
@@ -310,82 +330,91 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
           </Item>
 
           <Item>
-            <label>Proficiencies</label>
+            <h3>Proficiencies</h3>
             <Item>
               <label>
                 Languages:
-                <input
+                <textarea
                   type="text"
                   id="languages"
                   placeholder="Common and...?"
                   name="proficiencies.languages"
                   value={character.proficiencies.languages}
                   onChange={onCharacterChange}
+                  cols="40"
+                  rows="2"
                 />
               </label>
             </Item>
             <Item>
               <label>
                 Weapons:
-                <input
+                <textarea
                   type="text"
                   id="weapons"
                   placeholder="Simple and...?"
                   name="proficiencies.weapons"
                   value={character.proficiencies.weapons}
                   onChange={onCharacterChange}
+                  cols="40"
+                  rows="2"
                 />
               </label>
             </Item>
             <Item>
               <label>
                 Armour:
-                <input
+                <textarea
                   type="text"
                   id="armour"
                   placeholder="Light and...?"
                   name="proficiencies.armour"
                   value={character.proficiencies.armour}
                   onChange={onCharacterChange}
+                  cols="40"
+                  rows="2"
                 />
               </label>
             </Item>
             <Item>
               <label>
                 Other:
-                <input
+                <textarea
                   type="text"
                   id="other"
                   placeholder="Instruments, games, vehicles...?"
                   name="proficiencies.other"
                   value={character.proficiencies.other}
                   onChange={onCharacterChange}
+                  cols="40"
+                  rows="2"
                 />
               </label>
             </Item>
           </Item>
 
           <Item>
-              <label>
-                Proficient skills:
-                <input
-                  type="text"
-                  id="proficient"
-                //   placeholder="Athletics, persuasion..."
-                  name="skills.proficient"
-                  value={character.skills.proficient}
-                  onChange={onCharacterChange}
-                />
-              </label>
-            </Item>
-
+            <label>
+              Proficient skills:
+              <textarea
+                type="text"
+                id="proficient"
+                placeholder="Athletics, persuasion..."
+                name="skills.proficient"
+                value={character.skills.proficient}
+                onChange={onCharacterChange}
+                cols="40"
+                rows="3"
+              />
+            </label>
+          </Item>
         </FormControl>
         {/* </Grid> */}
         <div>
-        <Button variant="contained" onClick={Continue}>
-          Next
-        </Button>
-      </div>
+          <Button variant="contained" onClick={Continue}>
+            Next
+          </Button>
+        </div>
       </Box>
     </div>
   );

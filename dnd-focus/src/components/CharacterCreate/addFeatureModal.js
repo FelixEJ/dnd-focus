@@ -26,15 +26,13 @@ const style = {
   p: 4,
 };
 
-const AddFeatureModal = ({ featureLength, addFeature }) => {
+const AddFeatureModal = ({ addFeature }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  let featID = featureLength + 1;
-  // let currUses = 0;
 
   const [feature, setFeature] = useState({
-    feature_id: featID,
+    feature_id: 0,
     level_acquired: 0,
     feature_name: "",
     source: "",
@@ -48,17 +46,28 @@ const AddFeatureModal = ({ featureLength, addFeature }) => {
     let name = e.target.name;
     let value = e.target.value;
     setFeature((prev) => ({ ...prev, [name]: value }));
-    e.preventDefault();    
+    e.preventDefault();
   };
 
   //sometimes duplicate feature id?
   function clearFeature() {
-    setFeature({feature_id: featID});
+    setFeature({
+      feature_id: 0,
+      level_acquired: 0,
+      feature_name: "",
+      source: "",
+      description: "",
+      max_uses: 0,
+      current_uses: 0,
+      recharge: "",
+    });
   }
 
   return (
     <div>
-      <Button onClick={handleOpen}>Add Feature</Button>
+      <Button variant="contained" onClick={handleOpen}>
+        Add Feature
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -69,7 +78,7 @@ const AddFeatureModal = ({ featureLength, addFeature }) => {
           <Grid item xs={12} md={6}>
             <h2>Edit Feature</h2>
             {/* <p>feature name:{feature.feature_name}</p> */}
-            <p>feat ID: {featID}</p>
+            {/* <p>feat ID: {featID}</p> */}
             <Item>
               <label>Level Acquired:</label>
               <input
@@ -133,7 +142,7 @@ const AddFeatureModal = ({ featureLength, addFeature }) => {
                 id="max_uses"
                 name="max_uses"
                 value={feature.max_uses}
-                onChange={(handleChange)}
+                onChange={handleChange}
                 size="3"
               />
             </Item>
@@ -155,12 +164,13 @@ const AddFeatureModal = ({ featureLength, addFeature }) => {
             </Item>
           </Grid>
           <Button
+            variant="contained"
             onClick={() => {
               addFeature(feature);
               clearFeature();
             }}
           >
-            add feature
+            Confirm Feature
           </Button>
         </Box>
       </Modal>

@@ -9,7 +9,7 @@ import Success from "./success";
 function CreatePage() {
   const [step, setStep] = useState(1);
   const [character, setCharacter] = useState({
-    name: "Bill",
+    name: "",
     level: 1,
     race: "",
     size: "",
@@ -18,6 +18,8 @@ function CreatePage() {
       title: "",
       characteristic: "",
     },
+    class: "",
+    subclass: "",
     classes: [
       {
         class_id: 1,
@@ -26,10 +28,12 @@ function CreatePage() {
         subclass: "",
       },
     ],
+    hit_dice: "",
     hp: {
       max: 0,
       current: 0,
       temp: 0,
+      temp_max: 0,
     },
     defences: {
       resistances: "none",
@@ -46,25 +50,31 @@ function CreatePage() {
     proficiency_bonus: 2,
     stats: {
       str: 10,
-      temp_str: 10,
+      temp_str: 0,
       dex: 10,
-      temp_dex: 10,
+      temp_dex: 0,
       con: 10,
-      temp_con: 10,
+      temp_con: 0,
       int: 10,
-      temp_int: 10,
+      temp_int: 0,
       wis: 10,
-      temp_wis: 10,
+      temp_wis: 0,
       cha: 10,
-      temp_cha: 10,
+      temp_cha: 0,
     },
     saves: {
-      save_str: 10,
-      save_dex: 10,
-      save_con: 10,
-      save_int: 10,
-      save_wis: 10,
-      save_cha: 10,
+      save_str: false,
+      save_str_bonus: 0,
+      save_dex: false,
+      save_dex_bonus: 0,
+      save_con: false,
+      save_con_bonus: 0,
+      save_int: false,
+      save_int_bonus: 0,
+      save_wis: false,
+      save_wis_bonus: 0,
+      save_cha: false,
+      save_cha_bonus: 0,
     },
     skills: {
       all: ["athletics"],
@@ -73,9 +83,9 @@ function CreatePage() {
     },
     passives: {
       senses: "Darkvision 60ft",
-      perception: 10,
-      investigation: 10,
-      insight: 10,
+      perception: 0,
+      investigation: 0,
+      insight: 0,
     },
     features: [
       {
@@ -85,17 +95,9 @@ function CreatePage() {
         source: "race",
         description: "racial",
         max_uses: 1,
-        current_uses: 0,
+        current_uses: 1,
         recharge: "rest",
-      },
-      {
-        feature_id: 2,
-        feature_name: "glare",
-        source: "race",
-        description: "racial",
-        uses: "1",
-        recharge: "rest",
-      },
+      },      
     ],
     attacks: [
       {
@@ -110,19 +112,50 @@ function CreatePage() {
       },
     ],
     magic: {
-      save_dc: 10,
+      save_dc: 0,
+      save_dc_bonus: 0,
+      spell_attack_mod: 0,
       spell_attack_bonus: 0,
       ability: "",
+      cantrips_known: 0,
+      spells_known: 0,
     },
-    items: [
+    spellslots: {
+      first: 0,
+      first_used: 0,
+      second: 0,
+      second_used: 0,
+      third: 0,
+      third_used: 0,
+      fourth: 0,
+      fourth_used: 0,
+      fifth: 0,
+      fifth_used: 0,
+      sixth: 0,
+      sixth_used: 0,
+      seventh: 0,
+      seventh_used: 0,
+      eighth: 0,
+      eighth_used: 0,
+      ninth: 0,
+      ninth_used: 0,
+    },
+    inventory: [
       {
         item_id: 1,
         item_name: "",
-        quantity: 1,
-        value_each: 1,
-        value_total: 1,
+        quantity: 0,
+        value_each: 0,
+        value_total: 0,
       },
     ],
+    currency: {
+      copper: 0,
+      silver: 0,
+      electrum: 0,
+      gold: 0,
+      platinum: 0,
+    },
     proficiencies: {
       languages: "",
       weapons: "",
@@ -133,6 +166,7 @@ function CreatePage() {
       {
         equipment_id: 1,
         equipment_name: "",
+        equipment_type: "",
         desc: "",
       },
     ],
@@ -157,6 +191,7 @@ function CreatePage() {
     pointer[finalProp] =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setCharacter(newCharacter);
+    console.log("new char", newCharacter);
   }
 
   function prevStep() {
@@ -169,11 +204,22 @@ function CreatePage() {
 
   function addFeature(newFeat) {
     const newFeature = newFeat;
+    newFeat.feature_id = character.features.length + 1;
     const newCharacter = {...character}
     // console.log("char copy:", newCharacter);
     const oldFeatures = newCharacter.features;
     oldFeatures.push(newFeature);
     // setCharacter({ features: [...character.features, oldFeatures]});
+    setCharacter(newCharacter);
+    console.log("new char", newCharacter);
+  }
+
+  function addEquipment(newEquip) {
+    const newEquipment = newEquip;
+    newEquip.equipment_id = character.equipment.length + 1;
+    const newCharacter = {...character};
+    const oldEquipment = newCharacter.equipment;
+    oldEquipment.push(newEquipment);
     setCharacter(newCharacter);
     console.log("new char", newCharacter);
   }
@@ -196,6 +242,7 @@ function CreatePage() {
           onCharacterChange={onCharacterChange}
           character={character}
           addFeature={addFeature}
+          addEquipment={addEquipment}
         />
       );
     case 3:
@@ -206,6 +253,7 @@ function CreatePage() {
           onCharacterChange={onCharacterChange}
           character={character}
           addFeature={addFeature}
+          addEquipment={addEquipment}
         />
       );
     case 4:
