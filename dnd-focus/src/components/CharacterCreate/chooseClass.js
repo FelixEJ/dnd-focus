@@ -45,12 +45,11 @@ const ChooseClass = ({
   return (
     <div>
       <h1>Choose Class:</h1>
-
+      <ButtonGroup variant="contained">
+        <Button onClick={Previous}>Back</Button>
+        <Button onClick={Continue}>Next</Button>
+      </ButtonGroup>
       <Box sx={{ flexGrow: 2 }}>
-        <ButtonGroup variant="contained">
-          <Button onClick={Previous}>Back</Button>
-          <Button onClick={Continue}>Next</Button>
-        </ButtonGroup>
         <FormControl margin="normal">
           <Item>
             <label>
@@ -164,7 +163,7 @@ const ChooseClass = ({
                 value={character.saves.save_str}
                 onChange={onCharacterChange}
               />
-              <label for="save_str">Strength</label>
+              <label htmlFor="save_str">Strength</label>
               <input
                 type="checkbox"
                 id="save_dex"
@@ -172,7 +171,7 @@ const ChooseClass = ({
                 value={character.saves.save_dex}
                 onChange={onCharacterChange}
               />
-              <label for="save_str">Dexterity</label>
+              <label htmlFor="save_str">Dexterity</label>
               <br></br>
               <input
                 type="checkbox"
@@ -181,7 +180,7 @@ const ChooseClass = ({
                 value={character.saves.save_con}
                 onChange={onCharacterChange}
               />
-              <label for="save_str">Constitution</label>
+              <label htmlFor="save_str">Constitution</label>
               <input
                 type="checkbox"
                 id="save_int"
@@ -189,7 +188,7 @@ const ChooseClass = ({
                 value={character.saves.save_int}
                 onChange={onCharacterChange}
               />
-              <label for="save_str">Intelligence</label>
+              <label htmlFor="save_str">Intelligence</label>
               <br></br>
               <input
                 type="checkbox"
@@ -198,7 +197,7 @@ const ChooseClass = ({
                 value={character.saves.save_wis}
                 onChange={onCharacterChange}
               />
-              <label for="save_str">Wisdom</label>
+              <label htmlFor="save_str">Wisdom</label>
               <input
                 type="checkbox"
                 id="save_cha"
@@ -206,7 +205,7 @@ const ChooseClass = ({
                 value={character.saves.save_cha}
                 onChange={onCharacterChange}
               />
-              <label for="save_str">Charisma</label>
+              <label htmlFor="save_str">Charisma</label>
               <br></br>
             </Item>
             <Item>
@@ -249,6 +248,7 @@ const ChooseClass = ({
                 value={character.magic.ability}
                 onChange={onCharacterChange}
               >
+                <option value={""}>NA</option>
                 <option value={"int"}>Intelligence</option>
                 <option value={"wis"}>Wisdom</option>
                 <option value={"cha"}>Charisma</option>
@@ -266,11 +266,11 @@ const ChooseClass = ({
             ))}
           </Item>
         </FormControl>
-        <ButtonGroup variant="contained">
-          <Button onClick={Previous}>Back</Button>
-          <Button onClick={Continue}>Next</Button>
-        </ButtonGroup>
       </Box>
+      <ButtonGroup variant="contained">
+        <Button onClick={Previous}>Back</Button>
+        <Button onClick={Continue}>Next</Button>
+      </ButtonGroup>
     </div>
   );
 };

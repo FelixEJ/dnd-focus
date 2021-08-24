@@ -61,7 +61,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
         </div>
         {/* <Grid container spacing={2}> */}
         <FormControl margin="normal">
-          <Grid item xs={12} md={6}>
+          <Grid >
             <Item>
               <label>
                 Name:
@@ -76,7 +76,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
             </Item>
           </Grid>
 
-          <Grid item xs={12} md={6}>
+          <Grid >
             <Item>
               <label>
                 Level:
@@ -111,7 +111,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
             </Item>
           </Grid>
 
-          <Grid item xs={12} md={6}>
+          <Grid >
             <Item>
               <label>
                 Race:
@@ -235,7 +235,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
           </Item>
           {/* </Grid> */}
 
-          <Grid item xs={12} md={6}>
+          <Grid >
             <Item>
               <label>
                 Size:
@@ -247,7 +247,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
             </Item>
           </Grid>
 
-          <Grid item xs={12} md={6}>
+          <Grid >
             <Item>
               <label>
                 Speed:
@@ -262,7 +262,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
             </Item>
           </Grid>
 
-          <Grid item xs={12} md={6}>
+          <Grid >
             <Item>
               <AddFeatureModal
                 addFeature={addFeature}
