@@ -17,6 +17,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import AddFeatureModal from "./addFeatureModal";
 import AddEquipmentModal from "./addEquipmentModal";
+import AddItemModal from "./addItemModal";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -32,6 +33,7 @@ const ChooseBackground = ({
   character,
   addFeature,
   addEquipment,
+  addItem,
 }) => {
   const Continue = (e) => {
     e.preventDefault();
@@ -48,7 +50,7 @@ const ChooseBackground = ({
     <div>
       <h1>Choose Background:</h1>
       <Box sx={{ flexGrow: 2 }}>
-      <div>
+        <div>
           <ButtonGroup variant="contained">
             <Button onClick={Previous}>Back</Button>
             <Button onClick={Continue}>Next</Button>
@@ -130,6 +132,14 @@ const ChooseBackground = ({
               <h4 key={equip.equipment_id + equip.equipment_name}>
                 {equip.equipment_name}
               </h4>
+            ))}
+          </Item>
+
+          <Item>
+            <AddItemModal addItem={addItem} character={character} />
+            <h3>Inventory</h3>
+            {character.inventory.map((item, index) => (
+              <h4 key={index}>{item.item_name}</h4>
             ))}
           </Item>
 
@@ -225,7 +235,7 @@ const ChooseBackground = ({
                   id="trait2"
                   placeholder="I always ...?"
                   name="personality.trait2"
-                  value={character.personality.trait1}
+                  value={character.personality.trait2}
                   onChange={onCharacterChange}
                   cols="40"
                   rows="2"

@@ -75,11 +75,9 @@ const AddFeatureModal = ({ addFeature }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Grid item xs={12} md={6}>
-            <h2>Edit Feature</h2>
-            {/* <p>feature name:{feature.feature_name}</p> */}
-            {/* <p>feat ID: {featID}</p> */}
+          <Grid>
             <Item>
+              <h2>Add/Edit Feature</h2>
               <label>Level Acquired:</label>
               <input
                 type="number"
@@ -116,7 +114,7 @@ const AddFeatureModal = ({ addFeature }) => {
                   <option value={"race"}>Race</option>
                   <option value={"background"}>Background</option>
                   <option value={"class"}>Class</option>
-                  <option value={"equipment"}>Equipment</option>
+                  <option value={"equipment"}>Equipment/Item</option>
                 </select>
               </label>
             </Item>
@@ -163,15 +161,17 @@ const AddFeatureModal = ({ addFeature }) => {
               </label>
             </Item>
           </Grid>
-          <Button
-            variant="contained"
-            onClick={() => {
-              addFeature(feature);
-              clearFeature();
-            }}
-          >
-            Confirm Feature
-          </Button>
+          <Item>
+            <Button
+              variant="contained"
+              onClick={() => {
+                addFeature(feature);
+                clearFeature();
+              }}
+            >
+              Confirm Feature
+            </Button>
+          </Item>
         </Box>
       </Modal>
     </div>

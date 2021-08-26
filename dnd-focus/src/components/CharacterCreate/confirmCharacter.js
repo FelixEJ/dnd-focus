@@ -32,6 +32,7 @@ const ConfirmCharacter = ({
   prevStep,
   onCharacterChange,
   character,
+  saveCharacter,
 }) => {
   const Continue = (e) => {
     e.preventDefault();
@@ -53,7 +54,7 @@ const ConfirmCharacter = ({
 
   const getSave = (stat, save) => {
     let saveMod = Math.floor((stat - 10) / 2);
-    if (save == true) {
+    if (save === true) {
       saveMod = character.proficiency_bonus + saveMod;
     }
     if (saveMod > 0) {
@@ -119,7 +120,7 @@ const ConfirmCharacter = ({
             <Item>Subclass: {character.subclass}</Item>
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={2}>
-            <Item>Hit Die: {character.hit_dice}</Item>
+            <Item>Hit Die: {character.hit_dice.dice}</Item>
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={2}>
             <Item>HP: {character.hp.max}</Item>
@@ -325,6 +326,7 @@ const ConfirmCharacter = ({
           </Grid>
         </Grid>
         {/* </ImageList> */}
+        <Button onClick={saveCharacter()} variant="outlined">Save Character</Button>
       </Box>
 
       <div>

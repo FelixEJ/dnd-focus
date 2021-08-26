@@ -17,12 +17,23 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import AddFeatureModal from "./addFeatureModal";
 import AddEquipmentModal from "./addEquipmentModal";
+import AddItemModal from "./addItemModal";
+import AddAttackModal from "./addAttackModal";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,
+  margin: "5px",
+}));
+
+const Section = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+  backgroundColor: "beige",
 }));
 
 const ChooseClass = ({
@@ -32,6 +43,8 @@ const ChooseClass = ({
   character,
   addFeature,
   addEquipment,
+  addItem,
+  addAttack,
 }) => {
   const Continue = (e) => {
     e.preventDefault();
@@ -49,11 +62,11 @@ const ChooseClass = ({
         <Button onClick={Previous}>Back</Button>
         <Button onClick={Continue}>Next</Button>
       </ButtonGroup>
-      <Box sx={{ flexGrow: 2 }}>
+      <Box>
         <FormControl margin="normal">
-          <Item>
+          <Section>
             <label>
-              Class:
+              Class:&emsp;
               <input
                 type="text"
                 id="class"
@@ -62,14 +75,27 @@ const ChooseClass = ({
                 onChange={onCharacterChange}
               />
             </label>
-          </Item>
+          </Section>
 
-          <Item>
-            <label>Hit Dice:</label>
+          <Section>
+            <label>
+              Subclass:&emsp;
+              <input
+                type="text"
+                id="subclass"
+                name="subclass"
+                value={character.subclass}
+                onChange={onCharacterChange}
+              />
+            </label>
+          </Section>
+
+          <Section>
+            <label>Hit Dice:&emsp;</label>
             <select
               id="hit_dice"
-              name="hit_dice"
-              value={character.hit_dice}
+              name="hit_dice.dice"
+              value={character.hit_dice.dice}
               onChange={onCharacterChange}
             >
               <option value={"d6"}>d6</option>
@@ -77,10 +103,10 @@ const ChooseClass = ({
               <option value={"d10"}>d10</option>
               <option value={"d12"}>d12</option>
             </select>
-          </Item>
+          </Section>
 
-          <Item>
-            <label>Hit Points</label>
+          <Section>
+            <label>Hit Points:&emsp;</label>
             <input
               type="number"
               id="max"
@@ -90,13 +116,13 @@ const ChooseClass = ({
               size="3"
               required
             />
-          </Item>
+          </Section>
 
-          <Item>
+          <Section style={{ backgroundColor: "beige" }}>
             <h3>Proficiencies</h3>
             <Item>
               <label>
-                Languages:
+                Languages:&emsp;
                 <textarea
                   type="text"
                   id="languages"
@@ -111,7 +137,7 @@ const ChooseClass = ({
             </Item>
             <Item>
               <label>
-                Weapons:
+                Weapons:&emsp;
                 <textarea
                   type="text"
                   id="weapons"
@@ -126,7 +152,7 @@ const ChooseClass = ({
             </Item>
             <Item>
               <label>
-                Armour:
+                Armour:&emsp;
                 <textarea
                   type="text"
                   id="armour"
@@ -141,7 +167,7 @@ const ChooseClass = ({
             </Item>
             <Item>
               <label>
-                Other:
+                Other:&emsp;
                 <textarea
                   type="text"
                   id="other"
@@ -155,59 +181,38 @@ const ChooseClass = ({
               </label>
             </Item>
             <Item>
-              <h3>Saving throws</h3>
-              <input
-                type="checkbox"
-                id="save_str"
-                name="saves.save_str"
-                value={character.saves.save_str}
-                onChange={onCharacterChange}
-              />
-              <label htmlFor="save_str">Strength</label>
-              <input
-                type="checkbox"
-                id="save_dex"
-                name="saves.save_dex"
-                value={character.saves.save_dex}
-                onChange={onCharacterChange}
-              />
-              <label htmlFor="save_str">Dexterity</label>
-              <br></br>
-              <input
-                type="checkbox"
-                id="save_con"
-                name="saves.save_con"
-                value={character.saves.save_con}
-                onChange={onCharacterChange}
-              />
-              <label htmlFor="save_str">Constitution</label>
-              <input
-                type="checkbox"
-                id="save_int"
-                name="saves.save_int"
-                value={character.saves.save_int}
-                onChange={onCharacterChange}
-              />
-              <label htmlFor="save_str">Intelligence</label>
-              <br></br>
-              <input
-                type="checkbox"
-                id="save_wis"
-                name="saves.save_wis"
-                value={character.saves.save_wis}
-                onChange={onCharacterChange}
-              />
-              <label htmlFor="save_str">Wisdom</label>
-              <input
-                type="checkbox"
-                id="save_cha"
-                name="saves.save_cha"
-                value={character.saves.save_cha}
-                onChange={onCharacterChange}
-              />
-              <label htmlFor="save_str">Charisma</label>
-              <br></br>
+              <label>
+                Saving Throws: &emsp;
+                <select
+                  id="save1"
+                  name="saves.save1"
+                  value={character.saves.save1}
+                  onChange={onCharacterChange}
+                >
+                  <option value={"str"}>Strength</option>
+                  <option value={"dex"}>Dexterity</option>
+                  <option value={"con"}>Constitution</option>
+                  <option value={"int"}>Intelligence</option>
+                  <option value={"wis"}>Wisdom</option>
+                  <option value={"cha"}>Charisma</option>
+                </select>
+                &emsp;
+                <select
+                  id="save2"
+                  name="saves.save2"
+                  value={character.saves.save2}
+                  onChange={onCharacterChange}
+                >
+                  <option value={"str"}>Strength</option>
+                  <option value={"dex"}>Dexterity</option>
+                  <option value={"con"}>Constitution</option>
+                  <option value={"int"}>Intelligence</option>
+                  <option value={"wis"}>Wisdom</option>
+                  <option value={"cha"}>Charisma</option>
+                </select>
+              </label>
             </Item>
+            
             <Item>
               <label>
                 Skills:
@@ -223,9 +228,9 @@ const ChooseClass = ({
                 />
               </label>
             </Item>
-          </Item>
+          </Section>
 
-          <Item>
+          <Section>
             <AddEquipmentModal
               addEquipment={addEquipment}
               addFeature={addFeature}
@@ -237,9 +242,17 @@ const ChooseClass = ({
                 {equip.equipment_name}
               </h4>
             ))}
-          </Item>
+          </Section>
 
-          <Item>
+          <Section>
+            <AddItemModal addItem={addItem} character={character} />
+            <h3>Inventory</h3>
+            {character.inventory.map((item, index) => (
+              <h4 key={index}>{item.item_name}</h4>
+            ))}
+          </Section>
+
+          <Section>
             <label>
               Magic (if applicable):
               <select
@@ -254,9 +267,9 @@ const ChooseClass = ({
                 <option value={"cha"}>Charisma</option>
               </select>
             </label>
-          </Item>
+          </Section>
 
-          <Item>
+          <Section>
             <AddFeatureModal addFeature={addFeature} />
             <h3>Features & abilities</h3>
             {character.features.map((feature) => (
@@ -264,7 +277,17 @@ const ChooseClass = ({
                 {feature.feature_name}
               </h4>
             ))}
-          </Item>
+          </Section>
+
+          <Section>
+            <AddAttackModal addAttack={addAttack} />
+            <h3>Attacks</h3>
+            {character.attacks.map((attack, index) => (
+              <h4 key={index}>
+                {attack.attack_name}
+              </h4>
+            ))}
+          </Section>
         </FormControl>
       </Box>
       <ButtonGroup variant="contained">

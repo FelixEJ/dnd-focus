@@ -1,0 +1,245 @@
+import React, { useState } from "react";
+import { Button, FormControl } from "@material-ui/core";
+import Abilities from "../abilities";
+
+const Success = ({ prevStep }) => {
+  const [loadedChar, setLoadedChar] = useState({
+    name: "",
+    level: 0,
+    race: "",
+    size: "",
+    alignment: "",
+    background: {
+      title: "",
+      characteristic: "",
+    },
+    class: "",
+    subclass: "",
+    multiclasses: [
+      {
+        class_id: 0,
+        class_level: 1,
+        subclass: "",
+      },
+    ],
+    hit_dice: {
+      dice: "",
+      max: 0,
+      current: 0,
+    },
+    hp: {
+      max: 0,
+      current: 0,
+      temp: 0,
+      temp_max: 0,
+    },
+    defences: {
+      resistances: "",
+      immunities: "",
+      vulnerabilities: "",
+    },
+    death_saves: {
+      pass: 0,
+      fail: 0,
+    },
+    ac: 0,
+    speed: 0,
+    initiative: 0,
+    proficiency_bonus: 2,
+    inspiration: false,
+    stats: {
+      str: 0,
+      temp_str: 0,
+      dex: 0,
+      temp_dex: 0,
+      con: 0,
+      temp_con: 0,
+      int: 0,
+      temp_int: 0,
+      wis: 0,
+      temp_wis: 0,
+      cha: 0,
+      temp_cha: 0,
+    },
+    saves: {
+      save1: "",
+      save1_bonus: 0,
+      save2: "",
+      save2_bonus: 0,
+      save3: "",
+      save3_bonus: 0,
+      save4: "",
+      save4_bonus: 0,
+      save5: "",
+      save5_bonus: 0,
+      save6: "",
+      save6_bonus: 0,
+    },
+    skills: {
+      all: [
+        "Athletics[STR]", "Acrobatics[DEX]", "Sleight of Hand[DEX]", "Stealth[DEX]", "Arcana[INT]", "History[INT]", "Investigation[INT]", "Nature[INT]", "Religion[INT]", "Animal Handling[WIS]", "Insight[WIS]", "Medicine[WIS]", "Perception[WIS]", "Survival[WIS]", "Deception[CHA]", "Intimidation[CHA]", "Performance[CHA]", "Persuasion[CHA]",
+      ],
+      proficient: [],
+      expert: [],
+    },
+    passives: {
+      senses: "",
+      perception: 0,
+      investigation: 0,
+      insight: 0,
+    },
+    features: [
+      {
+        feature_id: 0,
+        level_acquired: 0,
+        feature_name: "",
+        source: "",
+        description: "",
+        max_uses: 0,
+        current_uses: 0,
+        recharge: "",
+      },
+    ],
+    attacks: [
+      {
+        attack_id: 0,
+        attack_name: "",
+        attack_bonus: 0,
+        damage_bonus: 0,
+        damage_dice: "",
+        damage_dice_num: 0,
+        damage_type: "",
+        range: "",
+        tags: "",
+        ammo: 0,
+      },
+    ],
+    magic: {
+      magic_user: false,
+      save_dc: 0,
+      save_dc_bonus: 0,
+      spell_attack_mod: 0,
+      spell_attack_bonus: 0,
+      ability: "",
+      cantrips_known: 0,
+      spells_known: 0,
+      concentrating: false,
+    },
+    spellslots: {
+      first: 0,
+      first_used: 0,
+      second: 0,
+      second_used: 0,
+      third: 0,
+      third_used: 0,
+      fourth: 0,
+      fourth_used: 0,
+      fifth: 0,
+      fifth_used: 0,
+      sixth: 0,
+      sixth_used: 0,
+      seventh: 0,
+      seventh_used: 0,
+      eighth: 0,
+      eighth_used: 0,
+      ninth: 0,
+      ninth_used: 0,
+    },
+    inventory: [
+      {
+        item_id: 0,
+        item_name: "",
+        quantity: 0,
+        value_each: 0,
+        value_currency: "",
+        value_total: 0,
+      },
+    ],
+    currency: {
+      copper: 0,
+      silver: 0,
+      electrum: 0,
+      gold: 0,
+      platinum: 0,
+    },
+    proficiencies: {
+      languages: "",
+      weapons: "",
+      armour: "",
+      other: "",
+    },
+    equipment: [
+      {
+        equipment_id: 0,
+        equipment_name: "",
+        equipment_type: "",
+        attuned: false,
+        desc: "",
+        value: 0,
+        value_currency: "",
+      },
+    ],
+    personality: {
+      trait1: "",
+      trait2: "",
+      ideal: "",
+      bond: "",
+      flaw: "",
+    },
+  });
+  //   const [loadedChar, setLoadedChar] = useState({
+  //     name: "",
+  //   });
+
+  const Previous = (e) => {
+    e.preventDefault();
+    prevStep();
+  };
+
+  function getAllCharacters() {
+    var arrayOfChars = [];
+    var archive = {},
+      keys = Object.keys(localStorage),
+      i = keys.length;
+
+    while (i--) {
+      archive[keys[i]] = localStorage.getItem(keys[i]);
+      arrayOfChars[i] = JSON.parse(archive[keys[i]]);
+    }
+    return arrayOfChars;
+  }
+  let allChars = getAllCharacters();
+
+  function handleChange(e) {
+    let charNum = e.target.value;
+    setLoadedChar(allChars[charNum]);
+  }
+
+  return (
+    <div>
+      <h1>Success</h1>
+      <Button variant="contained" onClick={Previous}>
+        Back
+      </Button>
+      <FormControl>
+        <label>Select Character&emsp;</label>
+        <select
+          id="char_select"
+          name="char_select"
+          value={loadedChar.char_select}
+          onChange={handleChange}
+        >
+          <option value="">Select character</option>
+          {allChars.map((char, index) => (
+            <option key={index} value={index}>
+              {char.name} lvl{char.level}
+            </option>
+          ))}
+        </select>
+      </FormControl>
+      <Abilities character={loadedChar} />
+    </div>
+  );
+};
+
+export default Success;

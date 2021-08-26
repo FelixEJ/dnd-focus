@@ -20,15 +20,18 @@ function CreatePage() {
     },
     class: "Fighter",
     subclass: "Battlemaster",
-    classes: [
+    multiclasses: [
       {
         class_id: 1,
-        main: true,
         class_level: 1,
         subclass: "",
       },
     ],
-    hit_dice: "d10",
+    hit_dice: {
+      dice: "d10",
+      max: 0,
+      current: 0,
+    },
     hp: {
       max: 25,
       current: 25,
@@ -48,6 +51,7 @@ function CreatePage() {
     speed: 25,
     initiative: 2,
     proficiency_bonus: 2,
+    inspiration: false,
     stats: {
       str: 13,
       temp_str: 0,
@@ -63,22 +67,24 @@ function CreatePage() {
       temp_cha: 0,
     },
     saves: {
-      save_str: true,
-      save_str_bonus: 0,
-      save_dex: false,
-      save_dex_bonus: 0,
-      save_con: true,
-      save_con_bonus: 0,
-      save_int: false,
-      save_int_bonus: 0,
-      save_wis: false,
-      save_wis_bonus: 0,
-      save_cha: false,
-      save_cha_bonus: 0,
+      save1: "str",
+      save1_bonus: 0,
+      save2: "con",
+      save2_bonus: 0,
+      save3: "",
+      save3_bonus: 0,
+      save4: "",
+      save4_bonus: 0,
+      save5: "",
+      save5_bonus: 0,
+      save6: "",
+      save6_bonus: 0,
     },
     skills: {
-      all: ["Athletics[STR], Acrobatics[DEX], Sleight of Hand[DEX], Stealth[DEX], Arcana[INT], History[INT], Investigation[INT], Nature[INT], Religion[INT], Animal Handling[WIS], Insight[WIS], Medicine[WIS], Perception[WIS], Survival[WIS], Deception[CHA], Intimidation[CHA], Performance[CHA], Persuasion[CHA]"],
-      proficient: ["Athletics, Acrobatics, Perception"],
+      all: [
+        "Athletics[STR]", "Acrobatics[DEX]", "Sleight of Hand[DEX]", "Stealth[DEX]", "Arcana[INT]", "History[INT]", "Investigation[INT]", "Nature[INT]", "Religion[INT]", "Animal Handling[WIS]", "Insight[WIS]", "Medicine[WIS]", "Perception[WIS]", "Survival[WIS]", "Deception[CHA]", "Intimidation[CHA]", "Performance[CHA]", "Persuasion[CHA]",
+      ],
+      proficient: ["Athletics", "Acrobatics", "Perception"],
       expert: ["Stealth"],
     },
     passives: {
@@ -112,17 +118,19 @@ function CreatePage() {
     attacks: [
       {
         attack_id: 1,
-        weapon: "Bow",
+        attack_name: "Bow",
         attack_bonus: 5,
         damage_bonus: 3,
-        damage: "1d6",
+        damage_dice: "d6",
+        damage_dice_num: 2,
         damage_type: "Piercing",
         range: "60/180",
         tags: "two handed",
+        ammo: 30,
       },
       {
         attack_id: 2,
-        weapon: "Sword",
+        attack_name: "Sword",
         attack_bonus: 5,
         damage_bonus: 3,
         damage: "1d6/1d8",
@@ -140,6 +148,7 @@ function CreatePage() {
       ability: "",
       cantrips_known: 0,
       spells_known: 0,
+      concentrating: false,
     },
     spellslots: {
       first: 0,
@@ -167,6 +176,7 @@ function CreatePage() {
         item_name: "Shield",
         quantity: 1,
         value_each: 2,
+        value_currency: "gp",
         value_total: 2,
       },
     ],
@@ -188,7 +198,10 @@ function CreatePage() {
         equipment_id: 1,
         equipment_name: "Breastplate",
         equipment_type: "armour",
+        attuned: false,
         desc: "Gives AC 14+DEX(max 2)",
+        value: 50,
+        value_currency: "gp",
       },
     ],
     personality: {
@@ -216,34 +229,58 @@ function CreatePage() {
   }
 
   function prevStep() {
-    setStep(step - 1 );
+    setStep(step - 1);
   }
 
   function nextStep() {
-    setStep(step + 1 );
+    setStep(step + 1);
   }
 
   function addFeature(newFeat) {
     const newFeature = newFeat;
     newFeat.feature_id = character.features.length + 1;
-    const newCharacter = {...character}
+    const newCharacter = { ...character };
     // console.log("char copy:", newCharacter);
     const oldFeatures = newCharacter.features;
     oldFeatures.push(newFeature);
     // setCharacter({ features: [...character.features, oldFeatures]});
     setCharacter(newCharacter);
-    console.log("new char", newCharacter);
+    console.log("new Feature", newCharacter);
   }
 
   function addEquipment(newEquip) {
     const newEquipment = newEquip;
     newEquip.equipment_id = character.equipment.length + 1;
-    const newCharacter = {...character};
+    const newCharacter = { ...character };
     const oldEquipment = newCharacter.equipment;
     oldEquipment.push(newEquipment);
     setCharacter(newCharacter);
-    console.log("new char", newCharacter);
+    console.log("new Equipment", newCharacter);
   }
+
+  function addItem(newItem) {
+    const newInventory = newItem;
+    newItem.item_id = character.inventory.length + 1;
+    const newCharacter = { ...character };
+    const oldInventory = newCharacter.inventory;
+    oldInventory.push(newInventory);
+    setCharacter(newCharacter);
+    console.log("new Invetory", newCharacter);
+  }
+
+  function addAttack(newattack) {
+    const newAttack = newattack;
+    newattack.item_id = character.attacks.length + 1;
+    const newCharacter = {...character};
+    const oldAttacks = newCharacter.attacks;
+    oldAttacks.push(newAttack);
+    setCharacter(newCharacter);
+    console.log("new attack", newCharacter);
+  }
+
+  const saveCharacter = () => {
+    localStorage.setItem(character.name, JSON.stringify(character));
+  };
 
   switch (step) {
     case 1:
@@ -264,6 +301,7 @@ function CreatePage() {
           character={character}
           addFeature={addFeature}
           addEquipment={addEquipment}
+          addItem={addItem}
         />
       );
     case 3:
@@ -275,6 +313,8 @@ function CreatePage() {
           character={character}
           addFeature={addFeature}
           addEquipment={addEquipment}
+          addItem={addItem}
+          addAttack={addAttack}
         />
       );
     case 4:
@@ -284,10 +324,11 @@ function CreatePage() {
           nextStep={nextStep}
           onCharacterChange={onCharacterChange}
           character={character}
+          saveCharacter={saveCharacter}
         />
       );
     case 5:
-      return <Success />;
+      return <Success prevStep={prevStep} />;
     default:
     //nothing
   }

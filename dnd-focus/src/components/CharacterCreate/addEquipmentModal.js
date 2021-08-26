@@ -35,7 +35,10 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
   const [equipment, setEquipment] = useState({
     equipment_id: 0,
     equipment_name: "",
+    equipment_type: "",
     desc: "",
+    value: 0,
+    value_currency: "",
   });
 
   const handleChange = (e) => {
@@ -49,7 +52,10 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
     setEquipment({
       equipment_id: 0,
       equipment_name: "",
+      equipment_type: "",
       desc: "",
+      value: 0,
+      value_currency: "",
     });
   }
 
@@ -65,9 +71,9 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Grid item xs={12} md={6}>
-            <h2>Edit Equipment</h2>
+          <Grid>
             <Item>
+              <h2>Add/Edit Equipment</h2>
               <label>Equipment name:</label>
               <input
                 type="text"
@@ -79,7 +85,7 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
               />
             </Item>
             <Item>
-              <label>Equipment desc:</label>
+              <label>Equipment description:</label>
               <input
                 type="text"
                 id="desc"
@@ -90,10 +96,34 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
             </Item>
             <Item>
               <label>
+                Value:
+                <input
+                  type="number"
+                  id="value"
+                  name="value"
+                  value={equipment.value}
+                  onChange={handleChange}
+                />
+                <select
+                  id="value_currency"
+                  name="value_currency"
+                  value={equipment.value_currency}
+                  onChange={handleChange}
+                >
+                  <option value={"cp"}>Copper</option>
+                  <option value={"sp"}>Silver</option>
+                  <option value={"ep"}>Electrum</option>
+                  <option value={"gp"}>Gold</option>
+                  <option value={"pp"}>Platinum</option>
+                </select>
+              </label>
+            </Item>
+            <Item>
+              <label>
                 Equipment type:
                 <select
                   id="equipment_type"
-                  name="equipment.equipment_type"
+                  name="equipment_type"
                   value={equipment.equipment_type}
                   onChange={handleChange}
                 >
@@ -105,9 +135,21 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
               </label>
             </Item>
             <Item>
-              <AddFeatureModal
-                addFeature={addFeature}
-              />
+              <label>
+                Attuned:
+                <select
+                  id="attuned"
+                  name="attuned"
+                  value={equipment.attuned}
+                  onChange={handleChange}
+                >
+                  <option value={"false"}>False</option>
+                  <option value={"true"}>True</option>
+                </select>
+              </label>
+            </Item>
+            <Item>
+              <AddFeatureModal addFeature={addFeature} />
               <h3>Features & abilities</h3>
               {character.features.map((feature) => (
                 <h4 key={feature.feature_id + feature.feature_name}>
@@ -116,15 +158,17 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
               ))}
             </Item>
           </Grid>
-          <Button
-            variant="contained"
-            onClick={() => {
-              addEquipment(equipment);
-              clearEquipment();
-            }}
-          >
-            Confirm Equipment
-          </Button>
+          <Item>
+            <Button
+              variant="contained"
+              onClick={() => {
+                addEquipment(equipment);
+                clearEquipment();
+              }}
+            >
+              Confirm Equipment
+            </Button>
+          </Item>
         </Box>
       </Modal>
     </div>
