@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import CreatePage from "./components/CharacterCreate/createPage";
+import Success from "./components/CharacterCreate/success";
 import { Container } from "@material-ui/core";
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
     <div className="App">
       <Container >
         {/* <h1>App</h1> */}
-        <CreatePage />
+        <Success />
+        {/* <CreatePage /> */}
       </Container>
     </div>
   );

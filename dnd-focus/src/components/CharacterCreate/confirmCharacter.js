@@ -326,13 +326,18 @@ const ConfirmCharacter = ({
           </Grid>
         </Grid>
         {/* </ImageList> */}
-        <Button onClick={saveCharacter()} variant="outlined">Save Character</Button>
+        
       </Box>
 
       <div>
         <ButtonGroup variant="contained">
           <Button onClick={Previous}>Back</Button>
           <Button onClick={Continue}>Next</Button>
+        </ButtonGroup>
+      </div>
+      <div>
+        <ButtonGroup variant="contained">
+        <Button onClick={() => saveCharacter(character)} variant="outlined">Save Character</Button>
         </ButtonGroup>
       </div>
     </div>

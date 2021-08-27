@@ -14,6 +14,7 @@ function CreatePage() {
     race: "Hobbit",
     size: "Small",
     alignment: "Good",
+    xp: 420,
     background: {
       title: "Folk Hero",
       characteristic: "Refuge",
@@ -84,8 +85,8 @@ function CreatePage() {
       all: [
         "Athletics[STR]", "Acrobatics[DEX]", "Sleight of Hand[DEX]", "Stealth[DEX]", "Arcana[INT]", "History[INT]", "Investigation[INT]", "Nature[INT]", "Religion[INT]", "Animal Handling[WIS]", "Insight[WIS]", "Medicine[WIS]", "Perception[WIS]", "Survival[WIS]", "Deception[CHA]", "Intimidation[CHA]", "Performance[CHA]", "Persuasion[CHA]",
       ],
-      proficient: ["Athletics", "Acrobatics", "Perception"],
-      expert: ["Stealth"],
+      proficient: ["Athletics[STR]", "Acrobatics[DEX]", "Perception[WIS]"],
+      expert: ["Stealth[DEX]"],
     },
     passives: {
       senses: "Darkvision 60ft",
@@ -278,7 +279,7 @@ function CreatePage() {
     console.log("new attack", newCharacter);
   }
 
-  const saveCharacter = () => {
+  function saveCharacter (character) {
     localStorage.setItem(character.name, JSON.stringify(character));
   };
 

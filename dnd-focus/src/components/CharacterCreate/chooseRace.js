@@ -29,6 +29,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
     nextStep();
   };
 
+  // duplicate, move to utilities
   const getModifier = (stat) => {
     let mod = Math.floor((stat - 10) / 2);
     if (mod > 0) {

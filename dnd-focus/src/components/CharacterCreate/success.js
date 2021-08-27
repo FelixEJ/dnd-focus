@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { Button, FormControl } from "@material-ui/core";
+import Basics from "../basics";
 import Abilities from "../abilities";
+import Skills from "../skills";
+import Proficiencies from "../proficiencies";
 
-const Success = ({ prevStep }) => {
+const Success = ({ }) => {
   const [loadedChar, setLoadedChar] = useState({
     name: "",
     level: 0,
     race: "",
     size: "",
     alignment: "",
+    xp: 0,
     background: {
       title: "",
       characteristic: "",
@@ -187,14 +191,6 @@ const Success = ({ prevStep }) => {
       flaw: "",
     },
   });
-  //   const [loadedChar, setLoadedChar] = useState({
-  //     name: "",
-  //   });
-
-  const Previous = (e) => {
-    e.preventDefault();
-    prevStep();
-  };
 
   function getAllCharacters() {
     var arrayOfChars = [];
@@ -217,10 +213,7 @@ const Success = ({ prevStep }) => {
 
   return (
     <div>
-      <h1>Success</h1>
-      <Button variant="contained" onClick={Previous}>
-        Back
-      </Button>
+      <h1>Character Sheet for {loadedChar.name}</h1>
       <FormControl>
         <label>Select Character&emsp;</label>
         <select
@@ -237,7 +230,10 @@ const Success = ({ prevStep }) => {
           ))}
         </select>
       </FormControl>
+      <Basics character={loadedChar}/>
       <Abilities character={loadedChar} />
+      <Skills character={loadedChar} />
+      <Proficiencies character={loadedChar} />
     </div>
   );
 };
