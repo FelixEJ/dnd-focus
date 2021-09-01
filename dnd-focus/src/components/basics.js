@@ -1,6 +1,5 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import ConfirmCharacter from "./CharacterCreate/confirmCharacter";
 
 const Container = styled.div`
   text-align: center;

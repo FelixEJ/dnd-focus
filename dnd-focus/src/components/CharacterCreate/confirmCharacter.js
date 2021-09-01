@@ -17,6 +17,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import ImageList from "@material-ui/core/ImageList";
 import ImageListItem from "@material-ui/core/ImageListItem";
+import stylish, { css } from "styled-components";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -74,8 +75,15 @@ const ConfirmCharacter = ({
     return total;
   };
 
+  var data =
+    "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(character));
+
+  const Page = stylish.div`
+    padding-bottom: 20px;
+  `;
+
   return (
-    <div>
+    <Page>
       <h1>Confirm Character</h1>
       <div>
         <ButtonGroup variant="contained">
@@ -83,7 +91,7 @@ const ConfirmCharacter = ({
           <Button onClick={Continue}>Next</Button>
         </ButtonGroup>
       </div>
-      <Box sx={{ width: "100%", overflowY:"scroll"}}>
+      <Box sx={{ width: "100%", overflowY: "scroll" }}>
         {/* <ImageList variant="masonry" cols={1} rows={6} gap={5}> */}
         <Grid
           container
@@ -326,7 +334,6 @@ const ConfirmCharacter = ({
           </Grid>
         </Grid>
         {/* </ImageList> */}
-        
       </Box>
 
       <div>
@@ -337,10 +344,24 @@ const ConfirmCharacter = ({
       </div>
       <div>
         <ButtonGroup variant="contained">
-        <Button onClick={() => saveCharacter(character)} variant="outlined">Save Character</Button>
+          <Button onClick={() => saveCharacter(character)} variant="outlined">
+            Save Character to Browser
+          </Button>
         </ButtonGroup>
       </div>
-    </div>
+      <div>
+        <ButtonGroup variant="contained">
+          <Button>
+            <a
+              href={"data:" + data}
+              download={character.name + " lvl" + character.level + ".json"}
+            >
+              Download Character
+            </a>
+          </Button>
+        </ButtonGroup>
+      </div>
+    </Page>
   );
 };
 

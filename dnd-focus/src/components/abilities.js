@@ -25,17 +25,18 @@ const Box = styled.div`
 
 const Title = styled.p`
   margin: 0;
-  font-size: 1em;
+  font-size: 1.1em;
 `;
 
 const Ability = styled.p`
-  font-size: 0.75em;
+  font-size: 0.8em;
   margin: 0;
 `;
 
 const Modifier = styled.p`
   font-size: 2em;
   margin: 0;
+  font-weight: bold;
 `;
 
 const Save = styled.p`

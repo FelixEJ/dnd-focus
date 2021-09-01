@@ -11,6 +11,9 @@ const Container = styled.div`
   display: block;
   margin-left: auto;
   margin-right: auto;
+
+  column-count: 3;
+  column-gap: 1%;
 `;
 
 const Box = styled.div`
@@ -20,33 +23,36 @@ const Box = styled.div`
   margin: 1% 1% 1% 1%;
 `;
 const Text = styled.p`
-  margin: 1% 1% 1% 1%;
+  font-size: 2em;
+  margin: 0;
+  font-weight: bold;
+`;
+const Title = styled.p`
+  margin: 0;
+  font-size: 0.9em;
+  text-decoration: underline;
 `;
 
-const Proficiencies = ({ character }) => {
+const Combat = ({ character }) => {
   return (
     <div>
-      <h4>Proficiencies</h4>
-      <Container>
+      <h4>Combat</h4>
+      <Container>        
         <Box>
-          <h4>Languages</h4>
-          <Text>{character.proficiencies.languages}</Text>
+          <Title>AC</Title>
+          <Text>{character.ac}</Text>
         </Box>
         <Box>
-          <h4>Weapons</h4>
-          <Text>{character.proficiencies.weapons}</Text>
+          <Title>Initiative</Title>
+          <Text>{character.initiative}</Text>
         </Box>
         <Box>
-          <h4>Armour</h4>
-          <Text>{character.proficiencies.armour}</Text>
-        </Box>
-        <Box>
-          <h4>Other</h4>
-          <Text>{character.proficiencies.other}</Text>
+          <Title>Speed</Title>
+          <Text>{character.speed}</Text>
         </Box>
       </Container>
     </div>
   );
 };
 
-export default Proficiencies;
+export default Combat;

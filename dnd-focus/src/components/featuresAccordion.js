@@ -1,0 +1,92 @@
+import * as React from "react";
+import { styled } from "@material-ui/core/styles";
+import ArrowForwardIosSharpIcon from "@material-ui/icons/ArrowForwardIosSharp";
+import MuiAccordion from "@material-ui/core/Accordion";
+import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
+import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
+import Typography from "@material-ui/core/Typography";
+
+const Accordion = styled((props) => (
+  <MuiAccordion disableGutters elevation={0} square {...props} />
+))(({ theme }) => ({
+  border: `1px solid ${theme.palette.divider}`,
+  "&:not(:last-child)": {
+    borderBottom: 0,
+  },
+  "&:before": {
+    display: "none",
+  },
+}));
+
+const AccordionSummary = styled((props) => (
+  <MuiAccordionSummary
+    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />}
+    {...props}
+  />
+))(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === "dark"
+      ? "rgba(255, 255, 255, .05)"
+      : "rgba(0, 0, 0, .03)",
+  flexDirection: "row-reverse",
+  "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+    transform: "rotate(90deg)",
+  },
+  "& .MuiAccordionSummary-content": {
+    marginLeft: theme.spacing(1),
+  },
+}));
+
+const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+  padding: theme.spacing(2),
+  borderTop: "1px solid rgba(0, 0, 0, .125)",
+}));
+
+const FeatureAccordion = ({ features }) => {
+  const [expanded, setExpanded] = React.useState("panel1");
+
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
+
+  return (
+    <div>
+      {features.map((feature, index) => (
+        <Accordion
+          key={index}
+          expanded={expanded === feature.feature_id}
+          onChange={handleChange(feature.feature_id)}
+        >
+          <AccordionSummary>
+            <Typography>
+              ({feature.level_acquired}){feature.feature_name}:{" "}
+              <b>
+                +{feature.attack_bonus}; {feature.damage_dice_num}
+                {feature.damage_dice}+{feature.damage_bonus}{" "}
+                {feature.damage_type}
+              </b>
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+              Attack Bonus: <b>+{feature.attack_bonus}</b>; Damage:
+              <b>
+                {feature.damage_dice_num}
+                {feature.damage_dice}+{feature.damage_bonus}
+                {feature.damage_type}
+              </b>
+              ; Tags: <b>{feature.tags}</b>
+              {feature.range.length > 0 && (
+                <p>
+                  Range: {feature.range}; Ammo: {feature.ammo}
+                </p>
+              )}
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      ))}
+    </div>
+  );
+};
+
+export default FeatureAccordion;

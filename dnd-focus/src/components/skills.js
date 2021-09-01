@@ -1,7 +1,5 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import ConfirmCharacter from "./CharacterCreate/confirmCharacter";
-import Proficiencies from "./proficiencies";
 
 const Container = styled.div`
   text-align: center;
@@ -50,27 +48,34 @@ const Skill = styled.div`
 
 const Skills = ({ character }) => {
   return (
-    <Container>
-        <h3>Skills</h3>
-      <h4>All Skills - Roll with [ability] modifier</h4>
-      <All>
-        {character.skills.all.map((skill, index) => (
-          <Skill key={index}>{skill}</Skill>
-        ))}
-      </All>
-      <h4>Proficient Skills - Roll [ability] mod +{character.proficiency_bonus}</h4>
-      <Proficient>
-        {character.skills.proficient.map((skill, index) => (
-          <Skill key={index}>{skill}</Skill>
-        ))}
-      </Proficient>
-      <h4>Proficient Skills - Roll [ability] mod +{character.proficiency_bonus * 2}</h4>
-      <Expert>
-        {character.skills.expert.map((skill, index) => (
-          <Skill key={index}>{skill}</Skill>
-        ))}
-      </Expert>
-    </Container>
+    <div>
+      <h4>Skills</h4>
+      <Container>
+        <h4>All Skills - Roll with [ability] modifier</h4>
+        <All>
+          {character.skills.all.map((skill, index) => (
+            <Skill key={index}>{skill}</Skill>
+          ))}
+        </All>
+        <h4>
+          Proficient Skills - Roll [ability] mod +{character.proficiency_bonus}
+        </h4>
+        <Proficient>
+          {character.skills.proficient.map((skill, index) => (
+            <Skill key={index}>{skill}</Skill>
+          ))}
+        </Proficient>
+        <h4>
+          Proficient Skills - Roll [ability] mod +
+          {character.proficiency_bonus * 2}
+        </h4>
+        <Expert>
+          {character.skills.expert.map((skill, index) => (
+            <Skill key={index}>{skill}</Skill>
+          ))}
+        </Expert>
+      </Container>
+    </div>
   );
 };
 

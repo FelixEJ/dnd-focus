@@ -1,11 +1,42 @@
 import React, { useState } from "react";
 import { Button, FormControl } from "@material-ui/core";
+import styled, { css } from "styled-components";
 import Basics from "../basics";
 import Abilities from "../abilities";
 import Skills from "../skills";
 import Proficiencies from "../proficiencies";
+import Attacks from "../attacks";
+import Combat from "../combat";
+import Features from "../features";
+import Health from "../health";
+import Inventory from "../inventory";
+import Magic from "../magic";
+import Passives from "../passives";
+import Personality from "../personality";
 
-const Success = ({ }) => {
+const CharSheet = styled.div`
+  & {
+    text-align: center;
+    z-index: 1;
+    background-color: pink;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    column-count: 1;
+    column-gap: 1%;
+  }
+  &{@media only screen and (min-width: 600px) {
+    & {
+      background-color: orange;
+      column-count: 2;
+      column-gap: 1%;
+    }
+  }}
+`;
+
+const Success = ({}) => {
   const [loadedChar, setLoadedChar] = useState({
     name: "",
     level: 0,
@@ -46,6 +77,7 @@ const Success = ({ }) => {
       pass: 0,
       fail: 0,
     },
+    exhaustion: 0,
     ac: 0,
     speed: 0,
     initiative: 0,
@@ -81,7 +113,24 @@ const Success = ({ }) => {
     },
     skills: {
       all: [
-        "Athletics[STR]", "Acrobatics[DEX]", "Sleight of Hand[DEX]", "Stealth[DEX]", "Arcana[INT]", "History[INT]", "Investigation[INT]", "Nature[INT]", "Religion[INT]", "Animal Handling[WIS]", "Insight[WIS]", "Medicine[WIS]", "Perception[WIS]", "Survival[WIS]", "Deception[CHA]", "Intimidation[CHA]", "Performance[CHA]", "Persuasion[CHA]",
+        "Athletics[STR]",
+        "Acrobatics[DEX]",
+        "Sleight of Hand[DEX]",
+        "Stealth[DEX]",
+        "Arcana[INT]",
+        "History[INT]",
+        "Investigation[INT]",
+        "Nature[INT]",
+        "Religion[INT]",
+        "Animal Handling[WIS]",
+        "Insight[WIS]",
+        "Medicine[WIS]",
+        "Perception[WIS]",
+        "Survival[WIS]",
+        "Deception[CHA]",
+        "Intimidation[CHA]",
+        "Performance[CHA]",
+        "Persuasion[CHA]",
       ],
       proficient: [],
       expert: [],
@@ -230,10 +279,20 @@ const Success = ({ }) => {
           ))}
         </select>
       </FormControl>
-      <Basics character={loadedChar}/>
-      <Abilities character={loadedChar} />
-      <Skills character={loadedChar} />
-      <Proficiencies character={loadedChar} />
+      <CharSheet>
+        <Basics character={loadedChar} />
+        <Abilities character={loadedChar} />
+        <Skills character={loadedChar} />
+        <Proficiencies character={loadedChar} />        
+        <Combat character={loadedChar} />
+        <Health character={loadedChar} />
+        <Attacks character={loadedChar} />
+        <Features character={loadedChar} />        
+        <Inventory character={loadedChar} />
+        <Magic character={loadedChar} />
+        <Passives character={loadedChar} />
+        <Personality character={loadedChar} />
+      </CharSheet>
     </div>
   );
 };
