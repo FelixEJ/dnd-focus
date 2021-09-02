@@ -42,7 +42,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
-const FeatureAccordion = ({ features }) => {
+const InventoryAccordion = ({ inventory }) => {
   const [expanded, setExpanded] = React.useState("panel1");
 
   const handleChange = (panel) => (event, newExpanded) => {
@@ -51,34 +51,30 @@ const FeatureAccordion = ({ features }) => {
 
   return (
     <div>
-      {features.map((feature, index) => (
-        <Accordion
-          key={index}
-          expanded={expanded === feature.feature_id}
-          onChange={handleChange(feature.feature_id)}
-        >
-          <AccordionSummary>
-            <Typography>
-              <b>
-                ({feature.level_acquired}){feature.feature_name}:
-              </b>
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              <p>Source: <b>{feature.source}</b></p>
-              <p>{feature.description}</p>
-              
-              {feature.max_uses > 0 && (
-                <text><p>Uses: <b>{feature.current_uses}/{feature.max_uses}</b></p>
-                <p>Recharge: {feature.recharge}</p></text>
-              )}
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-      ))}
+      <Accordion
+        expanded={expanded === inventory.feature_id}
+        onChange={handleChange(inventory.feature_id)}
+      >
+        <AccordionSummary>
+          <Typography>
+            <b>Inventory:</b>
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            {inventory.map((item, index) => (
+              <p key={index}>
+                <b>{item.item_name}</b> x{item.quantity}, value=
+                {item.value_total}
+                {item.value_currency}({item.value_each}
+                {item.value_currency} ea)
+              </p>
+            ))}
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
     </div>
   );
 };
 
-export default FeatureAccordion;
+export default InventoryAccordion;

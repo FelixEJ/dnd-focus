@@ -11,6 +11,9 @@ const Container = styled.div`
   display: block;
   margin-left: auto;
   margin-right: auto;
+
+  column-count: 2;
+  column-gap: 1%;
 `;
 
 const Box = styled.div`
@@ -29,12 +32,12 @@ const Proficiencies = ({ character }) => {
       <h4>Proficiencies</h4>
       <Container>
         <Box>
-          <h4>Languages</h4>
-          <Text>{character.proficiencies.languages}</Text>
-        </Box>
-        <Box>
           <h4>Weapons</h4>
           <Text>{character.proficiencies.weapons}</Text>
+        </Box>
+        <Box>
+          <h4>Languages</h4>
+          <Text>{character.proficiencies.languages}</Text>
         </Box>
         <Box>
           <h4>Armour</h4>

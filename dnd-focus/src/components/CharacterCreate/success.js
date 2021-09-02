@@ -27,10 +27,17 @@ const CharSheet = styled.div`
     column-count: 1;
     column-gap: 1%;
   }
-  &{@media only screen and (min-width: 600px) {
+  &{@media only screen and (min-width: 700px) {
     & {
       background-color: orange;
       column-count: 2;
+      column-gap: 1%;
+    }
+  }
+  &{@media only screen and (min-width: 1200px) {
+    & {
+      background-color: yellow;
+      column-count: 3;
       column-gap: 1%;
     }
   }}
@@ -180,23 +187,23 @@ const Success = ({}) => {
     },
     spellslots: {
       first: 0,
-      first_used: 0,
+      first_remaining: 0,
       second: 0,
-      second_used: 0,
+      second_remaining: 0,
       third: 0,
-      third_used: 0,
+      third_remaining: 0,
       fourth: 0,
-      fourth_used: 0,
+      fourth_remaining: 0,
       fifth: 0,
-      fifth_used: 0,
+      fifth_remaining: 0,
       sixth: 0,
-      sixth_used: 0,
+      sixth_remaining: 0,
       seventh: 0,
-      seventh_used: 0,
+      seventh_remaining: 0,
       eighth: 0,
-      eighth_used: 0,
+      eighth_remaining: 0,
       ninth: 0,
-      ninth_used: 0,
+      ninth_remaining: 0,
     },
     inventory: [
       {
@@ -287,9 +294,9 @@ const Success = ({}) => {
         <Combat character={loadedChar} />
         <Health character={loadedChar} />
         <Attacks character={loadedChar} />
-        <Features character={loadedChar} />        
-        <Inventory character={loadedChar} />
         <Magic character={loadedChar} />
+        <Features character={loadedChar} />        
+        <Inventory character={loadedChar} />        
         <Passives character={loadedChar} />
         <Personality character={loadedChar} />
       </CharSheet>

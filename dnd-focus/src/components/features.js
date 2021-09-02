@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import FeatureAccordion from "./featuresAccordion";
 
 const Container = styled.div`
   text-align: center;
@@ -25,10 +26,14 @@ const Text = styled.p`
 
 const Features = ({ character }) => {
   return (
-    <Container>
-      <h3>Features</h3>
-      
-    </Container>
+    <div>
+      <h4>Features</h4>
+      <Container>
+        <Box>
+          <FeatureAccordion features={character.features} />
+        </Box>
+      </Container>
+    </div>
   );
 };
 

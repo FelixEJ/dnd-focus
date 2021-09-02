@@ -10,8 +10,8 @@ function App() {
     <div className="App">
       <Container >
         {/* <h1>App</h1> */}
-        {/* <Success /> */}
-        <CreatePage />
+        <Success />
+        {/* <CreatePage /> */}
       </Container>
     </div>
   );

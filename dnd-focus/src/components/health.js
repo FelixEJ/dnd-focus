@@ -51,13 +51,6 @@ const Health = ({ character }) => {
           </Numbers>
         </Box>
         <Box>
-          <Title>Hit Dice</Title>
-          <Numbers>
-            {character.hit_dice.current}
-            {character.hit_dice.dice}/{character.hit_dice.max}
-          </Numbers>
-        </Box>
-        <Box>
           <Title>Exhaustion</Title>
           <Text>
             {character.exhaustion === 1 && (
@@ -108,6 +101,13 @@ const Health = ({ character }) => {
             )}
           </Text>
         </Box>
+        <Box>
+          <Title>Hit Dice</Title>
+          <Numbers>
+            {character.hit_dice.current}
+            {character.hit_dice.dice}/{character.hit_dice.max}
+          </Numbers>
+        </Box>        
         <Box>
           <Title>Death Saves</Title>
           <Text>

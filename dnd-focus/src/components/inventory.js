@@ -1,5 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import Features from "./features";
+import InventoryAccordion from "./inventoryAccordion";
 
 const Container = styled.div`
   text-align: center;
@@ -25,10 +27,14 @@ const Text = styled.p`
 
 const Inventory = ({ character }) => {
   return (
-    <Container>
-      <h3>Inventory</h3>
-      
-    </Container>
+    <div>
+      <h4>Inventory</h4>
+      <Container>
+        <Box>
+          <InventoryAccordion inventory={character.inventory} />
+        </Box>
+      </Container>
+    </div>
   );
 };
 
