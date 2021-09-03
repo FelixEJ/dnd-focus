@@ -11,6 +11,9 @@ const Container = styled.div`
   display: block;
   margin-left: auto;
   margin-right: auto;
+
+  column-count: 2;
+  column-gap: 1%;
 `;
 
 const Box = styled.div`
@@ -19,16 +22,47 @@ const Box = styled.div`
   display: inline-block;
   margin: 1% 1% 1% 1%;
 `;
+const Numbers = styled.p`
+  font-size: 2em;
+  margin: 0;
+  font-weight: bold;
+`;
+const Title = styled.p`
+  margin: 0;
+  font-size: 0.9em;
+  text-decoration: underline;
+`;
 const Text = styled.p`
-  margin: 1% 1% 1% 1%;
+  font-size: 1em;
+  margin: 0;
+  font-weight: bold;
 `;
 
 const Personality = ({ character }) => {
   return (
+    <div>
+      <h4>Personality</h4>
     <Container>
-      <h3>Personality</h3>
+      <Box>
+        <Title>Traits</Title>
+        <Text>{character.personality.trait1}</Text>
+        <Text>{character.personality.trait2}</Text>
+      </Box>
+      <Box>
+        <Title>Ideal</Title>
+        <Text>{character.personality.ideal}</Text>
+      </Box>
+      <Box>
+        <Title>Bond</Title>
+        <Text>{character.personality.bond}</Text>
+      </Box>
+      <Box>
+        <Title>Flaw</Title>
+        <Text>{character.personality.flaw}</Text>
+      </Box>
       
     </Container>
+    </div>
   );
 };
 

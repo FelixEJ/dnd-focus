@@ -20,7 +20,7 @@ const Accordion = styled((props) => (
 
 const AccordionSummary = styled((props) => (
   <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />}
+    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.5rem", margin: "0"}} />}
     {...props}
   />
 ))(({ theme }) => ({
@@ -33,20 +33,30 @@ const AccordionSummary = styled((props) => (
     transform: "rotate(90deg)",
   },
   "& .MuiAccordionSummary-content": {
-    marginLeft: theme.spacing(1),
+    marginLeft: theme.spacing(0),
   },
 }));
 
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  padding: theme.spacing(2),
+  padding: theme.spacing(0),
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
 const InventoryAccordion = ({ inventory }) => {
-  const [expanded, setExpanded] = React.useState("panel1");
+  const [expanded, setExpanded] = React.useState("");
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
+  };
+
+  const getInventoryValue = () => {
+    let total = 0;
+    inventory.forEach(myFunc);
+
+    function myFunc(item) {
+      total += item.value_total;
+    }
+    return total;
   };
 
   return (
@@ -57,7 +67,7 @@ const InventoryAccordion = ({ inventory }) => {
       >
         <AccordionSummary>
           <Typography>
-            <b>Inventory:</b>
+            <b>Inventory:</b> total value = {getInventoryValue()} gp
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -66,8 +76,8 @@ const InventoryAccordion = ({ inventory }) => {
               <p key={index}>
                 <b>{item.item_name}</b> x{item.quantity}, value=
                 {item.value_total}
-                {item.value_currency}({item.value_each}
-                {item.value_currency} ea)
+                {item.value_currency} ({item.value_each}
+                {item.value_currency}/ea)
               </p>
             ))}
           </Typography>

@@ -15,7 +15,20 @@ const Container = styled.div`
   column-count: 2;
   column-gap: 1%;
 `;
+const Row = styled.div`
+  text-align: center;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  background-color: none;
 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  column-count: 3;
+  column-gap: 1%;
+`;
 const Box = styled.div`
   width: 98%;
   background-color: lightblue;
@@ -35,6 +48,7 @@ const Title = styled.p`
 const Text = styled.p`
   font-size: 1em;
   margin: 0;
+  font-weight: bold;
 `;
 
 const Health = ({ character }) => {
@@ -118,6 +132,26 @@ const Health = ({ character }) => {
           </Text>
         </Box>
       </Container>
+      <Row>
+        {character.defences.resistances.length > 0 ? (
+          <Box>
+            <Title>Resistances</Title>
+            <Text>{character.defences.resistances}</Text>
+          </Box>
+        ) : null}
+        {character.defences.immunities.length > 0 ? (
+          <Box>
+            <Title>Immunities</Title>
+            <Text>{character.defences.immunities}</Text>
+          </Box>
+        ) : null}
+        {character.defences.vulnerabilities.length > 0 ? (
+          <Box>
+            <Title>Vulnerabilities</Title>
+            <Text>{character.defences.vulnerabilities}</Text>
+          </Box>
+        ) : null}
+      </Row>
     </div>
   );
 };

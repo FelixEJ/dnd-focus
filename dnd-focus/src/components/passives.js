@@ -11,6 +11,9 @@ const Container = styled.div`
   display: block;
   margin-left: auto;
   margin-right: auto;
+
+  column-count: 3;
+  column-gap: 1%;
 `;
 
 const Box = styled.div`
@@ -19,16 +22,47 @@ const Box = styled.div`
   display: inline-block;
   margin: 1% 1% 1% 1%;
 `;
+const Numbers = styled.p`
+  font-size: 2em;
+  margin: 0;
+  font-weight: bold;
+`;
+const Title = styled.p`
+  margin: 0;
+  font-size: 0.9em;
+  text-decoration: underline;
+`;
 const Text = styled.p`
-  margin: 1% 1% 1% 1%;
+  font-size: 1em;
+  margin: 0;
+  font-weight: bold;
 `;
 
 const Passives = ({ character }) => {
   return (
-    <Container>
-      <h3>Passives</h3>
-      
-    </Container>
+    <div>
+      <h4>Passive Senses</h4>
+      {character.passives.senses.length > 0 ? (
+          <Box>
+            <Title>Vision</Title>
+            <Text>{character.passives.senses}</Text>
+          </Box>
+        ) : null}
+      <Container>
+        <Box>
+          <Title>Perception</Title>
+          <Numbers>{character.passives.perception}</Numbers>
+        </Box>
+        <Box>
+          <Title>Investigation</Title>
+          <Numbers>{character.passives.investigation}</Numbers>
+        </Box>
+        <Box>
+          <Title>Insight</Title>
+          <Numbers>{character.passives.insight}</Numbers>
+        </Box>
+      </Container>
+    </div>
   );
 };
 

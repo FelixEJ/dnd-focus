@@ -26,12 +26,31 @@ const Text = styled.p`
 `;
 
 const Inventory = ({ character }) => {
+  const getTotalMoney = () => {
+    let total = 0;
+    total += character.currency.copper / 100;
+    total += character.currency.silver / 10;
+    total += character.currency.electrum / 2;
+    total += character.currency.gold;
+    total += character.currency.platinum * 10;
+    return total;
+  };
+
   return (
     <div>
-      <h4>Inventory</h4>
       <Container>
         <Box>
-          <InventoryAccordion inventory={character.inventory} />
+          <Text>
+            <InventoryAccordion inventory={character.inventory} />{" "}
+          </Text>
+        </Box>
+        <Box>
+          <Text>
+            cp:{character.currency.copper} | sp:{character.currency.silver} |
+            ep: {character.currency.electrum} | gp: {character.currency.gold} |
+            pp: {character.currency.platinum}
+          </Text>
+          <Text>Total: {getTotalMoney()} gp</Text>
         </Box>
       </Container>
     </div>

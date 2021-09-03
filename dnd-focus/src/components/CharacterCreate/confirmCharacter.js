@@ -64,7 +64,7 @@ const ConfirmCharacter = ({
       return saveMod;
     }
   };
-
+// duplicated in charsheet inventory
   const getTotalMoney = () => {
     let total = 0;
     total += character.currency.copper / 100;

@@ -42,6 +42,31 @@ const CharSheet = styled.div`
     }
   }}
 `;
+// const CharComponent = styled.div``;
+const CharComponent = styled.div`
+  & {
+    width: 100%;
+    max-width: 400px;
+    background-color: lightgreen;
+    display: inline-block;
+    margin: 1% 1% 1% 1%;
+  }  
+`;
+// const CharComponent = styled.div`
+//   & {
+//     width: 100%;
+//     max-width: 400px;
+//     background-color: lightgreen;
+//     display: inline-block;
+//     margin: 1% 1% 1% 1%;
+//     float: left;
+//   }
+//   & {
+//     :nth-child(3n + 1) {
+//       clear: left;
+//     }
+//   }
+// `;
 
 const Success = ({}) => {
   const [loadedChar, setLoadedChar] = useState({
@@ -287,18 +312,42 @@ const Success = ({}) => {
         </select>
       </FormControl>
       <CharSheet>
-        <Basics character={loadedChar} />
-        <Abilities character={loadedChar} />
-        <Skills character={loadedChar} />
-        <Proficiencies character={loadedChar} />        
-        <Combat character={loadedChar} />
-        <Health character={loadedChar} />
-        <Attacks character={loadedChar} />
-        <Magic character={loadedChar} />
-        <Features character={loadedChar} />        
-        <Inventory character={loadedChar} />        
-        <Passives character={loadedChar} />
-        <Personality character={loadedChar} />
+        <CharComponent>
+          <Basics character={loadedChar} />
+        </CharComponent>
+        <CharComponent>
+          <Abilities character={loadedChar} />
+        </CharComponent>
+        <CharComponent>
+          <Skills character={loadedChar} />
+        </CharComponent>
+        <CharComponent>
+          <Proficiencies character={loadedChar} />
+        </CharComponent>
+        <CharComponent>
+          <Passives character={loadedChar} />
+        </CharComponent>
+        <CharComponent>
+          <Combat character={loadedChar} />
+        </CharComponent>
+        <CharComponent>
+          <Health character={loadedChar} />
+        </CharComponent>
+        <CharComponent>
+          <Attacks character={loadedChar} />
+        </CharComponent>
+        <CharComponent>
+          <Magic character={loadedChar} />
+        </CharComponent>
+        <CharComponent>
+          <Features character={loadedChar} />
+        </CharComponent>
+        <CharComponent>
+          <Inventory character={loadedChar} />
+        </CharComponent>        
+        <CharComponent>
+          <Personality character={loadedChar} />
+        </CharComponent>
       </CharSheet>
     </div>
   );

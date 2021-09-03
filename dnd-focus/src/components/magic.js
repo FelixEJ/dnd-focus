@@ -29,14 +29,6 @@ const List = styled.div`
   column-count: 2;
   column-gap: 1%;
 `;
-
-const Box = styled.div`
-  width: 98%;
-  max-width: 400px;
-  background-color: lightblue;
-  display: inline-block;
-  margin: 1% 1% 1% 1%;
-`;
 const Slot = styled.div`
   & {
     width: 98%;
@@ -52,6 +44,13 @@ const Slot = styled.div`
     }
   }
 `;
+const Box = styled.div`
+  width: 98%;
+  max-width: 400px;
+  background-color: lightblue;
+  display: inline-block;
+  margin: 1% 1% 1% 1%;
+`;
 const Numbers = styled.p`
   font-size: 2em;
   margin: 0;
@@ -61,10 +60,6 @@ const Title = styled.p`
   margin: 0;
   font-size: 0.9em;
   text-decoration: underline;
-`;
-const Text = styled.p`
-  font-size: 1em;
-  margin: 0;
 `;
 
 const Magic = ({ character }) => {
