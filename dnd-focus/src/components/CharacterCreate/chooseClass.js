@@ -19,6 +19,11 @@ import AddFeatureModal from "./addFeatureModal";
 import AddEquipmentModal from "./addEquipmentModal";
 import AddItemModal from "./addItemModal";
 import AddAttackModal from "./addAttackModal";
+import stylish, { css } from "styled-components";
+
+const BotButtons = stylish.div`
+  margin-bottom: 40px;
+`;
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -103,6 +108,7 @@ const ChooseClass = ({
               <option value={"d10"}>d10</option>
               <option value={"d12"}>d12</option>
             </select>
+            <label>&emsp;Con mod = {(character.stats.con - 10) / 2}</label>
           </Section>
 
           <Section>
@@ -212,7 +218,7 @@ const ChooseClass = ({
                 </select>
               </label>
             </Item>
-            
+
             <Item>
               <label>
                 Skills:
@@ -283,17 +289,17 @@ const ChooseClass = ({
             <AddAttackModal addAttack={addAttack} />
             <h3>Attacks</h3>
             {character.attacks.map((attack, index) => (
-              <h4 key={index}>
-                {attack.attack_name}
-              </h4>
+              <h4 key={index}>{attack.attack_name}</h4>
             ))}
           </Section>
         </FormControl>
       </Box>
-      <ButtonGroup variant="contained">
-        <Button onClick={Previous}>Back</Button>
-        <Button onClick={Continue}>Next</Button>
-      </ButtonGroup>
+      <BotButtons>
+        <ButtonGroup variant="contained">
+          <Button onClick={Previous}>Back</Button>
+          <Button onClick={Continue}>Next</Button>
+        </ButtonGroup>
+      </BotButtons>
     </div>
   );
 };

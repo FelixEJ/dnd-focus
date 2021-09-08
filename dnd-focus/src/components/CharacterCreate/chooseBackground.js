@@ -18,6 +18,11 @@ import Grid from "@material-ui/core/Grid";
 import AddFeatureModal from "./addFeatureModal";
 import AddEquipmentModal from "./addEquipmentModal";
 import AddItemModal from "./addItemModal";
+import stylish, { css } from "styled-components";
+
+const BotButtons = stylish.div`
+  margin-bottom: 40px;
+`;
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -74,16 +79,9 @@ const ChooseBackground = ({
           <Item>
             <label>
               Proficient skills:
-              <textarea
-                type="text"
-                id="proficient"
-                placeholder="Athletics, persuasion..."
-                name="skills.proficient"
-                value={character.skills.proficient}
-                onChange={onCharacterChange}
-                cols="40"
-                rows="3"
-              />
+              {character.skills.map((skill, index) => (
+            <div key={index}>{skill.name} : {skill.bonus}</div>
+          ))}
             </label>
           </Item>
 
@@ -289,12 +287,12 @@ const ChooseBackground = ({
             </Item>
           </Item>
         </FormControl>
-        <div>
+        <BotButtons>
           <ButtonGroup variant="contained">
             <Button onClick={Previous}>Back</Button>
             <Button onClick={Continue}>Next</Button>
           </ButtonGroup>
-        </div>
+        </BotButtons>
       </Box>
     </div>
   );

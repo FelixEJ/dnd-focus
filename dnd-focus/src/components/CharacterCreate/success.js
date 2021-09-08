@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, FormControl } from "@material-ui/core";
 import styled, { css } from "styled-components";
+import LoadCharacterFromJSON from "../loadCharacterFromJSONModal";
 import Basics from "../basics";
 import Abilities from "../abilities";
 import Skills from "../skills";
@@ -42,7 +43,6 @@ const CharSheet = styled.div`
     }
   }}
 `;
-// const CharComponent = styled.div``;
 const CharComponent = styled.div`
   & {
     width: 100%;
@@ -50,23 +50,8 @@ const CharComponent = styled.div`
     background-color: lightgreen;
     display: inline-block;
     margin: 1% 1% 1% 1%;
-  }  
+  }
 `;
-// const CharComponent = styled.div`
-//   & {
-//     width: 100%;
-//     max-width: 400px;
-//     background-color: lightgreen;
-//     display: inline-block;
-//     margin: 1% 1% 1% 1%;
-//     float: left;
-//   }
-//   & {
-//     :nth-child(3n + 1) {
-//       clear: left;
-//     }
-//   }
-// `;
 
 const Success = ({}) => {
   const [loadedChar, setLoadedChar] = useState({
@@ -143,30 +128,26 @@ const Success = ({}) => {
       save6: "",
       save6_bonus: 0,
     },
-    skills: {
-      all: [
-        "Athletics[STR]",
-        "Acrobatics[DEX]",
-        "Sleight of Hand[DEX]",
-        "Stealth[DEX]",
-        "Arcana[INT]",
-        "History[INT]",
-        "Investigation[INT]",
-        "Nature[INT]",
-        "Religion[INT]",
-        "Animal Handling[WIS]",
-        "Insight[WIS]",
-        "Medicine[WIS]",
-        "Perception[WIS]",
-        "Survival[WIS]",
-        "Deception[CHA]",
-        "Intimidation[CHA]",
-        "Performance[CHA]",
-        "Persuasion[CHA]",
-      ],
-      proficient: [],
-      expert: [],
-    },
+    skills: [
+      { name: "Athletics", ability:"STR", bonus: "" },
+      { name: "Acrobatics", ability:"DEX", bonus: "" },
+      { name: "Sleight of Hand", ability:"DEX", bonus: "" },
+      { name: "Stealth", ability:"DEX", bonus: "" },
+      { name: "Arcana", ability:"INT", bonus: "" },
+      { name: "History", ability:"INT", bonus: "" },
+      { name: "Investigation", ability:"INT", bonus: "" },
+      { name: "Nature", ability:"INT", bonus: "" },
+      { name: "Religion", ability:"INT", bonus: "" },
+      { name: "Animal Handling", ability:"WIS", bonus: "" },
+      { name: "Insight", ability:"WIS", bonus: "" },
+      { name: "Medicine", ability:"WIS", bonus: "" },
+      { name: "Perception", ability:"WIS", bonus: "" },
+      { name: "Survival", ability:"WIS", bonus: "" },
+      { name: "Deception", ability:"CHA", bonus: "" },
+      { name: "Intimidation", ability:"CHA", bonus: "" },
+      { name: "Performance", ability:"CHA", bonus: "" },
+      { name: "Persuasion", ability:"CHA", bonus: "" },
+    ],
     passives: {
       senses: "",
       perception: 0,
@@ -292,18 +273,31 @@ const Success = ({}) => {
     setLoadedChar(allChars[charNum]);
   }
 
+  function loadFromJson(character) {
+    const newChar = character;
+    const newCharacter = { ...loadedChar };
+    const oldCharacter = newCharacter;
+    setLoadedChar(newChar);
+    console.log(newChar);
+  }
+
   return (
     <div>
       <h1>Character Sheet for {loadedChar.name}</h1>
+      <LoadCharacterFromJSON
+        loadFromJson={loadFromJson}
+        character={loadedChar}
+      />
       <FormControl>
         <label>Select Character&emsp;</label>
         <select
           id="char_select"
           name="char_select"
-          value={loadedChar.char_select}
+          // value={loadedChar.char_select}
+          value={loadedChar.name}
           onChange={handleChange}
         >
-          <option value="">Select character</option>
+          <option value={loadedChar}>Select character</option>
           {allChars.map((char, index) => (
             <option key={index} value={index}>
               {char.name} lvl{char.level}
@@ -344,7 +338,7 @@ const Success = ({}) => {
         </CharComponent>
         <CharComponent>
           <Inventory character={loadedChar} />
-        </CharComponent>        
+        </CharComponent>
         <CharComponent>
           <Personality character={loadedChar} />
         </CharComponent>

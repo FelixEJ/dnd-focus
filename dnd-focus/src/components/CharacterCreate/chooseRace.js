@@ -15,6 +15,12 @@ import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import AddFeatureModal from "./addFeatureModal";
+import AddSkillModal from "./addSkillModal";
+import stylish, { css } from "styled-components";
+
+const BotButtons = stylish.div`
+  margin-bottom: 40px;
+`;
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -23,7 +29,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
+const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature, addSkill }) => {
   const Continue = (e) => {
     e.preventDefault();
     nextStep();
@@ -409,13 +415,33 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature }) => {
               />
             </label>
           </Item>
+          <Grid >
+            <Item>
+              <AddSkillModal
+                addSkill={addSkill}
+                character={character}
+              />
+              <h3>Proficient Skills</h3>
+              {/* {character.skills.proficient.map((skill, index) => (
+                <h4 key={index}>
+                  {skill}
+                </h4>
+              ))}
+              <h3>Expert Skills</h3>
+              {character.skills.expert.map((skill, index) => (
+                <h4 key={index}>
+                  {skill}
+                </h4>
+              ))} */}
+            </Item>
+          </Grid>
         </FormControl>
         {/* </Grid> */}
-        <div>
+        <BotButtons>
           <Button variant="contained" onClick={Continue}>
             Next
           </Button>
-        </div>
+        </BotButtons>
       </Box>
     </div>
   );

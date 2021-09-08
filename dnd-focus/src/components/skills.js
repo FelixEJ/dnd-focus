@@ -53,11 +53,11 @@ const Skills = ({ character }) => {
       <Container>
         <h4>All Skills - Roll with [ability] modifier</h4>
         <All>
-          {character.skills.all.map((skill, index) => (
-            <Skill key={index}>{skill}</Skill>
+          {character.skills.map((skill, index) => (
+            <Skill key={index}>{skill.name} : {skill.bonus}</Skill>
           ))}
         </All>
-        <h4>
+        {/* <h4>
           Proficient Skills - Roll [ability] mod +{character.proficiency_bonus}
         </h4>
         <Proficient>
@@ -73,7 +73,7 @@ const Skills = ({ character }) => {
           {character.skills.expert.map((skill, index) => (
             <Skill key={index}>{skill}</Skill>
           ))}
-        </Expert>
+        </Expert> */}
       </Container>
     </div>
   );

@@ -354,7 +354,7 @@ const ConfirmCharacter = ({
           <Button>
             <a
               href={"data:" + data}
-              download={character.name + " lvl" + character.level + ".json"}
+              download={character.name + "_lvl" + character.level + ".json"}
             >
               Download Character
             </a>

@@ -95,6 +95,7 @@ const AddItemModal = ({ addItem, character }) => {
                 name="quantity"
                 value={item.quantity}
                 onChange={handleChange}
+                size="3"
               />
             </Item>
             <Item>
@@ -105,6 +106,7 @@ const AddItemModal = ({ addItem, character }) => {
                 name="value_each"
                 value={item.value_each}
                 onChange={handleChange}
+                size="4"
               />
               <select
                 id="value_currency"
