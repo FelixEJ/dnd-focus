@@ -29,7 +29,13 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature, addSkill }) => {
+const ChooseRace = ({
+  nextStep,
+  onCharacterChange,
+  character,
+  addFeature,
+  addSkill,
+}) => {
   const Continue = (e) => {
     e.preventDefault();
     nextStep();
@@ -68,7 +74,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature, addSki
         </div>
         {/* <Grid container spacing={2}> */}
         <FormControl margin="normal">
-          <Grid >
+          <Grid>
             <Item>
               <label>
                 Name:
@@ -83,7 +89,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature, addSki
             </Item>
           </Grid>
 
-          <Grid >
+          <Grid>
             <Item>
               <label>
                 Level:
@@ -118,7 +124,23 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature, addSki
             </Item>
           </Grid>
 
-          <Grid >
+          <Grid>
+            <Item>
+              <label>
+                Proficiency Bonus:
+                <input
+                  type="number"
+                  id="proficiency_bonus"
+                  name="proficiency_bonus"
+                  value={character.proficiency_bonus}
+                  onChange={onCharacterChange}
+                  size="3"
+                />
+              </label>
+            </Item>
+          </Grid>
+
+          <Grid>
             <Item>
               <label>
                 Race:
@@ -144,7 +166,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature, addSki
                 name="stats.str"
                 value={character.stats.str}
                 onChange={onCharacterChange}
-                size="3"
+                size="4"
                 required
               />
               <span>&emsp; {getModifier(character.stats.str)}</span>
@@ -159,7 +181,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature, addSki
                 name="stats.dex"
                 value={character.stats.dex}
                 onChange={onCharacterChange}
-                size="3"
+                size="4"
                 required
               />
               <span>&emsp; {getModifier(character.stats.dex)}</span>
@@ -174,7 +196,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature, addSki
                 name="stats.con"
                 value={character.stats.con}
                 onChange={onCharacterChange}
-                size="3"
+                size="4"
                 required
               />
               <span>&emsp; {getModifier(character.stats.con)}</span>
@@ -189,7 +211,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature, addSki
                 name="stats.int"
                 value={character.stats.int}
                 onChange={onCharacterChange}
-                size="3"
+                size="4"
                 required
               />
               <span>&emsp; {getModifier(character.stats.int)}</span>
@@ -204,7 +226,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature, addSki
                 name="stats.wis"
                 value={character.stats.wis}
                 onChange={onCharacterChange}
-                size="3"
+                size="4"
                 required
               />
               <span>&emsp; {getModifier(character.stats.wis)}</span>
@@ -219,7 +241,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature, addSki
                 name="stats.cha"
                 value={character.stats.cha}
                 onChange={onCharacterChange}
-                size="3"
+                size="4"
                 required
               />
               <span>&emsp; {getModifier(character.stats.cha)}</span>
@@ -242,11 +264,16 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature, addSki
           </Item>
           {/* </Grid> */}
 
-          <Grid >
+          <Grid>
             <Item>
               <label>
                 Size:
-                <select>
+                <select
+                  id="size"
+                  name="size"
+                  value={character.size}
+                  onChange={onCharacterChange}
+                >
                   <option value="medium">medium</option>
                   <option value="small">small</option>
                 </select>
@@ -254,7 +281,7 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature, addSki
             </Item>
           </Grid>
 
-          <Grid >
+          <Grid>
             <Item>
               <label>
                 Speed:
@@ -269,11 +296,9 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature, addSki
             </Item>
           </Grid>
 
-          <Grid >
+          <Grid>
             <Item>
-              <AddFeatureModal
-                addFeature={addFeature}
-              />
+              <AddFeatureModal addFeature={addFeature} />
               <h3>Features & abilities</h3>
               {character.features.map((feature) => (
                 <h4 key={feature.feature_id + feature.feature_name}>
@@ -400,39 +425,19 @@ const ChooseRace = ({ nextStep, onCharacterChange, character, addFeature, addSki
             </Item>
           </Item>
 
-          <Item>
-            <label>
-              Proficient skills:
-              <textarea
-                type="text"
-                id="proficient"
-                placeholder="Athletics, persuasion..."
-                name="skills.proficient"
-                value={character.skills.proficient}
-                onChange={onCharacterChange}
-                cols="40"
-                rows="3"
-              />
-            </label>
-          </Item>
-          <Grid >
+          <Grid>
             <Item>
               <AddSkillModal
-                addSkill={addSkill}
                 character={character}
+                onCharacterChange={onCharacterChange}
               />
-              <h3>Proficient Skills</h3>
-              {/* {character.skills.proficient.map((skill, index) => (
-                <h4 key={index}>
-                  {skill}
-                </h4>
-              ))}
-              <h3>Expert Skills</h3>
-              {character.skills.expert.map((skill, index) => (
-                <h4 key={index}>
-                  {skill}
-                </h4>
-              ))} */}
+              {/* <h3>Proficient Skills</h3>              
+              {Object.entries(character.skills).forEach((skill) => {
+                const [key, value] = skill;
+                console.log(key, value);
+                return <p>hello</p>;
+              })}
+              <p>hello</p> */}
             </Item>
           </Grid>
         </FormControl>

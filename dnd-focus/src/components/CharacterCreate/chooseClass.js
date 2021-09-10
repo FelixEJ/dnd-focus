@@ -19,6 +19,7 @@ import AddFeatureModal from "./addFeatureModal";
 import AddEquipmentModal from "./addEquipmentModal";
 import AddItemModal from "./addItemModal";
 import AddAttackModal from "./addAttackModal";
+import AddSkillModal from "./addSkillModal";
 import stylish, { css } from "styled-components";
 
 const BotButtons = stylish.div`
@@ -107,8 +108,7 @@ const ChooseClass = ({
               <option value={"d8"}>d8</option>
               <option value={"d10"}>d10</option>
               <option value={"d12"}>d12</option>
-            </select>
-            <label>&emsp;Con mod = {(character.stats.con - 10) / 2}</label>
+            </select>            
           </Section>
 
           <Section>
@@ -122,6 +122,7 @@ const ChooseClass = ({
               size="3"
               required
             />
+            <label>&emsp;Con mod = {(character.stats.con - 10) / 2}, level = {character.level}</label>
           </Section>
 
           <Section style={{ backgroundColor: "beige" }}>
@@ -137,7 +138,7 @@ const ChooseClass = ({
                   value={character.proficiencies.languages}
                   onChange={onCharacterChange}
                   cols="40"
-                  rows="2"
+                  rows="1"
                 />
               </label>
             </Item>
@@ -152,7 +153,7 @@ const ChooseClass = ({
                   value={character.proficiencies.weapons}
                   onChange={onCharacterChange}
                   cols="40"
-                  rows="2"
+                  rows="1"
                 />
               </label>
             </Item>
@@ -167,7 +168,7 @@ const ChooseClass = ({
                   value={character.proficiencies.armour}
                   onChange={onCharacterChange}
                   cols="40"
-                  rows="2"
+                  rows="1"
                 />
               </label>
             </Item>
@@ -182,7 +183,7 @@ const ChooseClass = ({
                   value={character.proficiencies.other}
                   onChange={onCharacterChange}
                   cols="40"
-                  rows="2"
+                  rows="1"
                 />
               </label>
             </Item>
@@ -220,19 +221,10 @@ const ChooseClass = ({
             </Item>
 
             <Item>
-              <label>
-                Skills:
-                <textarea
-                  type="text"
-                  id="proficient"
-                  placeholder="Athletics, persuasion..."
-                  name="skills.proficient"
-                  value={character.skills.proficient}
-                  onChange={onCharacterChange}
-                  cols="40"
-                  rows="3"
-                />
-              </label>
+              <AddSkillModal
+                character={character}
+                onCharacterChange={onCharacterChange}
+              />
             </Item>
           </Section>
 
@@ -248,6 +240,19 @@ const ChooseClass = ({
                 {equip.equipment_name}
               </h4>
             ))}
+            <Item>
+              <label>
+                Armour Class (AC):
+                <input
+                  type="number"
+                  id="ac"
+                  name="ac"
+                  value={character.ac}
+                  onChange={onCharacterChange}
+                  size="3"
+                />
+              </label>
+            </Item>
           </Section>
 
           <Section>
@@ -286,7 +291,7 @@ const ChooseClass = ({
           </Section>
 
           <Section>
-            <AddAttackModal addAttack={addAttack} />
+            <AddAttackModal addAttack={addAttack} character={character}/>
             <h3>Attacks</h3>
             {character.attacks.map((attack, index) => (
               <h4 key={index}>{attack.attack_name}</h4>

@@ -92,6 +92,8 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
                 name="desc"
                 value={equipment.desc}
                 onChange={handleChange}
+                cols="30"
+                rows="1"
               />
             </Item>
             <Item>

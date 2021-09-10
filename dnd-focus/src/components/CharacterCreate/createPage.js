@@ -9,7 +9,7 @@ import Success from "./success";
 function CreatePage() {
   const [step, setStep] = useState(1);
   const [character, setCharacter] = useState({
-    name: "",
+    name: "test02",
     level: 0,
     race: "",
     size: "",
@@ -82,26 +82,44 @@ function CreatePage() {
       save6: "",
       save6_bonus: 0,
     },
-    skills: [
-      { name: "Athletics", ability:"STR", bonus: "" },
-      { name: "Acrobatics", ability:"DEX", bonus: "" },
-      { name: "Sleight of Hand", ability:"DEX", bonus: "" },
-      { name: "Stealth", ability:"DEX", bonus: "" },
-      { name: "Arcana", ability:"INT", bonus: "" },
-      { name: "History", ability:"INT", bonus: "" },
-      { name: "Investigation", ability:"INT", bonus: "" },
-      { name: "Nature", ability:"INT", bonus: "" },
-      { name: "Religion", ability:"INT", bonus: "" },
-      { name: "Animal Handling", ability:"WIS", bonus: "" },
-      { name: "Insight", ability:"WIS", bonus: "" },
-      { name: "Medicine", ability:"WIS", bonus: "" },
-      { name: "Perception", ability:"WIS", bonus: "" },
-      { name: "Survival", ability:"WIS", bonus: "" },
-      { name: "Deception", ability:"CHA", bonus: "" },
-      { name: "Intimidation", ability:"CHA", bonus: "" },
-      { name: "Performance", ability:"CHA", bonus: "" },
-      { name: "Persuasion", ability:"CHA", bonus: "" },
-    ],
+    skills: {
+      Athletics: "",
+      Athletics_bonus: 0,
+      Acrobatics: "",
+      Acrobatics_bonus: 0,
+      SleightOfHand: "",
+      SleightOfHand_bonus: 0,
+      Stealth: "",
+      Stealth_bonus: 0,
+      Arcana: "",
+      Arcana_bonus: 0,
+      History: "",
+      History_bonus:0,
+      Investigation: "",
+      Investigation_bonus: 0,
+      Nature: "",
+      Nature_bonus: 0,
+      Religion: "",
+      Religion_bonus: 0,
+      AnimalHandling: "",
+      AnimalHandling_bonus: 0,
+      Insight: "",
+      Insight_bonus: 0,
+      Medicine: "",
+      Medicine_bonus: 0,
+      Perception: "",
+      Perception_bonus: 0,
+      Survival: "",
+      Survival_bonus: 0,
+      Deception: "",
+      Deception_bonus: 0,
+      Intimidation: "",
+      Intimidation_bonus: 0,
+      Performance: "",
+      Performance_bonus: 0,
+      Persuasion: "",
+      Persuasion_bonus: 0,
+    },
     passives: {
       senses: "",
       perception: 0,
@@ -273,15 +291,6 @@ function CreatePage() {
     console.log("new attack", newCharacter);
   }
 
-  function addSkill(newSkill) {
-    const newSkills = newSkill;
-    const newCharacter = { ...character };
-    const oldSkills = newCharacter.skills;
-    oldSkills.push(newSkills);
-    setCharacter(newCharacter);
-    console.log("new Invetory", newCharacter);
-  }
-
   function saveCharacter(character) {
     localStorage.setItem(character.name, JSON.stringify(character));
   }
@@ -294,7 +303,6 @@ function CreatePage() {
           onCharacterChange={onCharacterChange}
           character={character}
           addFeature={addFeature}
-          addSkill={addSkill}
         />
       );
     case 2:
@@ -307,7 +315,6 @@ function CreatePage() {
           addFeature={addFeature}
           addEquipment={addEquipment}
           addItem={addItem}
-          addSkill={addSkill}
         />
       );
     case 3:
@@ -321,7 +328,6 @@ function CreatePage() {
           addEquipment={addEquipment}
           addItem={addItem}
           addAttack={addAttack}
-          addSkill={addSkill}
         />
       );
     case 4:

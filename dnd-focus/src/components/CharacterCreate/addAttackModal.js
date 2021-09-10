@@ -52,6 +52,8 @@ const AddAttackModal = ({ addAttack, character }) => {
     e.preventDefault();
   };
 
+  function submitAttack() {}
+
   function clearAttack() {
     setAttack({
       attack_id: 0,
@@ -82,7 +84,7 @@ const AddAttackModal = ({ addAttack, character }) => {
         <Box sx={style}>
           <Grid>
             <Item>
-            <h2>Add/Edit Attack</h2>
+              <h2>Add/Edit Attack</h2>
               <label>Attack name</label>
               <input
                 type="text"
@@ -113,6 +115,19 @@ const AddAttackModal = ({ addAttack, character }) => {
             </Item>
             <Item>
               <label>
+                Attack modifier (ability mod + {character.proficiency_bonus})
+                <input
+                  type="number"
+                  id="attack_bonus"
+                  name="attack_bonus"
+                  value={attack.attack_bonus}
+                  onChange={handleChange}
+                  size="3"
+                  />
+              </label>
+            </Item>
+            <Item>
+              <label>
                 Damage: &emsp;
                 <input
                   type="number"
@@ -134,6 +149,19 @@ const AddAttackModal = ({ addAttack, character }) => {
                   <option value={"d10"}>d10</option>
                   <option value={"d12"}>d12</option>
                 </select>
+              </label>
+            </Item>
+            <Item>
+              <label>
+                Damage bonus (ability mod)
+                <input
+                  type="number"
+                  id="damage_bonus"
+                  name="damage_bonus"
+                  value={attack.damage_bonus}
+                  onChange={handleChange}
+                  size="3"
+                  />
               </label>
             </Item>
             <Item>

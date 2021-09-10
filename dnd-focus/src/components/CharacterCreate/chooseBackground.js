@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import {
   Select,
   TextField,
@@ -18,6 +19,7 @@ import Grid from "@material-ui/core/Grid";
 import AddFeatureModal from "./addFeatureModal";
 import AddEquipmentModal from "./addEquipmentModal";
 import AddItemModal from "./addItemModal";
+import AddSkillModal from "./addSkillModal";
 import stylish, { css } from "styled-components";
 
 const BotButtons = stylish.div`
@@ -76,17 +78,15 @@ const ChooseBackground = ({
               />
             </label>
           </Item>
-          <Item>
-            <label>
-              Proficient skills:
-              {character.skills.map((skill, index) => (
-            <div key={index}>{skill.name} : {skill.bonus}</div>
-          ))}
-            </label>
-          </Item>
 
           <Item>
             <h3>Proficiencies</h3>
+            <Item>
+              <AddSkillModal
+                character={character}
+                onCharacterChange={onCharacterChange}
+              />
+            </Item>
             <Item>
               <label>
                 Languages:
