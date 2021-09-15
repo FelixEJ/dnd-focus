@@ -1,26 +1,17 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import {
-  Select,
-  TextField,
   Button,
   ButtonGroup,
-  MenuItem,
-  InputLabel,
-  FormGroup,
   FormControl,
-  Container,
-  Input,
 } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
 import AddFeatureModal from "./addFeatureModal";
 import AddEquipmentModal from "./addEquipmentModal";
 import AddItemModal from "./addItemModal";
 import AddSkillModal from "./addSkillModal";
-import stylish, { css } from "styled-components";
+import stylish from "styled-components";
 
 const BotButtons = stylish.div`
   margin-bottom: 40px;
@@ -64,6 +55,7 @@ const ChooseBackground = ({
           </ButtonGroup>
         </div>
         <FormControl margin="normal">
+        <label>{character.name}, lvl:{character.level}</label>
           <Item>
             <label>
               Title:
@@ -98,7 +90,7 @@ const ChooseBackground = ({
                   value={character.proficiencies.languages}
                   onChange={onCharacterChange}
                   cols="40"
-                  rows="2"
+                  rows="1"
                 />
               </label>
             </Item>
@@ -113,7 +105,7 @@ const ChooseBackground = ({
                   value={character.proficiencies.other}
                   onChange={onCharacterChange}
                   cols="40"
-                  rows="2"
+                  rows="1"
                 />
               </label>
             </Item>

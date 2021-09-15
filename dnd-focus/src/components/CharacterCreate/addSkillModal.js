@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import Modal from "@material-ui/core/Modal";
 import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import stylish, { css } from "styled-components";
+import stylish from "styled-components";
 
 const Container = stylish.div`
   text-align: center;
@@ -18,28 +17,6 @@ const Container = stylish.div`
   display: block;
   margin-left: auto;
   margin-right: auto;
-`;
-
-const All = stylish.div`
-  width: 98%;
-  background-color: lightblue;
-  display: block;
-  column-count: 3;
-  column-gap: 1%;
-`;
-const Proficient = stylish.div`
-  width: 98%;
-  background-color: lightblue;
-  display: block;
-  column-count: 3;
-  column-gap: 1%;
-`;
-const Expert = stylish.div`
-  width: 98%;
-  background-color: lightblue;
-  display: block;
-  column-count: 3;
-  column-gap: 1%;
 `;
 const Skill = stylish.div`
   & {

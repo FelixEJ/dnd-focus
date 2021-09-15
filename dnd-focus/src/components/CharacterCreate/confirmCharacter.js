@@ -1,23 +1,13 @@
 import React from "react";
 import {
-  Select,
-  TextField,
   Button,
   ButtonGroup,
-  MenuItem,
-  InputLabel,
-  FormGroup,
-  FormControl,
-  Container,
-  Input,
 } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import ImageList from "@material-ui/core/ImageList";
-import ImageListItem from "@material-ui/core/ImageListItem";
-import stylish, { css } from "styled-components";
+import stylish from "styled-components";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -31,7 +21,6 @@ const Item = styled(Paper)(({ theme }) => ({
 const ConfirmCharacter = ({
   nextStep,
   prevStep,
-  onCharacterChange,
   character,
   saveCharacter,
 }) => {

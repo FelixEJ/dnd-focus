@@ -1,6 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
-import Features from "./features";
+import styled from "styled-components";
 import InventoryAccordion from "./inventoryAccordion";
 
 const Container = styled.div`

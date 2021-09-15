@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import AttackAccordion from "./attackAccordion";
 
 const Container = styled.div`
@@ -18,9 +18,6 @@ const Box = styled.div`
   width: 98%;
   background-color: none;
   display: inline-block;
-  margin: 1% 1% 1% 1%;
-`;
-const Text = styled.p`
   margin: 1% 1% 1% 1%;
 `;
 

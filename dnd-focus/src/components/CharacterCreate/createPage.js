@@ -123,8 +123,11 @@ function CreatePage() {
     passives: {
       senses: "",
       perception: 0,
+      perception_bonus: 0,
       investigation: 0,
+      investigation_bonus: 0,
       insight: 0,
+      insight_bonus: 0,
     },
     features: [
       {

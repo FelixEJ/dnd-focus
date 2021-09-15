@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Container = styled.div`
   text-align: center;
@@ -46,7 +46,6 @@ const Save = styled.p`
 
 // duplicate, move to utilities
 const Abilities = ({ character }) => {
-
   const getModifier = (stat) => {
     let mod = Math.floor((stat - 10) / 2);
     if (mod > 0) {
@@ -66,6 +65,7 @@ const Abilities = ({ character }) => {
       if (name === save) {
         saveTotal += character.proficiency_bonus + savesArray[index + 1];
       }
+      return true;
     });
 
     if (saveTotal > 0) {
@@ -78,38 +78,50 @@ const Abilities = ({ character }) => {
   return (
     <Container>
       <Box>
-        <Title><b>STR</b>ength</Title>
+        <Title>
+          <b>STR</b>ength
+        </Title>
         <Ability>{character.stats.str}</Ability>
         <Modifier>{getModifier(character.stats.str)}</Modifier>
         <Save>Save {getSave("str", character.stats.str)}</Save>
         {/* <Save>{character.stats.str.toString()}</Save> */}
       </Box>
       <Box>
-        <Title><b>INT</b>elligence</Title>
+        <Title>
+          <b>INT</b>elligence
+        </Title>
         <Ability>{character.stats.int}</Ability>
         <Modifier>{getModifier(character.stats.int)}</Modifier>
         <Save>Save {getSave("int", character.stats.int)}</Save>
       </Box>
       <Box>
-        <Title><b>DEX</b>terity</Title>
+        <Title>
+          <b>DEX</b>terity
+        </Title>
         <Ability>{character.stats.dex}</Ability>
         <Modifier>{getModifier(character.stats.dex)}</Modifier>
         <Save>Save {getSave("dex", character.stats.dex)}</Save>
       </Box>
       <Box>
-        <Title><b>WIS</b>dom</Title>
+        <Title>
+          <b>WIS</b>dom
+        </Title>
         <Ability>{character.stats.wis}</Ability>
         <Modifier>{getModifier(character.stats.wis)}</Modifier>
         <Save>Save {getSave("wis", character.stats.wis)}</Save>
       </Box>
       <Box>
-        <Title><b>CON</b>stitution</Title>
+        <Title>
+          <b>CON</b>stitution
+        </Title>
         <Ability>{character.stats.con}</Ability>
         <Modifier>{getModifier(character.stats.con)}</Modifier>
         <Save>Save {getSave("con", character.stats.con)}</Save>
       </Box>
       <Box>
-        <Title><b>CHA</b>risma</Title>
+        <Title>
+          <b>CHA</b>risma
+        </Title>
         <Ability>{character.stats.cha}</Ability>
         <Modifier>{getModifier(character.stats.cha)}</Modifier>
         <Save>Save {getSave("cha", character.stats.cha)}</Save>

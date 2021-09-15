@@ -1,14 +1,7 @@
 import React from "react";
 import {
-  Select,
-  TextField,
   Button,
-  MenuItem,
-  InputLabel,
-  FormGroup,
   FormControl,
-  Container,
-  Input,
 } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -16,7 +9,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import AddFeatureModal from "./addFeatureModal";
 import AddSkillModal from "./addSkillModal";
-import stylish, { css } from "styled-components";
+import stylish from "styled-components";
 
 const BotButtons = stylish.div`
   margin-bottom: 40px;
@@ -34,7 +27,6 @@ const ChooseRace = ({
   onCharacterChange,
   character,
   addFeature,
-  addSkill,
 }) => {
   const Continue = (e) => {
     e.preventDefault();

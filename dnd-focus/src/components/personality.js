@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Container = styled.div`
   text-align: center;
@@ -21,11 +21,6 @@ const Box = styled.div`
   background-color: lightblue;
   display: inline-block;
   margin: 1% 1% 1% 1%;
-`;
-const Numbers = styled.p`
-  font-size: 2em;
-  margin: 0;
-  font-weight: bold;
 `;
 const Title = styled.p`
   margin: 0;

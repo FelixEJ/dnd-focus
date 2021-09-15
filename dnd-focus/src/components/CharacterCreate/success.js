@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Button, FormControl } from "@material-ui/core";
-import styled, { css } from "styled-components";
+import { FormControl } from "@material-ui/core";
+import styled from "styled-components";
 import LoadCharacterFromJSON from "../loadCharacterFromJSONModal";
 import Basics from "../basics";
 import Abilities from "../abilities";
@@ -53,7 +53,7 @@ const CharComponent = styled.div`
   }
 `;
 
-const Success = ({}) => {
+const Success = () => {
   const [loadedChar, setLoadedChar] = useState({
     name: "",
     level: 0,
@@ -293,8 +293,8 @@ const Success = ({}) => {
 
   function loadFromJson(character) {
     const newChar = character;
-    const newCharacter = { ...loadedChar };
-    const oldCharacter = newCharacter;
+    // const newCharacter = { ...loadedChar };
+    // const oldCharacter = newCharacter;
     setLoadedChar(newChar);
     console.log(newChar);
   }
