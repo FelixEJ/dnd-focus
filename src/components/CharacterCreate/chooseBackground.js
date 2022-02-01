@@ -143,7 +143,7 @@ const ChooseBackground = ({
                 name="currency.copper"
                 value={character.currency.copper}
                 onChange={onCharacterChange}
-                size="3"
+                size="4"
               />
             </Item>
             <Item>
@@ -154,7 +154,7 @@ const ChooseBackground = ({
                 name="currency.silver"
                 value={character.currency.silver}
                 onChange={onCharacterChange}
-                size="3"
+                size="4"
               />
             </Item>
             <Item>
@@ -165,7 +165,7 @@ const ChooseBackground = ({
                 name="currency.electrum"
                 value={character.currency.electrum}
                 onChange={onCharacterChange}
-                size="3"
+                size="4"
               />
             </Item>
             <Item>
@@ -176,7 +176,7 @@ const ChooseBackground = ({
                 name="currency.gold"
                 value={character.currency.gold}
                 onChange={onCharacterChange}
-                size="3"
+                size="4"
               />
             </Item>
             <Item>
@@ -187,7 +187,7 @@ const ChooseBackground = ({
                 name="currency.platinum"
                 value={character.currency.platinum}
                 onChange={onCharacterChange}
-                size="3"
+                size="4"
               />
             </Item>
           </Item>

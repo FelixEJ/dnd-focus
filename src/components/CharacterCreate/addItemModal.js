@@ -136,6 +136,9 @@ const AddItemModal = ({ addItem, character }) => {
               Confirm Item
             </Button>
           </Item>
+          <Button variant="contained" onClick={handleClose}>
+            Close
+          </Button>
         </Box>
       </Modal>
     </div>

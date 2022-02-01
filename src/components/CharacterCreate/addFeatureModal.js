@@ -5,6 +5,7 @@ import Modal from "@material-ui/core/Modal";
 import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+// import { ButtonGroup } from "@material-ui/core";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -171,6 +172,9 @@ const AddFeatureModal = ({ addFeature }) => {
               Confirm Feature
             </Button>
           </Item>
+            <Button variant="contained" onClick={handleClose}>
+              Close
+            </Button>
         </Box>
       </Modal>
     </div>

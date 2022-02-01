@@ -10,9 +10,6 @@ function App() {
       <div className="App">
         <Container>
           <Routes />
-          {/* <h1>App</h1> */}
-          {/* <Success /> */}
-          {/* <CreatePage /> */}
         </Container>
       </div>
     </BrowserRouter>

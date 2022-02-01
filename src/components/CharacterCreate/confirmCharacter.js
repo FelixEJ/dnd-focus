@@ -80,6 +80,25 @@ const ConfirmCharacter = ({
           <Button onClick={Continue}>Next</Button>
         </ButtonGroup>
       </div>
+      <div>
+        <ButtonGroup variant="contained">
+          <Button onClick={() => saveCharacter(character)} variant="outlined">
+            Save Character to Browser
+          </Button>
+        </ButtonGroup>
+      </div>
+      <div>
+        <ButtonGroup variant="contained">
+          <Button>
+            <a
+              href={"data:" + data}
+              download={character.name + "_lvl" + character.level + ".json"}
+            >
+              Download Character
+            </a>
+          </Button>
+        </ButtonGroup>
+      </div>
       <Box sx={{ width: "100%", overflowY: "scroll" }}>
         {/* <ImageList variant="masonry" cols={1} rows={6} gap={5}> */}
         <Grid

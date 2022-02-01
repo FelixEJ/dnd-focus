@@ -91,6 +91,7 @@ const ChooseRace = ({
                   value={character.level}
                   onChange={onCharacterChange}
                 >
+                  <option value={0}>-</option>
                   <option value={1}>1</option>
                   <option value={2}>2</option>
                   <option value={3}>3</option>
@@ -283,6 +284,7 @@ const ChooseRace = ({
                   name="speed"
                   value={character.speed}
                   onChange={onCharacterChange}
+                  size="4"
                 />
               </label>
             </Item>

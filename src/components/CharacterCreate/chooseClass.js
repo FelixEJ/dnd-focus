@@ -286,6 +286,7 @@ const ChooseClass = ({
                   size="3"
                 />
               </label>
+              <label>AC = 10 + armour + {getModifier(character.stats.dex)} </label>
             </Item>
             <Item>
               <label>
@@ -374,8 +375,13 @@ const ChooseClass = ({
                 />
               </label>
               <label>
-                = 10 + {getModifier(character.stats.wis)}(WIS) +{" "}
-                {character.proficiency_bonus}(if proficient in Perception)
+                = 10 {getModifier(character.stats.wis)}(WIS) 
+                {character.skills.Perception === "Proficient" ? (
+                  <label>+{" "}{character.proficiency_bonus}(Perception)</label>
+                ): null}
+                {character.skills.Perception === "Expert" ? (
+                  <label>+{" "}{character.proficiency_bonus * 2}(Perception)</label>
+                ): null}
               </label>
             </Item>
             <Item>
@@ -391,8 +397,13 @@ const ChooseClass = ({
                 />
               </label>
               <label>
-                = 10 + {getModifier(character.stats.int)}(INT) +{" "}
-                {character.proficiency_bonus}(if proficient in Investigation)
+                = 10 {getModifier(character.stats.int)}(INT) 
+                {character.skills.Investigation === "Proficient" ? (
+                  <label>+{" "}{character.proficiency_bonus}(Investigation)</label>
+                ): null}
+                {character.skills.Investigation === "Expert" ? (
+                  <label>+{" "}{character.proficiency_bonus * 2}(Investigation)</label>
+                ): null}
               </label>
             </Item>
             <Item>
@@ -408,8 +419,13 @@ const ChooseClass = ({
                 />
               </label>
               <label>
-                = 10 + {getModifier(character.stats.wis)}(WIS) +{" "}
-                {character.proficiency_bonus}(if proficient in Insight)
+                = 10 + {getModifier(character.stats.wis)}(WIS) 
+                {character.skills.Insight === "Proficient" ? (
+                  <label>+{" "}{character.proficiency_bonus}(Insight)</label>
+                ): null}
+                {character.skills.Insight === "Expert" ? (
+                  <label>+{" "}{character.proficiency_bonus * 2} (Insight)</label>
+                ): null}
               </label>
             </Item>
           </Section>

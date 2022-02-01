@@ -289,6 +289,7 @@ const Success = () => {
   function handleChange(e) {
     let charNum = e.target.value;
     setLoadedChar(allChars[charNum]);
+    console.log(loadedChar);
   }
 
   function loadFromJson(character) {

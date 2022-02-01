@@ -67,6 +67,34 @@ const AddAttackModal = ({ addAttack, character }) => {
     });
   }
 
+  const getModifier = (stat) => {
+    let mod = Math.floor((stat - 10) / 2);
+    if (mod > 0) {
+      return "+" + mod;
+    } else {
+      return mod;
+    }
+  };
+
+  const showModifier = () => {
+    switch (attack.mod_used) {
+      case "str":
+        return <div>{getModifier(character.stats.cha)}</div>;
+      case "dex":
+        return <div>{getModifier(character.stats.cha)}</div>;
+      case "con":
+        return <div>{getModifier(character.stats.cha)}</div>;
+      case "int":
+        return <div>{getModifier(character.stats.cha)}</div>;
+      case "wis":
+        return <div>{getModifier(character.stats.cha)}</div>;
+      case "cha":
+        return <div>{getModifier(character.stats.cha)}</div>;
+      default:
+        return <div>yup</div>;
+    }
+  };
+
   return (
     <div>
       <Button variant="contained" onClick={handleOpen}>
@@ -101,6 +129,7 @@ const AddAttackModal = ({ addAttack, character }) => {
                   value={attack.mod_used}
                   onChange={handleChange}
                 >
+                  <option value={""}>-</option>
                   <option value={"str"}>Strength</option>
                   <option value={"dex"}>Dexterity</option>
                   <option value={"con"}>Constitution</option>
@@ -112,7 +141,26 @@ const AddAttackModal = ({ addAttack, character }) => {
             </Item>
             <Item>
               <label>
-                Attack modifier (ability mod + {character.proficiency_bonus})
+                Attack modifier (
+                {attack.mod_used === "str" ? (
+                  <label>{getModifier(character.stats.str)}</label>
+                ) : null}{" "}
+                {attack.mod_used === "dex" ? (
+                  <label>{getModifier(character.stats.dex)}</label>
+                ) : null}{" "}
+                {attack.mod_used === "con" ? (
+                  <label>{getModifier(character.stats.con)}</label>
+                ) : null}{" "}
+                {attack.mod_used === "int" ? (
+                  <label>{getModifier(character.stats.int)}</label>
+                ) : null}{" "}
+                {attack.mod_used === "wis" ? (
+                  <label>{getModifier(character.stats.wis)}</label>
+                ) : null}{" "}
+                {attack.mod_used === "cha" ? (
+                  <label>{getModifier(character.stats.cha)}</label>
+                ) : null}{" "}
+                + {character.proficiency_bonus})
                 <input
                   type="number"
                   id="attack_bonus"
@@ -120,7 +168,7 @@ const AddAttackModal = ({ addAttack, character }) => {
                   value={attack.attack_bonus}
                   onChange={handleChange}
                   size="3"
-                  />
+                />
               </label>
             </Item>
             <Item>
@@ -132,7 +180,7 @@ const AddAttackModal = ({ addAttack, character }) => {
                   name="damage_dice_num"
                   value={attack.damage_dice_num}
                   onChange={handleChange}
-                  size="2"
+                  size="3"
                 />
                 <select
                   id="damage_dice"
@@ -150,7 +198,24 @@ const AddAttackModal = ({ addAttack, character }) => {
             </Item>
             <Item>
               <label>
-                Damage bonus (ability mod)
+                Damage bonus ({attack.mod_used === "str" ? (
+                  <label>{getModifier(character.stats.str)}</label>
+                ) : null}{" "}
+                {attack.mod_used === "dex" ? (
+                  <label>{getModifier(character.stats.dex)}</label>
+                ) : null}{" "}
+                {attack.mod_used === "con" ? (
+                  <label>{getModifier(character.stats.con)}</label>
+                ) : null}{" "}
+                {attack.mod_used === "int" ? (
+                  <label>{getModifier(character.stats.int)}</label>
+                ) : null}{" "}
+                {attack.mod_used === "wis" ? (
+                  <label>{getModifier(character.stats.wis)}</label>
+                ) : null}{" "}
+                {attack.mod_used === "cha" ? (
+                  <label>{getModifier(character.stats.cha)}</label>
+                ) : null}{" "})
                 <input
                   type="number"
                   id="damage_bonus"
@@ -158,7 +223,7 @@ const AddAttackModal = ({ addAttack, character }) => {
                   value={attack.damage_bonus}
                   onChange={handleChange}
                   size="3"
-                  />
+                />
               </label>
             </Item>
             <Item>
@@ -218,6 +283,9 @@ const AddAttackModal = ({ addAttack, character }) => {
               Confirm Attack
             </Button>
           </Item>
+          <Button variant="contained" onClick={handleClose}>
+            Close
+          </Button>
         </Box>
       </Modal>
     </div>

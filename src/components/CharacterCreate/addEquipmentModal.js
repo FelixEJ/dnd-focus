@@ -130,8 +130,9 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
                 >
                   <option value={"armour"}>Armour</option>
                   <option value={"weapon"}>Weapon</option>
-                  <option value={"class"}>Class</option>
-                  <option value={"equipment"}>Equipment</option>
+                  <option value={"tool"}>Tool</option>
+                  <option value={"gear"}>Gear</option>
+                  <option value={"misc"}>Misc Equipment</option>
                 </select>
               </label>
             </Item>
@@ -170,6 +171,9 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
               Confirm Equipment
             </Button>
           </Item>
+          <Button variant="contained" onClick={handleClose}>
+            Close
+          </Button>
         </Box>
       </Modal>
     </div>
