@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 import ChooseBackground from "./chooseBackground";
 import ChooseClass from "./chooseClass";
-import ChooseRace from "./chooseRace";
+import ChooseRaceGrid from "./chooseRaceGrid";
 import ConfirmCharacter from "./confirmCharacter";
 import Success from "./success";
 
-function CreatePage() {
+function CreatePageGrid() {
   const [step, setStep] = useState(1);
   const [character, setCharacter] = useState({
     name: "",
@@ -301,7 +301,7 @@ function CreatePage() {
   switch (step) {
     case 1:
       return (
-        <ChooseRace
+        <ChooseRaceGrid
           nextStep={nextStep}
           onCharacterChange={onCharacterChange}
           character={character}
@@ -350,4 +350,4 @@ function CreatePage() {
   }
 }
 
-export default CreatePage;
+export default CreatePageGrid;

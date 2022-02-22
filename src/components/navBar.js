@@ -19,6 +19,11 @@ class NavBar extends Component {
                 </NavLink>
               </th>
               <th className="nav-item">
+                <NavLink className="nav-link" to="/createCharacterGrid">
+                Create Character New
+                </NavLink>
+              </th>
+              <th className="nav-item">
                 <NavLink className="nav-link" to="/loadCharacter">
                 Load Character
                 </NavLink>
