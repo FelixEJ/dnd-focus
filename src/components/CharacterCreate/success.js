@@ -15,6 +15,9 @@ import Magic from "../magic";
 import Passives from "../passives";
 import Personality from "../personality";
 
+import CardContainer from "../cardContainer";
+import CardDiv from "../cardDiv";
+
 const CharSheet = styled.div`
   & {
     text-align: center;
@@ -41,7 +44,15 @@ const CharSheet = styled.div`
       column-count: 3;
       column-gap: 1%;
     }
-  }}
+  }
+  &{@media only screen and (min-width: 1600px) {
+    & {
+      background-color: orange;
+      column-count: 4;
+      column-gap: 1%;
+    }
+  }
+}
 `;
 const CharComponent = styled.div`
   & {
@@ -140,7 +151,7 @@ const Success = () => {
       Arcana: "",
       Arcana_bonus: 0,
       History: "",
-      History_bonus:0,
+      History_bonus: 0,
       Investigation: "",
       Investigation_bonus: 0,
       Nature: "",
@@ -302,7 +313,9 @@ const Success = () => {
 
   return (
     <div>
-      <h1>Character Sheet for {loadedChar.name}, lvl:{loadedChar.level}</h1>
+      <h1>
+        Character Sheet for {loadedChar.name}, lvl:{loadedChar.level}
+      </h1>
       <LoadCharacterFromJSON
         loadFromJson={loadFromJson}
         character={loadedChar}
@@ -324,44 +337,46 @@ const Success = () => {
           ))}
         </select>
       </FormControl>
-      <CharSheet>
-        <CharComponent>
+      {/* <CharSheet> */}
+      <CardContainer>
+        <CardDiv>
           <Basics character={loadedChar} />
-        </CharComponent>
-        <CharComponent>
+        </CardDiv>
+        <CardDiv>
           <Abilities character={loadedChar} />
-        </CharComponent>
-        <CharComponent>
+        </CardDiv>
+        <CardDiv>
           <Skills character={loadedChar} />
-        </CharComponent>
-        <CharComponent>
+        </CardDiv>
+        <CardDiv>
           <Proficiencies character={loadedChar} />
-        </CharComponent>
-        <CharComponent>
+        </CardDiv>
+        <CardDiv>
           <Passives character={loadedChar} />
-        </CharComponent>
-        <CharComponent>
+        </CardDiv>
+        <CardDiv>
           <Combat character={loadedChar} />
-        </CharComponent>
-        <CharComponent>
+        </CardDiv>
+        <CardDiv>
           <Health character={loadedChar} />
-        </CharComponent>
-        <CharComponent>
+        </CardDiv>
+        <CardDiv>
           <Attacks character={loadedChar} />
-        </CharComponent>
-        <CharComponent>
+        </CardDiv>
+        <CardDiv>
           <Magic character={loadedChar} />
-        </CharComponent>
-        <CharComponent>
+        </CardDiv>
+        <CardDiv>
           <Features character={loadedChar} />
-        </CharComponent>
-        <CharComponent>
+        </CardDiv>
+        <CardDiv>
           <Inventory character={loadedChar} />
-        </CharComponent>
-        <CharComponent>
+        </CardDiv>
+        <CardDiv>
           <Personality character={loadedChar} />
-        </CharComponent>
-      </CharSheet>
+        </CardDiv>
+      </CardContainer>
+      {/* </CharSheet> */}
     </div>
   );
 };

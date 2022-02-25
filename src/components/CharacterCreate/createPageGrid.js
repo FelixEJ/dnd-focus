@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import ChooseBackground from "./chooseBackground";
-import ChooseClass from "./chooseClass";
+import ChooseBackgroundGrid from "./chooseBackgroundGrid";
+import ChooseClassGrid from "./chooseClassGrid";
 import ChooseRaceGrid from "./chooseRaceGrid";
 import ConfirmCharacter from "./confirmCharacter";
 import Success from "./success";
@@ -310,7 +310,7 @@ function CreatePageGrid() {
       );
     case 2:
       return (
-        <ChooseBackground
+        <ChooseBackgroundGrid
           prevStep={prevStep}
           nextStep={nextStep}
           onCharacterChange={onCharacterChange}
@@ -322,7 +322,7 @@ function CreatePageGrid() {
       );
     case 3:
       return (
-        <ChooseClass
+        <ChooseClassGrid
           prevStep={prevStep}
           nextStep={nextStep}
           onCharacterChange={onCharacterChange}

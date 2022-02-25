@@ -8,9 +8,9 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Container>
+        {/* <Container> */}
           <Routes />
-        </Container>
+        {/* </Container> */}
       </div>
     </BrowserRouter>
   );

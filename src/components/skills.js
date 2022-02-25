@@ -43,6 +43,7 @@ const Skill = styled.div`
   }
   &:nth-child(odd) {
     font-weight: bold;
+    background-color: lightgreen;
   }
 `;
 
@@ -51,7 +52,7 @@ const Skills = ({ character }) => {
     <div>
       <h4>Skills</h4>
       <Container>
-        <h4>All Skills - Roll with Roll (ability mod)</h4>
+        <h4>All Skills - Roll + ability mod</h4>
         <All>
           <Skill>Althletics(STR)</Skill>
           <Skill>Acrobatics(DEX)</Skill>
@@ -73,7 +74,7 @@ const Skills = ({ character }) => {
           <Skill>Persuasion(CHA)</Skill>
         </All>
         <h4>
-          Proficient Skills - Roll Roll (ability mod) +{character.proficiency_bonus}
+          Proficient Skills - Roll + ability mod +{character.proficiency_bonus}
         </h4>
         <Proficient>
           {character.skills.Athletics === "Proficient" ? (
@@ -132,7 +133,7 @@ const Skills = ({ character }) => {
           ) : null}
         </Proficient>
         <h4>
-          Expert Skills - Roll (ability mod) +
+          Expert Skills - Roll + ability mod +
           {character.proficiency_bonus * 2}
         </h4>
         <Expert>
