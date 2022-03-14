@@ -72,7 +72,7 @@ const ChooseRaceGrid = ({
       <p>dex:{character.stats.dex}</p>
       <p>cha:{character.stats.cha}</p> */}
       <p>
-        <a href="https://chicken-dinner.com/5e/5e-point-buy.html">
+        <a href="https://chicken-dinner.com/5e/5e-point-buy.html" target="_blank">
           5e point buy and racial info here
         </a>
       </p>

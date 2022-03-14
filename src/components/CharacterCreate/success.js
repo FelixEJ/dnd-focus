@@ -4,6 +4,7 @@ import styled from "styled-components";
 import LoadCharacterFromJSON from "../loadCharacterFromJSONModal";
 import Basics from "../basics";
 import Abilities from "../abilities";
+import SheetAbilities from "../sheetAbilities";
 import Skills from "../skills";
 import Proficiencies from "../proficiencies";
 import Attacks from "../attacks";
@@ -342,8 +343,11 @@ const Success = () => {
         <CardDiv>
           <Basics character={loadedChar} />
         </CardDiv>
-        <CardDiv>
+        {/* <CardDiv>
           <Abilities character={loadedChar} />
+        </CardDiv> */}
+        <CardDiv>
+          <SheetAbilities character={loadedChar} />
         </CardDiv>
         <CardDiv>
           <Skills character={loadedChar} />

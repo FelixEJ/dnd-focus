@@ -230,6 +230,9 @@ function CreatePageGrid() {
   });
 
   function onCharacterChange(e) {
+    // if (e === null) {
+    //   console.log("null event");
+    // }
     const path = e.target.name.split(".");
     const finalProp = path.pop();
     const newCharacter = { ...character };
@@ -286,7 +289,7 @@ function CreatePageGrid() {
 
   function addAttack(newattack) {
     const newAttack = newattack;
-    newattack.item_id = character.attacks.length + 1;
+    newattack.attack_id = character.attacks.length + 1;
     const newCharacter = { ...character };
     const oldAttacks = newCharacter.attacks;
     oldAttacks.push(newAttack);

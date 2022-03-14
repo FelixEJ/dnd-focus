@@ -58,7 +58,13 @@ const AddItemModal = ({ addItem, character }) => {
   }
 
   function getTotalValue() {
-    return item.quantity * item.value_each + item.value_currency;
+    return item.quantity * item.value_each;
+  }
+
+  function saveItem() {
+    item.value_total = getTotalValue();
+    addItem(item);
+    clearItem();
   }
 
   return (
@@ -122,15 +128,14 @@ const AddItemModal = ({ addItem, character }) => {
             </Item>
             <Item>
               <label>Total Value</label>
-              <p>{getTotalValue()}</p>
+              <p>{getTotalValue()+item.value_currency}</p>
             </Item>
           </Grid>
           <Item>
             <Button
               variant="contained"
               onClick={() => {
-                addItem(item);
-                clearItem();
+                saveItem();
               }}
             >
               Confirm Item

@@ -286,7 +286,7 @@ function CreatePage() {
 
   function addAttack(newattack) {
     const newAttack = newattack;
-    newattack.item_id = character.attacks.length + 1;
+    newattack.attack_id = character.attacks.length + 1;
     const newCharacter = { ...character };
     const oldAttacks = newCharacter.attacks;
     oldAttacks.push(newAttack);

@@ -42,19 +42,19 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
-const InventoryAccordion = ({ inventory }) => {
+const EquipmentAccordion = ({ equipment }) => {
   const [expanded, setExpanded] = React.useState("");
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
-  const getInventoryValue = () => {
+  const getEquipmentValue = () => {
     let total = 0;
-    inventory.forEach(myFunc);
+    equipment.forEach(myFunc);
 
     function myFunc(item) {
-      total += Number(item.value_total);
+      total += Number(item.value);
     }
     return total;
   };
@@ -62,22 +62,22 @@ const InventoryAccordion = ({ inventory }) => {
   return (
     <div>
       <Accordion
-        expanded={expanded === inventory.item_id}
-        onChange={handleChange(inventory.item_id)}
+        expanded={expanded === equipment.equipment_id}
+        onChange={handleChange(equipment.equipment_id)}
       >
         <AccordionSummary>
           <Typography>
-            <b>Inventory:</b> total value = {getInventoryValue()} gp
+            <b>Equipment:</b> total value = {getEquipmentValue()} gp
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            {inventory.map((item, index) => (
+            {equipment.map((item, index) => (
               <p key={index}>
-                <b>{item.item_name}</b> x{item.quantity}, value=
-                {item.value_total}
-                {item.value_currency} ({item.value_each}
-                {item.value_currency}/ea)
+                <b>{item.equipment_name}</b> 
+                ({item.value}
+                {item.value_currency})
+                <br></br>{item.desc}
               </p>
             ))}
           </Typography>
@@ -87,4 +87,4 @@ const InventoryAccordion = ({ inventory }) => {
   );
 };
 
-export default InventoryAccordion;
+export default EquipmentAccordion;
