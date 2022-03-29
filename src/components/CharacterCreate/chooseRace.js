@@ -66,6 +66,7 @@ const ChooseRace = ({
         </div>
         {/* <Grid container spacing={2}> */}
         <FormControl margin="normal">
+        <label>{character.name}, lvl:{character.level}</label>
           <Grid>
             <Item>
               <label>

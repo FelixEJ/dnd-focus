@@ -270,21 +270,21 @@ function CreatePageGrid() {
   function addEquipment(newEquip) {
     const newEquipment = newEquip;
     newEquip.equipment_id = character.equipment.length + 1;
-    const newCharacter = { ...character };
-    const oldEquipment = newCharacter.equipment;
-    oldEquipment.push(newEquipment);
-    setCharacter(newCharacter);
-    console.log("new Equipment", newCharacter);
+    const ogCharacter = { ...character };
+    const freshEquipment = ogCharacter.equipment;
+    freshEquipment.push(newEquipment);
+    setCharacter(ogCharacter);
+    console.log("new Equipment", ogCharacter);
   }
 
   function addItem(newItem) {
-    const newInventory = newItem;
+    const newInventoryItem = newItem;
     newItem.item_id = character.inventory.length + 1;
-    const newCharacter = { ...character };
-    const oldInventory = newCharacter.inventory;
-    oldInventory.push(newInventory);
-    setCharacter(newCharacter);
-    console.log("new Invetory", newCharacter);
+    const ogCharacter = { ...character };
+    const freshInventory = ogCharacter.inventory;
+    freshInventory.push(newInventoryItem);
+    setCharacter(ogCharacter);
+    console.log("new Invetory", ogCharacter);
   }
 
   function addAttack(newattack) {

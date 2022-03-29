@@ -43,7 +43,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 const AttackAccordion = ({ attacks }) => {
-  const [expanded, setExpanded] = React.useState("panel1");
+  const [expanded, setExpanded] = React.useState(attacks[0].attack_id);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);

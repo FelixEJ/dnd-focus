@@ -7,8 +7,10 @@ import Abilities from "../abilities";
 import SheetAbilities from "../sheetAbilities";
 import Skills from "../skills";
 import Proficiencies from "../proficiencies";
-import Attacks from "../attacks";
+import SheetProficiencies from "../sheetProficiencies";
+import SheetAttacks from "../sheetAttacks";
 import Combat from "../combat";
+import SheetCombat from "../sheetCombat";
 import Features from "../features";
 import Health from "../health";
 import Inventory from "../inventory";
@@ -16,52 +18,76 @@ import Magic from "../magic";
 import Passives from "../passives";
 import Personality from "../personality";
 
-import CardContainer from "../cardContainer";
-import CardDiv from "../cardDiv";
+// const CardContainer = styled.div`
+//   display: grid;
+//   grid-template-columns: 100%;
+//   margin: 1em 0px;
+//   max-width: 98vw;
+//   height: 95vh;
 
-const CharSheet = styled.div`
-  & {
-    text-align: center;
-    z-index: 1;
-    background-color: pink;
+//   @media only screen and (min-width: 700px) {
+//     grid-template-columns: 50% 50%;
+//   }
+//   @media only screen and (min-width: 1000px) {
+//     grid-template-columns: 32% 32% 32%;
+//   }
+//   @media only screen and (min-width: 1600px) {
+//     grid-template-columns: 25% 25% 25% 25%;
+//   }
+// `;
+const CardContainer = styled.div`
+  display: block;
+  column-count: 1;
+  -webkit-column-count: 1;
+  -moz-column-count: 1;
+  column-gap: 1em;
+  -moz-column-gap: 1em;
+  -webkit-column-gap: 1em;
+  margin: 1em 0px;
+  max-width: 98vw;
+  
 
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-
-    column-count: 1;
-    column-gap: 1%;
+  @media only screen and (min-width: 700px) {
+    column-count: 2;
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
   }
-  &{@media only screen and (min-width: 700px) {
-    & {
-      background-color: orange;
-      column-count: 2;
-      column-gap: 1%;
-    }
+  @media only screen and (min-width: 1000px) {
+    column-count: 3;
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    height: 98vh;
   }
-  &{@media only screen and (min-width: 1200px) {
-    & {
-      background-color: yellow;
-      column-count: 3;
-      column-gap: 1%;
-    }
+  @media only screen and (min-width: 1600px) {
+    column-count: 4;
+    -webkit-column-count: 4;
+    -moz-column-count: 4;
+    height: 98vh;
   }
-  &{@media only screen and (min-width: 1600px) {
-    & {
-      background-color: orange;
-      column-count: 4;
-      column-gap: 1%;
-    }
-  }
-}
 `;
-const CharComponent = styled.div`
-  & {
-    width: 100%;
-    max-width: 400px;
-    background-color: lightgreen;
-    display: inline-block;
-    margin: 1% 1% 1% 1%;
+
+const CardDiv = styled.div`
+  text-align: center;
+  max-width: 400px;
+  min-width: 250px;  
+
+  box-shadow: 0px 0px 8px 0px #c0c0c0;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
+  background-color: #fff;
+
+  @media only screen and (min-width: 700px) {
+    width: 49vw;
+  }
+  @media only screen and (min-width: 1000px) {
+    width: 32vw;
+    max-height: 98vh;
+  }
+  @media only screen and (min-width: 1600px) {
+    width: 24vw;
+    max-height: 98vh;
   }
 `;
 
@@ -311,11 +337,31 @@ const Success = () => {
     setLoadedChar(newChar);
     console.log(newChar);
   }
+  
+  function onCharacterChange(e) {
+    const path = e.target.name.split(".");
+    const finalProp = path.pop();
+    const newCharacter = { ...loadedChar };
+    let pointer = newCharacter;
+    path.forEach((el) => {
+      pointer[el] = { ...pointer[el] };
+      pointer = pointer[el];
+    });
+    pointer[finalProp] =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    setLoadedChar(newCharacter);
+    saveCharacter(newCharacter);
+    console.log("new char", loadedChar);
+  }
+
+  function saveCharacter(character) {
+    localStorage.setItem(character.name, JSON.stringify(character));
+  }
 
   return (
     <div>
       <h1>
-        Character Sheet for {loadedChar.name}, lvl:{loadedChar.level}
+        Character Sheet for {loadedChar.name}, lvl:{loadedChar.level}, insp:{loadedChar.inspiration ? "Yes" : "No"}
       </h1>
       <LoadCharacterFromJSON
         loadFromJson={loadFromJson}
@@ -339,33 +385,48 @@ const Success = () => {
         </select>
       </FormControl>
       {/* <CharSheet> */}
+      <CardDiv>
+        <Basics character={loadedChar} />
+      </CardDiv>
       <CardContainer>
         <CardDiv>
-          <Basics character={loadedChar} />
+          <SheetAbilities
+            character={loadedChar}
+            setLoadedChar={setLoadedChar}
+            onCharacterChange={onCharacterChange}
+          />
         </CardDiv>
+
         {/* <CardDiv>
           <Abilities character={loadedChar} />
         </CardDiv> */}
-        <CardDiv>
-          <SheetAbilities character={loadedChar} />
-        </CardDiv>
-        <CardDiv>
+
+        {/* <CardDiv>
           <Skills character={loadedChar} />
-        </CardDiv>
+        </CardDiv> */}
         <CardDiv>
+          <SheetProficiencies character={loadedChar} />
+        </CardDiv>
+        {/* <CardDiv>
           <Proficiencies character={loadedChar} />
-        </CardDiv>
-        <CardDiv>
+        </CardDiv> */}
+        {/* <CardDiv>
           <Passives character={loadedChar} />
-        </CardDiv>
+        </CardDiv> */}
         <CardDiv>
+          <SheetCombat
+            character={loadedChar}
+            onCharacterChange={onCharacterChange}
+          />
+        </CardDiv>
+        {/* <CardDiv>
           <Combat character={loadedChar} />
-        </CardDiv>
-        <CardDiv>
+        </CardDiv> */}
+        {/* <CardDiv>
           <Health character={loadedChar} />
-        </CardDiv>
+        </CardDiv> */}
         <CardDiv>
-          <Attacks character={loadedChar} />
+          <SheetAttacks character={loadedChar} />
         </CardDiv>
         <CardDiv>
           <Magic character={loadedChar} />

@@ -83,6 +83,7 @@ const ChooseRaceGrid = ({
           </Button>
         </div>
         <FormControl>
+        <label>{character.name}, lvl:{character.level}</label>
           <CardContainer>
             <CardDiv>
               <Item>
