@@ -21,13 +21,18 @@ const Box = styled.div`
   margin: 1% 1% 1% 1%;
 `;
 
-const Features = ({ character }) => {
+const Features = ({ character, onCharacterChange, editFeature }) => {
   return (
     <div>
       <h4>Features</h4>
       <Container>
         <Box>
-          <FeatureAccordion features={character.features} />
+          <FeatureAccordion
+            features={character.features}
+            character={character}
+            onCharacterChange={onCharacterChange}
+            editFeature={editFeature}
+          />
         </Box>
       </Container>
     </div>

@@ -7,6 +7,7 @@ const Container = styled.div`
   width: 100%;
   max-width: 400px;
   background-color: none;
+  max-height: 50vh;
 
   display: grid;
   grid-template-columns: 32% 32% 32%;
@@ -94,6 +95,8 @@ const SheetCombat = ({ character, onCharacterChange }) => {
             <Numbers>
               <input
                 type="number"
+                max={character.hp.max}
+                min="0"
                 id="hp.current"
                 name="hp.current"
                 value={character.hp.current}
@@ -120,6 +123,8 @@ const SheetCombat = ({ character, onCharacterChange }) => {
             <Numbers>
               <input
                 type="number"
+                max={character.hit_dice.max}
+                min="0"
                 id="hit_dice.current"
                 name="hit_dice.current"
                 value={character.hit_dice.current}
@@ -136,6 +141,8 @@ const SheetCombat = ({ character, onCharacterChange }) => {
               Passes:{" "}
               <input
                 type="number"
+                max="3"
+                min="0"
                 id="death_saves.pass"
                 name="death_saves.pass"
                 value={character.death_saves.pass}
@@ -148,6 +155,8 @@ const SheetCombat = ({ character, onCharacterChange }) => {
               Failures:{" "}
               <input
                 type="number"
+                max="3"
+                min="0"
                 id="death_saves.fail"
                 name="death_saves.fail"
                 value={character.death_saves.fail}
@@ -161,77 +170,68 @@ const SheetCombat = ({ character, onCharacterChange }) => {
         <Row>
           <Title>Exhaustion</Title>
           <select
-                  id="exhaustion"
-                  name="exhaustion"
-                  value={character.exhaustion}
-                  onChange={onCharacterChange}
-                  size="1"
-                >
-                  <option value={0}>-</option>
-                  <option value={1}>1</option>
-                  <option value={2}>2</option>
-                  <option value={3}>3</option>
-                  <option value={4}>4</option>
-                  <option value={5}>5</option>
-                  <option value={6}>6</option>
-                </select>
+            id="exhaustion"
+            name="exhaustion"
+            value={character.exhaustion}
+            onChange={onCharacterChange}
+            size="1"
+          >
+            <option value={0}>-</option>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+            <option value={6}>6</option>
+          </select>
           <Text>
             {character.exhaustion === "1" && (
-              <Text>
-                - Disadvantage on ability checks
-              </Text>
+              <Text>- Disadvantage on ability checks</Text>
             )}
             {character.exhaustion === "2" && (
               <Text>
                 - Disadvantage on ability checks
-                <br/>
-                - Speed Halved
+                <br />- Speed Halved
               </Text>
             )}
             {character.exhaustion === "3" && (
               <Text>
                 - Disadvantage on ability checks
-                <br/>
+                <br />
                 - Speed Halved
-                <br/>
-                - Disadvantage on attack rolls & saving throws
+                <br />- Disadvantage on attack rolls & saving throws
               </Text>
             )}
             {character.exhaustion === "4" && (
               <Text>
-                - Disadvantage on ability checks
-                - Speed Halved
-                <br/>
+                - Disadvantage on ability checks - Speed Halved
+                <br />
                 - Disadvantage on attack rolls & saving throws
-                <br/>
-                - HP maximum halved
+                <br />- HP maximum halved
               </Text>
             )}
             {character.exhaustion === "5" && (
               <Text>
-                - Disadvantage on ability checks
-                - Speed Halved
-                <br/>
+                - Disadvantage on ability checks - Speed Halved
+                <br />
                 - Disadvantage on attack rolls & saving throws
-                <br/>
+                <br />
                 - HP maximum halved
-                <br/>
-                - Speeed reduced to 0
+                <br />- Speeed reduced to 0
               </Text>
             )}
             {character.exhaustion === "6" && (
               <Text>
                 - Disadvantage on ability checks
-                <br/>
+                <br />
                 - Speed Halved
-                <br/>
+                <br />
                 - Disadvantage on attack rolls & saving throws
-                <br/>
+                <br />
                 - HP maximum halved
-                <br/>
+                <br />
                 - Speeed reduced to 0
-                <br/>
-                - Death
+                <br />- Death
               </Text>
             )}
           </Text>

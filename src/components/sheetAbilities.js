@@ -7,6 +7,7 @@ const Container = styled.div`
   z-index: 1;
   max-width: 400px;
   background-color: none;
+  max-height: 98vh;
 
   display: block;
   margin-left: auto;

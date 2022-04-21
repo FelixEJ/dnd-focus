@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import AttackAccordion from "./attackAccordion";
+import FeatureAccordion from "./featuresAccordion";
 
 const Container = styled.div`
   text-align: center;
@@ -8,7 +8,6 @@ const Container = styled.div`
   width: 100%;
   max-width: 400px;
   background-color: none;
-  max-height: 20vh;
 
   display: block;
   margin-left: auto;
@@ -17,22 +16,22 @@ const Container = styled.div`
 
 const Box = styled.div`
   width: 98%;
-  background-color: none;
+  background-color: lightblue;
   display: inline-block;
   margin: 1% 1% 1% 1%;
 `;
 
-const Attacks = ({ character }) => {
+const Features = ({ character }) => {
   return (
     <div>
-      <h4>Attacks</h4>
+      <h4>Features</h4>
       <Container>
         <Box>
-          <AttackAccordion attacks={character.attacks} />
+          <FeatureAccordion features={character.features} />
         </Box>
       </Container>
     </div>
   );
 };
 
-export default Attacks;
+export default Features;

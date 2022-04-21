@@ -15,6 +15,7 @@ import Features from "../features";
 import Health from "../health";
 import Inventory from "../inventory";
 import Magic from "../magic";
+import SheetMagic from "../sheetMagic";
 import Passives from "../passives";
 import Personality from "../personality";
 
@@ -45,7 +46,6 @@ const CardContainer = styled.div`
   -webkit-column-gap: 1em;
   margin: 1em 0px;
   max-width: 98vw;
-  
 
   @media only screen and (min-width: 700px) {
     column-count: 2;
@@ -68,8 +68,9 @@ const CardContainer = styled.div`
 
 const CardDiv = styled.div`
   text-align: center;
+  width: 99vw;
   max-width: 400px;
-  min-width: 250px;  
+  min-width: 250px;
 
   box-shadow: 0px 0px 8px 0px #c0c0c0;
   display: inline-block;
@@ -337,7 +338,7 @@ const Success = () => {
     setLoadedChar(newChar);
     console.log(newChar);
   }
-  
+
   function onCharacterChange(e) {
     const path = e.target.name.split(".");
     const finalProp = path.pop();
@@ -350,18 +351,28 @@ const Success = () => {
     pointer[finalProp] =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setLoadedChar(newCharacter);
-    saveCharacter(newCharacter);
-    console.log("new char", loadedChar);
+    saveLocalCharacter(newCharacter);
+    console.log("new char", newCharacter);
   }
 
-  function saveCharacter(character) {
+  function updateFeatures(newFeat) {
+    const newFeatures = newFeat;
+    const newCharacter = { ...loadedChar };
+    newCharacter.features = newFeatures;
+    setLoadedChar(newCharacter);
+    saveLocalCharacter(newCharacter);
+    console.log("new Feature", newCharacter);
+  }
+
+  function saveLocalCharacter(character) {
     localStorage.setItem(character.name, JSON.stringify(character));
   }
 
   return (
     <div>
       <h1>
-        Character Sheet for {loadedChar.name}, lvl:{loadedChar.level}, insp:{loadedChar.inspiration ? "Yes" : "No"}
+        Character Sheet for {loadedChar.name}, lvl:{loadedChar.level},
+        {loadedChar.features[0].feature_name}
       </h1>
       <LoadCharacterFromJSON
         loadFromJson={loadFromJson}
@@ -385,63 +396,77 @@ const Success = () => {
         </select>
       </FormControl>
       {/* <CharSheet> */}
-      <CardDiv>
-        <Basics character={loadedChar} />
-      </CardDiv>
-      <CardContainer>
-        <CardDiv>
-          <SheetAbilities
-            character={loadedChar}
-            setLoadedChar={setLoadedChar}
-            onCharacterChange={onCharacterChange}
-          />
-        </CardDiv>
+      {loadedChar.name != "" && (
+        <>
+          <CardDiv>
+            <Basics character={loadedChar} />
+          </CardDiv>
+          <CardContainer>
+            <CardDiv>
+              <SheetAbilities
+                character={loadedChar}
+                setLoadedChar={setLoadedChar}
+                onCharacterChange={onCharacterChange}
+              />
+            </CardDiv>
 
-        {/* <CardDiv>
+            {/* <CardDiv>
           <Abilities character={loadedChar} />
         </CardDiv> */}
 
-        {/* <CardDiv>
+            {/* <CardDiv>
           <Skills character={loadedChar} />
         </CardDiv> */}
-        <CardDiv>
-          <SheetProficiencies character={loadedChar} />
-        </CardDiv>
-        {/* <CardDiv>
+            <CardDiv>
+              <SheetProficiencies character={loadedChar} />
+            </CardDiv>
+            {/* <CardDiv>
           <Proficiencies character={loadedChar} />
         </CardDiv> */}
-        {/* <CardDiv>
+            {/* <CardDiv>
           <Passives character={loadedChar} />
         </CardDiv> */}
-        <CardDiv>
-          <SheetCombat
-            character={loadedChar}
-            onCharacterChange={onCharacterChange}
-          />
-        </CardDiv>
-        {/* <CardDiv>
+            <CardDiv>
+              <SheetCombat
+                character={loadedChar}
+                onCharacterChange={onCharacterChange}
+              />
+            </CardDiv>
+            {/* <CardDiv>
           <Combat character={loadedChar} />
         </CardDiv> */}
-        {/* <CardDiv>
+            {/* <CardDiv>
           <Health character={loadedChar} />
         </CardDiv> */}
-        <CardDiv>
-          <SheetAttacks character={loadedChar} />
-        </CardDiv>
-        <CardDiv>
-          <Magic character={loadedChar} />
-        </CardDiv>
-        <CardDiv>
-          <Features character={loadedChar} />
-        </CardDiv>
-        <CardDiv>
-          <Inventory character={loadedChar} />
-        </CardDiv>
-        <CardDiv>
-          <Personality character={loadedChar} />
-        </CardDiv>
-      </CardContainer>
-      {/* </CharSheet> */}
+            <CardDiv>
+              <SheetAttacks character={loadedChar} />
+            </CardDiv>
+            <CardDiv>
+              <SheetMagic
+                character={loadedChar}
+                onCharacterChange={onCharacterChange}
+              />
+            </CardDiv>
+            <CardDiv>
+              <Features
+                character={loadedChar}
+                onCharacterChange={onCharacterChange}
+                editFeature={updateFeatures}
+              />
+            </CardDiv>
+            <CardDiv>
+              <Inventory
+                character={loadedChar}
+                onCharacterChange={onCharacterChange}
+              />
+            </CardDiv>
+            <CardDiv>
+              <Personality character={loadedChar} />
+            </CardDiv>
+          </CardContainer>
+          {/* </CharSheet> */}
+        </>
+      )}
     </div>
   );
 };
