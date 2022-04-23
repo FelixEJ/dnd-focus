@@ -61,6 +61,7 @@ const AttackAccordion = ({ attacks }) => {
                 class="overflow-auto"
               >
                 <>
+                <p>{attack.attack_name}</p>
                   Attack Bonus: <b>+{attack.attack_bonus}</b>; Damage:
                   <b>
                     {attack.damage_dice_num}

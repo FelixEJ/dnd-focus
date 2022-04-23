@@ -355,13 +355,69 @@ const Success = () => {
     console.log("new char", newCharacter);
   }
 
-  function updateFeatures(newFeat) {
-    const newFeatures = newFeat;
+  function updateFeatures(newFeats) {
+    const tempFeatures = newFeats;
+    const updatedCharacter = { ...loadedChar };
+    updatedCharacter.features = tempFeatures;
+    setLoadedChar(updatedCharacter);
+    saveLocalCharacter(updatedCharacter);
+    console.log("new Feature", updatedCharacter);
+  }
+
+  function updateInventory(newInv) {
+    const tempInv = newInv;
+    const updatedCharacter = { ...loadedChar };
+    updatedCharacter.inventory = tempInv;
+    setLoadedChar(updatedCharacter);
+    saveLocalCharacter(updatedCharacter);
+    console.log("new Feature", updatedCharacter);
+  }
+
+  function updateEquipment(newEquip) {
+    const tempEquip = newEquip;
+    const updatedCharacter = { ...loadedChar };
+    updatedCharacter.equipment = tempEquip;
+    setLoadedChar(updatedCharacter);
+    saveLocalCharacter(updatedCharacter);
+    console.log("new Feature", updatedCharacter);
+  }
+
+  // duplicate
+  function addFeature(newFeat) {
+    const newFeature = newFeat;
+    newFeat.feature_id = loadedChar.features.length + 1;
     const newCharacter = { ...loadedChar };
-    newCharacter.features = newFeatures;
+    // console.log("char copy:", newCharacter);
+    const oldFeatures = newCharacter.features;
+    oldFeatures.push(newFeature);
+    // setCharacter({ features: [...character.features, oldFeatures]});
     setLoadedChar(newCharacter);
     saveLocalCharacter(newCharacter);
     console.log("new Feature", newCharacter);
+  }
+
+  // duplicated
+  function addEquipment(newEquip) {
+    const newEquipment = newEquip;
+    newEquip.equipment_id = loadedChar.equipment.length + 1;
+    const newCharacter = { ...loadedChar };
+    const freshEquipment = newCharacter.equipment;
+    freshEquipment.push(newEquipment);
+    setLoadedChar(newCharacter);
+    saveLocalCharacter(newCharacter);
+    console.log("new Equipment", newCharacter);
+  }
+
+  // duplicated
+  function addItem(newItem) {
+    const newInventoryItem = newItem;
+    newItem.item_id = loadedChar.inventory.length + 1;
+    const ogCharacter = { ...loadedChar };
+    const freshInventory = ogCharacter.inventory;
+    freshInventory.push(newInventoryItem);
+    setLoadedChar(ogCharacter);
+    saveLocalCharacter(ogCharacter);
+    console.log("new Invetory", ogCharacter);
   }
 
   function saveLocalCharacter(character) {
@@ -450,7 +506,6 @@ const Success = () => {
             <CardDiv>
               <Features
                 character={loadedChar}
-                onCharacterChange={onCharacterChange}
                 editFeature={updateFeatures}
               />
             </CardDiv>
@@ -458,6 +513,11 @@ const Success = () => {
               <Inventory
                 character={loadedChar}
                 onCharacterChange={onCharacterChange}
+                updateInventory={updateInventory}
+                updateEquipment={updateEquipment}
+                addItem={addItem}
+                addFeature={addFeature}
+                addEquipment={addEquipment}
               />
             </CardDiv>
             <CardDiv>

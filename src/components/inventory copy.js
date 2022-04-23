@@ -17,26 +17,15 @@ const Container = styled.div`
 
 const Box = styled.div`
   width: 98%;
-  background-color: none;
+  background-color: lightblue;
   display: inline-block;
   margin: 1% 1% 1% 1%;
 `;
-const Text = styled.div`
-  border-style: inset;
-  border-radius: 5px;
-  margin-top: 2px;
-  margin-bottom: 2px;
+const Text = styled.p`
+  margin: 1% 1% 1% 1%;
 `;
 
-const Inventory = ({
-  character,
-  onCharacterChange,
-  updateInventory,
-  updateEquipment,
-  addItem,
-  addFeature,
-  addEquipment,
-}) => {
+const Inventory = ({ character }) => {
   const getTotalMoney = () => {
     let total = 0;
     total += Number(character.currency.copper) / 100;
@@ -51,33 +40,25 @@ const Inventory = ({
     <div>
       <Container>
         <Box>
+          <h4>Equipment</h4>
+          <Text>
+            <EquipmentAccordion equipment ={character.equipment} />{" "}
+          </Text>
+        </Box>
+        <Box>
           <h4>Inventory</h4>
           <Text>
-            <EquipmentAccordion
-              character={character}
-              updateEquipment={updateEquipment}
-              addEquipment={addEquipment}
-              addFeature={addFeature}
-            />{" "}
+            <InventoryAccordion inventory={character.inventory} />{" "}
           </Text>
         </Box>
         <Box>
-          <Text>
-            <InventoryAccordion
-              character={character}
-              addItem={addItem}
-              updateInventory={updateInventory}
-            />{" "}
-          </Text>
-        </Box>
-        <Box>
+          <h4>Coins</h4>
           <Text>
             cp:{character.currency.copper} | sp:{character.currency.silver} |
             ep: {character.currency.electrum} | gp: {character.currency.gold} |
             pp: {character.currency.platinum}
-            <br />
-            Total: {getTotalMoney()} gp
           </Text>
+          <Text>Total: {getTotalMoney()} gp</Text>
         </Box>
       </Container>
     </div>

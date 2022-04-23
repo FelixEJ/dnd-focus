@@ -21,9 +21,7 @@ const Row = styled.div`
   background-color: none;
   border-style: inset;
   border-radius: 5px;
-
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin: 1% 1% 1% 1%;
 
   grid-column: 1 / span 3;
 `;
@@ -184,7 +182,7 @@ const SheetCombat = ({ character, onCharacterChange }) => {
             <option value={5}>5</option>
             <option value={6}>6</option>
           </select>
-          <Text>
+          <>
             {character.exhaustion === "1" && (
               <Text>- Disadvantage on ability checks</Text>
             )}
@@ -234,7 +232,7 @@ const SheetCombat = ({ character, onCharacterChange }) => {
                 <br />- Death
               </Text>
             )}
-          </Text>
+          </>
         </Row>
 
         <Row>

@@ -18,8 +18,11 @@ const Container = styled.div`
 
 const Box = styled.div`
   width: 98%;
-  background-color: lightblue;
+  background-color: none;
   display: inline-block;
+  border-style: inset;
+  border-radius: 5px;
+  
   margin: 1% 1% 1% 1%;
 `;
 const Title = styled.p`

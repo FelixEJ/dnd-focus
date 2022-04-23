@@ -11,6 +11,8 @@ const Container = styled.div`
   display: table;
   margin-left: auto;
   margin-right: auto;
+  border-style: inset;
+  border-radius: 5px;
 `;
 
 const Box = styled.div`
@@ -22,7 +24,7 @@ const Box = styled.div`
     background-color: lightgrey;
   }
 `;
-const Text = styled.p`
+const Text = styled.div`
   margin: 1% 1% 1% 1%;
 `;
 

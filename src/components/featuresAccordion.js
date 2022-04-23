@@ -36,12 +36,10 @@ const TextLeft = styled.div`
 `;
 
 const FeatureAccordion = ({
-  features,
   character,
-  onCharacterChange,
   editFeature,
 }) => {
-  const [tempFeats, setTempFeats] = useState([...features]);
+  const [tempFeats, setTempFeats] = useState([...character.features]);
 
   const handleChange = (e, index) => {
     e.preventDefault();
@@ -58,7 +56,7 @@ const FeatureAccordion = ({
   return (
     <Accordion defaultActiveKey={character.features[0].feature_id}>
       <div>
-        {tempFeats.map((feature, index) => (
+        {character.features.map((feature, index) => (
           <Card>
             <Card.Header>
               <TextLeft>

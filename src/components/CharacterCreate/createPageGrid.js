@@ -255,6 +255,7 @@ function CreatePageGrid() {
     setStep(step + 1);
   }
 
+  // duplicate
   function addFeature(newFeat) {
     const newFeature = newFeat;
     newFeat.feature_id = character.features.length + 1;
@@ -267,6 +268,7 @@ function CreatePageGrid() {
     console.log("new Feature", newCharacter);
   }
 
+  // duplicated
   function addEquipment(newEquip) {
     const newEquipment = newEquip;
     newEquip.equipment_id = character.equipment.length + 1;
@@ -277,6 +279,7 @@ function CreatePageGrid() {
     console.log("new Equipment", ogCharacter);
   }
 
+  // duplicated
   function addItem(newItem) {
     const newInventoryItem = newItem;
     newItem.item_id = character.inventory.length + 1;

@@ -1,57 +1,52 @@
-import * as React from "react";
-import { styled } from "@material-ui/core/styles";
-import ArrowForwardIosSharpIcon from "@material-ui/icons/ArrowForwardIosSharp";
-import MuiAccordion from "@material-ui/core/Accordion";
-import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
-import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
-import Typography from "@material-ui/core/Typography";
+import React, { useState } from "react";
+import styled from "styled-components";
+import Accordion from "react-bootstrap/Accordion";
+import Card from "react-bootstrap/Card";
 
-const Accordion = styled((props) => (
-  <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
-  border: `1px solid ${theme.palette.divider}`,
-  "&:not(:last-child)": {
-    borderBottom: 0,
-  },
-  "&:before": {
-    display: "none",
-  },
-}));
+import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
-const AccordionSummary = styled((props) => (
-  <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.5rem", margin: "0"}} />}
-    {...props}
-  />
-))(({ theme }) => ({
-  backgroundColor:
-    theme.palette.mode === "dark"
-      ? "rgba(255, 255, 255, .05)"
-      : "rgba(0, 0, 0, .03)",
-  flexDirection: "row-reverse",
-  "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
-    transform: "rotate(90deg)",
-  },
-  "& .MuiAccordionSummary-content": {
-    marginLeft: theme.spacing(0),
-  },
-}));
+import AddEquipmentModal from "./addEquipmentModal";
+import ConfirmDeleteEquipmentModal from "./confirmDeleteEquipmentModal";
 
-const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  padding: theme.spacing(0),
-  borderTop: "1px solid rgba(0, 0, 0, .125)",
-}));
+function CustomToggle({ children, eventKey }) {
+  const decoratedOnClick = useAccordionButton(eventKey, () =>
+    console.log("totally custom!")
+  );
 
-const EquipmentAccordion = ({ equipment }) => {
-  const [expanded, setExpanded] = React.useState("");
+  return (
+    <button
+      type="button"
+      style={{ backgroundColor: "none" }}
+      onClick={decoratedOnClick}
+    >
+      {children}
+    </button>
+  );
+}
 
-  const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
-  };
+const ButtonRight = styled.div`
+  float: right;
+  font-size: 0.9em;
+  text-decoration: underline;
+  text-transform: uppercase;
+`;
 
+const TextLeft = styled.div`
+  float: left;
+  font-size: 0.9em;
+  text-decoration: underline;
+  text-transform: uppercase;
+`;
+
+const EquipmentAccordion = ({
+  character,
+  addEquipment,
+  addFeature,
+  updateEquipment,
+}) => {
   const getEquipmentValue = () => {
     let total = 0;
-    equipment.forEach(myFunc);
+    character.equipment.forEach(myFunc);
 
     function myFunc(item) {
       total += Number(item.value);
@@ -60,30 +55,45 @@ const EquipmentAccordion = ({ equipment }) => {
   };
 
   return (
-    <div>
-      <Accordion
-        expanded={expanded === equipment.equipment_id}
-        onChange={handleChange(equipment.equipment_id)}
-      >
-        <AccordionSummary>
-          <Typography>
-            <b>Equipment:</b> total value = {getEquipmentValue()} gp
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            {equipment.map((item, index) => (
-              <p key={index}>
-                <b>{item.equipment_name}</b> 
-                ({item.value}
-                {item.value_currency})
-                <br></br>{item.desc}
-              </p>
-            ))}
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-    </div>
+    <Accordion>
+      <div>
+        <Card>
+          <Card.Header>
+            <TextLeft>
+              <b>Equipment:</b>
+            </TextLeft>
+            <ButtonRight>
+              <CustomToggle eventKey={0}>EXPAND</CustomToggle>
+            </ButtonRight>
+          </Card.Header>
+          <Accordion.Collapse eventKey={0}>
+            <Card.Body
+              style={{ backgroundColor: "lightgrey", maxHeight: "15vh" }}
+              class="overflow-auto"
+            >
+              {character.equipment.map((item, index) => (
+                <>
+                  <p key={index}>
+                    <b>{item.equipment_name}</b> [{item.value}
+                    {item.value_currency}]: {item.desc}
+                    <ConfirmDeleteEquipmentModal
+                      character={character}
+                      updateEquipment={updateEquipment}
+                      index={index}
+                    />
+                  </p>
+                </>
+              ))}
+              <AddEquipmentModal
+                character={character}
+                addEquipment={addEquipment}
+                addFeature={addFeature}
+              />
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </div>
+    </Accordion>
   );
 };
 

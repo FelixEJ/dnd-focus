@@ -19,7 +19,10 @@ const Box = styled.div`
   width: 98%;
   background-color: none;
   display: inline-block;
-  margin: 1% 1% 1% 1%;
+  border-style: inset;
+  border-radius: 5px;
+  margin-top: 2px;
+  margin-bottom: 2px;
 `;
 
 const Attacks = ({ character }) => {

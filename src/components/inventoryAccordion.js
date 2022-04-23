@@ -1,57 +1,47 @@
-import * as React from "react";
-import { styled } from "@material-ui/core/styles";
-import ArrowForwardIosSharpIcon from "@material-ui/icons/ArrowForwardIosSharp";
-import MuiAccordion from "@material-ui/core/Accordion";
-import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
-import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
-import Typography from "@material-ui/core/Typography";
+import React, { useState } from "react";
+import styled from "styled-components";
+import Accordion from "react-bootstrap/Accordion";
+import Card from "react-bootstrap/Card";
 
-const Accordion = styled((props) => (
-  <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
-  border: `1px solid ${theme.palette.divider}`,
-  "&:not(:last-child)": {
-    borderBottom: 0,
-  },
-  "&:before": {
-    display: "none",
-  },
-}));
+import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
-const AccordionSummary = styled((props) => (
-  <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.5rem", margin: "0"}} />}
-    {...props}
-  />
-))(({ theme }) => ({
-  backgroundColor:
-    theme.palette.mode === "dark"
-      ? "rgba(255, 255, 255, .05)"
-      : "rgba(0, 0, 0, .03)",
-  flexDirection: "row-reverse",
-  "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
-    transform: "rotate(90deg)",
-  },
-  "& .MuiAccordionSummary-content": {
-    marginLeft: theme.spacing(0),
-  },
-}));
+import AddItemModal from "./addItemModal";
+import ConfirmDeleteItemModal from "./confirmDeleteItemModal";
 
-const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  padding: theme.spacing(0),
-  borderTop: "1px solid rgba(0, 0, 0, .125)",
-}));
+function CustomToggle({ children, eventKey }) {
+  const decoratedOnClick = useAccordionButton(eventKey, () =>
+    console.log("totally custom!")
+  );
 
-const InventoryAccordion = ({ inventory }) => {
-  const [expanded, setExpanded] = React.useState("");
+  return (
+    <button
+      type="button"
+      style={{ backgroundColor: "none" }}
+      onClick={decoratedOnClick}
+    >
+      {children}
+    </button>
+  );
+}
 
-  const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
-  };
+const ButtonRight = styled.div`
+  float: right;
+  font-size: 0.9em;
+  text-decoration: underline;
+  text-transform: uppercase;
+`;
 
+const TextLeft = styled.div`
+  float: left;
+  font-size: 0.9em;
+  text-decoration: underline;
+  text-transform: uppercase;
+`;
+
+const InventoryAccordion = ({ character, addItem, updateInventory }) => {
   const getInventoryValue = () => {
     let total = 0;
-    inventory.forEach(myFunc);
+    character.inventory.forEach(myFunc);
 
     function myFunc(item) {
       total += Number(item.value_total);
@@ -61,27 +51,43 @@ const InventoryAccordion = ({ inventory }) => {
 
   return (
     <div>
-      <Accordion
-        expanded={expanded === inventory.item_id}
-        onChange={handleChange(inventory.item_id)}
-      >
-        <AccordionSummary>
-          <Typography>
-            <b>Inventory:</b> total value = {getInventoryValue()} gp
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            {inventory.map((item, index) => (
-              <p key={index}>
-                <b>{item.item_name}</b> x{item.quantity}, value=
-                {item.value_total}
-                {item.value_currency} ({item.value_each}
-                {item.value_currency}/ea)
-              </p>
-            ))}
-          </Typography>
-        </AccordionDetails>
+      <Accordion>
+        <div>
+          <Card>
+            <Card.Header>
+              <TextLeft>
+                <b>Inventory:</b> total value = {getInventoryValue()} gp
+              </TextLeft>
+              <ButtonRight>
+                <CustomToggle eventKey={0}>EXPAND</CustomToggle>
+              </ButtonRight>
+            </Card.Header>
+            <Accordion.Collapse eventKey={0}>
+              <Card.Body
+                style={{ backgroundColor: "lightgrey", maxHeight: "15vh" }}
+                class="overflow-auto"
+              >
+                {character.inventory.map((item, index) => (
+                  <p key={index}>
+                    <b>{item.item_name}</b> x{item.quantity}, value=
+                    {item.value_total}
+                    {item.value_currency} ({item.value_each}
+                    {item.value_currency}/ea)
+                    <ConfirmDeleteItemModal 
+                      character={character}
+                      updateInventory={updateInventory}
+                      index={index}
+                    />
+                  </p>
+                ))}
+                <AddItemModal 
+                  character={character}
+                  addItem={addItem}
+                />
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+        </div>
       </Accordion>
     </div>
   );

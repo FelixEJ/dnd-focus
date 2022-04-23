@@ -31,6 +31,9 @@ const Bar = styled.div`
   width: 98%;
   display: grid;
   grid-template-columns: 30% 70%;
+  border-style: inset;
+  border-radius: 5px;
+  margin: 1% 1% 1% 1%;
 `;
 
 const TextBottomLeft = styled.div`
