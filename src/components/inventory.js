@@ -9,6 +9,8 @@ const Container = styled.div`
   width: 100%;
   max-width: 400px;
   background-color: none;
+  max-height: 30vh;
+  overflow: auto;
 
   display: block;
   margin-left: auto;

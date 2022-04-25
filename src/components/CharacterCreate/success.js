@@ -45,7 +45,8 @@ const CardContainer = styled.div`
   -moz-column-gap: 1em;
   -webkit-column-gap: 1em;
   margin: 1em 0px;
-  max-width: 98vw;
+  width: 98vw;
+  max-height: 100vh;
 
   @media only screen and (min-width: 700px) {
     column-count: 2;
@@ -56,13 +57,11 @@ const CardContainer = styled.div`
     column-count: 3;
     -webkit-column-count: 3;
     -moz-column-count: 3;
-    height: 98vh;
   }
   @media only screen and (min-width: 1600px) {
     column-count: 4;
     -webkit-column-count: 4;
-    -moz-column-count: 4;
-    height: 98vh;
+    -moz-column-count: 4;    
   }
 `;
 
@@ -424,6 +423,9 @@ const Success = () => {
     localStorage.setItem(character.name, JSON.stringify(character));
   }
 
+  var data =
+    "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(loadedChar));
+
   return (
     <div>
       <h1>
@@ -434,6 +436,14 @@ const Success = () => {
         loadFromJson={loadFromJson}
         character={loadedChar}
       />
+      <button>
+        <a
+          href={"data:" + data}
+          download={loadedChar.name + "_lvl" + loadedChar.level + ".json"}
+        >
+          Download Character
+        </a>
+      </button>
       <FormControl>
         <label>Select Character&emsp;</label>
         <select
@@ -504,10 +514,7 @@ const Success = () => {
               />
             </CardDiv>
             <CardDiv>
-              <Features
-                character={loadedChar}
-                editFeature={updateFeatures}
-              />
+              <Features character={loadedChar} editFeature={updateFeatures} />
             </CardDiv>
             <CardDiv>
               <Inventory

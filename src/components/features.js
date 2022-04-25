@@ -8,6 +8,8 @@ const Container = styled.div`
   width: 100%;
   max-width: 400px;
   background-color: none;
+  max-height: 20vh;
+  overflow: auto;
 
   display: block;
   margin-left: auto;
@@ -21,6 +23,8 @@ const Box = styled.div`
   border-style: inset;
   border-radius: 5px;
   margin: 1% 1% 1% 1%;
+
+  
 `;
 
 const Features = ({ character, onCharacterChange, editFeature }) => {
