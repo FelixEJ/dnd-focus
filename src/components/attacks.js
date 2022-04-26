@@ -27,7 +27,7 @@ const Attacks = ({ character }) => {
       <h4>Attacks</h4>
       <Container>
         <Box>
-          <AttackAccordion attacks={character.attacks} />
+            <AttackAccordion attacks={character.attacks} />
         </Box>
       </Container>
     </div>

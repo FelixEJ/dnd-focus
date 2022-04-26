@@ -130,16 +130,16 @@ function CreatePageGrid() {
       insight_bonus: 0,
     },
     features: [
-      {
-        feature_id: 0,
-        level_acquired: 0,
-        feature_name: "",
-        source: "",
-        description: "",
-        max_uses: 0,
-        current_uses: 0,
-        recharge: "",
-      },
+      // {
+      //   feature_id: 0,
+      //   level_acquired: 0,
+      //   feature_name: "",
+      //   source: "",
+      //   description: "",
+      //   max_uses: 0,
+      //   current_uses: 0,
+      //   recharge: "",
+      // },
     ],
     attacks: [
       // {
@@ -244,7 +244,7 @@ function CreatePageGrid() {
     pointer[finalProp] =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setCharacter(newCharacter);
-    console.log("new char", newCharacter);
+    console.log("new char", character);
   }
 
   function prevStep() {
@@ -265,7 +265,7 @@ function CreatePageGrid() {
     oldFeatures.push(newFeature);
     // setCharacter({ features: [...character.features, oldFeatures]});
     setCharacter(newCharacter);
-    console.log("new Feature", newCharacter);
+    console.log("new Feature", character);
   }
 
   // duplicated
@@ -276,7 +276,7 @@ function CreatePageGrid() {
     const freshEquipment = ogCharacter.equipment;
     freshEquipment.push(newEquipment);
     setCharacter(ogCharacter);
-    console.log("new Equipment", ogCharacter);
+    console.log("new Equipment", character);
   }
 
   // duplicated
@@ -287,7 +287,7 @@ function CreatePageGrid() {
     const freshInventory = ogCharacter.inventory;
     freshInventory.push(newInventoryItem);
     setCharacter(ogCharacter);
-    console.log("new Invetory", ogCharacter);
+    console.log("new Invetory", character);
   }
 
   function addAttack(newattack) {
@@ -297,7 +297,16 @@ function CreatePageGrid() {
     const oldAttacks = newCharacter.attacks;
     oldAttacks.push(newAttack);
     setCharacter(newCharacter);
-    console.log("new attack", newCharacter);
+    console.log("new attack", character);
+  }
+
+  function setMagicUser(e) {
+    onCharacterChange(e);
+    const newCharacter = { ...character };
+    newCharacter.magic.magic_user = true;
+    newCharacter.magic.ability = e.target.value;
+    setCharacter(newCharacter);
+    console.log("magic user", character.magic);
   }
 
   function saveCharacter(character) {
@@ -333,6 +342,7 @@ function CreatePageGrid() {
           nextStep={nextStep}
           onCharacterChange={onCharacterChange}
           character={character}
+          setMagicUser={setMagicUser}
           addFeature={addFeature}
           addEquipment={addEquipment}
           addItem={addItem}

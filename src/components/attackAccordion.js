@@ -37,7 +37,7 @@ const TextLeft = styled.div`
 
 const AttackAccordion = ({ attacks }) => {
   return (
-    <Accordion defaultActiveKey={attacks[0].attack_id}>
+    <Accordion >
       <div>
         {attacks.map((attack, index) => (
           <Card>
