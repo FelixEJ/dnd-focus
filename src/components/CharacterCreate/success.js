@@ -19,6 +19,8 @@ import SheetMagic from "../sheetMagic";
 import Passives from "../passives";
 import Personality from "../personality";
 
+import RollDiceModal from "../rollDiceModal";
+
 // const CardContainer = styled.div`
 //   display: grid;
 //   grid-template-columns: 100%;
@@ -432,6 +434,7 @@ const Success = () => {
         Character Sheet for {loadedChar.name}, lvl:{loadedChar.level},
         {loadedChar.features[0].feature_name}
       </h1>
+      <RollDiceModal />
       <LoadCharacterFromJSON
         loadFromJson={loadFromJson}
         character={loadedChar}
