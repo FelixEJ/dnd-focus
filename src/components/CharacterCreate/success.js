@@ -20,6 +20,7 @@ import Passives from "../passives";
 import Personality from "../personality";
 
 import RollDiceModal from "../rollDiceModal";
+import RestModal from "../restModal";
 
 // const CardContainer = styled.div`
 //   display: grid;
@@ -63,7 +64,7 @@ const CardContainer = styled.div`
   @media only screen and (min-width: 1600px) {
     column-count: 4;
     -webkit-column-count: 4;
-    -moz-column-count: 4;    
+    -moz-column-count: 4;
   }
 `;
 
@@ -329,7 +330,7 @@ const Success = () => {
   function handleChange(e) {
     let charNum = e.target.value;
     setLoadedChar(allChars[charNum]);
-    console.log(loadedChar);
+    // console.log(loadedChar);
   }
 
   function loadFromJson(character) {
@@ -354,6 +355,15 @@ const Success = () => {
     setLoadedChar(newCharacter);
     saveLocalCharacter(newCharacter);
     console.log("new char", newCharacter);
+  }
+
+  function updateCharacter(newChar) {
+    // const tempChar = newChar;
+    // const updatedCharacter = { ...loadedChar };
+    // updatedCharacter = tempChar;
+    setLoadedChar(newChar);
+    saveLocalCharacter(newChar);
+    console.log("updated char:", newChar);
   }
 
   function updateFeatures(newFeats) {
@@ -435,6 +445,7 @@ const Success = () => {
         {loadedChar.features[0].feature_name}
       </h1>
       <RollDiceModal />
+      <RestModal character={loadedChar} updateCharacter={updateCharacter} />
       <LoadCharacterFromJSON
         loadFromJson={loadFromJson}
         character={loadedChar}

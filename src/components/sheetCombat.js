@@ -202,7 +202,9 @@ const SheetCombat = ({ character, onCharacterChange }) => {
             )}
             {character.exhaustion === "4" && (
               <Text>
-                - Disadvantage on ability checks - Speed Halved
+                - Disadvantage on ability checks 
+                <br />
+                - Speed Halved
                 <br />
                 - Disadvantage on attack rolls & saving throws
                 <br />- HP maximum halved
@@ -210,7 +212,9 @@ const SheetCombat = ({ character, onCharacterChange }) => {
             )}
             {character.exhaustion === "5" && (
               <Text>
-                - Disadvantage on ability checks - Speed Halved
+                - Disadvantage on ability checks 
+                <br />
+                - Speed Halved
                 <br />
                 - Disadvantage on attack rolls & saving throws
                 <br />
