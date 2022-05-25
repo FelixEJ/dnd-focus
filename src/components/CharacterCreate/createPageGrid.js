@@ -50,22 +50,22 @@ function CreatePageGrid() {
     },
     exhaustion: 0,
     ac: 0,
-    speed: 0,
+    speed: 30,
     initiative: 0,
     proficiency_bonus: 2,
     inspiration: false,
     stats: {
-      str: 0,
+      str: 8,
       temp_str: 0,
-      dex: 0,
+      dex: 8,
       temp_dex: 0,
-      con: 0,
+      con: 8,
       temp_con: 0,
-      int: 0,
+      int: 8,
       temp_int: 0,
-      wis: 0,
+      wis: 8,
       temp_wis: 0,
-      cha: 0,
+      cha: 8,
       temp_cha: 0,
     },
     saves: {
@@ -94,7 +94,7 @@ function CreatePageGrid() {
       Arcana: "",
       Arcana_bonus: 0,
       History: "",
-      History_bonus:0,
+      History_bonus: 0,
       Investigation: "",
       Investigation_bonus: 0,
       Nature: "",
@@ -248,11 +248,54 @@ function CreatePageGrid() {
   }
 
   function prevStep() {
+    window.scrollTo({
+      bottom: 0,
+      behavior: "smooth",
+    });
+    console.log("scroll");
     setStep(step - 1);
   }
 
   function nextStep() {
+    window.scrollTo({
+      bottom: 0,
+      behavior: "smooth",
+    });
+    console.log("scroll");
     setStep(step + 1);
+  }
+
+  // duplicated function
+  function updateFeatures(newFeats) {
+    const tempFeatures = newFeats;
+    const updatedCharacter = { ...character };
+    updatedCharacter.features = tempFeatures;
+    setCharacter(updatedCharacter);
+    // console.log("new Feature", updatedCharacter);
+  }
+  // duplicated function
+  function updateInventory(newInv) {
+    const tempInv = newInv;
+    const updatedCharacter = { ...character };
+    updatedCharacter.inventory = tempInv;
+    setCharacter(updatedCharacter);
+    // console.log("new Feature", updatedCharacter);
+  }
+  // duplicated function
+  function updateEquipment(newEquip) {
+    const tempEquip = newEquip;
+    const updatedCharacter = { ...character };
+    updatedCharacter.equipment = tempEquip;
+    setCharacter(updatedCharacter);
+    // console.log("new Feature", updatedCharacter);
+  }
+
+  function updateAttacks(newAttack) {
+    const tempAttack = newAttack;
+    const updatedCharacter = { ...character };
+    updatedCharacter.attacks = tempAttack;
+    setCharacter(updatedCharacter);
+    // console.log("new Feature", updatedCharacter);
   }
 
   // duplicate
@@ -310,7 +353,24 @@ function CreatePageGrid() {
   }
 
   function saveCharacter(character) {
-    localStorage.setItem(character.name, JSON.stringify(character));
+    let tempChar = { ...character };
+    tempChar.features.map((feature) => {
+      feature.current_uses = feature.max_uses;
+    });
+    tempChar.hp.current = tempChar.hp.max;
+    tempChar.hit_dice.current = tempChar.hit_dice.max;
+    tempChar.spellslots.first_remaining = tempChar.spellslots.first;
+    tempChar.spellslots.second_remaining = tempChar.spellslots.second;
+    tempChar.spellslots.third_remaining = tempChar.spellslots.third;
+    tempChar.spellslots.fourth_remaining = tempChar.spellslots.fourth;
+    tempChar.spellslots.fifth_remaining = tempChar.spellslots.fifth;
+    tempChar.spellslots.sixth_remaining = tempChar.spellslots.sixth;
+    tempChar.spellslots.seventh_remaining = tempChar.spellslots.seventh;
+    tempChar.spellslots.eighth_remaining = tempChar.spellslots.eighth;
+    tempChar.spellslots.ninth_remaining = tempChar.spellslots.ninth;
+
+    // localStorage.setItem(character.name, JSON.stringify(character));
+    localStorage.setItem(character.name, JSON.stringify(tempChar));
   }
 
   switch (step) {
@@ -321,6 +381,7 @@ function CreatePageGrid() {
           onCharacterChange={onCharacterChange}
           character={character}
           addFeature={addFeature}
+          updateFeatures={updateFeatures}
         />
       );
     case 2:
@@ -331,8 +392,11 @@ function CreatePageGrid() {
           onCharacterChange={onCharacterChange}
           character={character}
           addFeature={addFeature}
+          updateFeatures={updateFeatures}
           addEquipment={addEquipment}
+          updateEquipment={updateEquipment}
           addItem={addItem}
+          updateInventory={updateInventory}
         />
       );
     case 3:
@@ -344,9 +408,13 @@ function CreatePageGrid() {
           character={character}
           setMagicUser={setMagicUser}
           addFeature={addFeature}
+          updateFeatures={updateFeatures}
           addEquipment={addEquipment}
+          updateEquipment={updateEquipment}
           addItem={addItem}
+          updateInventory={updateInventory}
           addAttack={addAttack}
+          updateAttacks={updateAttacks}
         />
       );
     case 4:

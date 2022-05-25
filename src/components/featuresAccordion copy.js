@@ -1,83 +1,130 @@
-import * as React from "react";
-import { styled } from "@material-ui/core/styles";
-import ArrowForwardIosSharpIcon from "@material-ui/icons/ArrowForwardIosSharp";
-import MuiAccordion from "@material-ui/core/Accordion";
-import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
-import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
-import Typography from "@material-ui/core/Typography";
+import React, { useState } from "react";
+import styled from "styled-components";
+import Accordion from "react-bootstrap/Accordion";
+import Card from "react-bootstrap/Card";
 
-const Accordion = styled((props) => (
-  <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
-  border: `1px solid ${theme.palette.divider}`,
-  "&:not(:last-child)": {
-    borderBottom: 0,
-  },
-  "&:before": {
-    display: "none",
-  },
-}));
+import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
-const AccordionSummary = styled((props) => (
-  <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />}
-    {...props}
-  />
-))(({ theme }) => ({
-  backgroundColor:
-    theme.palette.mode === "dark"
-      ? "rgba(255, 255, 255, .05)"
-      : "rgba(0, 0, 0, .03)",
-  flexDirection: "row-reverse",
-  "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
-    transform: "rotate(90deg)",
-  },
-  "& .MuiAccordionSummary-content": {
-    marginLeft: theme.spacing(1),
-  },
-}));
+import EditFeatureModal from "./editFeatureModal";
 
-const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  padding: theme.spacing(2),
-  borderTop: "1px solid rgba(0, 0, 0, .125)",
-}));
+function CustomToggle({ children, eventKey }) {
+  const decoratedOnClick = useAccordionButton(eventKey, () => console.log(""));
 
-const FeatureAccordion = ({ features }) => {
-  const [expanded, setExpanded] = React.useState("panel1");
+  return (
+    <button
+      type="button"
+      style={{ backgroundColor: "none" }}
+      onClick={decoratedOnClick}
+    >
+      {children}
+    </button>
+  );
+}
 
-  const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
+const ButtonRight = styled.div`
+  float: right;
+  font-size: 0.9em;
+  text-decoration: underline;
+  text-transform: uppercase;
+`;
+
+const TextLeft = styled.div`
+  float: left;
+  font-size: 0.9em;
+  text-decoration: underline;
+  text-transform: uppercase;
+`;
+
+const FeatureAccordion = ({ character, updateFeatures }) => {
+  const [tempFeats, setTempFeats] = useState([...character.features]);
+
+  const handleChange = (e, index) => {
+    e.preventDefault();
+    let feats = tempFeats;
+    console.log(e.target.value);
+
+    let feat = tempFeats.findIndex((feat) => feat.feature_id === index);
+    feat++;
+    feats[feat].current_uses = e.target.value;
+
+    console.log(feats);
+    setTempFeats(feats);
+    updateFeatures(tempFeats);
   };
 
   return (
-    <div>
-      {features.map((feature, index) => (
-        <Accordion
-          key={index}
-          expanded={expanded === feature.feature_id}
-          onChange={handleChange(feature.feature_id)}
-        >
-          <AccordionSummary>
-            <Typography>
-              <b>
-                ({feature.level_acquired}){feature.feature_name}:
-              </b>
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              <p>Source: <b>{feature.source}</b></p>
-              <p>{feature.description}</p>
-              
+    <Accordion defaultActiveKey={character.features[0].feature_id}>
+      <div>
+        {character.features.map((feature, index) => (
+          <Card>
+            <Card.Header>
+              <TextLeft>
+                {feature.level_acquired} - {feature.feature_name}:
+              </TextLeft>
               {feature.max_uses > 0 && (
-                <text><p>Uses: <b>{feature.current_uses}/{feature.max_uses}</b></p>
-                <p>Recharge: {feature.recharge}</p></text>
+                <>
+                  Uses:
+                  <input
+                    type="number"
+                    max={feature.max_uses}
+                    min="0"
+                    id="current_uses"
+                    name="current_uses"
+                    value={feature.current_uses}
+                    onChange={(e) => handleChange(e, index)}
+                    size="2"
+                    display="none"
+                  />
+                  /{feature.max_uses}
+                </>
               )}
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-      ))}
-    </div>
+              <ButtonRight>
+                <CustomToggle eventKey={feature.feature_id}>
+                  EXPAND
+                </CustomToggle>
+              </ButtonRight>
+            </Card.Header>
+            <Accordion.Collapse eventKey={feature.feature_id}>
+              <Card.Body
+                style={{ backgroundColor: "lightgrey", maxHeight: "25vh" }}
+                class="overflow-auto"
+              >
+                <>
+                  Source: <b>{feature.source}</b>
+                  <br />
+                </>
+                {feature.max_uses > 0 && (
+                  <text>
+                    <>
+                      Uses:{" "}
+                      <input
+                        type="number"
+                        max={feature.max_uses}
+                        min="0"
+                        id="current_uses"
+                        name="current_uses"
+                        value={feature.current_uses}
+                        onChange={(e) => handleChange(e, index)}
+                        size="2"
+                        display="none"
+                      />
+                      /{feature.max_uses}
+                    </>
+                    <> Recharge: {feature.recharge}</>
+                  </text>
+                )}
+                <p>{feature.description}</p>
+                <EditFeatureModal
+                  character={character}
+                  updateFeatures={updateFeatures}
+                  index={index}
+                />
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+        ))}
+      </div>
+    </Accordion>
   );
 };
 

@@ -55,6 +55,7 @@ const Box = styled.div`
 const Numbers = styled.p`
   font-size: 2.2em;
   margin: 0;
+  text-transform: uppercase;
 `;
 const Title = styled.p`
   margin: 0;
@@ -78,15 +79,14 @@ const SheetMagic = ({ character, onCharacterChange }) => {
               <Title>Spell Attack Bonus</Title>
               <Numbers>
                 +
-                {character.magic.spell_attack_mod +
-                  character.magic.spell_attack_bonus}
+                {character.magic.spell_attack_mod}
               </Numbers>
             </Box>
 
             <Box>
               <Title>Spell Save DC</Title>
               <Numbers>
-                {character.magic.save_dc + character.magic.save_dc_bonus}
+                {character.magic.save_dc}
               </Numbers>
             </Box>
           </FlexContainer>

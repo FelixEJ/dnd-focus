@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -28,14 +29,13 @@ const style = {
 const X = stylish.div`
   float: right;
   font-size: 0.9em;
-  text-decoration: underline;
   text-transform: uppercase;
   margin-top: -16px;
   margin-right: 4px;
   cursor: pointer;
   `;
 
-const ConfirmDeleteEquipmentModal = ({ character, updateEquipment, index }) => {
+const ConfirmDeleteEquipmentModal = ({ character, updateEquipment, index, closePrev }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -43,15 +43,24 @@ const ConfirmDeleteEquipmentModal = ({ character, updateEquipment, index }) => {
   const [tempEquipment, setTempEquipment] = useState([...character.equipment]);
 
   function deleteEquipment() {
-    tempEquipment.splice(index, 1);
-    setTempEquipment(tempEquipment);
-    updateEquipment(tempEquipment);
+    let equip = tempEquipment;
+    equip.splice(index, 1);
+    // setTempEquipment(equip);
+    updateEquipment(equip);
     handleClose();
+    closePrev();
   }
 
   return (
     <div>
-      <X onClick={handleOpen}>x</X>
+      <Button
+        variant="outlined"
+        onClick={handleOpen}
+        startIcon={<DeleteIcon />}
+        color="secondary"
+      >
+        Delete?
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -63,6 +72,8 @@ const ConfirmDeleteEquipmentModal = ({ character, updateEquipment, index }) => {
             <Button
               variant="contained"
               onClick={deleteEquipment}
+              startIcon={<DeleteIcon />}
+              color="secondary"
             >
               Delete {character.equipment[index].equipment_name}?
             </Button>

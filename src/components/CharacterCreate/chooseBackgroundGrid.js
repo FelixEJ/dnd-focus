@@ -11,6 +11,10 @@ import stylish from "styled-components";
 import CardContainer from "../cardContainer";
 import CardDiv from "../cardDiv";
 
+import ConfirmDeleteFeatureModal from "../confirmDeleteFeatureModal";
+import ConfirmDeleteItemModal from "../confirmDeleteItemModal";
+import ConfirmDeleteEquipmentModal from "../confirmDeleteEquipmentModal";
+
 const BotButtons = stylish.div`
   margin-bottom: 40px;
 `;
@@ -47,8 +51,11 @@ const ChooseBackgroundGrid = ({
   onCharacterChange,
   character,
   addFeature,
+  updateFeatures,
   addEquipment,
+  updateEquipment,
   addItem,
+  updateInventory,
 }) => {
   const Continue = (e) => {
     e.preventDefault();
@@ -59,18 +66,16 @@ const ChooseBackgroundGrid = ({
     prevStep();
   };
 
-  console.log("character:", character);
+  // console.log("character:", character);
 
   return (
     <div>
       <h1>Choose Background:</h1>
-      <Box sx={{ flexGrow: 2 }}>
-        <div>
-          <ButtonGroup variant="contained">
-            <Button onClick={Previous}>Back</Button>
-            <Button onClick={Continue}>Next</Button>
-          </ButtonGroup>
-        </div>
+      <ButtonGroup variant="contained">
+        <Button onClick={Previous}>Back</Button>
+        <Button onClick={Continue}>Next</Button>
+      </ButtonGroup>
+      <Box>
         <FormControl>
           <label>
             {character.name}, lvl:{character.level}
@@ -198,9 +203,14 @@ const ChooseBackgroundGrid = ({
                   character={character}
                 />
                 <h3>Equipment</h3>
-                {character.equipment.map((equip) => (
+                {character.equipment.map((equip, index) => (
                   <h4 key={equip.equipment_id + equip.equipment_name}>
                     {equip.equipment_name}
+                    <ConfirmDeleteEquipmentModal
+                      character={character}
+                      updateEquipment={updateEquipment}
+                      index={index}
+                    />
                   </h4>
                 ))}
               </Item>
@@ -210,7 +220,14 @@ const ChooseBackgroundGrid = ({
                 <AddItemModal addItem={addItem} character={character} />
                 <h3>Inventory</h3>
                 {character.inventory.map((item, index) => (
-                  <h4 key={index}>{item.item_name}</h4>
+                  <h4 key={index}>
+                    {item.item_name}
+                    <ConfirmDeleteItemModal
+                      character={character}
+                      updateInventory={updateInventory}
+                      index={index}
+                    />
+                  </h4>
                 ))}
               </Item>
             </CardDiv>
@@ -281,9 +298,14 @@ const ChooseBackgroundGrid = ({
                   featureLength={character.features.length}
                 />
                 <h3>Features & abilities</h3>
-                {character.features.map((feature) => (
+                {character.features.map((feature, index) => (
                   <h4 key={feature.feature_id + feature.feature_name}>
                     {feature.feature_name}
+                    <ConfirmDeleteFeatureModal
+                      character={character}
+                      updateFeatures={updateFeatures}
+                      index={index}
+                    />
                   </h4>
                 ))}
               </Item>
@@ -365,13 +387,13 @@ const ChooseBackgroundGrid = ({
             </CardDiv>
           </CardContainer>
         </FormControl>
-        <BotButtons>
-          <ButtonGroup variant="contained">
-            <Button onClick={Previous}>Back</Button>
-            <Button onClick={Continue}>Next</Button>
-          </ButtonGroup>
-        </BotButtons>
       </Box>
+      <BotButtons>
+        <ButtonGroup variant="contained">
+          <Button onClick={Previous}>Back</Button>
+          <Button onClick={Continue}>Next</Button>
+        </ButtonGroup>
+      </BotButtons>
     </div>
   );
 };

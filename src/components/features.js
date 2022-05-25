@@ -8,12 +8,16 @@ const Container = styled.div`
   width: 100%;
   max-width: 400px;
   background-color: none;
-  max-height: 20vh;
+  max-height: 30vh;
   overflow: auto;
 
   display: block;
   margin-left: auto;
   margin-right: auto;
+
+  @media only screen and (min-width: 1300px) {
+    max-height: 90vh;
+  }
 `;
 
 const Box = styled.div`
@@ -27,7 +31,7 @@ const Box = styled.div`
   
 `;
 
-const Features = ({ character, onCharacterChange, editFeature }) => {
+const Features = ({ character, updateFeatures }) => {
   return (
     <div>
       <h4>Features</h4>
@@ -35,8 +39,7 @@ const Features = ({ character, onCharacterChange, editFeature }) => {
         <Box>
           <FeatureAccordion
             character={character}
-            onCharacterChange={onCharacterChange}
-            editFeature={editFeature}
+            updateFeatures={updateFeatures}
           />
         </Box>
       </Container>

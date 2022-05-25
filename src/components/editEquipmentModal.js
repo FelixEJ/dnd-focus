@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import stylish from "styled-components";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import AddFeatureModal from "./addFeatureModal";
+import DeleteIcon from "@material-ui/icons/Delete";
+import SaveIcon from "@material-ui/icons/Save";
+// import { ButtonGroup } from "@material-ui/core";
+
+import ConfirmDeleteEquipmentModal from "./confirmDeleteEquipmentModal";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -26,19 +31,26 @@ const style = {
   p: 4,
 };
 
-const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
+const X = stylish.div`
+  float: right;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  margin-top: -16px;
+  margin-right: 4px;
+  cursor: pointer;
+  `;
+
+const EditFeatureModal = ({ character, updateEquipment, index, name, equip }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [equipment, setEquipment] = useState({
-    equipment_id: 0,
-    equipment_name: "",
-    equipment_type: "",
-    desc: "",
-    value: 0,
-    value_currency: "",
-  });
+  const [equipment, setEquipment] = useState({equip});
+
+  useEffect(() => {
+    setEquipment(...character.equipment.filter(equip => equip.equipment_name === name));
+  }, [character]);
 
   const handleChange = (e) => {
     let name = e.target.name;
@@ -47,22 +59,18 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
     e.preventDefault();
   };
 
-  function clearEquipment() {
-    setEquipment({
-      equipment_id: 0,
-      equipment_name: "",
-      equipment_type: "",
-      desc: "",
-      value: 0,
-      value_currency: "",
-    });
-  }
+  const editEquipment = () => {
+    let equipments = [...character.equipment];
+    equipments[index] = equipment;
+    updateEquipment(equipments);
+    handleClose();
+  };
 
-  return (
+  return (    
     <div>
-      <Button variant="contained" onClick={handleOpen}>
-        Add Equipment
-      </Button>
+      <X onClick={handleOpen}>
+        Edit
+      </X>
       <Modal
         open={open}
         onClose={handleClose}
@@ -70,7 +78,7 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Grid>
+        <Grid>
             <Item>
               <h2>Add/Edit Equipment</h2>
               <label>Equipment name:</label>
@@ -150,27 +158,25 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
                   <option value={"true"}>True</option>
                 </select>
               </label>
-            </Item>
-            <Item>
-              <AddFeatureModal addFeature={addFeature} />
-              <h3>Features & abilities</h3>
-              {character.features.map((feature) => (
-                <h4 key={feature.feature_id + feature.feature_name}>
-                  {feature.feature_name}
-                </h4>
-              ))}
-            </Item>
+            </Item>            
           </Grid>
           <Item>
             <Button
               variant="contained"
               onClick={() => {
-                addEquipment(equipment);
-                clearEquipment();
+                editEquipment();
               }}
+              startIcon={<SaveIcon />}
+              color="primary"
             >
-              Confirm Equipment
+              Save change
             </Button>
+            <ConfirmDeleteEquipmentModal
+              character={character}
+              updateEquipment={updateEquipment}
+              index={index}
+              closePrev={handleClose}
+            />
           </Item>
           <Button variant="contained" onClick={handleClose}>
             Close
@@ -181,4 +187,4 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
   );
 };
 
-export default AddEquipmentModal;
+export default EditFeatureModal;

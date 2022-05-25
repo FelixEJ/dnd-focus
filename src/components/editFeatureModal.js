@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import stylish from "styled-components";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+import DeleteIcon from "@material-ui/icons/Delete";
+import SaveIcon from "@material-ui/icons/Save";
 // import { ButtonGroup } from "@material-ui/core";
+
+import ConfirmDeleteFeatureModal from "./confirmDeleteFeatureModal";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -26,21 +31,21 @@ const style = {
   p: 4,
 };
 
-const AddFeatureModal = ({ addFeature }) => {
+const SmallButton = stylish.div`
+  max-width: 50px;
+  height: 20px;
+`;
+
+const EditFeatureModal = ({ character, updateFeatures, index, name }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [feature, setFeature] = useState({
-    feature_id: 0,
-    level_acquired: 0,
-    feature_name: "",
-    source: "",
-    description: "",
-    max_uses: 0,
-    current_uses: 0,
-    recharge: "",
-  });
+  const [feature, setFeature] = useState({});
+
+  useEffect(() => {
+    setFeature(...character.features.filter(feat => feat.feature_name === name));
+  }, [character]);
 
   const handleChange = (e) => {
     let name = e.target.name;
@@ -49,24 +54,17 @@ const AddFeatureModal = ({ addFeature }) => {
     e.preventDefault();
   };
 
-  //sometimes duplicate feature id?
-  function clearFeature() {
-    setFeature({
-      feature_id: 0,
-      level_acquired: 0,
-      feature_name: "",
-      source: "",
-      description: "",
-      max_uses: 0,
-      current_uses: 0,
-      recharge: "",
-    });
-  }
+  const editFeature = () => {
+    let features = [...character.features];
+    features[index] = feature;
+    updateFeatures(features);
+    handleClose();
+  };
 
-  return (
+  return (    
     <div>
-      <Button variant="contained" onClick={handleOpen}>
-        Add Feature
+      <Button variant="outlined" size="small" onClick={handleOpen}>
+        Edit {name}
       </Button>
       <Modal
         open={open}
@@ -77,7 +75,7 @@ const AddFeatureModal = ({ addFeature }) => {
         <Box sx={style}>
           <Grid>
             <Item>
-              <h2>Add/Edit Feature</h2>
+              <h2>Edit Feature</h2>
               <label>Level Acquired:</label>
               <input
                 type="number"
@@ -166,20 +164,27 @@ const AddFeatureModal = ({ addFeature }) => {
             <Button
               variant="contained"
               onClick={() => {
-                addFeature(feature);
-                clearFeature();
+                editFeature();
               }}
+              startIcon={<SaveIcon />}
+              color="primary"
             >
-              Confirm Feature
+              Save change
             </Button>
+            <ConfirmDeleteFeatureModal
+              character={character}
+              updateFeatures={updateFeatures}
+              index={index}
+              closePrev={handleClose}
+            />
           </Item>
-            <Button variant="contained" onClick={handleClose}>
-              Close
-            </Button>
+          <Button variant="contained" onClick={handleClose}>
+            Close
+          </Button>
         </Box>
       </Modal>
     </div>
   );
 };
 
-export default AddFeatureModal;
+export default EditFeatureModal;

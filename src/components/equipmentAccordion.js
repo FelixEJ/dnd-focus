@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
 import AddEquipmentModal from "./addEquipmentModal";
+import EditEquipmentModal from "./editEquipmentModal";
 import ConfirmDeleteEquipmentModal from "./confirmDeleteEquipmentModal";
 
 function CustomToggle({ children, eventKey }) {
@@ -68,19 +69,25 @@ const EquipmentAccordion = ({
           </Card.Header>
           <Accordion.Collapse eventKey={0}>
             <Card.Body
-              style={{ backgroundColor: "lightgrey", maxHeight: "15vh" }}
+              style={{ backgroundColor: "lightgrey", maxHeight: "20vh" }}
               class="overflow-auto"
             >
               {character.equipment.map((item, index) => (
                 <>
                   <p key={index}>
-                    <b>{item.equipment_name}</b> [{item.value}
-                    {item.value_currency}]: {item.desc}
-                    <ConfirmDeleteEquipmentModal
+                    <b>{item.equipment_name}</b> {item.desc}
+                    <EditEquipmentModal
                       character={character}
                       updateEquipment={updateEquipment}
                       index={index}
+                      name={item.equipment_name}
+                      equip={{item}}
                     />
+                    {/* <ConfirmDeleteEquipmentModal
+                      character={character}
+                      updateEquipment={updateEquipment}
+                      index={index}
+                    /> */}
                   </p>
                 </>
               ))}

@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -25,33 +26,36 @@ const style = {
   p: 4,
 };
 
-const X = stylish.div`
-  float: right;
-  font-size: 0.9em;
-  text-transform: uppercase;
-  margin-top: -16px;
-  margin-right: 4px;
-  cursor: pointer;
-  `;
-
-const ConfirmDeleteItemModal = ({ character, updateInventory, index }) => {
+const ConfirmDeleteFeatureModal = ({
+  character,
+  updateFeatures,
+  index,
+  closePrev,
+}) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [tempInventory, setTempInventory] = useState([...character.inventory]);
+  const [tempFeatures, setTempFeatures] = useState([...character.features]);
 
   function deleteItem() {
-    let inv = tempInventory;
-    inv.splice(index, 1);
-    // setTempInventory(inv);
-    updateInventory(inv);
+    let feat = tempFeatures;
+    feat.splice(index, 1);
+    updateFeatures(feat);
     handleClose();
+    closePrev();
   }
 
   return (
     <div>
-      <X onClick={handleOpen}>x</X>
+      <Button
+        variant="outlined"
+        onClick={handleOpen}
+        startIcon={<DeleteIcon />}
+        color="secondary"
+      >
+        Delete feature
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -63,8 +67,10 @@ const ConfirmDeleteItemModal = ({ character, updateInventory, index }) => {
             <Button
               variant="contained"
               onClick={deleteItem}
+              startIcon={<DeleteIcon />}
+              color="secondary"
             >
-              Delete {character.inventory[index].item_name}?
+              Delete {character.features[index].feature_name}?
             </Button>
           </Item>
           <Button variant="contained" onClick={handleClose}>
@@ -76,4 +82,4 @@ const ConfirmDeleteItemModal = ({ character, updateInventory, index }) => {
   );
 };
 
-export default ConfirmDeleteItemModal;
+export default ConfirmDeleteFeatureModal;

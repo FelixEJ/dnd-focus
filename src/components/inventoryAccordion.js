@@ -39,15 +39,15 @@ const TextLeft = styled.div`
 `;
 
 const InventoryAccordion = ({ character, addItem, updateInventory }) => {
-  const getInventoryValue = () => {
-    let total = 0;
-    character.inventory.forEach(myFunc);
+  // const getInventoryValue = () => {
+  //   let total = 0;
+  //   character.inventory.forEach(myFunc);
 
-    function myFunc(item) {
-      total += Number(item.value_total);
-    }
-    return total;
-  };
+  //   function myFunc(item) {
+  //     total += Number(item.value_total);
+  //   }
+  //   return total;
+  // };
 
   return (
     <div>
@@ -56,7 +56,8 @@ const InventoryAccordion = ({ character, addItem, updateInventory }) => {
           <Card>
             <Card.Header>
               <TextLeft>
-                <b>Inventory:</b> total value = {getInventoryValue()} gp
+                <b>Inventory:</b> 
+                {/* total value = {getInventoryValue()} gp */}
               </TextLeft>
               <ButtonRight>
                 <CustomToggle eventKey={0}>EXPAND</CustomToggle>
@@ -64,7 +65,7 @@ const InventoryAccordion = ({ character, addItem, updateInventory }) => {
             </Card.Header>
             <Accordion.Collapse eventKey={0}>
               <Card.Body
-                style={{ backgroundColor: "lightgrey", maxHeight: "15vh" }}
+                style={{ backgroundColor: "lightgrey", maxHeight: "20vh" }}
                 class="overflow-auto"
               >
                 {character.inventory.map((item, index) => (

@@ -10,6 +10,8 @@ import stylish from "styled-components";
 import CardContainer from "../cardContainer";
 import CardDiv from "../cardDiv";
 
+import ConfirmDeleteFeatureModal from "../confirmDeleteFeatureModal";
+
 const BotButtons = stylish.div`
   margin-bottom: 40px;
 `;
@@ -45,6 +47,7 @@ const ChooseRaceGrid = ({
   onCharacterChange,
   character,
   addFeature,
+  updateFeatures,
 }) => {
   const Continue = (e) => {
     e.preventDefault();
@@ -72,7 +75,10 @@ const ChooseRaceGrid = ({
       <p>dex:{character.stats.dex}</p>
       <p>cha:{character.stats.cha}</p> */}
       <p>
-        <a href="https://chicken-dinner.com/5e/5e-point-buy.html" target="_blank">
+        <a
+          href="https://chicken-dinner.com/5e/5e-point-buy.html"
+          target="_blank"
+        >
           5e point buy and racial info here
         </a>
       </p>
@@ -83,7 +89,9 @@ const ChooseRaceGrid = ({
           </Button>
         </div>
         <FormControl>
-        <label>{character.name}, lvl:{character.level}</label>
+          <label>
+            {character.name}, lvl:{character.level}
+          </label>
           <CardContainer>
             <CardDiv>
               <Item>
@@ -297,10 +305,18 @@ const ChooseRaceGrid = ({
             <CardDiv>
               <Item>
                 <h3>Features & abilities</h3>
-                <AddFeatureModal addFeature={addFeature} />
-                {character.features.map((feature) => (
+                <AddFeatureModal
+                  addFeature={addFeature}
+                  updateFeatures={updateFeatures}
+                />
+                {character.features.map((feature, index) => (
                   <h4 key={feature.feature_id + feature.feature_name}>
                     {feature.feature_name}
+                    <ConfirmDeleteFeatureModal
+                      character={character}
+                      updateFeatures={updateFeatures}
+                      index={index}
+                    />
                   </h4>
                 ))}
               </Item>
@@ -481,13 +497,13 @@ const ChooseRaceGrid = ({
             </CardDiv>
           </CardContainer>
         </FormControl>
-
+        </Box>
         <BotButtons>
           <Button variant="contained" onClick={Continue}>
             Next
           </Button>
         </BotButtons>
-      </Box>
+      
     </div>
   );
 };

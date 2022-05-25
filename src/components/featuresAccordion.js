@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
+import EditFeatureModal from "./editFeatureModal";
+
 function CustomToggle({ children, eventKey }) {
-  const decoratedOnClick = useAccordionButton(eventKey, () =>
-    console.log("totally custom!")
-  );
+  const decoratedOnClick = useAccordionButton(eventKey, () => console.log(""));
 
   return (
     <button
@@ -35,22 +35,29 @@ const TextLeft = styled.div`
   text-transform: uppercase;
 `;
 
-const FeatureAccordion = ({
-  character,
-  editFeature,
-}) => {
+const FeatureAccordion = ({ character, updateFeatures }) => {
   const [tempFeats, setTempFeats] = useState([...character.features]);
 
-  const handleChange = (e, index) => {
+  useEffect(() => {
+    setTempFeats([...character.features]);
+  }, [character]);
+
+  const handleChange = (e, index, name) => {
     e.preventDefault();
-    const feats = [...tempFeats];
+    // let feats = tempFeats;
+    let feats = [...character.features];
+    console.log("uses", e.target.value);
 
-    const feat = feats.findIndex((feat) => feat.feature_id === index);
-    feats[feat].current_uses = e.target.value;
+    let featIndex = feats.findIndex((feat) => feat.feature_name === name);
+    console.log("name", name);
+    console.log("index", featIndex);
+    console.log("name2", feats[featIndex].feature_name);
+    // feat++;
+    feats[featIndex].current_uses = e.target.value;
 
-    console.log(feats);
-    setTempFeats(feats);
-    editFeature(tempFeats);
+    console.log("feats", feats);
+    // setTempFeats(feats);
+    updateFeatures(tempFeats);
   };
 
   return (
@@ -60,7 +67,8 @@ const FeatureAccordion = ({
           <Card>
             <Card.Header>
               <TextLeft>
-                ({feature.level_acquired}){feature.feature_name}: {index}
+                {/* {feature.level_acquired} - {feature.feature_name}: */}
+                {feature.feature_name}:
               </TextLeft>
               {feature.max_uses > 0 && (
                 <>
@@ -72,7 +80,9 @@ const FeatureAccordion = ({
                     id="current_uses"
                     name="current_uses"
                     value={feature.current_uses}
-                    onChange={(e) => handleChange(e, index)}
+                    onChange={(e) =>
+                      handleChange(e, index, feature.feature_name)
+                    }
                     size="2"
                     display="none"
                   />
@@ -87,11 +97,12 @@ const FeatureAccordion = ({
             </Card.Header>
             <Accordion.Collapse eventKey={feature.feature_id}>
               <Card.Body
-                style={{ backgroundColor: "lightgrey", maxHeight: "15vh" }}
+                style={{ backgroundColor: "lightgrey", maxHeight: "25vh" }}
                 class="overflow-auto"
               >
                 <>
                   Source: <b>{feature.source}</b>
+                  <br />
                 </>
                 {feature.max_uses > 0 && (
                   <text>
@@ -110,10 +121,17 @@ const FeatureAccordion = ({
                       />
                       /{feature.max_uses}
                     </>
-                    <>Recharge: {feature.recharge}</>
+                    <> Recharge: {feature.recharge}</>
                   </text>
                 )}
                 <p>{feature.description}</p>
+                <EditFeatureModal
+                  character={character}
+                  updateFeatures={updateFeatures}
+                  index={index}
+                  name={feature.feature_name}
+                  feat={{ feature }}
+                />
               </Card.Body>
             </Accordion.Collapse>
           </Card>

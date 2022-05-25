@@ -214,30 +214,30 @@ const Success = () => {
       insight: 0,
     },
     features: [
-      {
-        feature_id: 0,
-        level_acquired: 0,
-        feature_name: "",
-        source: "",
-        description: "",
-        max_uses: 0,
-        current_uses: 0,
-        recharge: "",
-      },
+      // {
+      //   feature_id: 0,
+      //   level_acquired: 0,
+      //   feature_name: "",
+      //   source: "",
+      //   description: "",
+      //   max_uses: 0,
+      //   current_uses: 0,
+      //   recharge: "",
+      // },
     ],
     attacks: [
-      {
-        attack_id: 0,
-        attack_name: "",
-        attack_bonus: 0,
-        damage_bonus: 0,
-        damage_dice: "",
-        damage_dice_num: 0,
-        damage_type: "",
-        range: "",
-        tags: "",
-        ammo: 0,
-      },
+      // {
+      //   attack_id: 0,
+      //   attack_name: "",
+      //   attack_bonus: 0,
+      //   damage_bonus: 0,
+      //   damage_dice: "",
+      //   damage_dice_num: 0,
+      //   damage_type: "",
+      //   range: "",
+      //   tags: "",
+      //   ammo: 0,
+      // },
     ],
     magic: {
       magic_user: false,
@@ -250,6 +250,17 @@ const Success = () => {
       spells_known: 0,
       concentrating: false,
     },
+    // spellslots: [
+    //   { first: 0, first_remaining: 0 },
+    //   { second: 0, second_remaining: 0 },
+    //   { third: 0, third_remaining: 0 },
+    //   { fourth: 0, fourth_remaining: 0 },
+    //   { fifth: 0, fifth_remaining: 0 },
+    //   { sixth: 0, sixth_remaining: 0 },
+    //   { seventh: 0, seventh_remaining: 0 },
+    //   { eighth: 0, eighth_remaining: 0 },
+    //   { ninth: 0, ninth_remaining: 0 },
+    // ],
     spellslots: {
       first: 0,
       first_remaining: 0,
@@ -271,14 +282,14 @@ const Success = () => {
       ninth_remaining: 0,
     },
     inventory: [
-      {
-        item_id: 0,
-        item_name: "",
-        quantity: 0,
-        value_each: 0,
-        value_currency: "",
-        value_total: 0,
-      },
+      // {
+      //   item_id: 0,
+      //   item_name: "",
+      //   quantity: 0,
+      //   value_each: 0,
+      //   value_currency: "",
+      //   value_total: 0,
+      // },
     ],
     currency: {
       copper: 0,
@@ -294,15 +305,15 @@ const Success = () => {
       other: "",
     },
     equipment: [
-      {
-        equipment_id: 0,
-        equipment_name: "",
-        equipment_type: "",
-        attuned: false,
-        desc: "",
-        value: 0,
-        value_currency: "",
-      },
+      // {
+      //   equipment_id: 0,
+      //   equipment_name: "",
+      //   equipment_type: "",
+      //   attuned: false,
+      //   desc: "",
+      //   value: 0,
+      //   value_currency: "",
+      // },
     ],
     personality: {
       trait1: "",
@@ -354,7 +365,7 @@ const Success = () => {
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setLoadedChar(newCharacter);
     saveLocalCharacter(newCharacter);
-    console.log("new char", newCharacter);
+    // console.log("new char", newCharacter);
   }
 
   function updateCharacter(newChar) {
@@ -363,7 +374,7 @@ const Success = () => {
     // updatedCharacter = tempChar;
     setLoadedChar(newChar);
     saveLocalCharacter(newChar);
-    console.log("updated char:", newChar);
+    // console.log("updated char:", newChar);
   }
 
   function updateFeatures(newFeats) {
@@ -372,7 +383,7 @@ const Success = () => {
     updatedCharacter.features = tempFeatures;
     setLoadedChar(updatedCharacter);
     saveLocalCharacter(updatedCharacter);
-    console.log("new Feature", updatedCharacter);
+    // console.log("new Feature", updatedCharacter);
   }
 
   function updateInventory(newInv) {
@@ -381,7 +392,7 @@ const Success = () => {
     updatedCharacter.inventory = tempInv;
     setLoadedChar(updatedCharacter);
     saveLocalCharacter(updatedCharacter);
-    console.log("new Feature", updatedCharacter);
+    // console.log("new Feature", updatedCharacter);
   }
 
   function updateEquipment(newEquip) {
@@ -390,7 +401,7 @@ const Success = () => {
     updatedCharacter.equipment = tempEquip;
     setLoadedChar(updatedCharacter);
     saveLocalCharacter(updatedCharacter);
-    console.log("new Feature", updatedCharacter);
+    // console.log("new Feature", updatedCharacter);
   }
 
   // duplicate
@@ -404,7 +415,7 @@ const Success = () => {
     // setCharacter({ features: [...character.features, oldFeatures]});
     setLoadedChar(newCharacter);
     saveLocalCharacter(newCharacter);
-    console.log("new Feature", newCharacter);
+    // console.log("new Feature", newCharacter);
   }
 
   // duplicated
@@ -416,19 +427,19 @@ const Success = () => {
     freshEquipment.push(newEquipment);
     setLoadedChar(newCharacter);
     saveLocalCharacter(newCharacter);
-    console.log("new Equipment", newCharacter);
+    // console.log("new Equipment", newCharacter);
   }
 
   // duplicated
   function addItem(newItem) {
     const newInventoryItem = newItem;
     newItem.item_id = loadedChar.inventory.length + 1;
-    const ogCharacter = { ...loadedChar };
-    const freshInventory = ogCharacter.inventory;
+    const newCharacter = { ...loadedChar };
+    const freshInventory = newCharacter.inventory;
     freshInventory.push(newInventoryItem);
-    setLoadedChar(ogCharacter);
-    saveLocalCharacter(ogCharacter);
-    console.log("new Invetory", ogCharacter);
+    setLoadedChar(newCharacter);
+    saveLocalCharacter(newCharacter);
+    // console.log("new Invetory", ogCharacter);
   }
 
   function saveLocalCharacter(character) {
@@ -441,8 +452,7 @@ const Success = () => {
   return (
     <div>
       <h1>
-        Character Sheet for {loadedChar.name}, lvl:{loadedChar.level},
-        {loadedChar.features[0].feature_name}
+        Character Sheet for {loadedChar.name}, lvl:{loadedChar.level}
       </h1>
       <RollDiceModal />
       <RestModal character={loadedChar} updateCharacter={updateCharacter} />
@@ -479,7 +489,7 @@ const Success = () => {
       {loadedChar.name != "" && (
         <>
           <CardDiv>
-            <Basics character={loadedChar} />
+            <Basics character={loadedChar} onCharacterChange={onCharacterChange} />
           </CardDiv>
           <CardContainer>
             <CardDiv>
@@ -528,7 +538,11 @@ const Success = () => {
               />
             </CardDiv>
             <CardDiv>
-              <Features character={loadedChar} editFeature={updateFeatures} />
+              <Features
+                character={loadedChar}
+                updateFeatures={updateFeatures}
+                onCharacterChange={onCharacterChange}
+              />
             </CardDiv>
             <CardDiv>
               <Inventory

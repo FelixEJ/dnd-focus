@@ -47,15 +47,39 @@ const XP = styled.div`
   margin: 1% 1% 1% 1%;
 `;
 
-const Basics = ({ character }) => {
+const Basics = ({ character, onCharacterChange }) => {
   return (
     <Container>
-      <Name>Name: <b>{character.name}</b></Name>
-      <Class>Class: <b>{character.class} {character.subclass}</b></Class>
-      <Race>Race: <b>{character.race}</b></Race>
-      <Background>Background: <b>{character.background.title}</b></Background>
-      <Alignment>Alignment: <b>{character.alignment}</b></Alignment>
-      <XP>XP: <b>{character.xp}</b></XP>
+      <Name>
+        Name: <b>{character.name}</b>
+      </Name>
+      <Class>
+        Class:{" "}
+        <b>
+          {character.class} {character.subclass}
+        </b>
+      </Class>
+      <Race>
+        Race: <b>{character.race}</b>
+      </Race>
+      <Background>
+        Background: <b>{character.background.title}</b>
+      </Background>
+      <Alignment>
+        Alignment: <b>{character.alignment}</b>
+      </Alignment>
+      <XP>
+        XP:{" "}
+        <input
+          type="number"
+          min="0"
+          id="xp"
+          name="xp"
+          value={character.xp}
+          onChange={onCharacterChange}
+          size="7"
+        />
+      </XP>
     </Container>
   );
 };

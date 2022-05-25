@@ -98,7 +98,7 @@ const AddAttackModal = ({ addAttack, character }) => {
   return (
     <div>
       <Button variant="contained" onClick={handleOpen}>
-        Add/Edit Attack
+        Add Attack
       </Button>
       <Modal
         open={open}
@@ -109,7 +109,7 @@ const AddAttackModal = ({ addAttack, character }) => {
         <Box sx={style}>
           <Grid>
             <Item>
-              <h2>Add/Edit Attack</h2>
+              <h2>Add Attack</h2>
               <label>Attack name</label>
               <input
                 type="text"

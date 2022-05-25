@@ -28,24 +28,24 @@ const style = {
 const X = stylish.div`
   float: right;
   font-size: 0.9em;
+  text-decoration: underline;
   text-transform: uppercase;
   margin-top: -16px;
   margin-right: 4px;
   cursor: pointer;
   `;
 
-const ConfirmDeleteItemModal = ({ character, updateInventory, index }) => {
+const ConfirmDeleteattackModal = ({ character, updateAttacks, index }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [tempInventory, setTempInventory] = useState([...character.inventory]);
+  const [tempAttacks, setTempAttacks] = useState([...character.attacks]);
 
   function deleteItem() {
-    let inv = tempInventory;
-    inv.splice(index, 1);
-    // setTempInventory(inv);
-    updateInventory(inv);
+    tempAttacks.splice(index, 1);
+    setTempAttacks(tempAttacks);
+    updateAttacks(tempAttacks);
     handleClose();
   }
 
@@ -64,7 +64,7 @@ const ConfirmDeleteItemModal = ({ character, updateInventory, index }) => {
               variant="contained"
               onClick={deleteItem}
             >
-              Delete {character.inventory[index].item_name}?
+              Delete {character.attacks[index].attack_name}?
             </Button>
           </Item>
           <Button variant="contained" onClick={handleClose}>
@@ -76,4 +76,4 @@ const ConfirmDeleteItemModal = ({ character, updateInventory, index }) => {
   );
 };
 
-export default ConfirmDeleteItemModal;
+export default ConfirmDeleteattackModal;

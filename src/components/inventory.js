@@ -15,6 +15,10 @@ const Container = styled.div`
   display: block;
   margin-left: auto;
   margin-right: auto;
+
+  @media only screen and (min-width: 1300px) {
+    max-height: 50vh;
+  }
 `;
 
 const Box = styled.div`
@@ -74,7 +78,7 @@ const Inventory = ({
         </Box>
         <Box>
           <Text>
-            cp:{character.currency.copper} | sp:{character.currency.silver} |
+            <b>Money</b><br /> cp:{character.currency.copper} | sp:{character.currency.silver} |
             ep: {character.currency.electrum} | gp: {character.currency.gold} |
             pp: {character.currency.platinum}
             <br />

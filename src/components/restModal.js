@@ -50,19 +50,26 @@ const RestModal = ({character, updateCharacter}) => {
   function takeRest() {
     // setTempChar({...character});
     let tempChar = {...character};
-    console.log("temp", tempChar);
+    // console.log("temp", tempChar);
     // console.log("char2", character);
 
+    //short rests
     if (rest.type === "short") {
       tempChar.features.map((feature) => {
         if (feature.recharge === "short") {
           feature.current_uses = feature.max_uses;
         }
       });
+      // long rests
     } else if (rest.type === "long") {
       tempChar.features.map((feature) => {
+        if (feature.recharge === "short") {
+          feature.current_uses = feature.max_uses;
+        }
+      });
+      tempChar.features.map((feature) => {
         if (feature.recharge === "long") {
-          console.log(feature);
+          // console.log(feature);
           feature.current_uses = feature.max_uses;
         }
       });
@@ -80,17 +87,28 @@ const RestModal = ({character, updateCharacter}) => {
         tempChar.exhaustion = tempChar.exhaustion.toString();
       }
       // reset death saves
+      tempChar.death_saves.pass = 0;
+      tempChar.death_saves.fail = 0;
       // reset spell slots
+      tempChar.spellslots.first_remaining = tempChar.spellslots.first;
+      tempChar.spellslots.second_remaining = tempChar.spellslots.second;
+      tempChar.spellslots.third_remaining = tempChar.spellslots.third;
+      tempChar.spellslots.fourth_remaining = tempChar.spellslots.fourth;
+      tempChar.spellslots.fifth_remaining = tempChar.spellslots.fifth;
+      tempChar.spellslots.sixth_remaining = tempChar.spellslots.sixth;
+      tempChar.spellslots.seventh_remaining = tempChar.spellslots.seventh;
+      tempChar.spellslots.eighth_remaining = tempChar.spellslots.eighth;
+      tempChar.spellslots.ninth_remaining = tempChar.spellslots.ninth;
       
     }
-    if (rest.dawn === true) {
+    if (rest.dawn === "true") {
       tempChar.features.map((feature) => {
         if (feature.recharge === "daily") {
           feature.current_uses = feature.max_uses;
         }
       });
     }
-    // console.log("temp2", tempChar);
+    // console.log("rest", rest);
     updateCharacter(tempChar);
   }
 
@@ -126,13 +144,15 @@ const RestModal = ({character, updateCharacter}) => {
             <Item>
               <label>
                 Past dawn?
-                <input
-                  type="checkbox"
+                <select
                   id="dawn"
                   name="dawn"
-                  checked={rest.dawn}
+                  value={rest.dawn}
                   onChange={handleChange}
-                />
+                >
+                  <option value={"false"}>No</option>
+                  <option value={"true"}>Yes</option>
+                </select>
               </label>
             </Item>
           </Grid>
@@ -141,6 +161,7 @@ const RestModal = ({character, updateCharacter}) => {
               variant="contained"
               onClick={() => {
                 takeRest();
+                handleClose();
               }}
             >
               Confirm Rest

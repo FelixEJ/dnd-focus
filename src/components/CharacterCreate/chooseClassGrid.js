@@ -12,6 +12,11 @@ import stylish from "styled-components";
 import CardContainer from "../cardContainer";
 import CardDiv from "../cardDiv";
 
+import ConfirmDeleteFeatureModal from "../confirmDeleteFeatureModal";
+import ConfirmDeleteItemModal from "../confirmDeleteItemModal";
+import ConfirmDeleteEquipmentModal from "../confirmDeleteEquipmentModal";
+import ConfirmDeleteAttackModal from "../confirmDeleteAttackModal";
+
 const BotButtons = stylish.div`
   margin-bottom: 40px;
 `;
@@ -40,15 +45,6 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,
-  margin: "5px",
-}));
-
-const Section = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-  backgroundColor: "beige",
 }));
 
 const ChooseClassGrid = ({
@@ -58,9 +54,13 @@ const ChooseClassGrid = ({
   character,
   setMagicUser,
   addFeature,
+  updateFeatures,
   addEquipment,
+  updateEquipment,
   addItem,
+  updateInventory,
   addAttack,
+  updateAttacks,
 }) => {
   const Continue = (e) => {
     e.preventDefault();
@@ -158,12 +158,12 @@ const ChooseClassGrid = ({
                 size="3"
                 display="none"
               />
-              <label>Hit Dice current:&emsp;</label>
+              {/* <label>Hit Dice current:&emsp;</label> */}
               <input
-                type="number"
+                type="hidden"
                 id="hit_dice.current"
                 name="hit_dice.current"
-                value={character.hit_dice.current}
+                value={character.hit_dice.max}
                 onChange={onCharacterChange}
                 size="3"
                 display="none"
@@ -181,18 +181,31 @@ const ChooseClassGrid = ({
                 size="4"
                 required
               />
-              <label>&emsp; Current:</label>
+              {/* <label>&emsp; Current:</label> */}
               <input
-                type="number"
+                type="hidden"
                 id="current"
                 name="hp.current"
-                value={character.hp.current}
+                value={character.hp.max}
                 onChange={onCharacterChange}
                 size="3"
                 display="none"
               />
               <label>&emsp;Con mod = {getModifier(character.stats.con)}</label>
             </CardDiv>
+            <CardDiv>
+                <label>
+                  Speed:
+                  <input
+                    type="number"
+                    id="speed"
+                    name="speed"
+                    value={character.speed}
+                    onChange={onCharacterChange}
+                    size="4"
+                  />
+                </label>
+              </CardDiv>
 
             <CardDiv style={{ backgroundColor: "beige" }}>
               <h3>Proficiencies</h3>
@@ -363,9 +376,14 @@ const ChooseClassGrid = ({
                 character={character}
               />
               <h3>Equipment</h3>
-              {character.equipment.map((equip) => (
+              {character.equipment.map((equip, index) => (
                 <h4 key={equip.equipment_id + equip.equipment_name}>
                   {equip.equipment_name}
+                  <ConfirmDeleteEquipmentModal
+                    character={character}
+                    updateEquipment={updateEquipment}
+                    index={index}
+                  />
                 </h4>
               ))}
               <Item>
@@ -381,7 +399,7 @@ const ChooseClassGrid = ({
                   />
                 </label>
                 <label>
-                  AC = 10 + armour + {getModifier(character.stats.dex)}{" "}
+                  AC = 10/armour + {getModifier(character.stats.dex)}{"(DEX)"}
                 </label>
               </Item>
               <Item>
@@ -406,13 +424,21 @@ const ChooseClassGrid = ({
               <AddItemModal addItem={addItem} character={character} />
               <h3>Inventory</h3>
               {character.inventory.map((item, index) => (
-                <h4 key={index}>{item.item_name}</h4>
+                <h4 key={index}>
+                  {item.item_name}
+                  <ConfirmDeleteItemModal
+                    character={character}
+                    updateInventory={updateInventory}
+                    index={index}
+                  />
+                </h4>
               ))}
             </CardDiv>
 
             <CardDiv>
+              <h3>Magic</h3>
               <label>
-                Magic (if applicable):
+                if applicable:
                 <select
                   type="select"
                   id="ability"
@@ -431,7 +457,8 @@ const ChooseClassGrid = ({
                   <br />
                   <label>
                     &emsp;{character.magic.ability} mod ={" "}
-                    {getSpellModifier(character.magic.ability)}{" || "}
+                    {getSpellModifier(character.magic.ability)}
+                    {" || "}
                     Proficiency Bonus: +{character.proficiency_bonus}
                   </label>
                   <br />
@@ -580,9 +607,14 @@ const ChooseClassGrid = ({
             <CardDiv>
               <AddFeatureModal addFeature={addFeature} />
               <h3>Features & abilities</h3>
-              {character.features.map((feature) => (
+              {character.features.map((feature, index) => (
                 <h4 key={feature.feature_id + feature.feature_name}>
                   {feature.feature_name}
+                  <ConfirmDeleteFeatureModal
+                    character={character}
+                    updateFeatures={updateFeatures}
+                    index={index}
+                  />
                 </h4>
               ))}
             </CardDiv>
@@ -591,7 +623,14 @@ const ChooseClassGrid = ({
               <AddAttackModal addAttack={addAttack} character={character} />
               <h3>Attacks</h3>
               {character.attacks.map((attack, index) => (
-                <h4 key={index}>{attack.attack_name}</h4>
+                <h4 key={index}>
+                  {attack.attack_name}
+                  <ConfirmDeleteAttackModal
+                    character={character}
+                    updateAttacks={updateAttacks}
+                    index={index}
+                  />
+                </h4>
               ))}
             </CardDiv>
 
