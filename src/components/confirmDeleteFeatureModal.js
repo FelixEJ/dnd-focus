@@ -38,7 +38,7 @@ const ConfirmDeleteFeatureModal = ({
 
   const [tempFeatures, setTempFeatures] = useState([...character.features]);
 
-  function deleteItem() {
+  function deleteFeature() {
     let feat = tempFeatures;
     feat.splice(index, 1);
     updateFeatures(feat);
@@ -66,7 +66,7 @@ const ConfirmDeleteFeatureModal = ({
           <Item>
             <Button
               variant="contained"
-              onClick={deleteItem}
+              onClick={deleteFeature}
               startIcon={<DeleteIcon />}
               color="secondary"
             >

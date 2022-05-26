@@ -34,6 +34,17 @@ const Text = styled.div`
   margin-bottom: 2px;
 `;
 
+const MoneyBox = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+`;
+
+const MoneyUnit = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  width: 20%;
+`;
+
 const Inventory = ({
   character,
   onCharacterChange,
@@ -78,11 +89,70 @@ const Inventory = ({
         </Box>
         <Box>
           <Text>
-            <b>Money</b><br /> cp:{character.currency.copper} | sp:{character.currency.silver} |
-            ep: {character.currency.electrum} | gp: {character.currency.gold} |
-            pp: {character.currency.platinum}
-            <br />
-            Total: {getTotalMoney()} gp
+            <b>Money</b>
+            <MoneyBox>
+              <MoneyUnit>
+                cp:
+                <input
+                  type="number"
+                  min="0"
+                  id="currency.copper"
+                  name="currency.copper"
+                  value={character.currency.copper}
+                  onChange={onCharacterChange}
+                  size="4"
+                />
+              </MoneyUnit>
+              <MoneyUnit>
+                sp:
+                <input
+                  type="number"
+                  min="0"
+                  id="currency.silver"
+                  name="currency.silver"
+                  value={character.currency.silver}
+                  onChange={onCharacterChange}
+                  size="4"
+                />
+              </MoneyUnit>
+              <MoneyUnit>
+                ep:
+                <input
+                  type="number"
+                  min="0"
+                  id="currency.electrum"
+                  name="currency.electrum"
+                  value={character.currency.electrum}
+                  onChange={onCharacterChange}
+                  size="4"
+                />
+              </MoneyUnit>
+              <MoneyUnit>
+                gp:
+                <input
+                  type="number"
+                  min="0"
+                  id="currency.gold"
+                  name="currency.gold"
+                  value={character.currency.gold}
+                  onChange={onCharacterChange}
+                  size="4"
+                />
+              </MoneyUnit>
+              <MoneyUnit>
+                pp:
+                <input
+                  type="number"
+                  min="0"
+                  id="currency.platinum"
+                  name="currency.platinum"
+                  value={character.currency.platinum}
+                  onChange={onCharacterChange}
+                  size="4"
+                />
+              </MoneyUnit>
+            </MoneyBox>
+            Total: <b>{getTotalMoney()} gp</b>
           </Text>
         </Box>
       </Container>

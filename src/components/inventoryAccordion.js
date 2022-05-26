@@ -6,7 +6,8 @@ import Card from "react-bootstrap/Card";
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
 import AddItemModal from "./addItemModal";
-import ConfirmDeleteItemModal from "./confirmDeleteItemModal";
+import EditInventoryModal from "./editInventoryModal";
+
 
 function CustomToggle({ children, eventKey }) {
   const decoratedOnClick = useAccordionButton(eventKey, () =>
@@ -71,13 +72,15 @@ const InventoryAccordion = ({ character, addItem, updateInventory }) => {
                 {character.inventory.map((item, index) => (
                   <p key={index}>
                     <b>{item.item_name}</b> x{item.quantity}, value=
-                    {item.value_total}
+                    {item.quantity * item.value_each}
                     {item.value_currency} ({item.value_each}
-                    {item.value_currency}/ea)
-                    <ConfirmDeleteItemModal 
+                    {item.value_currency}/ea)                    
+                    <EditInventoryModal
                       character={character}
                       updateInventory={updateInventory}
                       index={index}
+                      name={item.item_name}
+                      item={{item}}
                     />
                   </p>
                 ))}

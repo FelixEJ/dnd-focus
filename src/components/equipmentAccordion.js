@@ -7,7 +7,6 @@ import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
 import AddEquipmentModal from "./addEquipmentModal";
 import EditEquipmentModal from "./editEquipmentModal";
-import ConfirmDeleteEquipmentModal from "./confirmDeleteEquipmentModal";
 
 function CustomToggle({ children, eventKey }) {
   const decoratedOnClick = useAccordionButton(eventKey, () =>
@@ -83,11 +82,6 @@ const EquipmentAccordion = ({
                       name={item.equipment_name}
                       equip={{item}}
                     />
-                    {/* <ConfirmDeleteEquipmentModal
-                      character={character}
-                      updateEquipment={updateEquipment}
-                      index={index}
-                    /> */}
                   </p>
                 </>
               ))}

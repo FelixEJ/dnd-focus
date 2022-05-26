@@ -69,7 +69,7 @@ const Basics = ({ character, onCharacterChange }) => {
         Alignment: <b>{character.alignment}</b>
       </Alignment>
       <XP>
-        XP:{" "}
+        XP:
         <input
           type="number"
           min="0"

@@ -25,13 +25,16 @@ const Box = styled.div`
   margin-bottom: 2px;
 `;
 
-const Attacks = ({ character }) => {
+const Attacks = ({ character, updateAttacks }) => {
   return (
     <div>
       <h4>Attacks</h4>
       <Container>
         <Box>
-          <AttackAccordion attacks={character.attacks} />
+          <AttackAccordion
+            character={character}
+            updateAttacks={updateAttacks}
+          />
         </Box>
       </Container>
     </div>

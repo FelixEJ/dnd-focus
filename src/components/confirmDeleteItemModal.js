@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -25,16 +26,12 @@ const style = {
   p: 4,
 };
 
-const X = stylish.div`
-  float: right;
-  font-size: 0.9em;
-  text-transform: uppercase;
-  margin-top: -16px;
-  margin-right: 4px;
-  cursor: pointer;
-  `;
-
-const ConfirmDeleteItemModal = ({ character, updateInventory, index }) => {
+const ConfirmDeleteItemModal = ({
+  character,
+  updateInventory,
+  index,
+  closePrev,
+}) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -44,14 +41,20 @@ const ConfirmDeleteItemModal = ({ character, updateInventory, index }) => {
   function deleteItem() {
     let inv = tempInventory;
     inv.splice(index, 1);
-    // setTempInventory(inv);
     updateInventory(inv);
     handleClose();
   }
 
   return (
     <div>
-      <X onClick={handleOpen}>x</X>
+      <Button
+        variant="outlined"
+        onClick={handleOpen}
+        startIcon={<DeleteIcon />}
+        color="secondary"
+      >
+        Delete?
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -63,6 +66,8 @@ const ConfirmDeleteItemModal = ({ character, updateInventory, index }) => {
             <Button
               variant="contained"
               onClick={deleteItem}
+              startIcon={<DeleteIcon />}
+              color="secondary"
             >
               Delete {character.inventory[index].item_name}?
             </Button>

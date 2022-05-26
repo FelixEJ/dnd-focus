@@ -41,7 +41,7 @@ const X = stylish.div`
   cursor: pointer;
   `;
 
-const EditFeatureModal = ({ character, updateEquipment, index, name, equip }) => {
+const EditEquipmentModal = ({ character, updateEquipment, index, name, equip }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -80,7 +80,7 @@ const EditFeatureModal = ({ character, updateEquipment, index, name, equip }) =>
         <Box sx={style}>
         <Grid>
             <Item>
-              <h2>Add/Edit Equipment</h2>
+              <h2>Edit Equipment</h2>
               <label>Equipment name:</label>
               <input
                 type="text"
@@ -187,4 +187,4 @@ const EditFeatureModal = ({ character, updateEquipment, index, name, equip }) =>
   );
 };
 
-export default EditFeatureModal;
+export default EditEquipmentModal;

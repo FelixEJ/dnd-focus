@@ -26,16 +26,12 @@ const style = {
   p: 4,
 };
 
-const X = stylish.div`
-  float: right;
-  font-size: 0.9em;
-  text-transform: uppercase;
-  margin-top: -16px;
-  margin-right: 4px;
-  cursor: pointer;
-  `;
-
-const ConfirmDeleteEquipmentModal = ({ character, updateEquipment, index, closePrev }) => {
+const ConfirmDeleteEquipmentModal = ({
+  character,
+  updateEquipment,
+  index,
+  closePrev,
+}) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -45,7 +41,6 @@ const ConfirmDeleteEquipmentModal = ({ character, updateEquipment, index, closeP
   function deleteEquipment() {
     let equip = tempEquipment;
     equip.splice(index, 1);
-    // setTempEquipment(equip);
     updateEquipment(equip);
     handleClose();
     closePrev();

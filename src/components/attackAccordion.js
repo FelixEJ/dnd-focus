@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
+
+import EditAttackModal from "./editAttackModal";
 
 function CustomToggle({ children, eventKey }) {
   const decoratedOnClick = useAccordionButton(eventKey, () =>
@@ -35,11 +37,17 @@ const TextLeft = styled.div`
   text-transform: uppercase;
 `;
 
-const AttackAccordion = ({ attacks }) => {
+const AttackAccordion = ({ character, updateAttacks }) => {
+  const [tempAttacks, setTempAttacks] = useState([...character.attacks]);
+
+  useEffect(() => {
+    setTempAttacks([...character.attacks]);
+  }, [character]);
+
   return (
-    <Accordion >
+    <Accordion defaultActiveKey={character.attacks[0].attack_id}>
       <div>
-        {attacks.map((attack, index) => (
+        {character.attacks.map((attack, index) => (
           <Card>
             <Card.Header>
               <TextLeft>
@@ -61,7 +69,7 @@ const AttackAccordion = ({ attacks }) => {
                 class="overflow-auto"
               >
                 <>
-                <p>{attack.attack_name}</p>
+                  <p>{attack.attack_name}</p>
                   Attack Bonus: <b>+{attack.attack_bonus}</b>; Damage:
                   <b>
                     {attack.damage_dice_num}
@@ -74,6 +82,13 @@ const AttackAccordion = ({ attacks }) => {
                       Range: {attack.range}; Ammo: {attack.ammo}
                     </p>
                   )}
+                  <EditAttackModal
+                    character={character}
+                    updateAttacks={updateAttacks}
+                    index={index}
+                    name={attack.attack_name}
+                    attack={{ attack }}
+                  />
                 </>
               </Card.Body>
             </Accordion.Collapse>

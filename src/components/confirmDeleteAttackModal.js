@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -35,23 +36,36 @@ const X = stylish.div`
   cursor: pointer;
   `;
 
-const ConfirmDeleteattackModal = ({ character, updateAttacks, index }) => {
+const ConfirmDeleteattackModal = ({
+  character,
+  updateAttacks,
+  index,
+  closePrev,
+}) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const [tempAttacks, setTempAttacks] = useState([...character.attacks]);
 
-  function deleteItem() {
-    tempAttacks.splice(index, 1);
-    setTempAttacks(tempAttacks);
-    updateAttacks(tempAttacks);
+  function deleteAttack() {
+    let attack = tempAttacks;
+    attack.splice(index, 1);
+    updateAttacks(attack);
     handleClose();
+    closePrev();
   }
 
   return (
     <div>
-      <X onClick={handleOpen}>x</X>
+      <Button
+        variant="outlined"
+        onClick={handleOpen}
+        startIcon={<DeleteIcon />}
+        color="secondary"
+      >
+        Delete attack
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -62,7 +76,9 @@ const ConfirmDeleteattackModal = ({ character, updateAttacks, index }) => {
           <Item>
             <Button
               variant="contained"
-              onClick={deleteItem}
+              onClick={deleteAttack}
+              startIcon={<DeleteIcon />}
+              color="secondary"
             >
               Delete {character.attacks[index].attack_name}?
             </Button>

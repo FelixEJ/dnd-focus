@@ -44,19 +44,16 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
 
   const handleChange = (e, index, name) => {
     e.preventDefault();
-    // let feats = tempFeats;
     let feats = [...character.features];
-    console.log("uses", e.target.value);
+    // console.log("uses", e.target.value);
 
     let featIndex = feats.findIndex((feat) => feat.feature_name === name);
-    console.log("name", name);
-    console.log("index", featIndex);
-    console.log("name2", feats[featIndex].feature_name);
-    // feat++;
+    // console.log("name", name);
+    // console.log("index", featIndex);
+    // console.log("name2", feats[featIndex].feature_name);
     feats[featIndex].current_uses = e.target.value;
 
-    console.log("feats", feats);
-    // setTempFeats(feats);
+    // console.log("feats", feats);
     updateFeatures(tempFeats);
   };
 

@@ -404,6 +404,15 @@ const Success = () => {
     // console.log("new Feature", updatedCharacter);
   }
 
+  function updateAttacks(newAttack) {
+    const tempAttack = newAttack;
+    const updatedCharacter = { ...loadedChar };
+    updatedCharacter.attacks = tempAttack;
+    setLoadedChar(updatedCharacter);
+    saveLocalCharacter(updatedCharacter);
+    // console.log("new Feature", updatedCharacter);
+  }
+
   // duplicate
   function addFeature(newFeat) {
     const newFeature = newFeat;
@@ -489,7 +498,10 @@ const Success = () => {
       {loadedChar.name != "" && (
         <>
           <CardDiv>
-            <Basics character={loadedChar} onCharacterChange={onCharacterChange} />
+            <Basics
+              character={loadedChar}
+              onCharacterChange={onCharacterChange}
+            />
           </CardDiv>
           <CardContainer>
             <CardDiv>
@@ -529,7 +541,10 @@ const Success = () => {
           <Health character={loadedChar} />
         </CardDiv> */}
             <CardDiv>
-              <SheetAttacks character={loadedChar} />
+              <SheetAttacks
+                character={loadedChar}
+                updateAttacks={updateAttacks}
+              />
             </CardDiv>
             <CardDiv>
               <SheetMagic
