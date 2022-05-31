@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import EditProficienciesModal from "./editProficienciesModal";
+
 const Container = styled.div`
   text-align: center;
   z-index: 1;
@@ -28,10 +30,14 @@ const Text = styled.div`
   margin: 1% 1% 1% 1%;
 `;
 
-const SheetProficiencies = ({ character }) => {
+const SheetProficiencies = ({ character, onCharacterChange }) => {
   return (
     <div>
-      <h4>Proficiencies & Languages</h4>
+      <h4>Profs & Languages</h4>
+      <EditProficienciesModal
+        character={character}
+        onCharacterChange={onCharacterChange}
+      />
       <Container>
         <Box>
           <Text>

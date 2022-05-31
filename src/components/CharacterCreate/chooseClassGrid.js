@@ -158,16 +158,6 @@ const ChooseClassGrid = ({
                 size="3"
                 display="none"
               />
-              {/* <label>Hit Dice current:&emsp;</label> */}
-              <input
-                type="hidden"
-                id="hit_dice.current"
-                name="hit_dice.current"
-                value={character.hit_dice.max}
-                onChange={onCharacterChange}
-                size="3"
-                display="none"
-              />
             </CardDiv>
 
             <CardDiv>
@@ -180,16 +170,6 @@ const ChooseClassGrid = ({
                 onChange={onCharacterChange}
                 size="4"
                 required
-              />
-              {/* <label>&emsp; Current:</label> */}
-              <input
-                type="hidden"
-                id="current"
-                name="hp.current"
-                value={character.hp.max}
-                onChange={onCharacterChange}
-                size="3"
-                display="none"
               />
               <label>&emsp;Con mod = {getModifier(character.stats.con)}</label>
             </CardDiv>

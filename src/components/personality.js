@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import EditPersonalitiesModal from "./editPersonalitiesModal";
+
 const Container = styled.div`
   text-align: center;
   z-index: 1;
@@ -33,13 +35,16 @@ const Title = styled.p`
 const Text = styled.p`
   font-size: 1em;
   margin: 0;
-  font-weight: bold;
 `;
 
-const Personality = ({ character }) => {
+const Personality = ({ character, onCharacterChange }) => {
   return (
     <div>
       <h4>Personality</h4>
+      <EditPersonalitiesModal
+        character={character}
+        onCharacterChange={onCharacterChange}
+      />
     <Container>
       <Box>
         <Title>Traits</Title>

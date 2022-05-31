@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ToggleInspirationModal from "./toggleInspirationModal";
+
+import EditAbilitiesModal from "./editAbilitiesModal";
 
 const Container = styled.div`
   text-align: center;
@@ -124,8 +125,14 @@ const NumberMid = styled.div`
 
 // duplicate, move to utilities
 const SheetAbilities = ({ character, onCharacterChange }) => {
-  const getModifier = (stat) => {
-    let mod = Math.floor((stat - 10) / 2);
+  const getModifier = (stat, temp) => {
+    let mod = 0;
+    if (temp > 0) {
+      mod = Math.floor((temp - 10) / 2);
+    } else {
+      mod = Math.floor((stat - 10) / 2);
+    }
+
     if (mod > 0) {
       return "+" + mod;
     } else {
@@ -133,15 +140,21 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
     }
   };
 
-  const getSave = (name, stat) => {
-    let saveTotal = Math.floor((stat - 10) / 2);
+  const getSave = (name, stat, temp) => {
+    let saveTotal = 0;
+    if (temp > 0) {
+      saveTotal = Math.floor((temp - 10) / 2);
+    } else {
+      saveTotal = Math.floor((stat - 10) / 2);
+    }
     var savesArray = [];
     Object.keys(character.saves).forEach(function (key) {
       savesArray.push(character.saves[key]);
     });
     savesArray.map((save, index) => {
       if (name === save) {
-        saveTotal += character.proficiency_bonus + savesArray[index + 1];
+        saveTotal +=
+          parseInt(character.proficiency_bonus) + savesArray[index + 1];
       }
       return true;
     });
@@ -153,19 +166,24 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
     }
   };
 
-  const getSkill = (skill, stat) => {
+  const getSkill = (skill, bonus, stat, temp) => {
     let totalMod = 0;
     let prof = 0;
     let statMod = 0;
-    statMod = Math.floor((stat - 10) / 2);
-
-    if (skill === "Proficient") {
-      prof = character.proficiency_bonus;
-    } else if (skill === "Expert") {
-      prof = character.proficiency_bonus * 2;
+    let bonusMod = parseInt(bonus);
+    if (temp > 0) {
+      statMod = Math.floor((temp - 10) / 2);
+    } else {
+      statMod = Math.floor((stat - 10) / 2);
     }
 
-    totalMod = prof + statMod;
+    if (skill === "Proficient") {
+      prof = parseInt(character.proficiency_bonus);
+    } else if (skill === "Expert") {
+      prof = parseInt(character.proficiency_bonus * 2);
+    }
+
+    totalMod = prof + statMod + bonusMod;
     if (totalMod > 0) {
       return "+" + totalMod;
     } else {
@@ -180,9 +198,9 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
     statMod = Math.floor((stat - 10) / 2);
 
     if (skill === "Proficient") {
-      prof = character.proficiency_bonus;
+      prof = parseInt(character.proficiency_bonus);
     } else if (skill === "Expert") {
-      prof = character.proficiency_bonus * 2;
+      prof = parseInt(character.proficiency_bonus * 2);
     }
 
     totalMod = prof + statMod + 10;
@@ -191,200 +209,464 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
   };
 
   return (
-    <Container>
-      <Bar>
-        <NumberLeft>+{character.proficiency_bonus}</NumberLeft>
-        <TextRight>proficiency bonus</TextRight>
-      </Bar>
-      <Bar>
-        {/* <NumberLeft>{character.inspiration ? "Yes" : "No"}</NumberLeft> */}
-        <NumberLeft>
-          <input
-            type="checkbox"
-            id="inspiration"
-            name="inspiration"
-            checked={character.inspiration}
-            onChange={onCharacterChange}
-          />
-        </NumberLeft>
-        <TextRight>inspiration</TextRight>
-        {/* <ToggleInspirationModal character={character} toggleInspiration={toggleInspiration} /> */}
-      </Bar>
-      <Box>
-        <Stats>
-          <NumberLeft>{character.stats.str}</NumberLeft>
-          <NumberMidLeft>{getModifier(character.stats.str)}</NumberMidLeft>
-          <TextBottomLeft>
-            <b>STRENGTH</b>
-          </TextBottomLeft>
-        </Stats>
-        <Skills>
-          <NumberMid>{getSave("str", character.stats.str)} </NumberMid>
-          <TextFarRight>
-            <b>SAVING THROWS</b>
-          </TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.Athletics, character.stats.str)}
-          </NumberMid>
-          <TextFarRight>ATHLETICS</TextFarRight>
-        </Skills>
-      </Box>
-      <Box>
-        <Stats>
-          <NumberLeft>{character.stats.dex}</NumberLeft>
-          <NumberMidLeft>{getModifier(character.stats.dex)}</NumberMidLeft>
-          <TextBottomLeft>
-            <b>DEXTERITY</b>
-          </TextBottomLeft>
-        </Stats>
-        <Skills>
-          <NumberMid>{getSave("dex", character.stats.dex)} </NumberMid>
-          <TextFarRight>
-            <b>SAVING THROWS</b>
-          </TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.Acrobatics, character.stats.dex)}{" "}
-          </NumberMid>
-          <TextFarRight>Acrobatics</TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.SleightOfHand, character.stats.dex)}{" "}
-          </NumberMid>
-          <TextFarRight>Sleight Of Hand</TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.Stealth, character.stats.dex)}{" "}
-          </NumberMid>
-          <TextFarRight>Stealth</TextFarRight>
-        </Skills>
-      </Box>
-      <Box>
-        <Stats>
-          <NumberLeft>{character.stats.con}</NumberLeft>
-          <NumberMidLeft>{getModifier(character.stats.con)}</NumberMidLeft>
-          <TextBottomLeft>
-            <b>constitution</b>
-          </TextBottomLeft>
-        </Stats>
-        <Skills>
-          <NumberMid>{getSave("con", character.stats.con)} </NumberMid>
-          <TextFarRight>
-            <b>SAVING THROWS</b>
-          </TextFarRight>
-        </Skills>
-      </Box>
-      <Box>
-        <Stats>
-          <NumberLeft>{character.stats.int}</NumberLeft>
-          <NumberMidLeft>{getModifier(character.stats.int)}</NumberMidLeft>
-          <TextBottomLeft>
-            <b>intelligence</b>
-          </TextBottomLeft>
-        </Stats>
-        <Skills>
-          <NumberMid>{getSave("int", character.stats.int)} </NumberMid>
-          <TextFarRight>
-            <b>SAVING THROWS</b>
-          </TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.Arcana, character.stats.int)}{" "}
-          </NumberMid>
-          <TextFarRight>Arcana</TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.History, character.stats.int)}{" "}
-          </NumberMid>
-          <TextFarRight>History</TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.Investigation, character.stats.int)}{" "}
-          </NumberMid>
-          <TextFarRight>Investigation</TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.Nature, character.stats.int)}{" "}
-          </NumberMid>
-          <TextFarRight>Nature</TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.Religion, character.stats.int)}{" "}
-          </NumberMid>
-          <TextFarRight>Religion</TextFarRight>
-        </Skills>
-      </Box>
-      <Box>
-        <Stats>
-          <NumberLeft>{character.stats.wis}</NumberLeft>
-          <NumberMidLeft>{getModifier(character.stats.wis)}</NumberMidLeft>
-          <TextBottomLeft>
-            <b>wisdom</b>
-          </TextBottomLeft>
-        </Stats>
-        <Skills>
-          <NumberMid>{getSave("wis", character.stats.wis)} </NumberMid>
-          <TextFarRight>
-            <b>SAVING THROWS</b>
-          </TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.AnimalHandling, character.stats.wis)}{" "}
-          </NumberMid>
-          <TextFarRight>Animal Handling</TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.Insight, character.stats.wis)}{" "}
-          </NumberMid>
-          <TextFarRight>Insight</TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.Medicine, character.stats.wis)}{" "}
-          </NumberMid>
-          <TextFarRight>Medicine</TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.Perception, character.stats.wis)}{" "}
-          </NumberMid>
-          <TextFarRight>Perception</TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.Survival, character.stats.wis)}{" "}
-          </NumberMid>
-          <TextFarRight>Survival</TextFarRight>
-        </Skills>
-      </Box>
-      <Box>
-        <Stats>
-          <NumberLeft>{character.stats.cha}</NumberLeft>
-          <NumberMidLeft>{getModifier(character.stats.cha)}</NumberMidLeft>
-          <TextBottomLeft>
-            <b>charisma</b>
-          </TextBottomLeft>
-        </Stats>
-        <Skills>
-          <NumberMid>{getSave("cha", character.stats.cha)} </NumberMid>
-          <TextFarRight>
-            <b>SAVING THROWS</b>
-          </TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.Deception, character.stats.cha)}{" "}
-          </NumberMid>
-          <TextFarRight>Deception</TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.Intimidation, character.stats.cha)}{" "}
-          </NumberMid>
-          <TextFarRight>Intimidation</TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.Performance, character.stats.cha)}{" "}
-          </NumberMid>
-          <TextFarRight>Performance</TextFarRight>
-          <NumberMid>
-            {getSkill(character.skills.Persuasion, character.stats.cha)}{" "}
-          </NumberMid>
-          <TextFarRight>Persuasion</TextFarRight>
-        </Skills>
-      </Box>
-      <Bar>
-        <NumberLeft>
-          {getPassive(character.skills.Perception, character.stats.wis)}
-        </NumberLeft>
-        <TextRight>passive wisdom (perception)</TextRight>
-      </Bar>
-      <Bar>
-        <NumberLeft>
-          {getPassive(character.skills.Investigation, character.stats.int)}
-        </NumberLeft>
-        <TextRight>passive intelligence (investigation)</TextRight>
-      </Bar>
-    </Container>
+    <>
+      <h4>Abilities</h4>
+      <EditAbilitiesModal
+        character={character}
+        onCharacterChange={onCharacterChange}
+      />
+      <Container>
+        <Bar>
+          <NumberLeft>+{character.proficiency_bonus}</NumberLeft>
+          <TextRight>proficiency bonus</TextRight>
+        </Bar>
+        <Bar>
+          <NumberLeft>
+            <input
+              type="checkbox"
+              id="inspiration"
+              name="inspiration"
+              checked={character.inspiration}
+              onChange={onCharacterChange}
+            />
+          </NumberLeft>
+          <TextRight>inspiration</TextRight>
+        </Bar>
+        <Box>
+          <Stats>
+            {character.stats.temp_str > 0 && (
+              <NumberLeft>{character.stats.temp_str}</NumberLeft>
+            )}
+            {character.stats.temp_str < 1 && (
+              <NumberLeft>{character.stats.str}</NumberLeft>
+            )}
+            <NumberMidLeft>
+              {getModifier(character.stats.str, character.stats.temp_str)}
+            </NumberMidLeft>
+            <TextBottomLeft>
+              <b>STRENGTH</b>
+            </TextBottomLeft>
+          </Stats>
+          <Skills>
+            <NumberMid>{getSave("str", character.stats.str, character.stats.temp_str)} </NumberMid>
+            <TextFarRight>
+              <b>SAVING THROWS</b>
+            </TextFarRight>
+            <NumberMid>
+              {getSkill(
+                character.skills.Athletics,
+                character.skills.Athletics_bonus,
+                character.stats.str,
+                character.stats.temp_str
+              )}
+            </NumberMid>
+            {character.skills.Athletics === "" && (
+              <TextFarRight>ATHLETICS</TextFarRight>
+            )}
+            {character.skills.Athletics === "Proficient" && (
+              <TextFarRight>*ATHLETICS*</TextFarRight>
+            )}
+            {character.skills.Athletics === "Expert" && (
+              <TextFarRight>**ATHLETICS**</TextFarRight>
+            )}
+          </Skills>
+        </Box>
+        <Box>
+          <Stats>
+            {character.stats.temp_dex > 0 && (
+              <NumberLeft>{character.stats.temp_dex}</NumberLeft>
+            )}
+            {character.stats.temp_dex < 1 && (
+              <NumberLeft>{character.stats.dex}</NumberLeft>
+            )}
+            <NumberMidLeft>
+              {getModifier(character.stats.dex, character.stats.temp_dex)}
+            </NumberMidLeft>
+            <TextBottomLeft>
+              <b>DEXTERITY</b>
+            </TextBottomLeft>
+          </Stats>
+          <Skills>
+            <NumberMid>{getSave("dex", character.stats.dex, character.stats.temp_dex)} </NumberMid>
+            <TextFarRight>
+              <b>SAVING THROWS</b>
+            </TextFarRight>
+            <NumberMid>
+              {getSkill(
+                character.skills.Acrobatics,
+                character.skills.Acrobatics_bonus,
+                character.stats.dex
+              )}{" "}
+            </NumberMid>
+            {character.skills.Acrobatics === "" && (
+              <TextFarRight>Acrobatics</TextFarRight>
+            )}
+            {character.skills.Acrobatics === "Proficient" && (
+              <TextFarRight>*Acrobatics*</TextFarRight>
+            )}
+            {character.skills.Acrobatics === "Expert" && (
+              <TextFarRight>**Acrobatics**</TextFarRight>
+            )}
+            <NumberMid>
+              {getSkill(
+                character.skills.SleightOfHand,
+                character.skills.SleightOfHand_bonus,
+                character.stats.dex
+              )}{" "}
+            </NumberMid>
+            {character.skills.SleightOfHand === "" && (
+              <TextFarRight>Sleight Of Hand</TextFarRight>
+            )}
+            {character.skills.SleightOfHand === "Proficient" && (
+              <TextFarRight>*Sleight Of Hand*</TextFarRight>
+            )}
+            {character.skills.SleightOfHand === "Expert" && (
+              <TextFarRight>**Sleight Of Hand**</TextFarRight>
+            )}
+            <NumberMid>
+              {getSkill(
+                character.skills.Stealth,
+                character.skills.Stealth_bonus,
+                character.stats.dex
+              )}{" "}
+            </NumberMid>
+            {character.skills.Stealth === "" && (
+              <TextFarRight>Stealth</TextFarRight>
+            )}
+            {character.skills.Stealth === "Proficient" && (
+              <TextFarRight>*Stealth*</TextFarRight>
+            )}
+            {character.skills.Stealth === "Expert" && (
+              <TextFarRight>**Stealth**</TextFarRight>
+            )}
+          </Skills>
+        </Box>
+        <Box>
+          <Stats>
+            {character.stats.temp_con > 0 && (
+              <NumberLeft>{character.stats.temp_con}</NumberLeft>
+            )}
+            {character.stats.temp_con < 1 && (
+              <NumberLeft>{character.stats.con}</NumberLeft>
+            )}
+            <NumberMidLeft>
+              {getModifier(character.stats.con, character.stats.temp_con)}
+            </NumberMidLeft>
+            <TextBottomLeft>
+              <b>constitution</b>
+            </TextBottomLeft>
+          </Stats>
+          <Skills>
+            <NumberMid>{getSave("con", character.stats.con, character.stats.temp_con)} </NumberMid>
+            <TextFarRight>
+              <b>SAVING THROWS</b>
+            </TextFarRight>
+          </Skills>
+        </Box>
+        <Box>
+          <Stats>
+            {character.stats.temp_int > 0 && (
+              <NumberLeft>{character.stats.temp_int}</NumberLeft>
+            )}
+            {character.stats.temp_int < 1 && (
+              <NumberLeft>{character.stats.int}</NumberLeft>
+            )}
+            <NumberMidLeft>
+              {getModifier(character.stats.int, character.stats.temp_int)}
+            </NumberMidLeft>
+            <TextBottomLeft>
+              <b>intelligence</b>
+            </TextBottomLeft>
+          </Stats>
+          <Skills>
+            <NumberMid>{getSave("int", character.stats.int, character.stats.temp_int)} </NumberMid>
+            <TextFarRight>
+              <b>SAVING THROWS</b>
+            </TextFarRight>
+            <NumberMid>
+              {getSkill(
+                character.skills.Arcana,
+                character.skills.Arcana_bonus,
+                character.stats.int
+              )}{" "}
+            </NumberMid>
+            {character.skills.Arcana === "" && (
+              <TextFarRight>Arcana</TextFarRight>
+            )}
+            {character.skills.Arcana === "Proficient" && (
+              <TextFarRight>*Arcana*</TextFarRight>
+            )}
+            {character.skills.Arcana === "Expert" && (
+              <TextFarRight>**Arcana**</TextFarRight>
+            )}
+            <NumberMid>
+              {getSkill(
+                character.skills.History,
+                character.skills.History_bonus,
+                character.stats.int
+              )}{" "}
+            </NumberMid>
+            {character.skills.History === "" && (
+              <TextFarRight>History</TextFarRight>
+            )}
+            {character.skills.History === "Proficient" && (
+              <TextFarRight>*History*</TextFarRight>
+            )}
+            {character.skills.History === "Expert" && (
+              <TextFarRight>**History**</TextFarRight>
+            )}
+            <NumberMid>
+              {getSkill(
+                character.skills.Investigation,
+                character.skills.Investigation_bonus,
+                character.stats.int
+              )}{" "}
+            </NumberMid>
+            {character.skills.Investigation === "" && (
+              <TextFarRight>Investigation</TextFarRight>
+            )}
+            {character.skills.Investigation === "Proficient" && (
+              <TextFarRight>*Investigation*</TextFarRight>
+            )}
+            {character.skills.Investigation === "Expert" && (
+              <TextFarRight>**Investigation**</TextFarRight>
+            )}
+            <NumberMid>
+              {getSkill(
+                character.skills.Nature,
+                character.skills.Nature_bonus,
+                character.stats.int
+              )}{" "}
+            </NumberMid>
+            {character.skills.Nature === "" && (
+              <TextFarRight>Nature</TextFarRight>
+            )}
+            {character.skills.Nature === "Proficient" && (
+              <TextFarRight>*Nature*</TextFarRight>
+            )}
+            {character.skills.Nature === "Expert" && (
+              <TextFarRight>**Nature**</TextFarRight>
+            )}
+            <NumberMid>
+              {getSkill(
+                character.skills.Religion,
+                character.skills.Religion_bonus,
+                character.stats.int
+              )}{" "}
+            </NumberMid>
+            {character.skills.Religion === "" && (
+              <TextFarRight>Religion</TextFarRight>
+            )}
+            {character.skills.Religion === "Proficient" && (
+              <TextFarRight>*Religion*</TextFarRight>
+            )}
+            {character.skills.Religion === "Expert" && (
+              <TextFarRight>**Religion**</TextFarRight>
+            )}
+          </Skills>
+        </Box>
+        <Box>
+          <Stats>
+            {character.stats.temp_wis > 0 && (
+              <NumberLeft>{character.stats.temp_wis}</NumberLeft>
+            )}
+            {character.stats.temp_wis < 1 && (
+              <NumberLeft>{character.stats.wis}</NumberLeft>
+            )}
+            <NumberMidLeft>
+              {getModifier(character.stats.wis, character.stats.temp_wis)}
+            </NumberMidLeft>
+            <TextBottomLeft>
+              <b>wisdom</b>
+            </TextBottomLeft>
+          </Stats>
+          <Skills>
+            <NumberMid>{getSave("wis", character.stats.wis, character.stats.temp_wis)} </NumberMid>
+            <TextFarRight>
+              <b>SAVING THROWS</b>
+            </TextFarRight>
+            <NumberMid>
+              {getSkill(
+                character.skills.AnimalHandling,
+                character.skills.AnimalHandling_bonus,
+                character.stats.wis
+              )}{" "}
+            </NumberMid>
+            {character.skills.AnimalHandling === "" && (
+              <TextFarRight>Animal Handling</TextFarRight>
+            )}
+            {character.skills.AnimalHandling === "Proficient" && (
+              <TextFarRight>*Animal Handling*</TextFarRight>
+            )}
+            {character.skills.AnimalHandling === "Expert" && (
+              <TextFarRight>**Animal Handling**</TextFarRight>
+            )}
+            <NumberMid>
+              {getSkill(
+                character.skills.Insight,
+                character.skills.Insight_bonus,
+                character.stats.wis
+              )}{" "}
+            </NumberMid>
+            {character.skills.Insight === "" && (
+              <TextFarRight>Insight</TextFarRight>
+            )}
+            {character.skills.Insight === "Proficient" && (
+              <TextFarRight>*Insight*</TextFarRight>
+            )}
+            {character.skills.Insight === "Expert" && (
+              <TextFarRight>**Insight**</TextFarRight>
+            )}
+            <NumberMid>
+              {getSkill(
+                character.skills.Medicine,
+                character.skills.Medicine_bonus,
+                character.stats.wis
+              )}{" "}
+            </NumberMid>
+            {character.skills.Medicine === "" && (
+              <TextFarRight>Medicine</TextFarRight>
+            )}
+            {character.skills.Medicine === "Proficient" && (
+              <TextFarRight>*Medicine*</TextFarRight>
+            )}
+            {character.skills.Medicine === "Expert" && (
+              <TextFarRight>**Medicine**</TextFarRight>
+            )}
+            <NumberMid>
+              {getSkill(
+                character.skills.Perception,
+                character.skills.Perception_bonus,
+                character.stats.wis
+              )}{" "}
+            </NumberMid>
+            {character.skills.Perception === "" && (
+              <TextFarRight>Perception</TextFarRight>
+            )}
+            {character.skills.Perception === "Proficient" && (
+              <TextFarRight>*Perception*</TextFarRight>
+            )}
+            {character.skills.Perception === "Expert" && (
+              <TextFarRight>**Perception**</TextFarRight>
+            )}
+            <NumberMid>
+              {getSkill(
+                character.skills.Survival,
+                character.skills.Survival_bonus,
+                character.stats.wis
+              )}{" "}
+            </NumberMid>
+            {character.skills.Survival === "" && (
+              <TextFarRight>Survival</TextFarRight>
+            )}
+            {character.skills.Survival === "Proficient" && (
+              <TextFarRight>*Survival*</TextFarRight>
+            )}
+            {character.skills.Survival === "Expert" && (
+              <TextFarRight>**Survival**</TextFarRight>
+            )}
+          </Skills>
+        </Box>
+        <Box>
+          <Stats>
+            {character.stats.temp_cha > 0 && (
+              <NumberLeft>{character.stats.temp_cha}</NumberLeft>
+            )}
+            {character.stats.temp_cha < 1 && (
+              <NumberLeft>{character.stats.cha}</NumberLeft>
+            )}
+            <NumberMidLeft>
+              {getModifier(character.stats.cha, character.stats.temp_cha)}
+            </NumberMidLeft>
+            <TextBottomLeft>
+              <b>charisma</b>
+            </TextBottomLeft>
+          </Stats>
+          <Skills>
+            <NumberMid>{getSave("cha", character.stats.cha, character.stats.temp_cha)} </NumberMid>
+            <TextFarRight>
+              <b>SAVING THROWS</b>
+            </TextFarRight>
+            <NumberMid>
+              {getSkill(
+                character.skills.Deception,
+                character.skills.Deception_bonus,
+                character.stats.cha
+              )}{" "}
+            </NumberMid>
+            {character.skills.Deception === "" && (
+              <TextFarRight>Deception</TextFarRight>
+            )}
+            {character.skills.Deception === "Proficient" && (
+              <TextFarRight>*Deception*</TextFarRight>
+            )}
+            {character.skills.Deception === "Expert" && (
+              <TextFarRight>**Deception**</TextFarRight>
+            )}
+            <NumberMid>
+              {getSkill(
+                character.skills.Intimidation,
+                character.skills.Intimidation_bonus,
+                character.stats.cha
+              )}{" "}
+            </NumberMid>
+            {character.skills.Intimidation === "" && (
+              <TextFarRight>Intimidation</TextFarRight>
+            )}
+            {character.skills.Intimidation === "Proficient" && (
+              <TextFarRight>*Intimidation*</TextFarRight>
+            )}
+            {character.skills.Intimidation === "Expert" && (
+              <TextFarRight>**Intimidation**</TextFarRight>
+            )}
+            <NumberMid>
+              {getSkill(
+                character.skills.Performance,
+                character.skills.Performance_bonus,
+                character.stats.cha
+              )}{" "}
+            </NumberMid>
+            {character.skills.Performance === "" && (
+              <TextFarRight>Performance</TextFarRight>
+            )}
+            {character.skills.Performance === "Proficient" && (
+              <TextFarRight>*Performance*</TextFarRight>
+            )}
+            {character.skills.Performance === "Expert" && (
+              <TextFarRight>**Performance**</TextFarRight>
+            )}
+            <NumberMid>
+              {getSkill(
+                character.skills.Persuasion,
+                character.skills.Persuasion_bonus,
+                character.stats.cha
+              )}{" "}
+            </NumberMid>
+            {character.skills.Persuasion === "" && (
+              <TextFarRight>Persuasion</TextFarRight>
+            )}
+            {character.skills.Persuasion === "Proficient" && (
+              <TextFarRight>*Persuasion*</TextFarRight>
+            )}
+            {character.skills.Persuasion === "Expert" && (
+              <TextFarRight>**Persuasion**</TextFarRight>
+            )}
+          </Skills>
+        </Box>
+        <Bar>
+          <NumberLeft>
+            {getPassive(character.skills.Perception, character.stats.wis)}
+          </NumberLeft>
+          <TextRight>passive wisdom (perception)</TextRight>
+        </Bar>
+        <Bar>
+          <NumberLeft>
+            {getPassive(character.skills.Investigation, character.stats.int)}
+          </NumberLeft>
+          <TextRight>passive intelligence (investigation)</TextRight>
+        </Bar>
+      </Container>
+    </>
   );
 };
 

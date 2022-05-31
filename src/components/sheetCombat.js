@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import EditCombatModal from "./editCombatModal";
+
 const Container = styled.div`
   text-align: center;
   z-index: 1;
@@ -65,6 +67,10 @@ const SheetCombat = ({ character, onCharacterChange }) => {
   return (
     <div>
       <h4>Combat</h4>
+      <EditCombatModal
+        character={character}
+        onCharacterChange={onCharacterChange}
+      />
       <Container>
         <Row>
           <BoxTrio>
@@ -89,7 +95,7 @@ const SheetCombat = ({ character, onCharacterChange }) => {
         <Row>
           <BoxSolo>
             <Title>hit points</Title>
-            <Text>Base + Temp / Total</Text>
+            <Text>Base + Temp / Max</Text>
             <Numbers>
               <input
                 type="number"
@@ -113,6 +119,26 @@ const SheetCombat = ({ character, onCharacterChange }) => {
               />
               /<NumbersBold>{character.hp.max}</NumbersBold>
             </Numbers>
+            <Row>
+              {character.defences.resistances.length > 0 ? (
+                <BoxTrio>
+                  <Title>Resistances</Title>
+                  <Text>{character.defences.resistances}</Text>
+                </BoxTrio>
+              ) : null}
+              {character.defences.immunities.length > 0 ? (
+                <BoxTrio>
+                  <Title>Immunities</Title>
+                  <Text>{character.defences.immunities}</Text>
+                </BoxTrio>
+              ) : null}
+              {character.defences.vulnerabilities.length > 0 ? (
+                <BoxTrio>
+                  <Title>Vulnerabilities</Title>
+                  <Text>{character.defences.vulnerabilities}</Text>
+                </BoxTrio>
+              ) : null}
+            </Row>
           </BoxSolo>
         </Row>
         <Row>
@@ -202,7 +228,7 @@ const SheetCombat = ({ character, onCharacterChange }) => {
             )}
             {character.exhaustion === "4" && (
               <Text>
-                - Disadvantage on ability checks 
+                - Disadvantage on ability checks
                 <br />
                 - Speed Halved
                 <br />
@@ -212,7 +238,7 @@ const SheetCombat = ({ character, onCharacterChange }) => {
             )}
             {character.exhaustion === "5" && (
               <Text>
-                - Disadvantage on ability checks 
+                - Disadvantage on ability checks
                 <br />
                 - Speed Halved
                 <br />
@@ -237,27 +263,6 @@ const SheetCombat = ({ character, onCharacterChange }) => {
               </Text>
             )}
           </>
-        </Row>
-
-        <Row>
-          {character.defences.resistances.length > 0 ? (
-            <BoxTrio>
-              <Title>Resistances</Title>
-              <Text>{character.defences.resistances}</Text>
-            </BoxTrio>
-          ) : null}
-          {character.defences.immunities.length > 0 ? (
-            <BoxTrio>
-              <Title>Immunities</Title>
-              <Text>{character.defences.immunities}</Text>
-            </BoxTrio>
-          ) : null}
-          {character.defences.vulnerabilities.length > 0 ? (
-            <BoxTrio>
-              <Title>Vulnerabilities</Title>
-              <Text>{character.defences.vulnerabilities}</Text>
-            </BoxTrio>
-          ) : null}
         </Row>
       </Container>
     </div>

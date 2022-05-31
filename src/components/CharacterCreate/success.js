@@ -520,7 +520,10 @@ const Success = () => {
           <Skills character={loadedChar} />
         </CardDiv> */}
             <CardDiv>
-              <SheetProficiencies character={loadedChar} />
+              <SheetProficiencies
+                character={loadedChar}
+                onCharacterChange={onCharacterChange}
+              />
             </CardDiv>
             {/* <CardDiv>
           <Proficiencies character={loadedChar} />
@@ -571,7 +574,10 @@ const Success = () => {
               />
             </CardDiv>
             <CardDiv>
-              <Personality character={loadedChar} />
+              <Personality
+                character={loadedChar}
+                onCharacterChange={onCharacterChange}
+              />
             </CardDiv>
           </CardContainer>
           {/* </CharSheet> */}
