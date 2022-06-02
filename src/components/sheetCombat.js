@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import EditCombatModal from "./editCombatModal";
+import DamageHealingModal from "./damageHealingModal";
 
 const Container = styled.div`
   text-align: center;
@@ -63,7 +64,7 @@ const NumbersBold = styled.div`
   display: inline;
 `;
 
-const SheetCombat = ({ character, onCharacterChange }) => {
+const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
   return (
     <div>
       <h4>Combat</h4>
@@ -99,26 +100,38 @@ const SheetCombat = ({ character, onCharacterChange }) => {
             <Numbers>
               <input
                 type="number"
-                max={character.hp.max}
                 min="0"
                 id="hp.current"
                 name="hp.current"
                 value={character.hp.current}
                 onChange={onCharacterChange}
-                size="3"
+                size="2"
                 display="none"
               />
+              +
               <input
                 type="number"
+                min="0"
                 id="hp.temp"
                 name="hp.temp"
                 value={character.hp.temp}
                 onChange={onCharacterChange}
-                size="2"
+                size="1"
                 display="none"
               />
-              /<NumbersBold>{character.hp.max}</NumbersBold>
+              /
+              {character.hp.temp_max === "0" && (
+                <NumbersBold>{character.hp.max}</NumbersBold>
+              )}
+              {character.hp.temp_max > 0 && (
+                <NumbersBold>{character.hp.temp_max}</NumbersBold>
+              )}
             </Numbers>
+            <DamageHealingModal
+              character={character}
+              onChange={onCharacterChange}
+              updateHealth={updateHealth}
+            />
             <Row>
               {character.defences.resistances.length > 0 ? (
                 <BoxTrio>
@@ -153,11 +166,43 @@ const SheetCombat = ({ character, onCharacterChange }) => {
                 name="hit_dice.current"
                 value={character.hit_dice.current}
                 onChange={onCharacterChange}
-                size="2"
+                size="1"
                 display="none"
               />
               {character.hit_dice.dice}/{character.hit_dice.max}
             </Numbers>
+            {character.hit_dice.mult1_dice != "" && (
+              <Numbers>
+                <input
+                  type="number"
+                  max={character.hit_dice.mult1_max}
+                  min="0"
+                  id="hit_dice.mult1_current"
+                  name="hit_dice.mult1_current"
+                  value={character.hit_dice.mult1_current}
+                  onChange={onCharacterChange}
+                  size="1"
+                  display="none"
+                />
+                {character.hit_dice.mult1_dice}/{character.hit_dice.mult1_max}
+              </Numbers>
+            )}
+            {character.hit_dice.mult2_dice != "" && (
+              <Numbers>
+                <input
+                  type="number"
+                  max={character.hit_dice.mult2_max}
+                  min="0"
+                  id="hit_dice.mult2_current"
+                  name="hit_dice.mult2_current"
+                  value={character.hit_dice.mult2_current}
+                  onChange={onCharacterChange}
+                  size="1"
+                  display="none"
+                />
+                {character.hit_dice.mult2_dice}/{character.hit_dice.mult2_max}
+              </Numbers>
+            )}
           </BoxDuo>
           <BoxDuo>
             <Title>Death Saves</Title>

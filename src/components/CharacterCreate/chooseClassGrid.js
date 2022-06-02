@@ -40,6 +40,11 @@ const Skill = stylish.div`
   }
 `;
 
+const Row = stylish.div`
+  display: flex;
+  flex-flow: row wrap;
+`;
+
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -174,18 +179,18 @@ const ChooseClassGrid = ({
               <label>&emsp;Con mod = {getModifier(character.stats.con)}</label>
             </CardDiv>
             <CardDiv>
-                <label>
-                  Speed:
-                  <input
-                    type="number"
-                    id="speed"
-                    name="speed"
-                    value={character.speed}
-                    onChange={onCharacterChange}
-                    size="4"
-                  />
-                </label>
-              </CardDiv>
+              <label>
+                Speed:
+                <input
+                  type="number"
+                  id="speed"
+                  name="speed"
+                  value={character.speed}
+                  onChange={onCharacterChange}
+                  size="4"
+                />
+              </label>
+            </CardDiv>
 
             <CardDiv style={{ backgroundColor: "beige" }}>
               <h3>Proficiencies</h3>
@@ -250,38 +255,122 @@ const ChooseClassGrid = ({
                 </label>
               </Item>
               <Item>
-                <label>
-                  Saving Throws: &emsp;
-                  <select
-                    id="save1"
-                    name="saves.save1"
-                    value={character.saves.save1}
-                    onChange={onCharacterChange}
-                  >
-                    <option value={""}>-</option>
-                    <option value={"str"}>Strength</option>
-                    <option value={"dex"}>Dexterity</option>
-                    <option value={"con"}>Constitution</option>
-                    <option value={"int"}>Intelligence</option>
-                    <option value={"wis"}>Wisdom</option>
-                    <option value={"cha"}>Charisma</option>
-                  </select>
+                <h4>Saving Throws:</h4>
+                <Row>
                   &emsp;
-                  <select
-                    id="save2"
-                    name="saves.save2"
-                    value={character.saves.save2}
+                  <label>STR:</label>&emsp;
+                  <input
+                    type="checkbox"
+                    id="str"
+                    name="saves.str"
+                    checked={character.saves.str}
                     onChange={onCharacterChange}
-                  >
-                    <option value={""}>-</option>
-                    <option value={"str"}>Strength</option>
-                    <option value={"dex"}>Dexterity</option>
-                    <option value={"con"}>Constitution</option>
-                    <option value={"int"}>Intelligence</option>
-                    <option value={"wis"}>Wisdom</option>
-                    <option value={"cha"}>Charisma</option>
-                  </select>
-                </label>
+                  />
+                  &emsp;<label>bonus:</label>
+                  <input
+                    type="number"
+                    id="saves.str_bonus"
+                    name="saves.str_bonus"
+                    value={character.saves.str_bonus}
+                    onChange={onCharacterChange}
+                    size="2"
+                  />
+                  &emsp;
+                  <label>DEX:</label>&emsp;
+                  <input
+                    type="checkbox"
+                    id="dex"
+                    name="saves.dex"
+                    checked={character.saves.dex}
+                    onChange={onCharacterChange}
+                  />
+                  &emsp;<label>bonus:</label>
+                  <input
+                    type="number"
+                    id="saves.dex_bonus"
+                    name="saves.dex_bonus"
+                    value={character.saves.dex_bonus}
+                    onChange={onCharacterChange}
+                    size="2"
+                  />
+                </Row>
+                <Row>
+                  &emsp;
+                  <label>CON:</label>&emsp;
+                  <input
+                    type="checkbox"
+                    id="con"
+                    name="saves.con"
+                    checked={character.saves.con}
+                    onChange={onCharacterChange}
+                  />
+                  &emsp;<label>bonus:</label>
+                  <input
+                    type="number"
+                    id="saves.con_bonus"
+                    name="saves.con_bonus"
+                    value={character.saves.con_bonus}
+                    onChange={onCharacterChange}
+                    size="2"
+                  />
+                  &emsp;
+                  <label>INT:</label>&emsp;
+                  <input
+                    type="checkbox"
+                    id="int"
+                    name="saves.int"
+                    checked={character.saves.int}
+                    onChange={onCharacterChange}
+                  />
+                  &emsp;<label>bonus:</label>
+                  <input
+                    type="number"
+                    id="saves.int_bonus"
+                    name="saves.int_bonus"
+                    value={character.saves.int_bonus}
+                    onChange={onCharacterChange}
+                    size="2"
+                  />
+                </Row>
+                <Row>
+                  &emsp;
+                  <label>WIS:</label>&emsp;
+                  <input
+                    type="checkbox"
+                    id="wis"
+                    name="saves.wis"
+                    checked={character.saves.wis}
+                    onChange={onCharacterChange}
+                  />
+                  &emsp;<label>bonus:</label>
+                  <input
+                    type="number"
+                    id="saves.wis_bonus"
+                    name="saves.wis_bonus"
+                    value={character.saves.wis_bonus}
+                    onChange={onCharacterChange}
+                    size="2"
+                  />
+                  &emsp;
+                  <label>CHA: </label>&emsp;
+                  <input
+                    type="checkbox"
+                    id="cha"
+                    name="saves.cha"
+                    checked={character.saves.cha}
+                    onChange={onCharacterChange}
+                  />
+                  &emsp;<label>bonus:</label>{" "}
+                  <input
+                    type="number"
+                    id="saves.cha_bonus"
+                    name="saves.cha_bonus"
+                    value={character.saves.cha_bonus}
+                    onChange={onCharacterChange}
+                    size="2"
+                  />
+                  &emsp;
+                </Row>
               </Item>
 
               <Item>
@@ -379,7 +468,8 @@ const ChooseClassGrid = ({
                   />
                 </label>
                 <label>
-                  AC = 10/armour + {getModifier(character.stats.dex)}{"(DEX)"}
+                  AC = 10/armour + {getModifier(character.stats.dex)}
+                  {"(DEX)"}
                 </label>
               </Item>
               <Item>
@@ -615,7 +705,7 @@ const ChooseClassGrid = ({
             </CardDiv>
 
             <CardDiv>
-              <label>Passives:</label>
+              <h3>Passives:</h3>
               <Item>
                 <label>
                   Senses:
@@ -652,6 +742,17 @@ const ChooseClassGrid = ({
                     </label>
                   ) : null}
                 </label>
+                <label>
+                  PP bonus:
+                  <input
+                    type="number"
+                    id="perception_bonus"
+                    name="passives.perception_bonus"
+                    value={character.passives.perception_bonus}
+                    onChange={onCharacterChange}
+                    size="3"
+                  />
+                </label>
               </Item>
               <Item>
                 <label>
@@ -678,29 +779,18 @@ const ChooseClassGrid = ({
                     </label>
                   ) : null}
                 </label>
-              </Item>
-              <Item>
                 <label>
-                  Passive Insight(PIns):
+                  PInv bonus:
                   <input
                     type="number"
-                    id="senses"
-                    name="passives.insight"
-                    value={character.passives.insight}
+                    id="investigation_bonus"
+                    name="passives.investigation_bonus"
+                    value={character.passives.investigation_bonus}
                     onChange={onCharacterChange}
                     size="3"
                   />
                 </label>
-                <label>
-                  = 10 + {getModifier(character.stats.wis)}(WIS)
-                  {character.skills.Insight === "Proficient" ? (
-                    <label>+ {character.proficiency_bonus}(Insight)</label>
-                  ) : null}
-                  {character.skills.Insight === "Expert" ? (
-                    <label>+ {character.proficiency_bonus * 2} (Insight)</label>
-                  ) : null}
-                </label>
-              </Item>
+              </Item>              
             </CardDiv>
           </CardContainer>
         </FormControl>

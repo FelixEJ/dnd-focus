@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import stylish from "styled-components";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-// import { ButtonGroup } from "@material-ui/core";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -25,6 +25,12 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
+const ButtonContainer = stylish.div`
+  float: right;
+  margin-top: -30px;
+  margin-right: 5px;
+`;
 
 const AddFeatureModal = ({ addFeature }) => {
   const [open, setOpen] = React.useState(false);
@@ -65,9 +71,16 @@ const AddFeatureModal = ({ addFeature }) => {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleOpen}>
-        Add Feature
-      </Button>
+      <ButtonContainer>
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={handleOpen}
+          color="primary"
+        >
+          Add
+        </Button>
+      </ButtonContainer>
       <Modal
         open={open}
         onClose={handleClose}
@@ -172,9 +185,9 @@ const AddFeatureModal = ({ addFeature }) => {
               Confirm Feature
             </Button>
           </Item>
-            <Button variant="contained" onClick={handleClose}>
-              Close
-            </Button>
+          <Button variant="contained" onClick={handleClose}>
+            Close
+          </Button>
         </Box>
       </Modal>
     </div>

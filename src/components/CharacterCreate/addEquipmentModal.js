@@ -85,14 +85,14 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
             </Item>
             <Item>
               <label>Equipment description:</label>
-              <input
+              <textarea
                 type="text"
                 id="desc"
                 name="desc"
                 value={equipment.desc}
                 onChange={handleChange}
                 cols="30"
-                rows="1"
+                rows="3"
               />
             </Item>
             <Item>
@@ -152,6 +152,33 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
               </label>
             </Item>
             <Item>
+              <label>Uses/Charges</label>
+              <input
+                type="number"
+                id="max_uses"
+                name="max_uses"
+                value={equipment.max_uses}
+                onChange={handleChange}
+                size="3"
+              />
+            </Item>
+            <Item>
+              <label>
+                Recharge:
+                <select
+                  id="recharge"
+                  name="recharge"
+                  value={equipment.recharge}
+                  onChange={handleChange}
+                >
+                  <option value={"passive"}>Passive/Always on</option>
+                  <option value={"short"}>Short Rest</option>
+                  <option value={"long"}>Long Rest</option>
+                  <option value={"daily"}>Daily/Dawn</option>
+                </select>
+              </label>
+            </Item>
+            {/* <Item>
               <AddFeatureModal addFeature={addFeature} />
               <h3>Features & abilities</h3>
               {character.features.map((feature) => (
@@ -159,7 +186,7 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
                   {feature.feature_name}
                 </h4>
               ))}
-            </Item>
+            </Item> */}
           </Grid>
           <Item>
             <Button

@@ -33,8 +33,11 @@ const Basics = ({ character, onCharacterChange }) => {
       <Text>
         Class:{" "}
         <b>
-          {character.class} {character.subclass}
+          {character.class}
         </b>
+      </Text>
+      <Text>
+        Subclass: <b>{character.subclass}</b>
       </Text>
       <Text>
         Level: <b>{character.level}</b>

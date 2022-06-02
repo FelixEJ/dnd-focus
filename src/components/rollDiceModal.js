@@ -39,13 +39,13 @@ const RollDiceModal = () => {
     result: "",
   });
   const [rollsRecord, setRollsRecord] = useState([
-    {
-      dNum: 1,
-      dSize: 20,
-      rollType: "best",
-      rolls: [],
-      result: "",
-    },
+    // {
+    //   dNum: 1,
+    //   dSize: 20,
+    //   rollType: "best",
+    //   rolls: [],
+    //   result: "",
+    // },
   ]);
   const [rollResults, setRollResults] = useState("");
   let result = 0;
@@ -112,6 +112,10 @@ const RollDiceModal = () => {
       return [...prev, worst];
     });
   };
+
+  function clearRollRecord() {
+    setRollsRecord([])
+  }
 
   return (
     <div>
@@ -182,11 +186,23 @@ const RollDiceModal = () => {
             >
               Roll Dice
             </Button>
-          </Item>          
-          <Item>Dice rolls: {diceRoll.rolls.join(".")}
-          <br />
-          <br />
-          Result {diceRoll.result}</Item>
+          </Item>
+          <Item>
+            Dice rolls: {diceRoll.rolls.join(".")}
+            <br />
+            <br />
+            Result {diceRoll.result}
+          </Item>
+          <Item>Results:
+          {rollsRecord.map((roll, index) => (
+            <>d{roll.dSize}:{roll.result},</>
+          ))}
+          </Item>
+          <Item>
+          <Button variant="contained" onClick={clearRollRecord}>
+            Clear Roll
+          </Button>
+          </Item>
           <Button variant="contained" onClick={handleClose}>
             Close
           </Button>

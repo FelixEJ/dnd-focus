@@ -66,9 +66,9 @@ const Inventory = ({
 
   return (
     <div>
+      <h4>Inventory</h4>
       <Container>
         <Box>
-          <h4>Inventory</h4>
           <Text>
             <EquipmentAccordion
               character={character}
@@ -87,7 +87,9 @@ const Inventory = ({
             />{" "}
           </Text>
         </Box>
-        <Box>
+        
+      </Container>
+      <Box>
           <Text>
             <b>Money</b>
             <MoneyBox>
@@ -155,7 +157,6 @@ const Inventory = ({
             Total: <b>{getTotalMoney()} gp</b>
           </Text>
         </Box>
-      </Container>
     </div>
   );
 };

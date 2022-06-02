@@ -34,6 +34,7 @@ const Container = stylish.div`
 const ButtonContainer = stylish.div`
   float: right;
   margin-top: -30px;
+  margin-right: 5px;
 `;
 
 const EditCombatModal = ({ character, onCharacterChange }) => {
@@ -114,6 +115,19 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
                 />
               </Item>
               <Item>
+                <label>Temp Hit Points Max</label>{" "}
+                <input
+                  type="number"
+                  min="0"
+                  id="hp.temp_max"
+                  name="hp.temp_max"
+                  value={character.hp.temp_max}
+                  onChange={onCharacterChange}
+                  size="4"
+                  required
+                />
+              </Item>
+              <Item>
                 <label>Hit Dice Max:</label>{" "}
                 <input
                   type="number"
@@ -124,6 +138,54 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
                   size="3"
                   display="none"
                 />
+              </Item>
+              <Item>
+                <label>Multiclass Hit Dice:</label>{" "}
+                <input
+                  type="number"
+                  id="hit_dice.mult1_max"
+                  name="hit_dice.mult1_max"
+                  value={character.hit_dice.mult1_max}
+                  onChange={onCharacterChange}
+                  size="3"
+                  display="none"
+                />
+                <select
+                  id="hit_dice.mult1_dice"
+                  name="hit_dice.mult1_dice"
+                  value={character.hit_dice.mult1_dice}
+                  onChange={onCharacterChange}
+                >
+                  <option value="">-</option>
+                  <option value={"d6"}>d6</option>
+                  <option value={"d8"}>d8</option>
+                  <option value={"d10"}>d10</option>
+                  <option value={"d12"}>d12</option>
+                </select>
+              </Item>
+              <Item>
+                <label>Multiclass 2 Hit Dice:</label>{" "}
+                <input
+                  type="number"
+                  id="hit_dice.mult2_max"
+                  name="hit_dice.mult2_max"
+                  value={character.hit_dice.mult2_max}
+                  onChange={onCharacterChange}
+                  size="3"
+                  display="none"
+                />
+                <select
+                  id="hit_dice.mult2_dice"
+                  name="hit_dice.mult2_dice"
+                  value={character.hit_dice.mult2_dice}
+                  onChange={onCharacterChange}
+                >
+                  <option value="">-</option>
+                  <option value={"d6"}>d6</option>
+                  <option value={"d8"}>d8</option>
+                  <option value={"d10"}>d10</option>
+                  <option value={"d12"}>d12</option>
+                </select>
               </Item>
               <Item>
                 <label>

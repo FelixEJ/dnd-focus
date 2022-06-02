@@ -34,6 +34,7 @@ const Container = stylish.div`
 const ButtonContainer = stylish.div`
   float: right;
   margin-top: -30px;
+  margin-right: 5px;
 `;
 
 const EditPersonalitiesModal = ({ character, onCharacterChange }) => {

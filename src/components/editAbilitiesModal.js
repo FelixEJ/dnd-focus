@@ -34,6 +34,7 @@ const Container = stylish.div`
 const ButtonContainer = stylish.div`
   float: right;
   margin-top: -30px;
+  margin-right: 5px;
 `;
 
 const SkillContainer = stylish.div`
@@ -46,6 +47,12 @@ const SkillContainer = stylish.div`
   display: block;
   margin-left: auto;
   margin-right: auto;
+`;
+
+const Row = stylish.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
 `;
 
 const Skill = stylish.div`
@@ -85,7 +92,7 @@ const EditAbilitiesModal = ({ character, onCharacterChange }) => {
       >
         <Box sx={style}>
           <Grid>
-            <Container>              
+            <Container>
               <Item>
                 <label>
                   Proficiency Bonus:
@@ -115,7 +122,8 @@ const EditAbilitiesModal = ({ character, onCharacterChange }) => {
                     onChange={onCharacterChange}
                     size="4"
                     required
-                  />&emsp;
+                  />
+                  &emsp;
                   <label>Temp:</label>
                   <input
                     type="number"
@@ -136,7 +144,8 @@ const EditAbilitiesModal = ({ character, onCharacterChange }) => {
                     onChange={onCharacterChange}
                     size="4"
                     required
-                  />&emsp;
+                  />
+                  &emsp;
                   <label>Temp:</label>
                   <input
                     type="number"
@@ -157,7 +166,8 @@ const EditAbilitiesModal = ({ character, onCharacterChange }) => {
                     onChange={onCharacterChange}
                     size="4"
                     required
-                  />&emsp;
+                  />
+                  &emsp;
                   <label>Temp:</label>
                   <input
                     type="number"
@@ -178,7 +188,8 @@ const EditAbilitiesModal = ({ character, onCharacterChange }) => {
                     onChange={onCharacterChange}
                     size="4"
                     required
-                  />&emsp;
+                  />
+                  &emsp;
                   <label>Temp:</label>
                   <input
                     type="number"
@@ -199,7 +210,8 @@ const EditAbilitiesModal = ({ character, onCharacterChange }) => {
                     onChange={onCharacterChange}
                     size="4"
                     required
-                  />&emsp;
+                  />
+                  &emsp;
                   <label>Temp:</label>
                   <input
                     type="number"
@@ -220,7 +232,8 @@ const EditAbilitiesModal = ({ character, onCharacterChange }) => {
                     onChange={onCharacterChange}
                     size="4"
                     required
-                  />&emsp;
+                  />
+                  &emsp;
                   <label>Temp:</label>
                   <input
                     type="number"
@@ -233,7 +246,123 @@ const EditAbilitiesModal = ({ character, onCharacterChange }) => {
                 </Item>
               </Item>
               <Item>
-                <h2>Add/Edit Skills</h2>
+                <h3>Saving Throws:</h3>
+                <Row>
+                  <label>STR:</label>
+                  <input
+                    type="checkbox"
+                    id="str"
+                    name="saves.str"
+                    checked={character.saves.str}
+                    onChange={onCharacterChange}
+                  />
+                  <label>bonus:</label>
+                  <input
+                    type="number"
+                    id="saves.str_bonus"
+                    name="saves.str_bonus"
+                    value={character.saves.str_bonus}
+                    onChange={onCharacterChange}
+                    size="2"
+                  />
+                  &emsp;
+                  <label>DEX:</label>
+                  <input
+                    type="checkbox"
+                    id="dex"
+                    name="saves.dex"
+                    checked={character.saves.dex}
+                    onChange={onCharacterChange}
+                  />
+                  <label>bonus:</label>
+                  <input
+                    type="number"
+                    id="saves.dex_bonus"
+                    name="saves.dex_bonus"
+                    value={character.saves.dex_bonus}
+                    onChange={onCharacterChange}
+                    size="2"
+                  />
+                </Row>
+                <br />
+                <Row>
+                  <label>CON:</label>
+                  <input
+                    type="checkbox"
+                    id="con"
+                    name="saves.con"
+                    checked={character.saves.con}
+                    onChange={onCharacterChange}
+                  />
+                  <label>bonus:</label>
+                  <input
+                    type="number"
+                    id="saves.con_bonus"
+                    name="saves.con_bonus"
+                    value={character.saves.con_bonus}
+                    onChange={onCharacterChange}
+                    size="2"
+                  />
+                  &emsp;
+                  <label>INT:</label>
+                  <input
+                    type="checkbox"
+                    id="int"
+                    name="saves.int"
+                    checked={character.saves.int}
+                    onChange={onCharacterChange}
+                  />
+                  <label>bonus:</label>
+                  <input
+                    type="number"
+                    id="saves.int_bonus"
+                    name="saves.int_bonus"
+                    value={character.saves.int_bonus}
+                    onChange={onCharacterChange}
+                    size="2"
+                  />
+                </Row>
+                <br />
+                <Row>
+                  <label>WIS:</label>
+                  <input
+                    type="checkbox"
+                    id="wis"
+                    name="saves.wis"
+                    checked={character.saves.wis}
+                    onChange={onCharacterChange}
+                  />
+                  <label>bonus:</label>
+                  <input
+                    type="number"
+                    id="saves.wis_bonus"
+                    name="saves.wis_bonus"
+                    value={character.saves.wis_bonus}
+                    onChange={onCharacterChange}
+                    size="2"
+                  />
+                  &emsp;
+                  <label>CHA: </label>
+                  <input
+                    type="checkbox"
+                    id="cha"
+                    name="saves.cha"
+                    checked={character.saves.cha}
+                    onChange={onCharacterChange}
+                  />
+                  <label>bonus:</label>{" "}
+                  <input
+                    type="number"
+                    id="saves.cha_bonus"
+                    name="saves.cha_bonus"
+                    value={character.saves.cha_bonus}
+                    onChange={onCharacterChange}
+                    size="2"
+                  />
+                </Row>
+              </Item>
+              <Item>
+                <h3>Skills</h3>
                 <SkillContainer>
                   <Skill>
                     <label>Althletics(STR)</label>
@@ -632,6 +761,48 @@ const EditAbilitiesModal = ({ character, onCharacterChange }) => {
                     />
                   </Skill>
                 </SkillContainer>
+              </Item>
+              <Item>
+                <h3>Passives</h3>
+                <Item>
+                  <label>
+                    Senses:
+                    <input
+                      type="text"
+                      id="senses"
+                      placeholder="Darkvision?"
+                      name="passives.senses"
+                      value={character.passives.senses}
+                      onChange={onCharacterChange}
+                    />
+                  </label>
+                </Item>
+                <Item>
+                  <label>
+                    Passive Perception bonus:
+                    <input
+                      type="number"
+                      id="perception_bonus"
+                      name="passives.perception_bonus"
+                      value={character.passives.perception_bonus}
+                      onChange={onCharacterChange}
+                      size="3"
+                    />
+                  </label>
+                </Item>
+                <Item>
+                  <label>
+                    Passive Investigation bonus:
+                    <input
+                      type="number"
+                      id="investigation_bonus"
+                      name="passives.investigation_bonus"
+                      value={character.passives.investigation_bonus}
+                      onChange={onCharacterChange}
+                      size="3"
+                    />
+                  </label>
+                </Item>                
               </Item>
             </Container>
           </Grid>

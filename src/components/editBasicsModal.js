@@ -33,6 +33,7 @@ const Container = stylish.div`
 
 const ButtonContainer = stylish.div`
   float: right;
+  margin-right: 5px;
 `;
 
 const EditBasicsModal = ({ character, onCharacterChange }) => {
@@ -81,6 +82,18 @@ const EditBasicsModal = ({ character, onCharacterChange }) => {
                     id="class"
                     name="class"
                     value={character.class}
+                    onChange={onCharacterChange}
+                  />
+                </label>
+              </Item>
+              <Item>
+                <label>
+                  Subclass:&emsp;
+                  <input
+                    type="text"
+                    id="subclass"
+                    name="subclass"
+                    value={character.subclass}
                     onChange={onCharacterChange}
                   />
                 </label>

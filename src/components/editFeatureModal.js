@@ -45,7 +45,7 @@ const EditFeatureModal = ({ character, updateFeatures, index, name }) => {
 
   useEffect(() => {
     setFeature(...character.features.filter(feat => feat.feature_name === name));
-  }, [character]);
+  }, [character.features]);
 
   const handleChange = (e) => {
     let name = e.target.name;

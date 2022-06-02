@@ -113,12 +113,28 @@ const Success = () => {
         class_id: 0,
         class_level: 1,
         subclass: "",
+        hit_dice: "",
       },
     ],
     hit_dice: {
       dice: "",
       max: 0,
       current: 0,
+      mult1_dice: "",
+      mult1_max: 0,
+      mult1_current: 0,
+      mult2_dice: "",
+      mult2_max: 0,
+      mult2_current: 0,
+      mult3_dice: "",
+      mult3_max: 0,
+      mult3_current: 0,
+      mult4_dice: "",
+      mult4_max: 0,
+      mult4_current: 0,
+      mult5_dice: "",
+      mult5_max: 0,
+      mult5_current: 0,
     },
     hp: {
       max: 0,
@@ -155,19 +171,19 @@ const Success = () => {
       cha: 0,
       temp_cha: 0,
     },
-    saves: {
-      save1: "",
-      save1_bonus: 0,
-      save2: "",
-      save2_bonus: 0,
-      save3: "",
-      save3_bonus: 0,
-      save4: "",
-      save4_bonus: 0,
-      save5: "",
-      save5_bonus: 0,
-      save6: "",
-      save6_bonus: 0,
+    saves: {      
+      str: false,
+      str_bonus: 0,
+      dex: false,
+      dex_bonus: 0,
+      con: false,
+      con_bonus: 0,
+      int: false,
+      int_bonus: 0,
+      wis: false,
+      wis_bonus: 0,
+      cha: false,
+      cha_bonus: 0,
     },
     skills: {
       Athletics: "",
@@ -210,8 +226,11 @@ const Success = () => {
     passives: {
       senses: "",
       perception: 0,
+      perception_bonus: 0,
       investigation: 0,
+      investigation_bonus: 0,
       insight: 0,
+      insight_bonus: 0,
     },
     features: [
       // {
@@ -313,6 +332,8 @@ const Success = () => {
       //   desc: "",
       //   value: 0,
       //   value_currency: "",
+      //   max_uses: 0,
+      //   recharge: "",
       // },
     ],
     personality: {
@@ -411,6 +432,14 @@ const Success = () => {
     setLoadedChar(updatedCharacter);
     saveLocalCharacter(updatedCharacter);
     // console.log("new Feature", updatedCharacter);
+  }
+
+  function updateHealth(newHealth) {
+    const tempHealth = newHealth;
+    const updatedCharacter = {...loadedChar};
+    updatedCharacter.hp = tempHealth;
+    setLoadedChar(updatedCharacter);
+    saveLocalCharacter(updatedCharacter);
   }
 
   // duplicate
@@ -535,6 +564,7 @@ const Success = () => {
               <SheetCombat
                 character={loadedChar}
                 onCharacterChange={onCharacterChange}
+                updateHealth={updateHealth}
               />
             </CardDiv>
             {/* <CardDiv>
@@ -560,6 +590,7 @@ const Success = () => {
                 character={loadedChar}
                 updateFeatures={updateFeatures}
                 onCharacterChange={onCharacterChange}
+                addFeature={addFeature}
               />
             </CardDiv>
             <CardDiv>

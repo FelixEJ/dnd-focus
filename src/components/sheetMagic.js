@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import EditMagicModal from "./editMagicModal";
+
 const FlexContainer = styled.div`
   text-align: center;
   z-index: 1;
@@ -70,6 +72,10 @@ const SheetMagic = ({ character, onCharacterChange }) => {
       {character.magic.magic_user === true && (
         <div>
           <h4>Magic</h4>
+          <EditMagicModal
+            character={character}
+            onCharacterChange={onCharacterChange}
+          />
           <FlexContainer>
             <Box>
               <Title>Spellcasting Ability</Title>
@@ -77,17 +83,12 @@ const SheetMagic = ({ character, onCharacterChange }) => {
             </Box>
             <Box>
               <Title>Spell Attack Bonus</Title>
-              <Numbers>
-                +
-                {character.magic.spell_attack_mod}
-              </Numbers>
+              <Numbers>+{character.magic.spell_attack_mod}</Numbers>
             </Box>
 
             <Box>
               <Title>Spell Save DC</Title>
-              <Numbers>
-                {character.magic.save_dc}
-              </Numbers>
+              <Numbers>{character.magic.save_dc}</Numbers>
             </Box>
           </FlexContainer>
           <FlexContainer>
