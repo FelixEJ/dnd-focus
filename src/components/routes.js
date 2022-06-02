@@ -10,7 +10,7 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path="/" component={App}></Route>
-            <Route exact path="/createCharacter" component={CreateCharacter}></Route>
+            {/* <Route exact path="/createCharacter" component={CreateCharacter}></Route> */}
             <Route exact path="/createCharacterGrid" component={CreateCharacterGrid}></Route>
             <Route exact path="/loadCharacter" component={LoadCharacter}></Route>
         </Switch>

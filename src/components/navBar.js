@@ -13,14 +13,14 @@ class NavBar extends Component {
                   Home
                 </NavLink>
               </th>
-              <th className="nav-item">
+              {/* <th className="nav-item">
                 <NavLink className="nav-link" to="/createCharacter">
                 Create Character
                 </NavLink>
-              </th>
+              </th> */}
               <th className="nav-item">
                 <NavLink className="nav-link" to="/createCharacterGrid">
-                Create Character New
+                Create Character
                 </NavLink>
               </th>
               <th className="nav-item">
