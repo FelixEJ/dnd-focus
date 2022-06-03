@@ -5,7 +5,8 @@ import Modal from "@material-ui/core/Modal";
 import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-// import { ButtonGroup } from "@material-ui/core";
+
+import {ModalWindow} from "../StyledPageComponents/modalWindow";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -64,7 +65,7 @@ const AddFeatureModal = ({ addFeature }) => {
   }
 
   return (
-    <div>
+    <ModalWindow>
       <Button variant="contained" onClick={handleOpen}>
         Add Feature
       </Button>
@@ -178,7 +179,7 @@ const AddFeatureModal = ({ addFeature }) => {
             </Button>
         </Box>
       </Modal>
-    </div>
+    </ModalWindow>
   );
 };
 

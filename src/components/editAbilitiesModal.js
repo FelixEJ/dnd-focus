@@ -7,6 +7,8 @@ import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
+import {ModalWindow} from "./StyledPageComponents/modalWindow.js";
+
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -25,11 +27,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-const Container = stylish.div`
-  max-height: 90vh;
-  overflow: auto;
-`;
 
 const ButtonContainer = stylish.div`
   float: right;
@@ -92,7 +89,7 @@ const EditAbilitiesModal = ({ character, onCharacterChange }) => {
       >
         <Box sx={style}>
           <Grid>
-            <Container>
+            <ModalWindow>
               <Item>
                 <label>
                   Proficiency Bonus:
@@ -804,7 +801,7 @@ const EditAbilitiesModal = ({ character, onCharacterChange }) => {
                   </label>
                 </Item>                
               </Item>
-            </Container>
+            </ModalWindow>
           </Grid>
           <Button variant="contained" onClick={handleClose}>
             Close

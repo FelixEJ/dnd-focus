@@ -7,6 +7,8 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import AddFeatureModal from "./addFeatureModal";
 
+import {ModalWindow} from "../StyledPageComponents/modalWindow";
+
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -59,7 +61,7 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
   }
 
   return (
-    <div>
+    <ModalWindow>
       <Button variant="contained" onClick={handleOpen}>
         Add Equipment
       </Button>
@@ -204,7 +206,7 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
           </Button>
         </Box>
       </Modal>
-    </div>
+    </ModalWindow>
   );
 };
 
