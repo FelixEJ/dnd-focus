@@ -8,7 +8,6 @@ import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import AddItemModal from "./addItemModal";
 import EditInventoryModal from "./editInventoryModal";
 
-
 function CustomToggle({ children, eventKey }) {
   const decoratedOnClick = useAccordionButton(eventKey, () =>
     console.log("totally custom!")
@@ -57,7 +56,7 @@ const InventoryAccordion = ({ character, addItem, updateInventory }) => {
           <Card>
             <Card.Header>
               <TextLeft>
-                <b>Inventory:</b> 
+                <b>Inventory:</b>
                 {/* total value = {getInventoryValue()} gp */}
               </TextLeft>
               <ButtonRight>
@@ -70,24 +69,21 @@ const InventoryAccordion = ({ character, addItem, updateInventory }) => {
                 class="overflow-auto"
               >
                 {character.inventory.map((item, index) => (
-                  <p key={index}>
+                  <div key={index}>
                     <b>{item.item_name}</b> x{item.quantity}, value=
                     {item.quantity * item.value_each}
                     {item.value_currency} ({item.value_each}
-                    {item.value_currency}/ea)                    
+                    {item.value_currency}/ea)
                     <EditInventoryModal
                       character={character}
                       updateInventory={updateInventory}
                       index={index}
                       name={item.item_name}
-                      item={{item}}
+                      item={{ item }}
                     />
-                  </p>
+                  </div>
                 ))}
-                <AddItemModal 
-                  character={character}
-                  addItem={addItem}
-                />
+                <AddItemModal character={character} addItem={addItem} />
               </Card.Body>
             </Accordion.Collapse>
           </Card>

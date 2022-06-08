@@ -11,6 +11,9 @@ import CreateProficiencies from "./createProficiencies";
 import CreateFeatures from "./createFeatures";
 import CreateInventory from "./createInventory";
 
+import Inventory from "../inventory";
+import Features from "../features";
+
 import {
   WindowContent,
   PageContent,
@@ -34,6 +37,7 @@ const ChooseBackgroundGrid = ({
   updateEquipment,
   addItem,
   updateInventory,
+  updateCharacter
 }) => {
   const Continue = (e) => {
     e.preventDefault();
@@ -73,89 +77,94 @@ const ChooseBackgroundGrid = ({
             </CardColumn>
           </CardColumn>
         </SectionColumn>
-          <CreateProficiencies
-            character={character}
-            onCharacterChange={onCharacterChange}
-          />
-        <CreateInventory
+        <CreateProficiencies
           character={character}
           onCharacterChange={onCharacterChange}
-          updateEquipment={updateEquipment}
-          addItem={addItem}
-          updateInventory={updateInventory}
-          addEquipment={addEquipment}
         />
-          <CreateFeatures
+        <SectionColumn>
+          <Inventory
             character={character}
             onCharacterChange={onCharacterChange}
+            updateInventory={updateInventory}
+            updateEquipment={updateEquipment}
+            addItem={addItem}
             addFeature={addFeature}
-            updateFeatures={updateFeatures}
+            addEquipment={addEquipment}
           />
+        </SectionColumn>
         <SectionColumn>
-            <h3>Characteristics</h3>
-            <CardColumn>
-              <Label>Personality:</Label>
-              <textarea
-                type="text"
-                id="trait1"
-                placeholder="The first thing I ...?"
-                name="personality.trait1"
-                value={character.personality.trait1}
-                onChange={onCharacterChange}
-                cols="30"
-                rows="2"
-              />
-              <textarea
-                type="text"
-                id="trait2"
-                placeholder="I always ...?"
-                name="personality.trait2"
-                value={character.personality.trait2}
-                onChange={onCharacterChange}
-                cols="30"
-                rows="2"
-              />
-            </CardColumn>
-            <CardColumn>
-              <Label>Ideal:</Label>
-              <textarea
-                type="text"
-                id="ideal"
-                placeholder="Honour, freedom, charity...?"
-                name="personality.ideal"
-                value={character.personality.ideal}
-                onChange={onCharacterChange}
-                cols="30"
-                rows="2"
-              />
-            </CardColumn>
-            <CardColumn>
-              <Label>Bond:</Label>
-              <textarea
-                type="text"
-                id="bond"
-                placeholder="Debt, family, home..."
-                name="personality.bond"
-                value={character.personality.bond}
-                onChange={onCharacterChange}
-                cols="30"
-                rows="2"
-              />
-            </CardColumn>
-            <CardColumn>
-              <Label>Flaw:</Label>
-              <textarea
-                type="text"
-                id="flaw"
-                placeholder="Greed, pleasure, fame..."
-                name="personality.flaw"
-                value={character.personality.flaw}
-                onChange={onCharacterChange}
-                cols="30"
-                rows="2"
-              />
-            </CardColumn>
-          </SectionColumn>
+          <Features
+            character={character}
+            updateFeatures={updateFeatures}
+            onCharacterChange={onCharacterChange}
+            addFeature={addFeature}
+          />
+        </SectionColumn>
+        <SectionColumn>
+          <h3>Characteristics</h3>
+          <CardColumn>
+            <Label>Personality:</Label>
+            <textarea
+              type="text"
+              id="trait1"
+              placeholder="The first thing I ...?"
+              name="personality.trait1"
+              value={character.personality.trait1}
+              onChange={onCharacterChange}
+              cols="30"
+              rows="2"
+            />
+            <textarea
+              type="text"
+              id="trait2"
+              placeholder="I always ...?"
+              name="personality.trait2"
+              value={character.personality.trait2}
+              onChange={onCharacterChange}
+              cols="30"
+              rows="2"
+            />
+          </CardColumn>
+          <CardColumn>
+            <Label>Ideal:</Label>
+            <textarea
+              type="text"
+              id="ideal"
+              placeholder="Honour, freedom, charity...?"
+              name="personality.ideal"
+              value={character.personality.ideal}
+              onChange={onCharacterChange}
+              cols="30"
+              rows="2"
+            />
+          </CardColumn>
+          <CardColumn>
+            <Label>Bond:</Label>
+            <textarea
+              type="text"
+              id="bond"
+              placeholder="Debt, family, home..."
+              name="personality.bond"
+              value={character.personality.bond}
+              onChange={onCharacterChange}
+              cols="30"
+              rows="2"
+            />
+          </CardColumn>
+          <CardColumn>
+            <Label>Flaw:</Label>
+            <textarea
+              type="text"
+              id="flaw"
+              placeholder="Greed, pleasure, fame..."
+              name="personality.flaw"
+              value={character.personality.flaw}
+              onChange={onCharacterChange}
+              cols="30"
+              rows="2"
+            />
+          </CardColumn>
+        </SectionColumn>
       </PageContent>
       <BotButtons>
         <ButtonGroup variant="contained">

@@ -125,7 +125,7 @@ const EditMagicModal = ({ character, onCharacterChange }) => {
                   name="magic.cantrips_known"
                   value={character.magic.cantrips_known}
                   onChange={onCharacterChange}
-                  size="2"
+                  size="3"
                   required
                 />
                 <br />
@@ -136,7 +136,7 @@ const EditMagicModal = ({ character, onCharacterChange }) => {
                   name="magic.spells_known"
                   value={character.magic.spells_known}
                   onChange={onCharacterChange}
-                  size="2"
+                  size="4"
                   required
                 />
                 <br />

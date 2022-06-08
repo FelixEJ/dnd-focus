@@ -11,6 +11,13 @@ import CreateProficiencies from "./createProficiencies";
 import CreateFeatures from "./createFeatures";
 import CreateInventory from "./createInventory";
 
+import Inventory from "../inventory";
+import Features from "../features";
+import SheetAttacks from "../sheetAttacks";
+import SheetMagic from "../sheetMagic";
+
+import { getModifier, getSave, getSkill, getPassive } from "../utils";
+
 import {
   WindowContent,
   PageContent,
@@ -22,24 +29,6 @@ import {
   Label,
   BotButtons,
 } from "../StyledPageComponents/pageStyling";
-
-const Proficient = stylish.div`
-  width: 98%;
-  background-color: none;
-  display: block;
-  column-count: 3;
-  column-gap: 1%;
-`;
-const Skill = stylish.div`
-  & {
-    width: 98%;
-    display: inline-block;
-    margin: 1% 1% 1% 1%;
-  }
-  &:nth-child(odd) {
-    background-color: rgba(203, 203, 203, 0.4);
-  }
-`;
 
 const ChooseClassGrid = ({
   nextStep,
@@ -53,8 +42,8 @@ const ChooseClassGrid = ({
   updateEquipment,
   addItem,
   updateInventory,
-  addAttack,
   updateAttacks,
+  addAttack,
 }) => {
   const Continue = (e) => {
     e.preventDefault();
@@ -71,16 +60,6 @@ const ChooseClassGrid = ({
       return "+" + mod;
     } else {
       return mod;
-    }
-  };
-
-  const getSpellModifier = (spellStat) => {
-    for (const stat in character.stats) {
-      // console.log(spellStat, stat);
-      if (stat === spellStat) {
-        // console.log(spellStat, character.stats[stat]);
-        return getModifier(character.stats[stat]);
-      }
     }
   };
 
@@ -132,6 +111,7 @@ const ChooseClassGrid = ({
               value={character.hit_dice.dice}
               onChange={onCharacterChange}
             >
+              <option value={""}></option>
               <option value={"d6"}>d6</option>
               <option value={"d8"}>d8</option>
               <option value={"d10"}>d10</option>
@@ -157,6 +137,7 @@ const ChooseClassGrid = ({
               value={character.hit_dice.mult1_dice}
               onChange={onCharacterChange}
             >
+              <option value={""}></option>
               <option value={"d6"}>d6</option>
               <option value={"d8"}>d8</option>
               <option value={"d10"}>d10</option>
@@ -168,6 +149,31 @@ const ChooseClassGrid = ({
               id="hit_dice.mult1_max"
               name="hit_dice.mult1_max"
               value={character.hit_dice.mult1_max}
+              onChange={onCharacterChange}
+              size="3"
+              display="none"
+            />
+          </CardRow>
+          <CardRow>
+            <Label>Multiclass 2 Hit Dice:</Label>
+            <Select
+              id="hit_dice.mult2_dice"
+              name="hit_dice.mult2_dice"
+              value={character.hit_dice.mult2_dice}
+              onChange={onCharacterChange}
+            >
+              <option value={""}></option>
+              <option value={"d6"}>d6</option>
+              <option value={"d8"}>d8</option>
+              <option value={"d10"}>d10</option>
+              <option value={"d12"}>d12</option>
+            </Select>
+            <Label> Max:</Label>
+            <input
+              type="number"
+              id="hit_dice.mult2_max"
+              name="hit_dice.mult2_max"
+              value={character.hit_dice.mult2_max}
               onChange={onCharacterChange}
               size="3"
               display="none"
@@ -337,49 +343,48 @@ const ChooseClassGrid = ({
               </CardItem>
             </CardColumn>
           </CardRow>
+          <SectionColumn>
+            <Inventory
+              character={character}
+              onCharacterChange={onCharacterChange}
+              updateInventory={updateInventory}
+              updateEquipment={updateEquipment}
+              addItem={addItem}
+              addFeature={addFeature}
+              addEquipment={addEquipment}
+            />
+          </SectionColumn>
         </SectionColumn>
-        <CreateInventory
-          character={character}
-          onCharacterChange={onCharacterChange}
-          updateEquipment={updateEquipment}
-          addItem={addItem}
-          updateInventory={updateInventory}
-          addEquipment={addEquipment}
-        />
         <SectionColumn>
-          <CardColumn>
-            <CardRow>
-              <Label>
-                Armour Class (AC):
-                <input
-                  type="number"
-                  id="ac"
-                  name="ac"
-                  value={character.ac}
-                  onChange={onCharacterChange}
-                  size="3"
-                />
-              </Label>
+          <CardRow>
+            <CardColumn>
+              <Label>Armour Class (AC):</Label>
+              <input
+                type="number"
+                id="ac"
+                name="ac"
+                value={character.ac}
+                onChange={onCharacterChange}
+                size="3"
+              />
               <Label>
                 AC = 10/armour + {getModifier(character.stats.dex)}
                 {"(DEX)"}
               </Label>
-            </CardRow>
-            <CardRow>
-              <Label>
-                Initiative:
-                <input
-                  type="number"
-                  id="initiative"
-                  name="initiative"
-                  value={character.initiative}
-                  onChange={onCharacterChange}
-                  size="3"
-                />
-              </Label>
+            </CardColumn>
+            <CardColumn>
+              <Label>Initiative:</Label>
+              <input
+                type="number"
+                id="initiative"
+                name="initiative"
+                value={character.initiative}
+                onChange={onCharacterChange}
+                size="3"
+              />
               <Label>DEX mod = {getModifier(character.stats.dex)}</Label>
-            </CardRow>
-          </CardColumn>
+            </CardColumn>
+          </CardRow>
         </SectionColumn>
         <SectionColumn>
           <h3>Magic</h3>
@@ -400,180 +405,30 @@ const ChooseClassGrid = ({
               </Select>
             </Label>
             {character.magic.magic_user === true && (
-              <>
-                <br />
-                <Label>
-                  {character.magic.ability} mod ={" "}
-                  {getSpellModifier(character.magic.ability)}
-                  {" || "}
-                  Proficiency Bonus: +{character.proficiency_bonus}
-                </Label>
-                <br />
-                <Label>Spell save DC:</Label>
-                <input
-                  type="number"
-                  id="save_dc"
-                  name="magic.save_dc"
-                  value={character.magic.save_dc}
-                  onChange={onCharacterChange}
-                  size="3"
-                  required
+              <CardColumn>
+                <SheetMagic
+                  character={character}
+                  onCharacterChange={onCharacterChange}
                 />
-                <br />
-                <Label>Spell attack modifier:</Label>
-                <input
-                  type="number"
-                  id="spell_attack_mod"
-                  name="magic.spell_attack_mod"
-                  value={character.magic.spell_attack_mod}
-                  onChange={onCharacterChange}
-                  size="3"
-                  required
-                />
-                <br />
-                <Label>Cantrips known:</Label>
-                <input
-                  type="number"
-                  id="cantrips_known"
-                  name="magic.cantrips_known"
-                  value={character.magic.cantrips_known}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <br />
-                <Label>Spells known/preparable:</Label>
-                <input
-                  type="number"
-                  id="spells_known"
-                  name="magic.spells_known"
-                  value={character.magic.spells_known}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <br />
-                <Label>Spell slots:</Label>
-                <br />
-                <Label>1st:</Label>
-                <input
-                  type="number"
-                  id="first"
-                  name="spellslots.first"
-                  value={character.spellslots.first}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <Label>2nd:</Label>
-                <input
-                  type="number"
-                  id="second"
-                  name="spellslots.second"
-                  value={character.spellslots.second}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <Label>3rd:</Label>
-                <input
-                  type="number"
-                  id="third"
-                  name="spellslots.third"
-                  value={character.spellslots.third}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <br />
-                <Label>4th:</Label>
-                <input
-                  type="number"
-                  id="fourth"
-                  name="spellslots.fourth"
-                  value={character.spellslots.fourth}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <Label>5th:</Label>
-                <input
-                  type="number"
-                  id="fifth"
-                  name="spellslots.fifth"
-                  value={character.spellslots.fifth}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <Label>6th:</Label>
-                <input
-                  type="number"
-                  id="sixth"
-                  name="spellslots.sixth"
-                  value={character.spellslots.sixth}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <br />
-                <Label>7th:</Label>
-                <input
-                  type="number"
-                  id="seventh"
-                  name="spellslots.seventh"
-                  value={character.spellslots.seventh}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <Label>8th:</Label>
-                <input
-                  type="number"
-                  id="eighth"
-                  name="spellslots.eighth"
-                  value={character.spellslots.eighth}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <Label>9th:</Label>
-                <input
-                  type="number"
-                  id="ninth"
-                  name="spellslots.ninth"
-                  value={character.spellslots.ninth}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-              </>
+              </CardColumn>
             )}
           </CardColumn>
         </SectionColumn>
 
-        <CreateFeatures
-          character={character}
-          onCharacterChange={onCharacterChange}
-          addFeature={addFeature}
-          updateFeatures={updateFeatures}
-        />
         <SectionColumn>
-          <h3>Attacks</h3>
-          <CardColumn>
-            <AddAttackModal addAttack={addAttack} character={character} />
-
-            {character.attacks.map((attack, index) => (
-              <h4 key={index}>
-                {attack.attack_name}
-                <ConfirmDeleteAttackModal
-                  character={character}
-                  updateAttacks={updateAttacks}
-                  index={index}
-                />
-              </h4>
-            ))}
-          </CardColumn>
+          <Features
+            character={character}
+            updateFeatures={updateFeatures}
+            onCharacterChange={onCharacterChange}
+            addFeature={addFeature}
+          />
+        </SectionColumn>
+        <SectionColumn>
+          <SheetAttacks
+            character={character}
+            updateAttacks={updateAttacks}
+            addAttack={addAttack}
+          />
         </SectionColumn>
         <SectionColumn>
           <h3>Passives:</h3>
@@ -589,64 +444,52 @@ const ChooseClassGrid = ({
                 onChange={onCharacterChange}
               />
             </CardRow>
-            <CardRow>
-              <Label>Passive Perception (PP):</Label>
-              <input
-                type="number"
-                id="PP"
-                name="passives.perception"
-                value={character.passives.perception}
-                onChange={onCharacterChange}
-                size="3"
-              />
+            <CardColumn> 
+              <Label>Passive Perception (PP) = 
+                {getPassive(
+                  character,
+                  character.passives.perception_bonus,
+                  character.skills.Perception,
+                  character.skills.Perception_bonus,
+                  character.stats.wis
+                )}
+              </Label>
 
-              <Label>= 10 {getModifier(character.stats.wis)}(WIS)</Label>
-              {character.skills.Perception === "Proficient" ? (
-                <Label>+ {character.proficiency_bonus}</Label>
-              ) : null}
-              {character.skills.Perception === "Expert" ? (
-                <Label>+ {character.proficiency_bonus * 2}</Label>
-              ) : null}
+              <Label>
+                PP bonus:
+                <input
+                  type="number"
+                  id="perception_bonus"
+                  name="passives.perception_bonus"
+                  value={character.passives.perception_bonus}
+                  onChange={onCharacterChange}
+                  size="3"
+                />
+              </Label>
+            </CardColumn>
+            <CardColumn>
+              <Label>Passive Investigation (PI) = 
+                {getPassive(
+                  character,
+                  character.passives.investigation_bonus,
+                  character.skills.Investigation,
+                  character.skills.Investigation_bonus,
+                  character.stats.int
+                )}
+              </Label>
 
-              <Label>PP bonus:</Label>
-              <input
-                type="number"
-                id="perception_bonus"
-                name="passives.perception_bonus"
-                value={character.passives.perception_bonus}
-                onChange={onCharacterChange}
-                size="3"
-              />
-            </CardRow>
-            <CardRow>
-              <Label>Passive Investigation (PInv):</Label>
-              <input
-                type="number"
-                id="PI"
-                name="passives.investigation"
-                value={character.passives.investigation}
-                onChange={onCharacterChange}
-                size="3"
-              />
-
-              <Label>= 10 {getModifier(character.stats.int)}(INT)</Label>
-              {character.skills.Investigation === "Proficient" ? (
-                <Label>+ {character.proficiency_bonus}</Label>
-              ) : null}
-              {character.skills.Investigation === "Expert" ? (
-                <Label>+ {character.proficiency_bonus * 2}</Label>
-              ) : null}
-
-              <Label>PInv bonus:</Label>
-              <input
-                type="number"
-                id="investigation_bonus"
-                name="passives.investigation_bonus"
-                value={character.passives.investigation_bonus}
-                onChange={onCharacterChange}
-                size="3"
-              />
-            </CardRow>
+              <Label>
+                PI bonus:
+                <input
+                  type="number"
+                  id="investigation_bonus"
+                  name="passives.investigation_bonus"
+                  value={character.passives.investigation_bonus}
+                  onChange={onCharacterChange}
+                  size="3"
+                />
+              </Label>
+            </CardColumn>
           </CardColumn>
         </SectionColumn>
       </PageContent>

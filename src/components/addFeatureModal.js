@@ -7,24 +7,25 @@ import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
+import {
+  WindowContent,
+  ModalWindow,
+  Container,
+  PageContent,
+  SectionColumn,
+  CardColumn,
+  CardRow,
+  CardItem,
+  Label,
+  BotButtons,
+} from "./StyledPageComponents/pageStyling";
+
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 
 const ButtonContainer = stylish.div`
   float: right;
@@ -43,9 +44,13 @@ const AddFeatureModal = ({ addFeature }) => {
     feature_name: "",
     source: "",
     description: "",
+    action_type: "",
     max_uses: 0,
     current_uses: 0,
     recharge: "",
+    damage_dice: "",
+    damage_dice_num: "",
+    damage_type: "",
   });
 
   const handleChange = (e) => {
@@ -63,14 +68,18 @@ const AddFeatureModal = ({ addFeature }) => {
       feature_name: "",
       source: "",
       description: "",
+      action_type: "",
       max_uses: 0,
       current_uses: 0,
       recharge: "",
+      damage_dice: "",
+      damage_dice_num: "",
+      damage_type: "",
     });
   }
 
   return (
-    <div>
+    <>
       <ButtonContainer>
         <Button
           variant="outlined"
@@ -81,116 +90,163 @@ const AddFeatureModal = ({ addFeature }) => {
           Add
         </Button>
       </ButtonContainer>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Grid>
+      <CardColumn>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <PageContent>
+            <ModalWindow>
+              <Grid>
+                <Item>
+                  <h2>Add/Edit Feature</h2>
+                  <Label>Level Acquired:</Label>
+                  <input
+                    type="number"
+                    id="level_acquired"
+                    name="level_acquired"
+                    value={feature.level_acquired}
+                    onChange={handleChange}
+                    size="3"
+                    required
+                  />
+                </Item>
+                <Item>
+                  <Label>Feature Name:</Label>
+                  <input
+                    type="text"
+                    id="feature_name"
+                    name="feature_name"
+                    value={feature.feature_name}
+                    onChange={handleChange}
+                    required
+                  />
+                </Item>
+                <Item>
+                  <Label>Source:</Label>
+                  <select
+                    id="source"
+                    name="source"
+                    value={feature.source}
+                    onChange={handleChange}
+                  >
+                    <option value={""}></option>
+                    <option value={"race"}>Race</option>
+                    <option value={"background"}>Background</option>
+                    <option value={"class"}>Class</option>
+                    <option value={"multiclass1"}>Multiclass 1</option>
+                    <option value={"multiclass2"}>Multiclass 2</option>
+                    <option value={"equipment"}>Equipment/Item</option>
+                  </select>
+                </Item>
+                <Item>
+                  <Label>Feature Description:</Label>
+                  <textarea
+                    type="text"
+                    id="description"
+                    name="description"
+                    value={feature.description}
+                    onChange={handleChange}
+                    required
+                    cols="35"
+                    rows="5"
+                  />
+                </Item>
+                <Item>
+                  <Label>Action Type:</Label>
+                  <select
+                    id="action_type"
+                    name="action_type"
+                    value={feature.action_type}
+                    onChange={handleChange}
+                  >
+                    <option value={"free"}>Free Action</option>
+                    <option value={"bonus"}>Bonus Action</option>
+                    <option value={"action"}>Action</option>
+                    <option value={"reaction"}>Reaction</option>
+                  </select>
+                </Item>
+                <Item>
+                  <Label>Uses/Charges</Label>
+                  <input
+                    type="number"
+                    id="max_uses"
+                    name="max_uses"
+                    value={feature.max_uses}
+                    onChange={handleChange}
+                    size="3"
+                  />
+                </Item>
+                <Item>
+                  <Label>Recharge:</Label>
+                  <select
+                    id="recharge"
+                    name="recharge"
+                    value={feature.recharge}
+                    onChange={handleChange}
+                  >
+                    <option value={"passive"}>Passive/Always on</option>
+                    <option value={"short"}>Short Rest</option>
+                    <option value={"long"}>Long Rest</option>
+                    <option value={"daily"}>Daily/Dawn</option>
+                  </select>
+                </Item>
+                <Item>
+                  <Label>Damage:</Label>
+                  <input
+                    type="number"
+                    id="damage_dice_num"
+                    name="damage_dice_num"
+                    value={feature.damage_dice_num}
+                    onChange={handleChange}
+                    size="3"
+                  />
+                  <select
+                    id="damage_dice"
+                    name="damage_dice"
+                    value={feature.damage_dice}
+                    onChange={handleChange}
+                  >
+                    <option value={"d4"}>D4</option>
+                    <option value={"d6"}>D6</option>
+                    <option value={"d8"}>D8</option>
+                    <option value={"d10"}>D10</option>
+                    <option value={"d12"}>D12</option>
+                    <option value={"d20"}>D20</option>
+                    <option value={"d100"}>D100</option>
+                  </select>
+                  {/* <Label>Uses/Charges</Label> */}
+                  <input
+                    type="text"
+                    id="damage_type"
+                    name="damage_type"
+                    value={feature.damage_type}
+                    placeholder="Damage type"
+                    onChange={handleChange}
+                  />
+                </Item>
+              </Grid>
+            </ModalWindow>
             <Item>
-              <h2>Add/Edit Feature</h2>
-              <label>Level Acquired:</label>
-              <input
-                type="number"
-                id="level_acquired"
-                name="level_acquired"
-                value={feature.level_acquired}
-                onChange={handleChange}
-                size="3"
-                required
-              />
+              <Button
+                variant="contained"
+                onClick={() => {
+                  addFeature(feature);
+                  clearFeature();
+                }}
+              >
+                Confirm Feature
+              </Button>
             </Item>
-            <Item>
-              <label>
-                Feature Name:
-                <input
-                  type="text"
-                  id="feature_name"
-                  name="feature_name"
-                  value={feature.feature_name}
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-            </Item>
-            <Item>
-              <label>
-                Source:
-                <select
-                  id="source"
-                  name="source"
-                  value={feature.source}
-                  onChange={handleChange}
-                >
-                  <option value={"race"}>Race</option>
-                  <option value={"background"}>Background</option>
-                  <option value={"class"}>Class</option>
-                  <option value={"equipment"}>Equipment/Item</option>
-                </select>
-              </label>
-            </Item>
-            <Item>
-              <label>
-                Feature Description:
-                <textarea
-                  type="text"
-                  id="description"
-                  name="description"
-                  value={feature.description}
-                  onChange={handleChange}
-                  required
-                  cols="35"
-                  rows="5"
-                />
-              </label>
-            </Item>
-            <Item>
-              <label>Uses/Charges</label>
-              <input
-                type="number"
-                id="max_uses"
-                name="max_uses"
-                value={feature.max_uses}
-                onChange={handleChange}
-                size="3"
-              />
-            </Item>
-            <Item>
-              <label>
-                Recharge:
-                <select
-                  id="recharge"
-                  name="recharge"
-                  value={feature.recharge}
-                  onChange={handleChange}
-                >
-                  <option value={"passive"}>Passive/Always on</option>
-                  <option value={"short"}>Short Rest</option>
-                  <option value={"long"}>Long Rest</option>
-                  <option value={"daily"}>Daily/Dawn</option>
-                </select>
-              </label>
-            </Item>
-          </Grid>
-          <Item>
-            <Button
-              variant="contained"
-              onClick={() => {
-                addFeature(feature);
-                clearFeature();
-              }}
-            >
-              Confirm Feature
+            <Button variant="contained" onClick={handleClose}>
+              Close
             </Button>
-          </Item>
-          <Button variant="contained" onClick={handleClose}>
-            Close
-          </Button>
-        </Box>
-      </Modal>
-    </div>
+          </PageContent>
+        </Modal>
+      </CardColumn>
+    </>
   );
 };
 

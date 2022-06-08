@@ -35,7 +35,7 @@ const TextLeft = styled.div`
   text-transform: uppercase;
 `;
 
-const FeatureAccordion = ({ character, updateFeatures }) => {
+const FeatureAccordion = ({ character, updateFeatures, updateCharacter }) => {
   const [tempFeats, setTempFeats] = useState([...character.features]);
 
   useEffect(() => {
@@ -45,27 +45,22 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
   const handleChange = (e, index, name) => {
     e.preventDefault();
     let feats = [...character.features];
-    // console.log("uses", e.target.value);
 
     let featIndex = feats.findIndex((feat) => feat.feature_name === name);
-    // console.log("name", name);
-    // console.log("index", featIndex);
-    // console.log("name2", feats[featIndex].feature_name);
     feats[featIndex].current_uses = e.target.value;
 
-    // console.log("feats", feats);
+    console.log("feats", tempFeats);
     updateFeatures(tempFeats);
   };
 
   return (
-    <Accordion defaultActiveKey={character.features[0].feature_id}>
+    <Accordion>
       <div>
         {character.features.map((feature, index) => (
           <Card>
             <Card.Header>
               <TextLeft>
-                {/* {feature.level_acquired} - {feature.feature_name}: */}
-                {feature.feature_name}:
+                {feature.feature_name}: {feature.action_type}
               </TextLeft>
               {feature.max_uses > 0 && (
                 <>
@@ -97,10 +92,23 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                 style={{ backgroundColor: "lightgrey", maxHeight: "25vh" }}
                 class="overflow-auto"
               >
-                <>
+                <div>
                   Source: <b>{feature.source}</b>
                   <br />
-                </>
+                </div>
+                {feature.action_type && (
+                  <div>
+                    Action used: <b>{feature.action_type}</b>
+                    <br />
+                  </div>
+                )}
+                {feature.damage_dice_num != "" && (
+                  <div>
+                    {feature.damage_dice_num}
+                    {feature.damage_dice}
+                    {feature.damage_type} damage
+                  </div>
+                )}
                 {feature.max_uses > 0 && (
                   <text>
                     <>

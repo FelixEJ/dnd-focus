@@ -140,7 +140,7 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
                 />
               </Item>
               <Item>
-                <label>Multiclass Hit Dice:</label>{" "}
+                <label>Multiclass 1 Hit Dice:</label>{" "}
                 <input
                   type="number"
                   id="hit_dice.mult1_max"

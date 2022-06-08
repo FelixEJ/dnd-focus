@@ -53,67 +53,72 @@ const Container = stylish.div`
 
 const ButtonContainer = stylish.div`
   float: right;
-  margin-top: -30px;
+  margin-top: -20px;
 `;
 
-const DamageHealingModal = ({ character, onCharacterChange, updateHealth }) => {
+const MoneyModal = ({ character, updateMoney }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [health, setHealth] = useState({});
+  const [money, setMoney] = useState({});
 
-  const [hit, setHit] = useState({
-    hit_type: "dam",
-    hit_amount: 0,
+  const [transaction, setTransaction] = useState({
+    trans_type: "add",
+    trans_amount: 0,
+    trans_currency: "",
   });
 
   useEffect(
     () => {
-      setHealth({ ...character.hp });
+      setMoney({ ...character.currency });
     },
-    [character.hp],
-    hit
+    [character.currency],
+    transaction
   );
 
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
-    setHit((prev) => ({ ...prev, [name]: value }));
+    setTransaction((prev) => ({ ...prev, [name]: value }));
     e.preventDefault();
   };
 
-  const editHealth = () => {
-    // let hp = { ...health };
-    let hpTotal = parseInt(health.current) + parseInt(health.temp);
-    // console.log("total",hpTotal);
-    if (hit.hit_type === "heal") {
-      health.current = parseInt(health.current + hit.hit_amount);
-      if (health.temp_max > 0) {
-        if (health.current > health.temp_max) {
-          health.current = parseInt(health.temp_max);
-        }
-      } else if (health.current > health.max) {
-        if (health.temp_max > 0) {
-          health.current = parseInt(health.temp_max);
-        } else {
-          health.current = parseInt(health.max);
-        }
-      }
-    } else {
-      if (hit.hit_amount < health.temp) {
-        health.temp = parseInt(health.temp - hit.hit_amount);
-      } else {
-        health.current = parseInt(hpTotal - hit.hit_amount);
-        health.temp = 0;
-      }
-    }
-    updateHealth(health);
-    handleClose();
-  };
+  const editMoney = () => {
 
-  function clearHit() {
-    setHit({ hit_type: "dam", hit_amount: 0 });
+  }
+
+  // const editMoney = () => {
+  //   // let hp = { ...health };
+  //   let hpTotal = parseInt(money.current) + parseInt(money.temp);
+  //   // console.log("total",hpTotal);
+  //   if (transaction.trans_type === "heal") {
+  //     money.current = parseInt(money.current + transaction.trans_amount);
+  //     if (money.temp_max > 0) {
+  //       if (money.current > money.temp_max) {
+  //         money.current = parseInt(money.temp_max);
+  //       }
+  //     } else if (money.current > money.max) {
+  //       if (money.temp_max > 0) {
+  //         money.current = parseInt(money.temp_max);
+  //       } else {
+  //         money.current = parseInt(money.max);
+  //       }
+  //     }
+  //   } else {
+  //     if (transaction.trans_amount < money.temp) {
+  //       money.temp = parseInt(money.temp - transaction.trans_amount);
+  //     } else {
+  //       money.current = parseInt(hpTotal - transaction.trans_amount);
+  //       money.temp = 0;
+  //     }
+  //   }
+  //   updateHealth(money);
+  //   handleClose();
+  // };
+
+  function clearTransaction() {
+    setTransaction({ trans_type: "add", trans_amount: 0, trans_currency: "" });
   }
 
   return (
@@ -125,7 +130,7 @@ const DamageHealingModal = ({ character, onCharacterChange, updateHealth }) => {
           onClick={handleOpen}
           color="primary"
         >
-          hit/heal
+          buy/sell
         </Button>
       </ButtonContainer>
       <Modal
@@ -138,36 +143,48 @@ const DamageHealingModal = ({ character, onCharacterChange, updateHealth }) => {
           <ModalWindow>
             <Grid>
               <Container>
-                HP:{health.current} temp:{health.temp}
+                {/* HP:{money.current} temp:{money.temp} */}
                 <Item>
-                  <label>Take: </label>{" "}
+                <select
+                    type="select"
+                    id="trans_type"
+                    name="trans_type"
+                    value={transaction.trans_type}
+                    onChange={handleChange}
+                  >
+                    <option value={"add"}>Add</option>
+                    <option value={"remove"}>Remove</option>
+                  </select>
                   <input
                     type="number"
                     min="0"
-                    id="hit_amount"
-                    name="hit_amount"
-                    value={hit.hit_amount}
+                    id="trans_amount"
+                    name="trans_amount"
+                    value={transaction.trans_amount}
                     onChange={handleChange}
                     size="3"
                     display="none"
                   />{" "}
                   <select
                     type="select"
-                    id="hit_type"
-                    name="hit_type"
-                    value={hit.hit_type}
+                    id="trans_currency"
+                    name="trans_currency"
+                    value={transaction.trans_currency}
                     onChange={handleChange}
                   >
-                    <option value={"dam"}>Damage</option>
-                    <option value={"heal"}>Healing</option>
+                    <option value={"cp"}>Copper</option>
+                    <option value={"sp"}>Silver</option>
+                    <option value={"ep"}>Electrum</option>
+                    <option value={"gp"}>Gold</option>
+                    <option value={"pp"}>Platinum</option>
                   </select>
                 </Item>
                 <Item>
                   <Button
                     variant="contained"
                     onClick={() => {
-                      editHealth(hit);
-                      clearHit();
+                      editMoney(transaction);
+                      clearTransaction();
                     }}
                   >
                     Apply
@@ -185,4 +202,4 @@ const DamageHealingModal = ({ character, onCharacterChange, updateHealth }) => {
   );
 };
 
-export default DamageHealingModal;
+export default MoneyModal;
