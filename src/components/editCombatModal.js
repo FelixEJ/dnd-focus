@@ -59,7 +59,7 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
             name="ac"
             value={character.ac}
             onChange={onCharacterChange}
-            size="3"
+            style={{width: "20%"}}
           />
         </label>
       </Item>
@@ -72,7 +72,7 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
             name="initiative"
             value={character.initiative}
             onChange={onCharacterChange}
-            size="3"
+            style={{width: "20%"}}
           />
         </label>
       </Item>
@@ -85,7 +85,7 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
             name="speed"
             value={character.speed}
             onChange={onCharacterChange}
-            size="4"
+            style={{width: "20%"}}
           />
         </label>
       </Item>
@@ -97,7 +97,7 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
           name="hp.max"
           value={character.hp.max}
           onChange={onCharacterChange}
-          size="4"
+          style={{width: "20%"}}
           required
         />
       </Item>
@@ -110,7 +110,7 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
           name="hp.temp_max"
           value={character.hp.temp_max}
           onChange={onCharacterChange}
-          size="4"
+          style={{width: "20%"}}
           required
         />
       </Item>
@@ -122,7 +122,7 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
           name="hit_dice.max"
           value={character.hit_dice.max}
           onChange={onCharacterChange}
-          size="3"
+          style={{width: "20%"}}
           display="none"
         />
       </Item>
@@ -134,7 +134,7 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
           name="hit_dice.mult1_max"
           value={character.hit_dice.mult1_max}
           onChange={onCharacterChange}
-          size="3"
+          style={{width: "20%"}}
           display="none"
         />
         <select
@@ -158,7 +158,7 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
           name="hit_dice.mult2_max"
           value={character.hit_dice.mult2_max}
           onChange={onCharacterChange}
-          size="3"
+          style={{width: "20%"}}
           display="none"
         />
         <select
@@ -210,6 +210,9 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
           />
         </label>
       </Item>
+      <Button variant="contained" onClick={handleClose}>
+        Close
+      </Button>
     </EditModalWindow>
   );
 };

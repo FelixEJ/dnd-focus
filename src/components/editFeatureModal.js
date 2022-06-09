@@ -58,7 +58,7 @@ const EditFeatureModal = ({ character, updateFeatures, index, name }) => {
           name="level_acquired"
           value={feature.level_acquired}
           onChange={handleChange}
-          size="3"
+          style={{width: "20%"}}
           required
         />
       </Item>
@@ -115,7 +115,7 @@ const EditFeatureModal = ({ character, updateFeatures, index, name }) => {
           name="max_uses"
           value={feature.max_uses}
           onChange={handleChange}
-          size="3"
+          style={{width: "20%"}}
         />
       </Item>
       <Item>

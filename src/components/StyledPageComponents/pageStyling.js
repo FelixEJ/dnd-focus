@@ -194,9 +194,40 @@ export const BotButtons = ({ children }) => {
   return <BottomButtons>{children}</BottomButtons>;
 };
 
-const ModalWindowContainer = styled.div`
+const ModalContentContainer = styled.div`
   max-height: 90vh;
   overflow: auto;
+  background: red;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 400;
+`;
+export const ModalContent = ({ children }) => {
+  return <ModalContentContainer>{children}</ModalContentContainer>;
+};
+
+const ModalWindowContainer = styled.div`
+  background: red;
+  width: 95%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  @media only screen and (min-width: 480px) {
+    background: orange;
+  }
+  @media only screen and (min-width: 768px) {
+    background: yellow;
+  }
+  @media only screen and (min-width: 1024px) {
+    background: green;
+  }
+  @media only screen and (min-width: 1800px) {
+    background: blue;
+  }
 `;
 export const ModalWindow = ({ children }) => {
   return <ModalWindowContainer>{children}</ModalWindowContainer>;

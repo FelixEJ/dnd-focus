@@ -1,18 +1,12 @@
-import React, { useState, useEffect } from "react";
-import stylish from "styled-components";
+import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import DeleteIcon from "@material-ui/icons/Delete";
-import SaveIcon from "@material-ui/icons/Save";
-// import { ButtonGroup } from "@material-ui/core";
 
-import ConfirmDeleteAttackModal from "./confirmDeleteAttackModal";
-
-import EditModalWindow from "./StyledPageComponents/editModalWindow";
+import AddModalWindow from "./StyledPageComponents/addModalWindow";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -33,23 +27,24 @@ const style = {
   p: 4,
 };
 
-const SmallButton = stylish.div`
-  max-width: 50px;
-  height: 20px;
-`;
-
-const EditAttackModal = ({ character, updateAttacks, index, name }) => {
+const AddAttackModal = ({ addAttack, character }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [attack, setAttack] = useState({});
-
-  useEffect(() => {
-    setAttack(
-      ...character.attacks.filter((attack) => attack.attack_name === name)
-    );
-  }, [character]);
+  const [attack, setAttack] = useState({
+    attack_id: 0,
+    attack_name: "",
+    mod_used: "",
+    attack_bonus: 0,
+    damage_bonus: 0,
+    damage_dice: "",
+    damage_dice_num: 0,
+    damage_type: "",
+    range: "",
+    tags: "",
+    ammo: 0,
+  });
 
   const handleChange = (e) => {
     let name = e.target.name;
@@ -58,12 +53,21 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
     e.preventDefault();
   };
 
-  const editAttack = () => {
-    let attacks = [...character.attacks];
-    attacks[index] = attack;
-    updateAttacks(attacks);
-    handleClose();
-  };
+  function clearAttack() {
+    setAttack({
+      attack_id: 0,
+      attack_name: "",
+      mod_used: "",
+      attack_bonus: 0,
+      damage_bonus: 0,
+      damage_dice: "",
+      damage_dice_num: 0,
+      damage_type: "",
+      range: "",
+      tags: "",
+      ammo: 0,
+    });
+  }
 
   const getModifier = (stat) => {
     let mod = Math.floor((stat - 10) / 2);
@@ -74,14 +78,33 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
     }
   };
 
+  const showModifier = () => {
+    switch (attack.mod_used) {
+      case "str":
+        return <div>{getModifier(character.stats.cha)}</div>;
+      case "dex":
+        return <div>{getModifier(character.stats.cha)}</div>;
+      case "con":
+        return <div>{getModifier(character.stats.cha)}</div>;
+      case "int":
+        return <div>{getModifier(character.stats.cha)}</div>;
+      case "wis":
+        return <div>{getModifier(character.stats.cha)}</div>;
+      case "cha":
+        return <div>{getModifier(character.stats.cha)}</div>;
+      default:
+        return <div>yup</div>;
+    }
+  };
+
   return (
-    <EditModalWindow
+    <AddModalWindow
       open={open}
       handleOpen={handleOpen}
       handleClose={handleClose}
     >
       <Item>
-        <h2>Edit Attack</h2>
+        <h2>Add Attack</h2>
         <label>Attack name</label>
         <input
           type="text"
@@ -139,7 +162,7 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
             name="attack_bonus"
             value={attack.attack_bonus}
             onChange={handleChange}
-            style={{width: "20%"}}
+            style={{ width: "20%" }}
           />
         </label>
       </Item>
@@ -152,7 +175,7 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
             name="damage_dice_num"
             value={attack.damage_dice_num}
             onChange={handleChange}
-            style={{width: "20%"}}
+            style={{ width: "20%" }}
           />
           <select
             id="damage_dice"
@@ -196,7 +219,7 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
             name="damage_bonus"
             value={attack.damage_bonus}
             onChange={handleChange}
-            style={{width: "20%"}}
+            style={{ width: "20%" }}
           />
         </label>
       </Item>
@@ -242,32 +265,22 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
           placeholder="..30.."
           value={attack.ammo}
           onChange={handleChange}
-          style={{width: "20%"}}
+          style={{ width: "20%" }}
         />
       </Item>
       <Item>
         <Button
           variant="contained"
           onClick={() => {
-            editAttack();
+            addAttack(attack);
+            clearAttack();
           }}
-          startIcon={<SaveIcon />}
-          color="primary"
         >
-          Save change
+          Confirm Attack
         </Button>
-        <ConfirmDeleteAttackModal
-          character={character}
-          updateAttacks={updateAttacks}
-          index={index}
-          closePrev={handleClose}
-        />
       </Item>
-      <Button variant="contained" onClick={handleClose}>
-        Close
-      </Button>
-    </EditModalWindow>
+    </AddModalWindow>
   );
 };
 
-export default EditAttackModal;
+export default AddAttackModal;

@@ -20,34 +20,6 @@ import {
   BotButtons,
 } from "../StyledPageComponents/pageStyling";
 
-const Proficient = stylish.div`
-  width: 98%;
-  background-color: none;
-  display: block;
-  column-count: 3;
-  column-gap: 1%;
-`;
-const Skill = stylish.div`
-  & {
-    width: 98%;
-    display: inline-block;
-    margin: 1% 1% 1% 1%;
-  }
-  &:nth-child(odd) {
-    background-color: rgba(203, 203, 203, 0.4);
-  }
-`;
-// const Skill = stylish.div`
-//   & {
-//     background-color: none;
-//     display: inline-block;
-//     margin: 1% 1% 1% 1%;
-//   }
-//   &:nth-child(odd) {
-//     background-color: rgba(203, 203, 203, 0.4);
-//   }
-// `;
-
 const ChooseRaceGrid = ({
   nextStep,
   onCharacterChange,
@@ -178,7 +150,7 @@ const ChooseRaceGrid = ({
               name="speed"
               value={character.speed}
               onChange={onCharacterChange}
-              size="4"
+              style={{ width: "20%" }}
             />
           </CardColumn>
           <CardColumn>
@@ -205,8 +177,7 @@ const ChooseRaceGrid = ({
                   name="stats.str"
                   value={character.stats.str}
                   onChange={onCharacterChange}
-                  size="4"
-                  required
+                  style={{ width: "30%" }}
                 />
                 <span>&emsp; {getModifier(character.stats.str)}</span>
               </CardItem>
@@ -220,8 +191,7 @@ const ChooseRaceGrid = ({
                   name="stats.dex"
                   value={character.stats.dex}
                   onChange={onCharacterChange}
-                  size="4"
-                  required
+                  style={{ width: "30%" }}
                 />
                 <span>&emsp; {getModifier(character.stats.dex)}</span>
               </CardItem>
@@ -237,8 +207,7 @@ const ChooseRaceGrid = ({
                   name="stats.con"
                   value={character.stats.con}
                   onChange={onCharacterChange}
-                  size="4"
-                  required
+                  style={{ width: "30%" }}
                 />
                 <span>&emsp; {getModifier(character.stats.con)}</span>
               </CardItem>
@@ -252,8 +221,7 @@ const ChooseRaceGrid = ({
                   name="stats.int"
                   value={character.stats.int}
                   onChange={onCharacterChange}
-                  size="4"
-                  required
+                  style={{ width: "30%" }}
                 />
                 <span>&emsp; {getModifier(character.stats.int)}</span>
               </CardItem>
@@ -269,8 +237,7 @@ const ChooseRaceGrid = ({
                   name="stats.wis"
                   value={character.stats.wis}
                   onChange={onCharacterChange}
-                  size="4"
-                  required
+                  style={{ width: "30%" }}
                 />
                 <span>&emsp; {getModifier(character.stats.wis)}</span>
               </CardItem>
@@ -284,8 +251,7 @@ const ChooseRaceGrid = ({
                   name="stats.cha"
                   value={character.stats.cha}
                   onChange={onCharacterChange}
-                  size="4"
-                  required
+                  style={{ width: "30%" }}
                 />
                 <span>&emsp; {getModifier(character.stats.cha)}</span>
               </CardItem>

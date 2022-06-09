@@ -104,7 +104,7 @@ const EditInventoryModal = ({
           name="quantity"
           value={invItem.quantity}
           onChange={handleChange}
-          size="3"
+          style={{width: "20%"}}
         />
       </Item>
       <Item>
@@ -115,7 +115,7 @@ const EditInventoryModal = ({
           name="value_each"
           value={invItem.value_each}
           onChange={handleChange}
-          size="4"
+          style={{width: "20%"}}
         />
         <select
           id="value_currency"
@@ -152,6 +152,9 @@ const EditInventoryModal = ({
           closePrev={handleClose}
         />
       </Item>
+      <Button variant="contained" onClick={handleClose}>
+        Close
+      </Button>
     </EditModalWindow>
   );
 };

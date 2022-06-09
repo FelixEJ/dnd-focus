@@ -58,7 +58,7 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
   };
 
   return (
-    <Accordion defaultActiveKey={character.features[0].feature_id}>
+    <Accordion >
       <div>
         {character.features.map((feature, index) => (
           <Card>

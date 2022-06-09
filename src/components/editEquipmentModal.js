@@ -21,28 +21,6 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
-const X = stylish.div`
-  float: right;
-  font-size: 0.9em;
-  text-transform: uppercase;
-  text-decoration: underline;
-  margin-top: -16px;
-  margin-right: 4px;
-  cursor: pointer;
-  `;
-
 const EditEquipmentModal = ({
   character,
   updateEquipment,
@@ -113,7 +91,7 @@ const EditEquipmentModal = ({
             type="number"
             id="value"
             name="value"
-            size="4"
+            style={{width: "20%"}}
             value={equipment.value}
             onChange={handleChange}
           />
@@ -180,6 +158,9 @@ const EditEquipmentModal = ({
           closePrev={handleClose}
         />
       </Item>
+      <Button variant="contained" onClick={handleClose}>
+        Close
+      </Button>
     </EditModalWindow>
   );
 };

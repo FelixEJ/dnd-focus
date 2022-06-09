@@ -5,7 +5,8 @@ import Modal from "@material-ui/core/Modal";
 import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import AddFeatureModal from "./addFeatureModal";
+
+import AddModalWindow from "./StyledPageComponents/addModalWindow";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -59,151 +60,129 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
   }
 
   return (
-    <div>
-      <Button variant="contained" onClick={handleOpen}>
-        Add Equipment
-      </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Grid>
-            <Item>
-              <h2>Add/Edit Equipment</h2>
-              <label>Equipment name:</label>
-              <input
-                type="text"
-                id="equipment_name"
-                name="equipment_name"
-                value={equipment.equipment_name}
-                onChange={handleChange}
-                required
-              />
-            </Item>
-            <Item>
-              <label>Equipment description:</label>
-              <input
-                type="text"
-                id="desc"
-                name="desc"
-                value={equipment.desc}
-                onChange={handleChange}
-                cols="30"
-                rows="1"
-              />
-            </Item>
-            <Item>
-              <label>
-                Value:
-                <input
-                  type="number"
-                  id="value"
-                  name="value"
-                  value={equipment.value}
-                  onChange={handleChange}
-                />
-                <select
-                  id="value_currency"
-                  name="value_currency"
-                  value={equipment.value_currency}
-                  onChange={handleChange}
-                >
-                  <option value={"cp"}>Copper</option>
-                  <option value={"sp"}>Silver</option>
-                  <option value={"ep"}>Electrum</option>
-                  <option value={"gp"}>Gold</option>
-                  <option value={"pp"}>Platinum</option>
-                </select>
-              </label>
-            </Item>
-            <Item>
-              <label>
-                Equipment type:
-                <select
-                  id="equipment_type"
-                  name="equipment_type"
-                  value={equipment.equipment_type}
-                  onChange={handleChange}
-                >
-                  <option value={"armour"}>Armour</option>
-                  <option value={"weapon"}>Weapon</option>
-                  <option value={"tool"}>Tool</option>
-                  <option value={"gear"}>Gear</option>
-                  <option value={"misc"}>Misc Equipment</option>
-                </select>
-              </label>
-            </Item>
-            <Item>
-              <label>
-                Attuned:
-                <select
-                  id="attuned"
-                  name="attuned"
-                  value={equipment.attuned}
-                  onChange={handleChange}
-                >
-                  <option value={"false"}>False</option>
-                  <option value={"true"}>True</option>
-                </select>
-              </label>
-            </Item>
-            <Item>
-              <label>Uses/Charges</label>
-              <input
-                type="number"
-                id="max_uses"
-                name="max_uses"
-                value={equipment.max_uses}
-                onChange={handleChange}
-                size="3"
-              />
-            </Item>
-            <Item>
-              <label>
-                Recharge:
-                <select
-                  id="recharge"
-                  name="recharge"
-                  value={equipment.recharge}
-                  onChange={handleChange}
-                >
-                  <option value={"passive"}>Passive/Always on</option>
-                  <option value={"short"}>Short Rest</option>
-                  <option value={"long"}>Long Rest</option>
-                  <option value={"daily"}>Daily/Dawn</option>
-                </select>
-              </label>
-            </Item>
-            {/* <Item>
-              <AddFeatureModal addFeature={addFeature} />
-              <h3>Features & abilities</h3>
-              {character.features.map((feature) => (
-                <h4 key={feature.feature_id + feature.feature_name}>
-                  {feature.feature_name}
-                </h4>
-              ))}
-            </Item> */}
-          </Grid>
-          <Item>
-            <Button
-              variant="contained"
-              onClick={() => {
-                addEquipment(equipment);
-                clearEquipment();
-              }}
-            >
-              Confirm Equipment
-            </Button>
-          </Item>
-          <Button variant="contained" onClick={handleClose}>
-            Close
-          </Button>
-        </Box>
-      </Modal>
-    </div>
+    <AddModalWindow
+      open={open}
+      handleOpen={handleOpen}
+      handleClose={handleClose}
+    >
+      <Item>
+        <h2>Add/Edit Equipment</h2>
+        <label>Equipment name:</label>
+        <input
+          type="text"
+          id="equipment_name"
+          name="equipment_name"
+          value={equipment.equipment_name}
+          onChange={handleChange}
+          required
+        />
+      </Item>
+      <Item>
+        <label>Equipment description:</label>
+        <input
+          type="text"
+          id="desc"
+          name="desc"
+          value={equipment.desc}
+          onChange={handleChange}
+          cols="30"
+          rows="1"
+        />
+      </Item>
+      <Item>
+        <label>
+          Value:
+          <input
+            type="number"
+            id="value"
+            name="value"
+            value={equipment.value}
+            onChange={handleChange}
+          />
+          <select
+            id="value_currency"
+            name="value_currency"
+            value={equipment.value_currency}
+            onChange={handleChange}
+          >
+            <option value={"cp"}>Copper</option>
+            <option value={"sp"}>Silver</option>
+            <option value={"ep"}>Electrum</option>
+            <option value={"gp"}>Gold</option>
+            <option value={"pp"}>Platinum</option>
+          </select>
+        </label>
+      </Item>
+      <Item>
+        <label>
+          Equipment type:
+          <select
+            id="equipment_type"
+            name="equipment_type"
+            value={equipment.equipment_type}
+            onChange={handleChange}
+          >
+            <option value={"armour"}>Armour</option>
+            <option value={"weapon"}>Weapon</option>
+            <option value={"tool"}>Tool</option>
+            <option value={"gear"}>Gear</option>
+            <option value={"misc"}>Misc Equipment</option>
+          </select>
+        </label>
+      </Item>
+      <Item>
+        <label>
+          Attuned:
+          <select
+            id="attuned"
+            name="attuned"
+            value={equipment.attuned}
+            onChange={handleChange}
+          >
+            <option value={"false"}>False</option>
+            <option value={"true"}>True</option>
+          </select>
+        </label>
+      </Item>
+      <Item>
+        <label>Uses/Charges</label>
+        <input
+          type="number"
+          id="max_uses"
+          name="max_uses"
+          value={equipment.max_uses}
+          onChange={handleChange}
+          style={{ width: "20%" }}
+        />
+      </Item>
+      <Item>
+        <label>
+          Recharge:
+          <select
+            id="recharge"
+            name="recharge"
+            value={equipment.recharge}
+            onChange={handleChange}
+          >
+            <option value={"passive"}>Passive/Always on</option>
+            <option value={"short"}>Short Rest</option>
+            <option value={"long"}>Long Rest</option>
+            <option value={"daily"}>Daily/Dawn</option>
+          </select>
+        </label>
+      </Item>
+      <Item>
+        <Button
+          variant="contained"
+          onClick={() => {
+            addEquipment(equipment);
+            clearEquipment();
+          }}
+        >
+          Confirm Equipment
+        </Button>
+      </Item>
+    </AddModalWindow>
   );
 };
 

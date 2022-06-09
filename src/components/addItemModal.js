@@ -6,6 +6,8 @@ import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
+import AddModalWindow from "./StyledPageComponents/addModalWindow";
+
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -68,85 +70,71 @@ const AddItemModal = ({ addItem, character }) => {
   }
 
   return (
-    <div>
-      <Button variant="contained" onClick={handleOpen}>
-        Add Item
-      </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Grid>
-            <Item>
-              <h2>Add/Edit Item</h2>
-              <label>Item Name</label>
-              <input
-                type="text"
-                id="item_name"
-                name="item_name"
-                value={item.item_name}
-                onChange={handleChange}
-                required
-              />
-            </Item>
-            <Item>
-              <label>Quantity</label>
-              <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                value={item.quantity}
-                onChange={handleChange}
-                size="3"
-              />
-            </Item>
-            <Item>
-              <label>Value (each)</label>
-              <input
-                type="number"
-                id="value_each"
-                name="value_each"
-                value={item.value_each}
-                onChange={handleChange}
-                size="4"
-              />
-              <select
-                id="value_currency"
-                name="value_currency"
-                value={item.value_currency}
-                onChange={handleChange}
-              >
-                <option value={"cp"}>Copper</option>
-                <option value={"sp"}>Silver</option>
-                <option value={"ep"}>Electrum</option>
-                <option value={"gp"}>Gold</option>
-                <option value={"pp"}>Platinum</option>
-              </select>
-            </Item>
-            <Item>
-              <label>Total Value</label>
-              <p>{getTotalValue()+item.value_currency}</p>
-            </Item>
-          </Grid>
-          <Item>
-            <Button
-              variant="contained"
-              onClick={() => {
-                saveItem();
-              }}
-            >
-              Confirm Item
-            </Button>
-          </Item>
-          <Button variant="contained" onClick={handleClose}>
-            Close
-          </Button>
-        </Box>
-      </Modal>
-    </div>
+    <AddModalWindow
+      open={open}
+      handleOpen={handleOpen}
+      handleClose={handleClose}
+    >
+      <Item>
+        <h2>Add/Edit Item</h2>
+        <label>Item Name</label>
+        <input
+          type="text"
+          id="item_name"
+          name="item_name"
+          value={item.item_name}
+          onChange={handleChange}
+        />
+      </Item>
+      <Item>
+        <label>Quantity</label>
+        <input
+          type="number"
+          id="quantity"
+          name="quantity"
+          value={item.quantity}
+          onChange={handleChange}
+          style={{ width: "20%" }}
+        />
+      </Item>
+      <Item>
+        <label>Value (each)</label>
+        <input
+          type="number"
+          id="value_each"
+          name="value_each"
+          value={item.value_each}
+          onChange={handleChange}
+          style={{ width: "20%" }}
+        />
+        <select
+          id="value_currency"
+          name="value_currency"
+          value={item.value_currency}
+          onChange={handleChange}
+        >
+          <option value={"cp"}>Copper</option>
+          <option value={"sp"}>Silver</option>
+          <option value={"ep"}>Electrum</option>
+          <option value={"gp"}>Gold</option>
+          <option value={"pp"}>Platinum</option>
+        </select>
+      </Item>
+      <Item>
+        <label>Total Value</label>
+        <p>{getTotalValue() + item.value_currency}</p>
+      </Item>
+      <Item>
+        <Button
+          variant="contained"
+          onClick={() => {
+            saveItem();
+          }}
+        >
+          Confirm Item
+        </Button>
+      </Item>
+    </AddModalWindow>
   );
 };
 
