@@ -9,6 +9,8 @@ import stylish from "styled-components";
 
 import AddModalWindow from "./StyledPageComponents/addModalWindow";
 
+import { BotButton, TopRightButton } from "./StyledPageComponents/pageStyling";
+
 const Container = stylish.div`
   text-align: center;
   z-index: 1;
@@ -39,24 +41,23 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
 const AddSkillModal = ({ character, onCharacterChange }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
+    <>
+      <TopRightButton>
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={handleOpen}
+          color="primary"
+        >
+          Edit
+        </Button>
+      </TopRightButton>
     <AddModalWindow
       open={open}
       handleOpen={handleOpen}
@@ -84,7 +85,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.Athletics_bonus"
               value={character.skills.Athletics_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -106,7 +107,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.Acrobatics_bonus"
               value={character.skills.Acrobatics_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -128,7 +129,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.SleightOfHand_bonus"
               value={character.skills.SleightOfHand_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -150,7 +151,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.Stealth_bonus"
               value={character.skills.Stealth_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -172,7 +173,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.Arcana_bonus"
               value={character.skills.Arcana_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -194,7 +195,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.History_bonus"
               value={character.skills.History_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -216,7 +217,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.Investigation_bonus"
               value={character.skills.Investigation_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -238,7 +239,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.Nature_bonus"
               value={character.skills.Nature_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -260,7 +261,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.Religion_bonus"
               value={character.skills.Religion_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -282,7 +283,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.AnimalHandling_bonus"
               value={character.skills.AnimalHandling_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -304,7 +305,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.Insight_bonus"
               value={character.skills.Insight_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -326,7 +327,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.Medicine_bonus"
               value={character.skills.Medicine_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -348,7 +349,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.Perception_bonus"
               value={character.skills.Perception_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -370,7 +371,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.Survival_bonus"
               value={character.skills.Survival_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -392,7 +393,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.Deception_bonus"
               value={character.skills.Deception_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -414,7 +415,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.Intimidation_bonus"
               value={character.skills.Intimidation_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -436,7 +437,7 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.Performance_bonus"
               value={character.skills.Performance_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
           <Skill>
@@ -458,12 +459,16 @@ const AddSkillModal = ({ character, onCharacterChange }) => {
               name="skills.Persuasion_bonus"
               value={character.skills.Persuasion_bonus}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "15%" }}
             />
           </Skill>
         </Container>
       </Item>
+      <Button variant="contained" onClick={handleClose}>
+        Close
+      </Button>
     </AddModalWindow>
+    </>
   );
 };
 

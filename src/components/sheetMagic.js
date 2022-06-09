@@ -22,23 +22,6 @@ const FlexContainer = styled.div`
   margin-bottom: 2px;
 `;
 
-const List = styled.div`
-  text-align: center;
-  z-index: 1;
-  width: 100%;
-  max-width: 400px;
-  background-color: none;
-
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-
-  column-count: 2;
-  column-gap: 1%;
-
-  border-style: inset;
-  border-radius: 5px;
-`;
 const Slot = styled.div`
   width: 30%;
   max-width: 195px;
@@ -69,7 +52,7 @@ const Title = styled.p`
 const SheetMagic = ({ character, onCharacterChange }) => {
   return (
     <div>
-      {character.magic.magic_user === true && (
+      {character.magic.ability !== "" && (
         <div>
           <h4>Magic</h4>
           <EditMagicModal

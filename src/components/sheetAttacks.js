@@ -2,17 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import AttackAccordion from "./attackAccordion";
 
+import AddAttackModal from "./addAttackModal";
+
 const Container = styled.div`
   text-align: center;
   z-index: 1;
   width: 100%;
   max-width: 400px;
   background-color: none;
-  max-height: 20vh;
 
   display: block;
   margin-left: auto;
   margin-right: auto;
+
+  @media only screen and (min-width: 1300px) {
+    max-height: 90vh;
+  }
 `;
 
 const Box = styled.div`
@@ -25,19 +30,18 @@ const Box = styled.div`
   margin-bottom: 2px;
 `;
 
-const Attacks = ({ character, updateAttacks }) => {
+const Attacks = ({ character, updateAttacks, addAttack }) => {
   return (
-    <div>
+    <Container>
       <h4>Attacks</h4>
-      <Container>
+      <AddAttackModal addAttack={addAttack} character={character}/>
         <Box>
           <AttackAccordion
             character={character}
             updateAttacks={updateAttacks}
           />
         </Box>
-      </Container>
-    </div>
+    </Container>
   );
 };
 

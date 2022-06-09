@@ -3,26 +3,31 @@ import { FormControl } from "@material-ui/core";
 import styled from "styled-components";
 import LoadCharacterFromJSON from "../loadCharacterFromJSONModal";
 import Basics from "../basics";
-import Abilities from "../abilities";
 import SheetAbilities from "../sheetAbilities";
-import Skills from "../skills";
-import Proficiencies from "../proficiencies";
 import SheetProficiencies from "../sheetProficiencies";
 import SheetAttacks from "../sheetAttacks";
-import Combat from "../combat";
 import SheetCombat from "../sheetCombat";
 import Features from "../features";
-import Health from "../health";
 import Inventory from "../inventory";
-import Magic from "../magic";
 import SheetMagic from "../sheetMagic";
-import Passives from "../passives";
 import Personality from "../personality";
 
 import { blankCharacter } from "../../data/character";
 
 import RollDiceModal from "../rollDiceModal";
 import RestModal from "../restModal";
+
+import {
+  WindowContent,
+  PageContent,
+  SectionColumn,
+  SectionRow,
+  CardColumn,
+  CardRow,
+  CardItem,
+  Label,
+  BotButton,
+} from "../StyledPageComponents/pageStyling";
 
 const CardContainer = styled.div`
   display: block;
@@ -217,6 +222,17 @@ const Success = () => {
     // console.log("new Invetory", ogCharacter);
   }
 
+  function addAttack(newattack) {
+    const newAttack = newattack;
+    newattack.attack_id = loadedChar.attacks.length + 1;
+    const newCharacter = { ...loadedChar };
+    const oldAttacks = newCharacter.attacks;
+    oldAttacks.push(newAttack);
+    setLoadedChar(newCharacter);
+    saveLocalCharacter(newCharacter);
+    // console.log("new attack", loadedChar);
+  }
+
   function saveLocalCharacter(character) {
     localStorage.setItem(character.name, JSON.stringify(character));
   }
@@ -225,133 +241,113 @@ const Success = () => {
     "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(loadedChar));
 
   return (
-    <div>
+    <WindowContent>
       <h1>
         Character Sheet for {loadedChar.name}, lvl:{loadedChar.level}
       </h1>
-      <RollDiceModal />
-      <RestModal character={loadedChar} updateCharacter={updateCharacter} />
-      <LoadCharacterFromJSON
-        loadFromJson={loadFromJson}
-        character={loadedChar}
-      />
-      <button>
-        <a
-          href={"data:" + data}
-          download={loadedChar.name + "_lvl" + loadedChar.level + ".json"}
-        >
-          Download Character
-        </a>
-      </button>
-      <FormControl>
-        <label>Select Character&emsp;</label>
-        <select
-          id="char_select"
-          name="char_select"
-          // value={loadedChar.char_select}
-          value={loadedChar.name}
-          onChange={handleChange}
-        >
-          <option value={loadedChar}>Select character</option>
-          {allChars.map((char, index) => (
-            <option key={index} value={index}>
-              {char.name} lvl{char.level}
-            </option>
-          ))}
-        </select>
-      </FormControl>
-      {/* <CharSheet> */}
-      {loadedChar.name != "" && (
-        <>
-          <CardDiv>
-            <Basics
-              character={loadedChar}
-              onCharacterChange={onCharacterChange}
-            />
-          </CardDiv>
-          <CardContainer>
-            <CardDiv>
-              <SheetAbilities
-                character={loadedChar}
-                setLoadedChar={setLoadedChar}
-                onCharacterChange={onCharacterChange}
-              />
-            </CardDiv>
-
-            {/* <CardDiv>
-          <Abilities character={loadedChar} />
-        </CardDiv> */}
-
-            {/* <CardDiv>
-          <Skills character={loadedChar} />
-        </CardDiv> */}
-            <CardDiv>
-              <SheetProficiencies
+      
+        <RollDiceModal />
+        <RestModal character={loadedChar} updateCharacter={updateCharacter} />
+        <LoadCharacterFromJSON
+          loadFromJson={loadFromJson}
+          character={loadedChar}
+        />
+        <button>
+          <a
+            href={"data:" + data}
+            download={loadedChar.name + "_lvl" + loadedChar.level + ".json"}
+          >
+            Download Character
+          </a>
+        </button>
+        <FormControl>
+          <label>Select Character&emsp;</label>
+          <select
+            id="char_select"
+            name="char_select"
+            // value={loadedChar.char_select}
+            value={loadedChar.name}
+            onChange={handleChange}
+          >
+            <option value={loadedChar}>Select character</option>
+            {allChars.map((char, index) => (
+              <option key={index} value={index}>
+                {char.name} lvl{char.level}
+              </option>
+            ))}
+          </select>
+        </FormControl>
+        {loadedChar.name != "" && (
+          <PageContent>
+            <CardColumn>
+              <Basics
                 character={loadedChar}
                 onCharacterChange={onCharacterChange}
               />
-            </CardDiv>
-            {/* <CardDiv>
-          <Proficiencies character={loadedChar} />
-        </CardDiv> */}
-            {/* <CardDiv>
-          <Passives character={loadedChar} />
-        </CardDiv> */}
-            <CardDiv>
-              <SheetCombat
-                character={loadedChar}
-                onCharacterChange={onCharacterChange}
-                updateHealth={updateHealth}
-              />
-            </CardDiv>
-            {/* <CardDiv>
-          <Combat character={loadedChar} />
-        </CardDiv> */}
-            {/* <CardDiv>
-          <Health character={loadedChar} />
-        </CardDiv> */}
-            <CardDiv>
-              <SheetAttacks
-                character={loadedChar}
-                updateAttacks={updateAttacks}
-              />
-            </CardDiv>
-            <CardDiv>
-              <SheetMagic
-                character={loadedChar}
-                onCharacterChange={onCharacterChange}
-              />
-            </CardDiv>
-            <CardDiv>
-              <Features
-                character={loadedChar}
-                updateFeatures={updateFeatures}
-                onCharacterChange={onCharacterChange}
-                addFeature={addFeature}
-              />
-            </CardDiv>
-            <CardDiv>
-              <Inventory
-                character={loadedChar}
-                onCharacterChange={onCharacterChange}
-                updateInventory={updateInventory}
-                updateEquipment={updateEquipment}
-                addItem={addItem}
-                addFeature={addFeature}
-                addEquipment={addEquipment}
-              />
-            </CardDiv>
-            <CardDiv>
-              <Personality
-                character={loadedChar}
-                onCharacterChange={onCharacterChange}
-              />
-            </CardDiv>
-          </CardContainer>
-          {/* </CharSheet> */}
-        </>
-      )}
-    </div>
+            </CardColumn>
+            {/* <CardContainer> */}
+              <CardColumn>
+                <SheetAbilities
+                  character={loadedChar}
+                  setLoadedChar={setLoadedChar}
+                  onCharacterChange={onCharacterChange}
+                />
+              </CardColumn>
+              <CardColumn>
+                <SheetProficiencies
+                  character={loadedChar}
+                  onCharacterChange={onCharacterChange}
+                />
+              </CardColumn>
+              <CardColumn>
+                <SheetCombat
+                  character={loadedChar}
+                  onCharacterChange={onCharacterChange}
+                  updateHealth={updateHealth}
+                />
+              </CardColumn>
+              <CardColumn>
+                <SheetAttacks
+                  character={loadedChar}
+                  updateAttacks={updateAttacks}
+                  addAttack={addAttack}
+                />
+              </CardColumn>
+              <CardColumn>
+                <SheetMagic
+                  character={loadedChar}
+                  onCharacterChange={onCharacterChange}
+                />
+              </CardColumn>
+              <CardColumn>
+                <Features
+                  character={loadedChar}
+                  updateFeatures={updateFeatures}
+                  onCharacterChange={onCharacterChange}
+                  addFeature={addFeature}
+                />
+              </CardColumn>
+              <CardColumn>
+                <Inventory
+                  character={loadedChar}
+                  onCharacterChange={onCharacterChange}
+                  updateInventory={updateInventory}
+                  updateEquipment={updateEquipment}
+                  addItem={addItem}
+                  addFeature={addFeature}
+                  addEquipment={addEquipment}
+                />
+              </CardColumn>
+              <CardColumn>
+                <Personality
+                  character={loadedChar}
+                  onCharacterChange={onCharacterChange}
+                />
+              </CardColumn>
+            {/* </CardContainer> */}
+          </PageContent>
+        )}
+    </WindowContent>
   );
 };
 

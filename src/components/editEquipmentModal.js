@@ -54,114 +54,128 @@ const EditEquipmentModal = ({
     handleClose();
   };
 
+  const X = stylish.div`
+    text-transform: uppercase;
+    text-decoration: underline;
+    float: right;
+    font-size: .7em;
+  `;
+
   return (
-    <EditModalWindow
-      open={open}
-      handleOpen={handleOpen}
-      handleClose={handleClose}
-    >
-      <Item>
-        <h2>Edit Equipment</h2>
-        <label>Equipment name:</label>
-        <input
-          type="text"
-          id="equipment_name"
-          name="equipment_name"
-          value={equipment.equipment_name}
-          onChange={handleChange}
-          required
-        />
-      </Item>
-      <Item>
-        <label>Equipment description:</label>
-        <input
-          type="text"
-          id="desc"
-          name="desc"
-          value={equipment.desc}
-          onChange={handleChange}
-          cols="30"
-          rows="1"
-        />
-      </Item>
-      <Item>
-        <label>
-          Value:
+    <>
+      <X
+        onClick={handleOpen}
+      >
+        Edit
+      </X>
+      <EditModalWindow
+        open={open}
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+      >
+        <Item>
+          <h2>Edit Equipment</h2>
+          <label>Equipment name:</label>
           <input
-            type="number"
-            id="value"
-            name="value"
-            style={{width: "20%"}}
-            value={equipment.value}
+            type="text"
+            id="equipment_name"
+            name="equipment_name"
+            value={equipment.equipment_name}
             onChange={handleChange}
+            required
           />
-          <select
-            id="value_currency"
-            name="value_currency"
-            value={equipment.value_currency}
+        </Item>
+        <Item>
+          <label>Equipment description:</label>
+          <input
+            type="text"
+            id="desc"
+            name="desc"
+            value={equipment.desc}
             onChange={handleChange}
+            cols="30"
+            rows="1"
+          />
+        </Item>
+        <Item>
+          <label>
+            Value:
+            <input
+              type="number"
+              id="value"
+              name="value"
+              style={{ width: "20%" }}
+              value={equipment.value}
+              onChange={handleChange}
+            />
+            <select
+              id="value_currency"
+              name="value_currency"
+              value={equipment.value_currency}
+              onChange={handleChange}
+            >
+              <option value={"cp"}>Copper</option>
+              <option value={"sp"}>Silver</option>
+              <option value={"ep"}>Electrum</option>
+              <option value={"gp"}>Gold</option>
+              <option value={"pp"}>Platinum</option>
+            </select>
+          </label>
+        </Item>
+        <Item>
+          <label>
+            Equipment type:
+            <select
+              id="equipment_type"
+              name="equipment_type"
+              value={equipment.equipment_type}
+              onChange={handleChange}
+            >
+              <option value={"armour"}>Armour</option>
+              <option value={"weapon"}>Weapon</option>
+              <option value={"tool"}>Tool</option>
+              <option value={"gear"}>Gear</option>
+              <option value={"misc"}>Misc Equipment</option>
+            </select>
+          </label>
+        </Item>
+        <Item>
+          <label>
+            Attuned:
+            <select
+              id="attuned"
+              name="attuned"
+              value={equipment.attuned}
+              onChange={handleChange}
+            >
+              <option value={"false"}>False</option>
+              <option value={"true"}>True</option>
+            </select>
+          </label>
+        </Item>
+        <Item>
+          <Button
+            variant="contained"
+            onClick={() => {
+              editEquipment();
+            }}
+            startIcon={<SaveIcon />}
+            color="primary"
           >
-            <option value={"cp"}>Copper</option>
-            <option value={"sp"}>Silver</option>
-            <option value={"ep"}>Electrum</option>
-            <option value={"gp"}>Gold</option>
-            <option value={"pp"}>Platinum</option>
-          </select>
-        </label>
-      </Item>
-      <Item>
-        <label>
-          Equipment type:
-          <select
-            id="equipment_type"
-            name="equipment_type"
-            value={equipment.equipment_type}
-            onChange={handleChange}
-          >
-            <option value={"armour"}>Armour</option>
-            <option value={"weapon"}>Weapon</option>
-            <option value={"tool"}>Tool</option>
-            <option value={"gear"}>Gear</option>
-            <option value={"misc"}>Misc Equipment</option>
-          </select>
-        </label>
-      </Item>
-      <Item>
-        <label>
-          Attuned:
-          <select
-            id="attuned"
-            name="attuned"
-            value={equipment.attuned}
-            onChange={handleChange}
-          >
-            <option value={"false"}>False</option>
-            <option value={"true"}>True</option>
-          </select>
-        </label>
-      </Item>
-      <Item>
-        <Button
-          variant="contained"
-          onClick={() => {
-            editEquipment();
-          }}
-          startIcon={<SaveIcon />}
-          color="primary"
-        >
-          Save change
+            Save change
+          </Button>
+          <ConfirmDeleteEquipmentModal
+            character={character}
+            updateEquipment={updateEquipment}
+            index={index}
+            closePrev={handleClose}
+          />
+        </Item>
+        <Button variant="contained" onClick={handleClose}>
+          Close
         </Button>
-        <ConfirmDeleteEquipmentModal
-          character={character}
-          updateEquipment={updateEquipment}
-          index={index}
-          closePrev={handleClose}
-        />
-      </Item>
-      <Button variant="contained" onClick={handleClose}>
-        Close
-      </Button>
-    </EditModalWindow>
+      </EditModalWindow>
+    </>
   );
 };
 

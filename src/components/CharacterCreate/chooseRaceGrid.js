@@ -4,7 +4,8 @@ import stylish from "styled-components";
 import { Button, ButtonGroup, Select } from "@material-ui/core";
 
 import CreateProficiencies from "./createProficiencies";
-import CreateFeatures from "./createFeatures";
+
+import Features from "../features";
 
 import { getModifier } from "../utils";
 
@@ -17,7 +18,7 @@ import {
   CardRow,
   CardItem,
   Label,
-  BotButtons,
+  BotButton,
 } from "../StyledPageComponents/pageStyling";
 
 const ChooseRaceGrid = ({
@@ -258,12 +259,14 @@ const ChooseRaceGrid = ({
             </CardColumn>
           </CardRow>
         </SectionColumn>
-        <CreateFeatures
-          character={character}
-          onCharacterChange={onCharacterChange}
-          addFeature={addFeature}
-          updateFeatures={updateFeatures}
-        />
+        <SectionColumn>
+          <Features
+            character={character}
+            onCharacterChange={onCharacterChange}
+            addFeature={addFeature}
+            updateFeatures={updateFeatures}
+          />
+        </SectionColumn>
         <SectionColumn>
           <h3>Defences</h3>
           <CardColumn>
@@ -297,17 +300,19 @@ const ChooseRaceGrid = ({
             />
           </CardColumn>
         </SectionColumn>
-        <CreateProficiencies
-          character={character}
-          onCharacterChange={onCharacterChange}
-        />
+        <SectionColumn>
+          <CreateProficiencies
+            character={character}
+            onCharacterChange={onCharacterChange}
+          />
+        </SectionColumn>
       </PageContent>
 
-      <BotButtons>
+      <BotButton>
         <Button variant="contained" onClick={Continue}>
           Next
         </Button>
-      </BotButtons>
+      </BotButton>
     </WindowContent>
   );
 };

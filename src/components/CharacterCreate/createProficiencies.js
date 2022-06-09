@@ -1,10 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import AddFeatureModal from "./addFeatureModal";
-import AddEquipmentModal from "./addEquipmentModal";
-import AddItemModal from "./addItemModal";
-import AddSkillModal from "./addSkillModal";
+import AddSkillModal from "../addSkillModal";
 
 import {
   WindowContent,
@@ -17,6 +14,22 @@ import {
   Label,
   BotButtons,
 } from "../StyledPageComponents/pageStyling";
+
+const Container = styled.div`
+  text-align: center;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  background-color: none;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media only screen and (min-width: 1300px) {
+    max-height: 90vh;
+  }
+`;
 
 const Proficient = styled.div`
   width: 98%;
@@ -38,13 +51,14 @@ const Skill = styled.div`
 
 export const CreateProficiencies = ({ onCharacterChange, character }) => {
   return (
-    <SectionColumn>
-      <h3>Proficient Skills</h3>
-      <CardColumn>
-        <AddSkillModal
-          character={character}
-          onCharacterChange={onCharacterChange}
-        />
+    <Container>
+      <h3>Proficiencies</h3>
+      <AddSkillModal
+        character={character}
+        onCharacterChange={onCharacterChange}
+      />
+      <SectionColumn>
+        <Label>Skills:</Label>
         <CardColumn>
           <Proficient>
             {character.skills.Athletics !== "" ? (
@@ -87,60 +101,60 @@ export const CreateProficiencies = ({ onCharacterChange, character }) => {
             ) : null}
           </Proficient>
         </CardColumn>
-      </CardColumn>
-      <CardColumn>
-        <Label>Languages:</Label>
-        <textarea
-          type="text"
-          id="languages"
-          placeholder="Common and...?"
-          name="proficiencies.languages"
-          value={character.proficiencies.languages}
-          onChange={onCharacterChange}
-          cols="30"
-          rows="2"
-        />
-      </CardColumn>
-      <CardColumn>
-        <Label>Weapons:</Label>
-        <textarea
-          type="text"
-          id="weapons"
-          placeholder="Simple and...?"
-          name="proficiencies.weapons"
-          value={character.proficiencies.weapons}
-          onChange={onCharacterChange}
-          cols="30"
-          rows="2"
-        />
-      </CardColumn>
-      <CardColumn>
-        <Label>Armour:</Label>
-        <textarea
-          type="text"
-          id="armour"
-          placeholder="Light and...?"
-          name="proficiencies.armour"
-          value={character.proficiencies.armour}
-          onChange={onCharacterChange}
-          cols="30"
-          rows="2"
-        />
-      </CardColumn>
-      <CardColumn>
-        <Label>Other:</Label>
-        <textarea
-          type="text"
-          id="other"
-          placeholder="Instruments, games, vehicles...?"
-          name="proficiencies.other"
-          value={character.proficiencies.other}
-          onChange={onCharacterChange}
-          cols="30"
-          rows="1"
-        />
-      </CardColumn>
-    </SectionColumn>
+        <CardColumn>
+          <Label>Languages:</Label>
+          <textarea
+            type="text"
+            id="languages"
+            placeholder="Common and...?"
+            name="proficiencies.languages"
+            value={character.proficiencies.languages}
+            onChange={onCharacterChange}
+            cols="30"
+            rows="2"
+          />
+        </CardColumn>
+        <CardColumn>
+          <Label>Weapons:</Label>
+          <textarea
+            type="text"
+            id="weapons"
+            placeholder="Simple and...?"
+            name="proficiencies.weapons"
+            value={character.proficiencies.weapons}
+            onChange={onCharacterChange}
+            cols="30"
+            rows="2"
+          />
+        </CardColumn>
+        <CardColumn>
+          <Label>Armour:</Label>
+          <textarea
+            type="text"
+            id="armour"
+            placeholder="Light and...?"
+            name="proficiencies.armour"
+            value={character.proficiencies.armour}
+            onChange={onCharacterChange}
+            cols="30"
+            rows="2"
+          />
+        </CardColumn>
+        <CardColumn>
+          <Label>Other:</Label>
+          <textarea
+            type="text"
+            id="other"
+            placeholder="Instruments, games, vehicles...?"
+            name="proficiencies.other"
+            value={character.proficiencies.other}
+            onChange={onCharacterChange}
+            cols="30"
+            rows="1"
+          />
+        </CardColumn>
+      </SectionColumn>
+    </Container>
   );
 };
 

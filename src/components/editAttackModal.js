@@ -14,29 +14,14 @@ import ConfirmDeleteAttackModal from "./confirmDeleteAttackModal";
 
 import EditModalWindow from "./StyledPageComponents/editModalWindow";
 
+import { BotButton, TopRightButton } from "./StyledPageComponents/pageStyling";
+
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
-const SmallButton = stylish.div`
-  max-width: 50px;
-  height: 20px;
-`;
 
 const EditAttackModal = ({ character, updateAttacks, index, name }) => {
   const [open, setOpen] = React.useState(false);
@@ -75,6 +60,17 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
   };
 
   return (
+    <>
+      <BotButton>
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={handleOpen}
+          color="primary"
+        >
+          Edit
+        </Button>
+      </BotButton>
     <EditModalWindow
       open={open}
       handleOpen={handleOpen}
@@ -267,6 +263,7 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
         Close
       </Button>
     </EditModalWindow>
+    </>
   );
 };
 

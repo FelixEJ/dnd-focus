@@ -12,6 +12,7 @@ const WindowContentContainer = styled.div`
 
   @media only screen and (min-width: 480px) {
     background: red;
+    max-width: 765px;
   }
   @media only screen and (min-width: 768px) {
     background: orange;
@@ -50,6 +51,25 @@ const PageContentContainer = styled.div`
 `;
 export const PageContent = ({ children }) => {
   return <PageContentContainer>{children}</PageContentContainer>;
+};
+
+const SectionContainer = styled.div`
+  text-align: center;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  background-color: none;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media only screen and (min-width: 1300px) {
+    max-height: 90vh;
+  }
+`;
+export const Container = ({ children }) => {
+  return <Container>{children}</Container>;
 };
 
 const SectionColumnContainer = styled.div`
@@ -187,11 +207,21 @@ export const Label = ({ children }) => {
   return <LabelStyle>{children}</LabelStyle>;
 };
 
-const BottomButtons = styled.div`
-  margin-bottom: 40px;
+const BottomButtonContainer = styled.div`
+  margin-bottom: 10px;
+  margin-top: 10px;
 `;
-export const BotButtons = ({ children }) => {
-  return <BottomButtons>{children}</BottomButtons>;
+export const BotButton = ({ children }) => {
+  return <BottomButtonContainer>{children}</BottomButtonContainer>;
+};
+
+const TopRightButtonContainer = styled.div`
+  float: right;
+  margin-top: -30px;
+  margin-right: 5px;
+`;
+export const TopRightButton = ({ children }) => {
+  return <TopRightButtonContainer>{children}</TopRightButtonContainer>;
 };
 
 const ModalContentContainer = styled.div`
@@ -202,6 +232,7 @@ const ModalContentContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width:90vw;
   max-width: 400;
 `;
 export const ModalContent = ({ children }) => {
@@ -210,7 +241,6 @@ export const ModalContent = ({ children }) => {
 
 const ModalWindowContainer = styled.div`
   background: red;
-  width: 95%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;

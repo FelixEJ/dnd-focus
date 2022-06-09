@@ -7,10 +7,11 @@ import ConfirmCharacter from "./confirmCharacter";
 import Success from "./success";
 
 import { blankCharacter } from "../../data/character";
+import { testCharacter } from "../../data/testCharacter";
 
 function CreatePageGrid() {
   const [step, setStep] = useState(1);
-  const [character, setCharacter] = useState(blankCharacter);
+  const [character, setCharacter] = useState(testCharacter);
 
   function onCharacterChange(e) {
     // if (e === null) {

@@ -5,17 +5,34 @@ import EditAbilitiesModal from "./editAbilitiesModal";
 
 import { getModifier, getSave, getSkill, getPassive } from "./utils";
 
-const Container = styled.div`
-  text-align: center;
-  z-index: 1;
-  max-width: 400px;
-  background-color: none;
-  max-height: 100vh;
+import {
+  WindowContent,
+  PageContent,
+  Container,
+  SectionColumn,
+  SectionRow,
+  CardColumn,
+  CardRow,
+  CardItem,
+  Label,
+  BotButton,
+} from "../components/StyledPageComponents/pageStyling";
 
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-`;
+// const Container = styled.div`
+//   text-align: center;
+//   z-index: 1;
+//   width: 100%;
+//   max-width: 400px;
+//   background-color: none;
+
+//   display: block;
+//   margin-left: auto;
+//   margin-right: auto;
+
+//   @media only screen and (min-width: 1300px) {
+//     max-height: 90vh;
+//   }
+// `;
 
 const Box = styled.div`
   width: 98%;
@@ -127,7 +144,7 @@ const NumberMid = styled.div`
 
 const SheetAbilities = ({ character, onCharacterChange }) => {
   return (
-    <Container>
+    <>
       <h4>Ability Scores</h4>
       <EditAbilitiesModal
         character={character}
@@ -710,7 +727,7 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
         </NumberLeft>
         <TextRight>passive intelligence (investigation)</TextRight>
       </Bar>
-    </Container>
+    </>
   );
 };
 

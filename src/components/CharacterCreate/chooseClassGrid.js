@@ -1,15 +1,14 @@
 import React from "react";
 import stylish from "styled-components";
 import { Button, ButtonGroup, Select } from "@material-ui/core";
-import AddItemModal from "./addItemModal";
-import AddAttackModal from "./addAttackModal";
 
-import ConfirmDeleteItemModal from "../confirmDeleteItemModal";
-import ConfirmDeleteAttackModal from "../confirmDeleteAttackModal";
 
 import CreateProficiencies from "./createProficiencies";
-import CreateFeatures from "./createFeatures";
-import CreateInventory from "./createInventory";
+
+import Inventory from "../inventory";
+import Features from "../features";
+import SheetAttacks from "../sheetAttacks";
+import SheetMagic from "../sheetMagic";
 
 import {
   WindowContent,
@@ -20,26 +19,8 @@ import {
   CardRow,
   CardItem,
   Label,
-  BotButtons,
+  BotButton,
 } from "../StyledPageComponents/pageStyling";
-
-const Proficient = stylish.div`
-  width: 98%;
-  background-color: none;
-  display: block;
-  column-count: 3;
-  column-gap: 1%;
-`;
-const Skill = stylish.div`
-  & {
-    width: 98%;
-    display: inline-block;
-    margin: 1% 1% 1% 1%;
-  }
-  &:nth-child(odd) {
-    background-color: rgba(203, 203, 203, 0.4);
-  }
-`;
 
 const ChooseClassGrid = ({
   nextStep,
@@ -144,7 +125,7 @@ const ChooseClassGrid = ({
               name="hit_dice.max"
               value={character.hit_dice.max}
               onChange={onCharacterChange}
-              size="3"
+              style={{ width: "15%" }}
               display="none"
             />
           </CardRow>
@@ -169,7 +150,7 @@ const ChooseClassGrid = ({
               name="hit_dice.mult1_max"
               value={character.hit_dice.mult1_max}
               onChange={onCharacterChange}
-              size="3"
+              style={{ width: "15%" }}
               display="none"
             />
           </CardRow>
@@ -182,7 +163,7 @@ const ChooseClassGrid = ({
               name="hp.max"
               value={character.hp.max}
               onChange={onCharacterChange}
-              size="4"
+              style={{ width: "15%" }}
               required
             />
             <Label>Con mod = {getModifier(character.stats.con)}</Label>
@@ -195,14 +176,16 @@ const ChooseClassGrid = ({
               name="speed"
               value={character.speed}
               onChange={onCharacterChange}
-              size="4"
+              style={{ width: "15%" }}
             />
           </CardColumn>
         </SectionColumn>
-        <CreateProficiencies
-          character={character}
-          onCharacterChange={onCharacterChange}
-        />
+        <SectionColumn>
+          <CreateProficiencies
+            character={character}
+            onCharacterChange={onCharacterChange}
+          />
+        </SectionColumn>
         <SectionColumn>
           <h3>Saving Throws:</h3>
           <CardRow>
@@ -223,7 +206,7 @@ const ChooseClassGrid = ({
                   name="saves.str_bonus"
                   value={character.saves.str_bonus}
                   onChange={onCharacterChange}
-                  size="2"
+                  style={{ width: "20%" }}
                 />
               </CardItem>
             </CardColumn>
@@ -244,7 +227,7 @@ const ChooseClassGrid = ({
                   name="saves.dex_bonus"
                   value={character.saves.dex_bonus}
                   onChange={onCharacterChange}
-                  size="2"
+                  style={{ width: "20%" }}
                 />
               </CardItem>
             </CardColumn>
@@ -267,7 +250,7 @@ const ChooseClassGrid = ({
                   name="saves.con_bonus"
                   value={character.saves.con_bonus}
                   onChange={onCharacterChange}
-                  size="2"
+                  style={{ width: "20%" }}
                 />
               </CardItem>
             </CardColumn>
@@ -288,7 +271,7 @@ const ChooseClassGrid = ({
                   name="saves.int_bonus"
                   value={character.saves.int_bonus}
                   onChange={onCharacterChange}
-                  size="2"
+                  style={{ width: "20%" }}
                 />
               </CardItem>
             </CardColumn>
@@ -311,7 +294,7 @@ const ChooseClassGrid = ({
                   name="saves.wis_bonus"
                   value={character.saves.wis_bonus}
                   onChange={onCharacterChange}
-                  size="2"
+                  style={{ width: "20%" }}
                 />
               </CardItem>
             </CardColumn>
@@ -332,53 +315,47 @@ const ChooseClassGrid = ({
                   name="saves.cha_bonus"
                   value={character.saves.cha_bonus}
                   onChange={onCharacterChange}
-                  size="2"
+                  style={{ width: "20%" }}
                 />
               </CardItem>
             </CardColumn>
           </CardRow>
         </SectionColumn>
-        <CreateInventory
-          character={character}
-          onCharacterChange={onCharacterChange}
-          updateEquipment={updateEquipment}
-          addItem={addItem}
-          updateInventory={updateInventory}
-          addEquipment={addEquipment}
-        />
+        <SectionColumn>
+          <Inventory
+            character={character}
+            onCharacterChange={onCharacterChange}
+            updateEquipment={updateEquipment}
+            addItem={addItem}
+            updateInventory={updateInventory}
+            addEquipment={addEquipment}
+          />
+        </SectionColumn>
         <SectionColumn>
           <CardColumn>
-            <CardRow>
-              <Label>
-                Armour Class (AC):
-                <input
-                  type="number"
-                  id="ac"
-                  name="ac"
-                  value={character.ac}
-                  onChange={onCharacterChange}
-                  size="3"
-                />
-              </Label>
-              <Label>
-                AC = 10/armour + {getModifier(character.stats.dex)}
-                {"(DEX)"}
-              </Label>
-            </CardRow>
-            <CardRow>
-              <Label>
-                Initiative:
-                <input
-                  type="number"
-                  id="initiative"
-                  name="initiative"
-                  value={character.initiative}
-                  onChange={onCharacterChange}
-                  size="3"
-                />
-              </Label>
+            <CardColumn>
+              <Label>Armour Class (AC):</Label>
+              <input
+                type="number"
+                id="ac"
+                name="ac"
+                value={character.ac}
+                onChange={onCharacterChange}
+                style={{ width: "20%" }}
+              />
               <Label>DEX mod = {getModifier(character.stats.dex)}</Label>
-            </CardRow>
+            </CardColumn>
+            <CardColumn>
+              <Label>Initiative:</Label>
+              <input
+                type="number"
+                id="initiative"
+                name="initiative"
+                value={character.initiative}
+                onChange={onCharacterChange}
+                style={{ width: "20%" }}
+              />
+            </CardColumn>
           </CardColumn>
         </SectionColumn>
         <SectionColumn>
@@ -399,181 +376,27 @@ const ChooseClassGrid = ({
                 <option value={"cha"}>Charisma</option>
               </Select>
             </Label>
-            {character.magic.magic_user === true && (
-              <>
-                <br />
-                <Label>
-                  {character.magic.ability} mod ={" "}
-                  {getSpellModifier(character.magic.ability)}
-                  {" || "}
-                  Proficiency Bonus: +{character.proficiency_bonus}
-                </Label>
-                <br />
-                <Label>Spell save DC:</Label>
-                <input
-                  type="number"
-                  id="save_dc"
-                  name="magic.save_dc"
-                  value={character.magic.save_dc}
-                  onChange={onCharacterChange}
-                  size="3"
-                  required
-                />
-                <br />
-                <Label>Spell attack modifier:</Label>
-                <input
-                  type="number"
-                  id="spell_attack_mod"
-                  name="magic.spell_attack_mod"
-                  value={character.magic.spell_attack_mod}
-                  onChange={onCharacterChange}
-                  size="3"
-                  required
-                />
-                <br />
-                <Label>Cantrips known:</Label>
-                <input
-                  type="number"
-                  id="cantrips_known"
-                  name="magic.cantrips_known"
-                  value={character.magic.cantrips_known}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <br />
-                <Label>Spells known/preparable:</Label>
-                <input
-                  type="number"
-                  id="spells_known"
-                  name="magic.spells_known"
-                  value={character.magic.spells_known}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <br />
-                <Label>Spell slots:</Label>
-                <br />
-                <Label>1st:</Label>
-                <input
-                  type="number"
-                  id="first"
-                  name="spellslots.first"
-                  value={character.spellslots.first}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <Label>2nd:</Label>
-                <input
-                  type="number"
-                  id="second"
-                  name="spellslots.second"
-                  value={character.spellslots.second}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <Label>3rd:</Label>
-                <input
-                  type="number"
-                  id="third"
-                  name="spellslots.third"
-                  value={character.spellslots.third}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <br />
-                <Label>4th:</Label>
-                <input
-                  type="number"
-                  id="fourth"
-                  name="spellslots.fourth"
-                  value={character.spellslots.fourth}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <Label>5th:</Label>
-                <input
-                  type="number"
-                  id="fifth"
-                  name="spellslots.fifth"
-                  value={character.spellslots.fifth}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <Label>6th:</Label>
-                <input
-                  type="number"
-                  id="sixth"
-                  name="spellslots.sixth"
-                  value={character.spellslots.sixth}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <br />
-                <Label>7th:</Label>
-                <input
-                  type="number"
-                  id="seventh"
-                  name="spellslots.seventh"
-                  value={character.spellslots.seventh}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <Label>8th:</Label>
-                <input
-                  type="number"
-                  id="eighth"
-                  name="spellslots.eighth"
-                  value={character.spellslots.eighth}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-                <Label>9th:</Label>
-                <input
-                  type="number"
-                  id="ninth"
-                  name="spellslots.ninth"
-                  value={character.spellslots.ninth}
-                  onChange={onCharacterChange}
-                  size="2"
-                  required
-                />
-              </>
-            )}
+            <SheetMagic
+              character={character}
+              onCharacterChange={onCharacterChange}
+            />
           </CardColumn>
         </SectionColumn>
-
-        <CreateFeatures
-          character={character}
-          onCharacterChange={onCharacterChange}
-          addFeature={addFeature}
-          updateFeatures={updateFeatures}
-        />
         <SectionColumn>
-          <h3>Attacks</h3>
-          <CardColumn>
-            <AddAttackModal addAttack={addAttack} character={character} />
+          <Features
+            character={character}
+            onCharacterChange={onCharacterChange}
+            addFeature={addFeature}
+            updateFeatures={updateFeatures}
+          />
+        </SectionColumn>
 
-            {character.attacks.map((attack, index) => (
-              <h4 key={index}>
-                {attack.attack_name}
-                <ConfirmDeleteAttackModal
-                  character={character}
-                  updateAttacks={updateAttacks}
-                  index={index}
-                />
-              </h4>
-            ))}
-          </CardColumn>
+        <SectionColumn>
+          <SheetAttacks
+            character={character}
+            updateAttacks={updateAttacks}
+            addAttack={addAttack}
+          />
         </SectionColumn>
         <SectionColumn>
           <h3>Passives:</h3>
@@ -597,7 +420,7 @@ const ChooseClassGrid = ({
                 name="passives.perception"
                 value={character.passives.perception}
                 onChange={onCharacterChange}
-                size="3"
+                style={{ width: "20%" }}
               />
 
               <Label>= 10 {getModifier(character.stats.wis)}(WIS)</Label>
@@ -615,7 +438,7 @@ const ChooseClassGrid = ({
                 name="passives.perception_bonus"
                 value={character.passives.perception_bonus}
                 onChange={onCharacterChange}
-                size="3"
+                style={{ width: "20%" }}
               />
             </CardRow>
             <CardRow>
@@ -626,7 +449,7 @@ const ChooseClassGrid = ({
                 name="passives.investigation"
                 value={character.passives.investigation}
                 onChange={onCharacterChange}
-                size="3"
+                style={{ width: "20%" }}
               />
 
               <Label>= 10 {getModifier(character.stats.int)}(INT)</Label>
@@ -644,18 +467,18 @@ const ChooseClassGrid = ({
                 name="passives.investigation_bonus"
                 value={character.passives.investigation_bonus}
                 onChange={onCharacterChange}
-                size="3"
+                style={{ width: "20%" }}
               />
             </CardRow>
           </CardColumn>
         </SectionColumn>
       </PageContent>
-      <BotButtons>
+      <BotButton>
         <ButtonGroup variant="contained">
           <Button onClick={Previous}>Back</Button>
           <Button onClick={Continue}>Next</Button>
         </ButtonGroup>
-      </BotButtons>
+      </BotButton>
     </WindowContent>
   );
 };

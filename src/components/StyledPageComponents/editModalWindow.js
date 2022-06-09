@@ -13,12 +13,7 @@ const ButtonContainer = stylish.div`
 
 const EditModalWindow = ({ children, open, handleOpen, handleClose }) => {
   return (
-    <div>
-      <ButtonContainer>
-        <Button variant="outlined" size="small" onClick={handleOpen}>
-          Edit
-        </Button>
-      </ButtonContainer>
+    <div>      
       <ModalWindow>
         <Modal
           open={open}

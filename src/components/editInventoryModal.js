@@ -78,84 +78,116 @@ const EditInventoryModal = ({
     return invItem.quantity * invItem.value_each;
   }
 
+  const X = stylish.div`
+    text-transform: uppercase;
+    text-decoration: underline;
+    float: right;
+    font-size: .7em;
+  `;
+
   return (
-    <EditModalWindow
-      open={open}
-      handleOpen={handleOpen}
-      handleClose={handleClose}
-    >
-      <Item>
-        <h2>Edit Item</h2>
-        <label>Item Name</label>
-        <input
-          type="text"
-          id="item_name"
-          name="item_name"
-          value={invItem.item_name}
-          onChange={handleChange}
-          required
-        />
-      </Item>
-      <Item>
-        <label>Quantity</label>
-        <input
-          type="number"
-          id="quantity"
-          name="quantity"
-          value={invItem.quantity}
-          onChange={handleChange}
-          style={{width: "20%"}}
-        />
-      </Item>
-      <Item>
-        <label>Value (each)</label>
-        <input
-          type="number"
-          id="value_each"
-          name="value_each"
-          value={invItem.value_each}
-          onChange={handleChange}
-          style={{width: "20%"}}
-        />
-        <select
-          id="value_currency"
-          name="value_currency"
-          value={invItem.value_currency}
-          onChange={handleChange}
-        >
-          <option value={"cp"}>Copper</option>
-          <option value={"sp"}>Silver</option>
-          <option value={"ep"}>Electrum</option>
-          <option value={"gp"}>Gold</option>
-          <option value={"pp"}>Platinum</option>
-        </select>
-      </Item>
-      <Item>
-        <label>Total Value</label>
-        <p>{getTotalValue() + invItem.value_currency}</p>
-      </Item>
-      <Item>
-        <Button
-          variant="contained"
-          onClick={() => {
-            editInventory();
-          }}
-          startIcon={<SaveIcon />}
-          color="primary"
-        >
-          Save change
+    <>
+      <X onClick={handleOpen}>Edit</X>
+      <EditModalWindow
+        open={open}
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+      >
+        <Item>
+          <h2>Edit Item</h2>
+          <label>Item Name</label>
+          <input
+            type="text"
+            id="item_name"
+            name="item_name"
+            value={invItem.item_name}
+            onChange={handleChange}
+            required
+          />
+        </Item>
+        <Item>
+          <label>Item Description</label>
+          <input
+            type="text"
+            id="item_description"
+            name="item_description"
+            value={item.item_description}
+            onChange={handleChange}
+          />
+        </Item>
+        <Item>
+          <label>Quantity</label>
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            value={invItem.quantity}
+            onChange={handleChange}
+            style={{ width: "20%" }}
+          />
+        </Item>
+        <Item>
+          <label>Value (each)</label>
+          <input
+            type="number"
+            id="value_each"
+            name="value_each"
+            value={invItem.value_each}
+            onChange={handleChange}
+            style={{ width: "20%" }}
+          />
+          <select
+            id="value_currency"
+            name="value_currency"
+            value={invItem.value_currency}
+            onChange={handleChange}
+          >
+            <option value={"cp"}>Copper</option>
+            <option value={"sp"}>Silver</option>
+            <option value={"ep"}>Electrum</option>
+            <option value={"gp"}>Gold</option>
+            <option value={"pp"}>Platinum</option>
+          </select>
+        </Item>
+        <Item>
+          <label>Total Value</label>
+          <p>{getTotalValue() + invItem.value_currency}</p>
+        </Item>
+        <Item>
+          <label>Group Loot?</label>
+          <select
+            id="group_loot"
+            name="group_loot"
+            value={item.group_loot}
+            onChange={handleChange}
+          >
+            <option value={""}>No</option>
+            <option value={"yes"}>Yes</option>
+          </select>
+        </Item>
+        <Item>
+          <Button
+            variant="contained"
+            onClick={() => {
+              editInventory();
+            }}
+            startIcon={<SaveIcon />}
+            color="primary"
+          >
+            Save change
+          </Button>
+          <ConfirmDeleteItemModal
+            character={character}
+            updateInventory={updateInventory}
+            index={index}
+            closePrev={handleClose}
+          />
+        </Item>
+        <Button variant="contained" onClick={handleClose}>
+          Close
         </Button>
-        <ConfirmDeleteItemModal
-          character={character}
-          updateInventory={updateInventory}
-          index={index}
-          closePrev={handleClose}
-        />
-      </Item>
-      <Button variant="contained" onClick={handleClose}>
-        Close
-      </Button>
-    </EditModalWindow>
+      </EditModalWindow>
+    </>
   );
 };
 

@@ -7,6 +7,7 @@ import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
 import EditAttackModal from "./editAttackModal";
 
+
 function CustomToggle({ children, eventKey }) {
   const decoratedOnClick = useAccordionButton(eventKey, () =>
     console.log("totally custom!")
@@ -45,7 +46,7 @@ const AttackAccordion = ({ character, updateAttacks }) => {
   }, [character]);
 
   return (
-    <Accordion defaultActiveKey={character.attacks[0].attack_id}>
+    <Accordion >
       <div>
         {character.attacks.map((attack, index) => (
           <Card>

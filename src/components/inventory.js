@@ -9,7 +9,6 @@ const Container = styled.div`
   width: 100%;
   max-width: 400px;
   background-color: none;
-  max-height: 30vh;
   overflow: auto;
 
   display: block;
@@ -27,7 +26,7 @@ const Box = styled.div`
   display: inline-block;
   margin: 1% 1% 1% 1%;
 `;
-const Text = styled.div`
+const Inset = styled.div`
   border-style: inset;
   border-radius: 5px;
   margin-top: 2px;
@@ -37,12 +36,13 @@ const Text = styled.div`
 const MoneyBox = styled.div`
   display: flex;
   flex-flow: row nowrap;
+  width: 90vw;
+  max-width: 400px;
 `;
 
 const MoneyUnit = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  width: 20%;
 `;
 
 const Inventory = ({
@@ -69,28 +69,28 @@ const Inventory = ({
       <h4>Inventory</h4>
       <Container>
         <Box>
-          <Text>
+          <Inset>
             <EquipmentAccordion
               character={character}
               updateEquipment={updateEquipment}
               addEquipment={addEquipment}
               addFeature={addFeature}
             />{" "}
-          </Text>
+          </Inset>
         </Box>
         <Box>
-          <Text>
+          <Inset>
             <InventoryAccordion
               character={character}
               addItem={addItem}
               updateInventory={updateInventory}
             />{" "}
-          </Text>
+          </Inset>
         </Box>
         
       </Container>
       <Box>
-          <Text>
+          <Inset>
             <b>Money</b>
             <MoneyBox>
               <MoneyUnit>
@@ -102,7 +102,7 @@ const Inventory = ({
                   name="currency.copper"
                   value={character.currency.copper}
                   onChange={onCharacterChange}
-                  size="4"
+                  style={{width: "18vw", maxWidth: "80px"}}
                 />
               </MoneyUnit>
               <MoneyUnit>
@@ -114,7 +114,7 @@ const Inventory = ({
                   name="currency.silver"
                   value={character.currency.silver}
                   onChange={onCharacterChange}
-                  size="4"
+                  style={{width: "18vw", maxWidth: "80px"}}
                 />
               </MoneyUnit>
               <MoneyUnit>
@@ -126,7 +126,7 @@ const Inventory = ({
                   name="currency.electrum"
                   value={character.currency.electrum}
                   onChange={onCharacterChange}
-                  size="4"
+                  style={{width: "18vw", maxWidth: "80px"}}
                 />
               </MoneyUnit>
               <MoneyUnit>
@@ -138,7 +138,7 @@ const Inventory = ({
                   name="currency.gold"
                   value={character.currency.gold}
                   onChange={onCharacterChange}
-                  size="4"
+                  style={{width: "18vw", maxWidth: "80px"}}
                 />
               </MoneyUnit>
               <MoneyUnit>
@@ -150,12 +150,12 @@ const Inventory = ({
                   name="currency.platinum"
                   value={character.currency.platinum}
                   onChange={onCharacterChange}
-                  size="4"
+                  style={{width: "18vw", maxWidth: "80px"}}
                 />
               </MoneyUnit>
             </MoneyBox>
             Total: <b>{getTotalMoney()} gp</b>
-          </Text>
+          </Inset>
         </Box>
     </div>
   );

@@ -3,6 +3,19 @@ import styled from "styled-components";
 
 import EditBasicsModal from "./editBasicsModal";
 
+import {
+  WindowContent,
+  PageContent,
+  SectionColumn,
+  SectionRow,
+  CardColumn,
+  CardRow,
+  CardItem,
+  Label,
+  BotButton,
+} from "../components/StyledPageComponents/pageStyling";
+
+
 const Container = styled.div`
   text-align: center;
   z-index: 1;
@@ -26,7 +39,7 @@ const Text = styled.div`
 
 const Basics = ({ character, onCharacterChange }) => {
   return (
-    <Container>
+    <SectionColumn>
       <Text>
         Name: <b>{character.name}</b>
       </Text>
@@ -67,7 +80,7 @@ const Basics = ({ character, onCharacterChange }) => {
         character={character}
         onCharacterChange={onCharacterChange}
       />
-    </Container>
+    </SectionColumn>
   );
 };
 
