@@ -29,7 +29,7 @@ export const WindowContent = ({ children }) => {
 
 const PageContentContainer = styled.div`
   background: red;
-  width: 99%;
+  width: 95%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -54,7 +54,7 @@ export const PageContent = ({ children }) => {
 
 const SectionColumnContainer = styled.div`
   background-color: orange;
-  width: 99%;
+  width: 95%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -80,7 +80,7 @@ export const SectionColumn = ({ children }) => {
 
 const SectionRowContainer = styled.div`
   background-color: orange;
-  width: 99%;
+  width: 95%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -106,7 +106,7 @@ export const SectionRow = ({ children }) => {
 
 const CardColumnContainer = styled.div`
   background-color: yellow;
-  width: 99%;
+  width: 95%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -132,7 +132,7 @@ export const CardColumn = ({ children }) => {
 
 const CardRowContainer = styled.div`
   background-color: yellow;
-  width: 99%;
+  width: 95%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -181,7 +181,7 @@ export const CardItem = ({ children }) => {
 };
 
 const LabelStyle = styled.div`
-  clear: right;
+    clear:right;
 `;
 export const Label = ({ children }) => {
   return <LabelStyle>{children}</LabelStyle>;
@@ -195,23 +195,9 @@ export const BotButtons = ({ children }) => {
 };
 
 const ModalWindowContainer = styled.div`
-  max-height: 85vh;
+  max-height: 90vh;
   overflow: auto;
 `;
 export const ModalWindow = ({ children }) => {
   return <ModalWindowContainer>{children}</ModalWindowContainer>;
-};
-
-const CentredContainer = styled.div`
-  background: maroon;
-  width: 100vw;
-  max-width: 480px;
-  height: 90vh;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-`;
-export const Container = ({ children }) => {
-  return <CentredContainer>{children}</CentredContainer>;
 };

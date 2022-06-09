@@ -6,18 +6,6 @@ import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
-import {
-  WindowContent,
-  ModalWindow,
-  PageContent,
-  SectionColumn,
-  CardColumn,
-  CardRow,
-  CardItem,
-  Label,
-  BotButtons,
-} from "./StyledPageComponents/pageStyling";
-
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -45,12 +33,10 @@ const AddItemModal = ({ addItem, character }) => {
   const [item, setItem] = useState({
     item_id: 0,
     item_name: "",
-    item_description: "",
     quantity: 0,
     value_each: 0,
-    value_currency: "",
+    value_currency: "cp",
     value_total: 0,
-    party_loot: false,
   });
 
   const handleChange = (e) => {
@@ -64,12 +50,10 @@ const AddItemModal = ({ addItem, character }) => {
     setItem({
       item_id: 0,
       item_name: "",
-      item_description: "",
       quantity: 0,
       value_each: 0,
-      value_currency: "",
+      value_currency: "cp",
       value_total: 0,
-      party_loot: false,
     });
   }
 
@@ -84,7 +68,7 @@ const AddItemModal = ({ addItem, character }) => {
   }
 
   return (
-    <PageContent>
+    <div>
       <Button variant="contained" onClick={handleOpen}>
         Add Item
       </Button>
@@ -95,82 +79,58 @@ const AddItemModal = ({ addItem, character }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <ModalWindow>
-            <Grid>
-              <Item>
-                <h2>Add/Edit Item</h2>
-                <Label>Item Name</Label>
-                <input
-                  type="text"
-                  id="item_name"
-                  name="item_name"
-                  value={item.item_name}
-                  onChange={handleChange}
-                />
-              </Item>
-              <Item>
-                <Label>Item Description</Label>
-                <input
-                  type="text"
-                  id="item_description"
-                  name="item_description"
-                  value={item.item_description}
-                  onChange={handleChange}
-                />
-              </Item>
-              <Item>
-                <Label>Quantity</Label>
-                <input
-                  type="number"
-                  id="quantity"
-                  name="quantity"
-                  value={item.quantity}
-                  onChange={handleChange}
-                  size="3"
-                />
-              </Item>
-              <Item>
-                <Label>Value (each)</Label>
-                <input
-                  type="number"
-                  id="value_each"
-                  name="value_each"
-                  value={item.value_each}
-                  onChange={handleChange}
-                  size="4"
-                />
-                <select
-                  id="value_currency"
-                  name="value_currency"
-                  value={item.value_currency}
-                  onChange={handleChange}
-                >
-                  <option value={"cp"}>Copper</option>
-                  <option value={"sp"}>Silver</option>
-                  <option value={"ep"}>Electrum</option>
-                  <option value={"gp"}>Gold</option>
-                  <option value={"pp"}>Platinum</option>
-                </select>
-              </Item>
-              <Item>
-                <Label>Total Value</Label>
-                <p>{getTotalValue() + item.value_currency}</p>
-              </Item>
-              <Item>
-                <Label>Party loot?</Label>
-                <select
-                  type="checkbox"
-                  id="party_loot"
-                  name="party_loot"
-                  value={item.party_loot}
-                  onChange={handleChange}
-                >
-                  <option value={false}>No</option>
-                  <option value={true}>Yes</option>
-                </select>
-              </Item>
-            </Grid>
-          </ModalWindow>
+          <Grid>
+            <Item>
+              <h2>Add/Edit Item</h2>
+              <label>Item Name</label>
+              <input
+                type="text"
+                id="item_name"
+                name="item_name"
+                value={item.item_name}
+                onChange={handleChange}
+                required
+              />
+            </Item>
+            <Item>
+              <label>Quantity</label>
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                value={item.quantity}
+                onChange={handleChange}
+                size="3"
+              />
+            </Item>
+            <Item>
+              <label>Value (each)</label>
+              <input
+                type="number"
+                id="value_each"
+                name="value_each"
+                value={item.value_each}
+                onChange={handleChange}
+                size="4"
+              />
+              <select
+                id="value_currency"
+                name="value_currency"
+                value={item.value_currency}
+                onChange={handleChange}
+              >
+                <option value={"cp"}>Copper</option>
+                <option value={"sp"}>Silver</option>
+                <option value={"ep"}>Electrum</option>
+                <option value={"gp"}>Gold</option>
+                <option value={"pp"}>Platinum</option>
+              </select>
+            </Item>
+            <Item>
+              <label>Total Value</label>
+              <p>{getTotalValue()+item.value_currency}</p>
+            </Item>
+          </Grid>
           <Item>
             <Button
               variant="contained"
@@ -181,13 +141,12 @@ const AddItemModal = ({ addItem, character }) => {
               Confirm Item
             </Button>
           </Item>
-
           <Button variant="contained" onClick={handleClose}>
             Close
           </Button>
         </Box>
       </Modal>
-    </PageContent>
+    </div>
   );
 };
 

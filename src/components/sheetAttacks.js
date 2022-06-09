@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import AttackAccordion from "./attackAccordion";
 
-import AddAttackModal from "./addAttackModal";
-
 const Container = styled.div`
   text-align: center;
   z-index: 1;
@@ -27,15 +25,19 @@ const Box = styled.div`
   margin-bottom: 2px;
 `;
 
-const Attacks = ({ character, updateAttacks, addAttack }) => {
+const Attacks = ({ character, updateAttacks }) => {
   return (
-    <Container>
+    <div>
       <h4>Attacks</h4>
-      <AddAttackModal character={character} addAttack={addAttack}/>
-      <Box>
-        <AttackAccordion character={character} updateAttacks={updateAttacks} />
-      </Box>
-    </Container>
+      <Container>
+        <Box>
+          <AttackAccordion
+            character={character}
+            updateAttacks={updateAttacks}
+          />
+        </Box>
+      </Container>
+    </div>
   );
 };
 

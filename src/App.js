@@ -1,25 +1,17 @@
 import React from "react";
-import stylish from "styled-components";
 import "./App.css";
+import { Container } from "@material-ui/core";
 import { BrowserRouter } from "react-router-dom";
 import Routes from "./components/routes";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-const Container = stylish.div`
-  width: 100vw;  
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-`;
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Container>
+        {/* <Container> */}
           <Routes />
-        </Container>
+        {/* </Container> */}
       </div>
     </BrowserRouter>
   );

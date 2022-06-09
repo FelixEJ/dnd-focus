@@ -3,20 +3,6 @@ import styled from "styled-components";
 import InventoryAccordion from "./inventoryAccordion";
 import EquipmentAccordion from "./equipmentAccordion";
 
-import {
-  WindowContent,
-  ModalWindow,
-  PageContent,
-  SectionColumn,
-  CardColumn,
-  CardRow,
-  CardItem,
-  Label,
-  BotButtons,
-} from "./StyledPageComponents/pageStyling";
-
-import MoneyModal from "./moneyModal";
-
 const Container = styled.div`
   text-align: center;
   z-index: 1;
@@ -51,7 +37,6 @@ const Text = styled.div`
 const MoneyBox = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  width: 100%;
 `;
 
 const MoneyUnit = styled.div`
@@ -68,7 +53,6 @@ const Inventory = ({
   addItem,
   addFeature,
   addEquipment,
-  updateMoney,
 }) => {
   const getTotalMoney = () => {
     let total = 0;
@@ -103,12 +87,11 @@ const Inventory = ({
             />{" "}
           </Text>
         </Box>
+        
       </Container>
       <Box>
-        <Text>
-          <b>Money</b>
-          {/* <MoneyModal character={character} updateMoney={updateMoney} /> */}
-          <CardRow>
+          <Text>
+            <b>Money</b>
             <MoneyBox>
               <MoneyUnit>
                 cp:
@@ -171,10 +154,9 @@ const Inventory = ({
                 />
               </MoneyUnit>
             </MoneyBox>
-          </CardRow>
-          Total: <b>{getTotalMoney()} gp</b>
-        </Text>
-      </Box>
+            Total: <b>{getTotalMoney()} gp</b>
+          </Text>
+        </Box>
     </div>
   );
 };

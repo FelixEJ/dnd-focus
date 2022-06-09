@@ -12,6 +12,8 @@ import SaveIcon from "@material-ui/icons/Save";
 
 import ConfirmDeleteEquipmentModal from "./confirmDeleteEquipmentModal";
 
+import EditModalWindow from "./StyledPageComponents/editModalWindow";
+
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -41,15 +43,23 @@ const X = stylish.div`
   cursor: pointer;
   `;
 
-const EditEquipmentModal = ({ character, updateEquipment, index, name, equip }) => {
+const EditEquipmentModal = ({
+  character,
+  updateEquipment,
+  index,
+  name,
+  equip,
+}) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [equipment, setEquipment] = useState({equip});
+  const [equipment, setEquipment] = useState({ equip });
 
   useEffect(() => {
-    setEquipment(...character.equipment.filter(equip => equip.equipment_name === name));
+    setEquipment(
+      ...character.equipment.filter((equip) => equip.equipment_name === name)
+    );
   }, [character]);
 
   const handleChange = (e) => {
@@ -66,124 +76,111 @@ const EditEquipmentModal = ({ character, updateEquipment, index, name, equip }) 
     handleClose();
   };
 
-  return (    
-    <div>
-      <X onClick={handleOpen}>
-        Edit
-      </X>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-        <Grid>
-            <Item>
-              <h2>Edit Equipment</h2>
-              <label>Equipment name:</label>
-              <input
-                type="text"
-                id="equipment_name"
-                name="equipment_name"
-                value={equipment.equipment_name}
-                onChange={handleChange}
-                required
-              />
-            </Item>
-            <Item>
-              <label>Equipment description:</label>
-              <input
-                type="text"
-                id="desc"
-                name="desc"
-                value={equipment.desc}
-                onChange={handleChange}
-                cols="30"
-                rows="1"
-              />
-            </Item>
-            <Item>
-              <label>
-                Value:
-                <input
-                  type="number"
-                  id="value"
-                  name="value"
-                  size="4"
-                  value={equipment.value}
-                  onChange={handleChange}
-                />
-                <select
-                  id="value_currency"
-                  name="value_currency"
-                  value={equipment.value_currency}
-                  onChange={handleChange}
-                >
-                  <option value={"cp"}>Copper</option>
-                  <option value={"sp"}>Silver</option>
-                  <option value={"ep"}>Electrum</option>
-                  <option value={"gp"}>Gold</option>
-                  <option value={"pp"}>Platinum</option>
-                </select>
-              </label>
-            </Item>
-            <Item>
-              <label>
-                Equipment type:
-                <select
-                  id="equipment_type"
-                  name="equipment_type"
-                  value={equipment.equipment_type}
-                  onChange={handleChange}
-                >
-                  <option value={"armour"}>Armour</option>
-                  <option value={"weapon"}>Weapon</option>
-                  <option value={"tool"}>Tool</option>
-                  <option value={"gear"}>Gear</option>
-                  <option value={"misc"}>Misc Equipment</option>
-                </select>
-              </label>
-            </Item>
-            <Item>
-              <label>
-                Attuned:
-                <select
-                  id="attuned"
-                  name="attuned"
-                  value={equipment.attuned}
-                  onChange={handleChange}
-                >
-                  <option value={"false"}>False</option>
-                  <option value={"true"}>True</option>
-                </select>
-              </label>
-            </Item>            
-          </Grid>
-          <Item>
-            <Button
-              variant="contained"
-              onClick={() => {
-                editEquipment();
-              }}
-              startIcon={<SaveIcon />}
-              color="primary"
-            >
-              Save change
-            </Button>
-            <ConfirmDeleteEquipmentModal
-              character={character}
-              updateEquipment={updateEquipment}
-              index={index}
-              closePrev={handleClose}
-            />
-          </Item>
-          <Button variant="contained" onClick={handleClose}>
-            Close
-          </Button>
-        </Box>
-      </Modal>
-    </div>
+  return (
+    <EditModalWindow
+      open={open}
+      handleOpen={handleOpen}
+      handleClose={handleClose}
+    >
+      <Item>
+        <h2>Edit Equipment</h2>
+        <label>Equipment name:</label>
+        <input
+          type="text"
+          id="equipment_name"
+          name="equipment_name"
+          value={equipment.equipment_name}
+          onChange={handleChange}
+          required
+        />
+      </Item>
+      <Item>
+        <label>Equipment description:</label>
+        <input
+          type="text"
+          id="desc"
+          name="desc"
+          value={equipment.desc}
+          onChange={handleChange}
+          cols="30"
+          rows="1"
+        />
+      </Item>
+      <Item>
+        <label>
+          Value:
+          <input
+            type="number"
+            id="value"
+            name="value"
+            size="4"
+            value={equipment.value}
+            onChange={handleChange}
+          />
+          <select
+            id="value_currency"
+            name="value_currency"
+            value={equipment.value_currency}
+            onChange={handleChange}
+          >
+            <option value={"cp"}>Copper</option>
+            <option value={"sp"}>Silver</option>
+            <option value={"ep"}>Electrum</option>
+            <option value={"gp"}>Gold</option>
+            <option value={"pp"}>Platinum</option>
+          </select>
+        </label>
+      </Item>
+      <Item>
+        <label>
+          Equipment type:
+          <select
+            id="equipment_type"
+            name="equipment_type"
+            value={equipment.equipment_type}
+            onChange={handleChange}
+          >
+            <option value={"armour"}>Armour</option>
+            <option value={"weapon"}>Weapon</option>
+            <option value={"tool"}>Tool</option>
+            <option value={"gear"}>Gear</option>
+            <option value={"misc"}>Misc Equipment</option>
+          </select>
+        </label>
+      </Item>
+      <Item>
+        <label>
+          Attuned:
+          <select
+            id="attuned"
+            name="attuned"
+            value={equipment.attuned}
+            onChange={handleChange}
+          >
+            <option value={"false"}>False</option>
+            <option value={"true"}>True</option>
+          </select>
+        </label>
+      </Item>
+      <Item>
+        <Button
+          variant="contained"
+          onClick={() => {
+            editEquipment();
+          }}
+          startIcon={<SaveIcon />}
+          color="primary"
+        >
+          Save change
+        </Button>
+        <ConfirmDeleteEquipmentModal
+          character={character}
+          updateEquipment={updateEquipment}
+          index={index}
+          closePrev={handleClose}
+        />
+      </Item>
+    </EditModalWindow>
   );
 };
 

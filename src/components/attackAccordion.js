@@ -45,7 +45,7 @@ const AttackAccordion = ({ character, updateAttacks }) => {
   }, [character]);
 
   return (
-    <Accordion >
+    <Accordion defaultActiveKey={character.attacks[0].attack_id}>
       <div>
         {character.attacks.map((attack, index) => (
           <Card>

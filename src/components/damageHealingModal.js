@@ -8,18 +8,6 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
 import {
-  WindowContent,
-  ModalWindow,
-  PageContent,
-  SectionColumn,
-  CardColumn,
-  CardRow,
-  CardItem,
-  Label,
-  BotButtons,
-} from "./StyledPageComponents/pageStyling";
-
-import {
   getModifier,
   getSave,
   getSkill,
@@ -93,7 +81,8 @@ const DamageHealingModal = ({ character, onCharacterChange, updateHealth }) => {
         if (health.current > health.temp_max) {
           health.current = parseInt(health.temp_max);
         }
-      } else if (health.current > health.max) {
+      }
+      else if (health.current > health.max) {
         if (health.temp_max > 0) {
           health.current = parseInt(health.temp_max);
         } else {
@@ -135,47 +124,45 @@ const DamageHealingModal = ({ character, onCharacterChange, updateHealth }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <ModalWindow>
-            <Grid>
-              <Container>
-                HP:{health.current} temp:{health.temp}
-                <Item>
-                  <label>Take: </label>{" "}
-                  <input
-                    type="number"
-                    min="0"
-                    id="hit_amount"
-                    name="hit_amount"
-                    value={hit.hit_amount}
-                    onChange={handleChange}
-                    size="3"
-                    display="none"
-                  />{" "}
-                  <select
-                    type="select"
-                    id="hit_type"
-                    name="hit_type"
-                    value={hit.hit_type}
-                    onChange={handleChange}
-                  >
-                    <option value={"dam"}>Damage</option>
-                    <option value={"heal"}>Healing</option>
-                  </select>
-                </Item>
-                <Item>
-                  <Button
-                    variant="contained"
-                    onClick={() => {
-                      editHealth(hit);
-                      clearHit();
-                    }}
-                  >
-                    Apply
-                  </Button>
-                </Item>
-              </Container>
-            </Grid>
-          </ModalWindow>
+          <Grid>
+            <Container>
+              HP:{health.current} temp:{health.temp}
+              <Item>
+                <label>Take: </label>{" "}
+                <input
+                  type="number"
+                  min="0"
+                  id="hit_amount"
+                  name="hit_amount"
+                  value={hit.hit_amount}
+                  onChange={handleChange}
+                  size="3"
+                  display="none"
+                />{" "}
+                <select
+                  type="select"
+                  id="hit_type"
+                  name="hit_type"
+                  value={hit.hit_type}
+                  onChange={handleChange}
+                >
+                  <option value={"dam"}>Damage</option>
+                  <option value={"heal"}>Healing</option>
+                </select>
+              </Item>
+              <Item>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    editHealth(hit);
+                    clearHit();
+                  }}
+                >
+                  Apply
+                </Button>
+              </Item>
+            </Container>
+          </Grid>
           <Button variant="contained" onClick={handleClose}>
             Close
           </Button>

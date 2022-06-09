@@ -78,7 +78,7 @@ export const CreateInventory = ({
               name="currency.copper"
               value={character.currency.copper}
               onChange={onCharacterChange}
-              size="6"
+              size="4"
             />
           </CardColumn>
           <CardColumn>
@@ -89,7 +89,7 @@ export const CreateInventory = ({
               name="currency.silver"
               value={character.currency.silver}
               onChange={onCharacterChange}
-              size="6"
+              size="4"
             />
           </CardColumn>
           <CardColumn>
@@ -100,7 +100,7 @@ export const CreateInventory = ({
               name="currency.electrum"
               value={character.currency.electrum}
               onChange={onCharacterChange}
-              size="6"
+              size="4"
             />
           </CardColumn>
           <CardColumn>
@@ -111,18 +111,18 @@ export const CreateInventory = ({
               name="currency.gold"
               value={character.currency.gold}
               onChange={onCharacterChange}
-              size="6"
+              size="4"
             />
           </CardColumn>
           <CardColumn>
-            <Label>Platinums:</Label>
+            <Label>Platinum:</Label>
             <input
               type="number"
               id="platinum"
               name="currency.platinum"
               value={character.currency.platinum}
               onChange={onCharacterChange}
-              size="6"
+              size="4"
             />
           </CardColumn>
         </CardRow>

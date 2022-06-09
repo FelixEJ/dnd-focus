@@ -1,9 +1,10 @@
 // import React from "react";
 import * as React from "react";
+import stylish from "styled-components";
 import { Button, ButtonGroup, Select } from "@material-ui/core";
 
 import CreateProficiencies from "./createProficiencies";
-import Features from "../features";
+import CreateFeatures from "./createFeatures";
 
 import { getModifier } from "../utils";
 
@@ -11,6 +12,7 @@ import {
   WindowContent,
   PageContent,
   SectionColumn,
+  SectionRow,
   CardColumn,
   CardRow,
   CardItem,
@@ -18,13 +20,40 @@ import {
   BotButtons,
 } from "../StyledPageComponents/pageStyling";
 
+const Proficient = stylish.div`
+  width: 98%;
+  background-color: none;
+  display: block;
+  column-count: 3;
+  column-gap: 1%;
+`;
+const Skill = stylish.div`
+  & {
+    width: 98%;
+    display: inline-block;
+    margin: 1% 1% 1% 1%;
+  }
+  &:nth-child(odd) {
+    background-color: rgba(203, 203, 203, 0.4);
+  }
+`;
+// const Skill = stylish.div`
+//   & {
+//     background-color: none;
+//     display: inline-block;
+//     margin: 1% 1% 1% 1%;
+//   }
+//   &:nth-child(odd) {
+//     background-color: rgba(203, 203, 203, 0.4);
+//   }
+// `;
+
 const ChooseRaceGrid = ({
   nextStep,
   onCharacterChange,
   character,
   addFeature,
   updateFeatures,
-  updateCharacter,
 }) => {
   const Continue = (e) => {
     e.preventDefault();
@@ -263,21 +292,12 @@ const ChooseRaceGrid = ({
             </CardColumn>
           </CardRow>
         </SectionColumn>
-        <SectionColumn>
-          <Features
-            character={character}
-            updateFeatures={updateFeatures}
-            onCharacterChange={onCharacterChange}
-            addFeature={addFeature}
-          />
-        </SectionColumn>
-
-        {/* <CreateFeatures
+        <CreateFeatures
           character={character}
           onCharacterChange={onCharacterChange}
           addFeature={addFeature}
           updateFeatures={updateFeatures}
-        /> */}
+        />
         <SectionColumn>
           <h3>Defences</h3>
           <CardColumn>

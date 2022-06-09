@@ -6,7 +6,7 @@ import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
-import { ModalWindow } from "../StyledPageComponents/modalWindow";
+import {ModalWindow} from "../StyledPageComponents/modalWindow";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -35,12 +35,10 @@ const AddItemModal = ({ addItem, character }) => {
   const [item, setItem] = useState({
     item_id: 0,
     item_name: "",
-    item_description: "",
     quantity: 0,
     value_each: 0,
-    value_currency: "",
+    value_currency: "cp",
     value_total: 0,
-    party_loot: false,
   });
 
   const handleChange = (e) => {
@@ -54,12 +52,10 @@ const AddItemModal = ({ addItem, character }) => {
     setItem({
       item_id: 0,
       item_name: "",
-      item_description: "",
       quantity: 0,
       value_each: 0,
-      value_currency: "",
+      value_currency: "cp",
       value_total: 0,
-      party_loot: false,
     });
   }
 
@@ -87,24 +83,13 @@ const AddItemModal = ({ addItem, character }) => {
         <Box sx={style}>
           <Grid>
             <Item>
-              <h2>Add/Edit Items</h2>
+              <h2>Add/Edit Item</h2>
               <label>Item Name</label>
               <input
                 type="text"
                 id="item_name"
                 name="item_name"
                 value={item.item_name}
-                onChange={handleChange}
-                required
-              />
-            </Item>
-            <Item>
-              <label>Item Description</label>
-              <input
-                type="text"
-                id="item_description"
-                name="item_description"
-                value={item.item_description}
                 onChange={handleChange}
                 required
               />
@@ -145,21 +130,7 @@ const AddItemModal = ({ addItem, character }) => {
             </Item>
             <Item>
               <label>Total Value</label>
-              <p>{getTotalValue() + item.value_currency}</p>
-            </Item>
-            <Item>
-              <label>Party loot?</label>
-              <select
-                type="checkbox"
-                id="party_loot"
-                name="party_loot"
-                value={item.party_loot}
-                onChange={handleChange}
-                size="3"
-              >
-                <option value={false}>No</option>
-                <option value={true}>Yes</option>
-              </select>
+              <p>{getTotalValue()+item.value_currency}</p>
             </Item>
           </Grid>
           <Item>

@@ -72,16 +72,18 @@ const EquipmentAccordion = ({
               class="overflow-auto"
             >
               {character.equipment.map((item, index) => (
-                <div key={index}>
-                  <b>{item.equipment_name}</b> {item.desc}
-                  <EditEquipmentModal
-                    character={character}
-                    updateEquipment={updateEquipment}
-                    index={index}
-                    name={item.equipment_name}
-                    equip={{ item }}
-                  />
-                </div>
+                <>
+                  <p key={index}>
+                    <b>{item.equipment_name}</b> {item.desc}
+                    <EditEquipmentModal
+                      character={character}
+                      updateEquipment={updateEquipment}
+                      index={index}
+                      name={item.equipment_name}
+                      equip={{item}}
+                    />
+                  </p>
+                </>
               ))}
               <AddEquipmentModal
                 character={character}

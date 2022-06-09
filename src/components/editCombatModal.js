@@ -7,6 +7,8 @@ import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
+import EditModalWindow from "./StyledPageComponents/editModalWindow";
+
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -43,194 +45,172 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
-      <ButtonContainer>
-        <Button
-          variant="outlined"
-          size="small"
-          onClick={handleOpen}
-          color="primary"
+    <EditModalWindow
+      open={open}
+      handleOpen={handleOpen}
+      handleClose={handleClose}
+    >
+      <Item>
+        <label>
+          Armour Class (AC):{" "}
+          <input
+            type="number"
+            id="ac"
+            name="ac"
+            value={character.ac}
+            onChange={onCharacterChange}
+            size="3"
+          />
+        </label>
+      </Item>
+      <Item>
+        <label>
+          Initiative:{" "}
+          <input
+            type="number"
+            id="initiative"
+            name="initiative"
+            value={character.initiative}
+            onChange={onCharacterChange}
+            size="3"
+          />
+        </label>
+      </Item>
+      <Item>
+        <label>
+          Speed:{" "}
+          <input
+            type="number"
+            id="speed"
+            name="speed"
+            value={character.speed}
+            onChange={onCharacterChange}
+            size="4"
+          />
+        </label>
+      </Item>
+      <Item>
+        <label>Hit Points Max</label>{" "}
+        <input
+          type="number"
+          id="hp.max"
+          name="hp.max"
+          value={character.hp.max}
+          onChange={onCharacterChange}
+          size="4"
+          required
+        />
+      </Item>
+      <Item>
+        <label>Temp Hit Points Max</label>{" "}
+        <input
+          type="number"
+          min="0"
+          id="hp.temp_max"
+          name="hp.temp_max"
+          value={character.hp.temp_max}
+          onChange={onCharacterChange}
+          size="4"
+          required
+        />
+      </Item>
+      <Item>
+        <label>Hit Dice Max:</label>{" "}
+        <input
+          type="number"
+          id="hit_dice.max"
+          name="hit_dice.max"
+          value={character.hit_dice.max}
+          onChange={onCharacterChange}
+          size="3"
+          display="none"
+        />
+      </Item>
+      <Item>
+        <label>Multiclass Hit Dice:</label>{" "}
+        <input
+          type="number"
+          id="hit_dice.mult1_max"
+          name="hit_dice.mult1_max"
+          value={character.hit_dice.mult1_max}
+          onChange={onCharacterChange}
+          size="3"
+          display="none"
+        />
+        <select
+          id="hit_dice.mult1_dice"
+          name="hit_dice.mult1_dice"
+          value={character.hit_dice.mult1_dice}
+          onChange={onCharacterChange}
         >
-          Edit
-        </Button>
-      </ButtonContainer>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Grid>
-            <Container>
-              <Item>
-                <label>
-                  Armour Class (AC):{" "}
-                  <input
-                    type="number"
-                    id="ac"
-                    name="ac"
-                    value={character.ac}
-                    onChange={onCharacterChange}
-                    size="3"
-                  />
-                </label>
-              </Item>
-              <Item>
-                <label>
-                  Initiative:{" "}
-                  <input
-                    type="number"
-                    id="initiative"
-                    name="initiative"
-                    value={character.initiative}
-                    onChange={onCharacterChange}
-                    size="3"
-                  />
-                </label>
-              </Item>
-              <Item>
-                <label>
-                  Speed:{" "}
-                  <input
-                    type="number"
-                    id="speed"
-                    name="speed"
-                    value={character.speed}
-                    onChange={onCharacterChange}
-                    size="4"
-                  />
-                </label>
-              </Item>
-              <Item>
-                <label>Hit Points Max</label>{" "}
-                <input
-                  type="number"
-                  id="hp.max"
-                  name="hp.max"
-                  value={character.hp.max}
-                  onChange={onCharacterChange}
-                  size="4"
-                  required
-                />
-              </Item>
-              <Item>
-                <label>Temp Hit Points Max</label>{" "}
-                <input
-                  type="number"
-                  min="0"
-                  id="hp.temp_max"
-                  name="hp.temp_max"
-                  value={character.hp.temp_max}
-                  onChange={onCharacterChange}
-                  size="4"
-                  required
-                />
-              </Item>
-              <Item>
-                <label>Hit Dice Max:</label>{" "}
-                <input
-                  type="number"
-                  id="hit_dice.max"
-                  name="hit_dice.max"
-                  value={character.hit_dice.max}
-                  onChange={onCharacterChange}
-                  size="3"
-                  display="none"
-                />
-              </Item>
-              <Item>
-                <label>Multiclass 1 Hit Dice:</label>{" "}
-                <input
-                  type="number"
-                  id="hit_dice.mult1_max"
-                  name="hit_dice.mult1_max"
-                  value={character.hit_dice.mult1_max}
-                  onChange={onCharacterChange}
-                  size="3"
-                  display="none"
-                />
-                <select
-                  id="hit_dice.mult1_dice"
-                  name="hit_dice.mult1_dice"
-                  value={character.hit_dice.mult1_dice}
-                  onChange={onCharacterChange}
-                >
-                  <option value="">-</option>
-                  <option value={"d6"}>d6</option>
-                  <option value={"d8"}>d8</option>
-                  <option value={"d10"}>d10</option>
-                  <option value={"d12"}>d12</option>
-                </select>
-              </Item>
-              <Item>
-                <label>Multiclass 2 Hit Dice:</label>{" "}
-                <input
-                  type="number"
-                  id="hit_dice.mult2_max"
-                  name="hit_dice.mult2_max"
-                  value={character.hit_dice.mult2_max}
-                  onChange={onCharacterChange}
-                  size="3"
-                  display="none"
-                />
-                <select
-                  id="hit_dice.mult2_dice"
-                  name="hit_dice.mult2_dice"
-                  value={character.hit_dice.mult2_dice}
-                  onChange={onCharacterChange}
-                >
-                  <option value="">-</option>
-                  <option value={"d6"}>d6</option>
-                  <option value={"d8"}>d8</option>
-                  <option value={"d10"}>d10</option>
-                  <option value={"d12"}>d12</option>
-                </select>
-              </Item>
-              <Item>
-                <label>
-                  Resistances:{" "}
-                  <input
-                    type="text"
-                    id="resistances"
-                    name="defences.resistances"
-                    value={character.defences.resistances}
-                    onChange={onCharacterChange}
-                  />
-                </label>
-              </Item>
-              <Item>
-                <label>
-                  Immunities:{" "}
-                  <input
-                    type="text"
-                    id="immunities"
-                    name="defences.immunities"
-                    value={character.defences.immunities}
-                    onChange={onCharacterChange}
-                  />
-                </label>
-              </Item>
-              <Item>
-                <label>
-                  Vulnerabilities:{" "}
-                  <input
-                    type="text"
-                    id="vulnerabilities"
-                    name="defences.vulnerabilities"
-                    value={character.defences.vulnerabilities}
-                    onChange={onCharacterChange}
-                  />
-                </label>
-              </Item>
-            </Container>
-          </Grid>
-          <Button variant="contained" onClick={handleClose}>
-            Close
-          </Button>
-        </Box>
-      </Modal>
-    </div>
+          <option value="">-</option>
+          <option value={"d6"}>d6</option>
+          <option value={"d8"}>d8</option>
+          <option value={"d10"}>d10</option>
+          <option value={"d12"}>d12</option>
+        </select>
+      </Item>
+      <Item>
+        <label>Multiclass 2 Hit Dice:</label>{" "}
+        <input
+          type="number"
+          id="hit_dice.mult2_max"
+          name="hit_dice.mult2_max"
+          value={character.hit_dice.mult2_max}
+          onChange={onCharacterChange}
+          size="3"
+          display="none"
+        />
+        <select
+          id="hit_dice.mult2_dice"
+          name="hit_dice.mult2_dice"
+          value={character.hit_dice.mult2_dice}
+          onChange={onCharacterChange}
+        >
+          <option value="">-</option>
+          <option value={"d6"}>d6</option>
+          <option value={"d8"}>d8</option>
+          <option value={"d10"}>d10</option>
+          <option value={"d12"}>d12</option>
+        </select>
+      </Item>
+      <Item>
+        <label>
+          Resistances:{" "}
+          <input
+            type="text"
+            id="resistances"
+            name="defences.resistances"
+            value={character.defences.resistances}
+            onChange={onCharacterChange}
+          />
+        </label>
+      </Item>
+      <Item>
+        <label>
+          Immunities:{" "}
+          <input
+            type="text"
+            id="immunities"
+            name="defences.immunities"
+            value={character.defences.immunities}
+            onChange={onCharacterChange}
+          />
+        </label>
+      </Item>
+      <Item>
+        <label>
+          Vulnerabilities:{" "}
+          <input
+            type="text"
+            id="vulnerabilities"
+            name="defences.vulnerabilities"
+            value={character.defences.vulnerabilities}
+            onChange={onCharacterChange}
+          />
+        </label>
+      </Item>
+    </EditModalWindow>
   );
 };
 
