@@ -123,12 +123,7 @@ const ConfirmCharacter = ({
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={2}>
             <Item>Background: {character.background.title}</Item>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={2}>
-            <Item>
-              Background feature: {character.background.characteristic}
-            </Item>
-          </Grid>
+          </Grid>          
           <Grid item xs={12} sm={6} md={4} lg={2}>
             <Item>Class: {character.class}</Item>
           </Grid>

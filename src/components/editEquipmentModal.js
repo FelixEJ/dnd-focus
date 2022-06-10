@@ -57,7 +57,7 @@ const EditEquipmentModal = ({
   const X = stylish.div`
     text-transform: uppercase;
     text-decoration: underline;
-    float: right;
+    float:right;
     font-size: .7em;
   `;
 

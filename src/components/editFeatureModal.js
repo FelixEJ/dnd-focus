@@ -11,8 +11,8 @@ import EditModalWindow from "./StyledPageComponents/editModalWindow";
 import { BotButton, TopRightButton } from "./StyledPageComponents/pageStyling";
 
 import {
-  WindowContent,
-  PageContent,
+  Window,
+  Page,
   SectionColumn,
   SectionRow,
   CardColumn,

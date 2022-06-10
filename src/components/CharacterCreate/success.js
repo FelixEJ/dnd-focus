@@ -16,10 +16,13 @@ import { blankCharacter } from "../../data/character";
 
 import RollDiceModal from "../rollDiceModal";
 import RestModal from "../restModal";
+import EditAbilitiesModal from "../editAbilitiesModal";
 
 import {
-  WindowContent,
-  PageContent,
+  Window,
+  Page,
+  Section,
+  Card,
   SectionColumn,
   SectionRow,
   CardColumn,
@@ -29,63 +32,8 @@ import {
   BotButton,
 } from "../StyledPageComponents/pageStyling";
 
-const CardContainer = styled.div`
-  display: block;
-  column-count: 1;
-  -webkit-column-count: 1;
-  -moz-column-count: 1;
-  column-gap: 1em;
-  -moz-column-gap: 1em;
-  -webkit-column-gap: 1em;
-  margin: 1em 0px;
-  width: 98vw;
-  max-height: 100vh;
-
-  @media only screen and (min-width: 700px) {
-    column-count: 2;
-    -webkit-column-count: 2;
-    -moz-column-count: 2;
-  }
-  @media only screen and (min-width: 1000px) {
-    column-count: 3;
-    -webkit-column-count: 3;
-    -moz-column-count: 3;
-  }
-  @media only screen and (min-width: 1600px) {
-    column-count: 4;
-    -webkit-column-count: 4;
-    -moz-column-count: 4;
-  }
-`;
-
-const CardDiv = styled.div`
-  text-align: center;
-  width: 99vw;
-  max-width: 400px;
-  min-width: 250px;
-
-  box-shadow: 0px 0px 8px 0px #c0c0c0;
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 5px;
-  background-color: #fff;
-
-  @media only screen and (min-width: 700px) {
-    width: 49vw;
-  }
-  @media only screen and (min-width: 1000px) {
-    width: 32vw;
-    max-height: 98vh;
-  }
-  @media only screen and (min-width: 1600px) {
-    width: 24vw;
-    max-height: 98vh;
-  }
-`;
-
 const Success = () => {
-  const [loadedChar, setLoadedChar] = useState(blankCharacter);
+  const [character, setLoadedChar] = useState(blankCharacter);
 
   function getAllCharacters() {
     var arrayOfChars = [];
@@ -118,7 +66,7 @@ const Success = () => {
   function onCharacterChange(e) {
     const path = e.target.name.split(".");
     const finalProp = path.pop();
-    const newCharacter = { ...loadedChar };
+    const newCharacter = { ...character };
     let pointer = newCharacter;
     path.forEach((el) => {
       pointer[el] = { ...pointer[el] };
@@ -142,7 +90,7 @@ const Success = () => {
 
   function updateFeatures(newFeats) {
     const tempFeatures = newFeats;
-    const updatedCharacter = { ...loadedChar };
+    const updatedCharacter = { ...character };
     updatedCharacter.features = tempFeatures;
     setLoadedChar(updatedCharacter);
     saveLocalCharacter(updatedCharacter);
@@ -151,7 +99,7 @@ const Success = () => {
 
   function updateInventory(newInv) {
     const tempInv = newInv;
-    const updatedCharacter = { ...loadedChar };
+    const updatedCharacter = { ...character };
     updatedCharacter.inventory = tempInv;
     setLoadedChar(updatedCharacter);
     saveLocalCharacter(updatedCharacter);
@@ -160,7 +108,7 @@ const Success = () => {
 
   function updateEquipment(newEquip) {
     const tempEquip = newEquip;
-    const updatedCharacter = { ...loadedChar };
+    const updatedCharacter = { ...character };
     updatedCharacter.equipment = tempEquip;
     setLoadedChar(updatedCharacter);
     saveLocalCharacter(updatedCharacter);
@@ -169,7 +117,7 @@ const Success = () => {
 
   function updateAttacks(newAttack) {
     const tempAttack = newAttack;
-    const updatedCharacter = { ...loadedChar };
+    const updatedCharacter = { ...character };
     updatedCharacter.attacks = tempAttack;
     setLoadedChar(updatedCharacter);
     saveLocalCharacter(updatedCharacter);
@@ -178,7 +126,7 @@ const Success = () => {
 
   function updateHealth(newHealth) {
     const tempHealth = newHealth;
-    const updatedCharacter = { ...loadedChar };
+    const updatedCharacter = { ...character };
     updatedCharacter.hp = tempHealth;
     setLoadedChar(updatedCharacter);
     saveLocalCharacter(updatedCharacter);
@@ -187,8 +135,8 @@ const Success = () => {
   // duplicate
   function addFeature(newFeat) {
     const newFeature = newFeat;
-    newFeat.feature_id = loadedChar.features.length + 1;
-    const newCharacter = { ...loadedChar };
+    newFeat.feature_id = character.features.length + 1;
+    const newCharacter = { ...character };
     // console.log("char copy:", newCharacter);
     const oldFeatures = newCharacter.features;
     oldFeatures.push(newFeature);
@@ -201,8 +149,8 @@ const Success = () => {
   // duplicated
   function addEquipment(newEquip) {
     const newEquipment = newEquip;
-    newEquip.equipment_id = loadedChar.equipment.length + 1;
-    const newCharacter = { ...loadedChar };
+    newEquip.equipment_id = character.equipment.length + 1;
+    const newCharacter = { ...character };
     const freshEquipment = newCharacter.equipment;
     freshEquipment.push(newEquipment);
     setLoadedChar(newCharacter);
@@ -213,8 +161,8 @@ const Success = () => {
   // duplicated
   function addItem(newItem) {
     const newInventoryItem = newItem;
-    newItem.item_id = loadedChar.inventory.length + 1;
-    const newCharacter = { ...loadedChar };
+    newItem.item_id = character.inventory.length + 1;
+    const newCharacter = { ...character };
     const freshInventory = newCharacter.inventory;
     freshInventory.push(newInventoryItem);
     setLoadedChar(newCharacter);
@@ -224,8 +172,8 @@ const Success = () => {
 
   function addAttack(newattack) {
     const newAttack = newattack;
-    newattack.attack_id = loadedChar.attacks.length + 1;
-    const newCharacter = { ...loadedChar };
+    newattack.attack_id = character.attacks.length + 1;
+    const newCharacter = { ...character };
     const oldAttacks = newCharacter.attacks;
     oldAttacks.push(newAttack);
     setLoadedChar(newCharacter);
@@ -238,116 +186,137 @@ const Success = () => {
   }
 
   var data =
-    "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(loadedChar));
+    "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(character));
 
   return (
-    <WindowContent>
+    <Page>
       <h1>
-        Character Sheet for {loadedChar.name}, lvl:{loadedChar.level}
+        Character Sheet for {character.name}, lvl:{character.level}
       </h1>
-      
-        <RollDiceModal />
-        <RestModal character={loadedChar} updateCharacter={updateCharacter} />
-        <LoadCharacterFromJSON
-          loadFromJson={loadFromJson}
-          character={loadedChar}
-        />
-        <button>
-          <a
-            href={"data:" + data}
-            download={loadedChar.name + "_lvl" + loadedChar.level + ".json"}
-          >
-            Download Character
-          </a>
-        </button>
-        <FormControl>
-          <label>Select Character&emsp;</label>
-          <select
-            id="char_select"
-            name="char_select"
-            // value={loadedChar.char_select}
-            value={loadedChar.name}
-            onChange={handleChange}
-          >
-            <option value={loadedChar}>Select character</option>
-            {allChars.map((char, index) => (
-              <option key={index} value={index}>
-                {char.name} lvl{char.level}
-              </option>
-            ))}
-          </select>
-        </FormControl>
-        {loadedChar.name != "" && (
-          <PageContent>
-            <CardColumn>
+
+      <RollDiceModal />
+      <RestModal character={character} updateCharacter={updateCharacter} />
+      <LoadCharacterFromJSON
+        loadFromJson={loadFromJson}
+        character={character}
+      />
+      <button>
+        <a
+          href={"data:" + data}
+          download={character.name + "_lvl" + character.level + ".json"}
+        >
+          Download Character
+        </a>
+      </button>
+      <FormControl>
+        <label>Select Character&emsp;</label>
+        <select
+          id="char_select"
+          name="char_select"
+          // value={loadedChar.char_select}
+          value={character.name}
+          onChange={handleChange}
+        >
+          <option value={character}>Select character</option>
+          {allChars.map((char, index) => (
+            <option key={index} value={index}>
+              {char.name} lvl{char.level}
+            </option>
+          ))}
+        </select>
+      </FormControl>
+      {character.name != "" && (
+        <>
+          <Section>
+            <Card>
               <Basics
-                character={loadedChar}
+                character={character}
                 onCharacterChange={onCharacterChange}
               />
-            </CardColumn>
-            {/* <CardContainer> */}
-              <CardColumn>
-                <SheetAbilities
-                  character={loadedChar}
-                  setLoadedChar={setLoadedChar}
-                  onCharacterChange={onCharacterChange}
-                />
-              </CardColumn>
-              <CardColumn>
-                <SheetProficiencies
-                  character={loadedChar}
-                  onCharacterChange={onCharacterChange}
-                />
-              </CardColumn>
-              <CardColumn>
-                <SheetCombat
-                  character={loadedChar}
-                  onCharacterChange={onCharacterChange}
-                  updateHealth={updateHealth}
-                />
-              </CardColumn>
-              <CardColumn>
-                <SheetAttacks
-                  character={loadedChar}
-                  updateAttacks={updateAttacks}
-                  addAttack={addAttack}
-                />
-              </CardColumn>
-              <CardColumn>
-                <SheetMagic
-                  character={loadedChar}
-                  onCharacterChange={onCharacterChange}
-                />
-              </CardColumn>
-              <CardColumn>
-                <Features
-                  character={loadedChar}
-                  updateFeatures={updateFeatures}
-                  onCharacterChange={onCharacterChange}
-                  addFeature={addFeature}
-                />
-              </CardColumn>
-              <CardColumn>
-                <Inventory
-                  character={loadedChar}
-                  onCharacterChange={onCharacterChange}
-                  updateInventory={updateInventory}
-                  updateEquipment={updateEquipment}
-                  addItem={addItem}
-                  addFeature={addFeature}
-                  addEquipment={addEquipment}
-                />
-              </CardColumn>
-              <CardColumn>
-                <Personality
-                  character={loadedChar}
-                  onCharacterChange={onCharacterChange}
-                />
-              </CardColumn>
-            {/* </CardContainer> */}
-          </PageContent>
-        )}
-    </WindowContent>
+            </Card>
+          </Section>
+          <Section>
+            <h4>Ability Scores</h4>
+            <EditAbilitiesModal
+              character={character}
+              onCharacterChange={onCharacterChange}
+            />
+            <Card>
+              <SheetAbilities
+                character={character}
+                setLoadedChar={setLoadedChar}
+                onCharacterChange={onCharacterChange}
+              />
+            </Card>
+          </Section>
+          <Section>
+            <Card>
+              <SheetProficiencies
+                character={character}
+                onCharacterChange={onCharacterChange}
+              />
+            </Card>
+          </Section>
+          <Section>
+            <Card>
+              <SheetCombat
+                character={character}
+                onCharacterChange={onCharacterChange}
+                updateHealth={updateHealth}
+              />
+            </Card>
+          </Section>
+          <Section>
+            <Card>
+              <SheetAttacks
+                character={character}
+                updateAttacks={updateAttacks}
+                addAttack={addAttack}
+              />
+            </Card>
+          </Section>
+          <Section>
+            <Card>
+              <SheetMagic
+                character={character}
+                onCharacterChange={onCharacterChange}
+              />
+            </Card>
+          </Section>
+          <Section>
+            <Card>
+              <Features
+                character={character}
+                updateFeatures={updateFeatures}
+                onCharacterChange={onCharacterChange}
+                addFeature={addFeature}
+              />
+            </Card>
+          </Section>
+          <Section>
+            <Card>
+              <Inventory
+                character={character}
+                onCharacterChange={onCharacterChange}
+                updateInventory={updateInventory}
+                updateEquipment={updateEquipment}
+                addItem={addItem}
+                addFeature={addFeature}
+                addEquipment={addEquipment}
+              />
+            </Card>
+          </Section>
+          <Section>
+            <Card>
+              <Personality
+                character={character}
+                onCharacterChange={onCharacterChange}
+              />
+            </Card>
+          </Section>
+        </>
+      )}
+    </Page>
   );
 };
 

@@ -2,7 +2,8 @@ export const blankCharacter = {
   name: "",
   level: 0,
   race: "",
-  size: "",
+  age: "",
+  size: "medium",
   alignment: "",
   xp: 0,
   background: {

@@ -10,8 +10,8 @@ import Grid from "@material-ui/core/Grid";
 import AddModalWindow from "./StyledPageComponents/addModalWindow";
 
 import {
-  WindowContent,
-  PageContent,
+  Window,
+  Page,
   SectionColumn,
   SectionRow,
   CardColumn,

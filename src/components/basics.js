@@ -4,7 +4,7 @@ import styled from "styled-components";
 import EditBasicsModal from "./editBasicsModal";
 
 import {
-  WindowContent,
+  Window,
   PageContent,
   SectionColumn,
   SectionRow,
@@ -39,7 +39,7 @@ const Text = styled.div`
 
 const Basics = ({ character, onCharacterChange }) => {
   return (
-    <SectionColumn>
+    <>
       <Text>
         Name: <b>{character.name}</b>
       </Text>
@@ -80,7 +80,7 @@ const Basics = ({ character, onCharacterChange }) => {
         character={character}
         onCharacterChange={onCharacterChange}
       />
-    </SectionColumn>
+    </>
   );
 };
 

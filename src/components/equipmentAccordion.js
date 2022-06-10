@@ -31,11 +31,32 @@ const ButtonRight = styled.div`
   text-transform: uppercase;
 `;
 
-const TextLeft = styled.div`
+const Header = styled.div`
   float: left;
   font-size: 0.9em;
   text-decoration: underline;
   text-transform: uppercase;
+`;
+
+const ItemRow = styled.div`
+  width: 90%
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  clear: both;
+`;
+
+const Item = styled.div`
+  float: left;
+  font-size: 0.9em;
+  margin: 5px 5px;
+  max-width: 85%
+`;
+
+const Container = styled.div`
+  width: 95vw;
+  max-width: 400px;
+  padding: 2%;
 `;
 
 const EquipmentAccordion = ({
@@ -55,46 +76,50 @@ const EquipmentAccordion = ({
   };
 
   return (
-    <Accordion>
-      <div>
-        <Card>
-          <Card.Header>
-            <TextLeft>
-              <b>Equipment:</b>
-            </TextLeft>
-            <ButtonRight>
-              <CustomToggle eventKey={0}>EXPAND</CustomToggle>
-            </ButtonRight>
-          </Card.Header>
-          <Accordion.Collapse eventKey={0}>
-            <Card.Body
-              style={{ backgroundColor: "lightgrey", maxHeight: "30vh" }}
-              class="overflow-auto"
-            >
-              {character.equipment.map((item, index) => (
+    <Container>
+      <Accordion>
+        <div>
+          <Card>
+            <Card.Header>
+              <Header>
+                <b>Equipment:</b>
+              </Header>
+              <ButtonRight>
+                <CustomToggle eventKey={0}>EXPAND</CustomToggle>
+              </ButtonRight>
+            </Card.Header>
+            <Accordion.Collapse eventKey={0}>
+              <Card.Body
+                style={{ backgroundColor: "lightgrey" }}
+                class="overflow-auto"
+              >
                 <>
-                  <p key={index}>
-                    <b>{item.equipment_name}</b> {item.desc}
-                    <EditEquipmentModal
-                      character={character}
-                      updateEquipment={updateEquipment}
-                      index={index}
-                      name={item.equipment_name}
-                      equip={{item}}
-                    />
-                  </p>
+                  {character.equipment.map((item, index) => (
+                    <ItemRow>
+                      <Item key={index}>
+                        <b>{item.equipment_name}</b> {item.desc}
+                      </Item>
+                      <EditEquipmentModal
+                        character={character}
+                        updateEquipment={updateEquipment}
+                        index={index}
+                        name={item.equipment_name}
+                        equip={{ item }}
+                      />
+                    </ItemRow>
+                  ))}
                 </>
-              ))}
-              <AddEquipmentModal
-                character={character}
-                addEquipment={addEquipment}
-                addFeature={addFeature}
-              />
-            </Card.Body>
-          </Accordion.Collapse>
-        </Card>
-      </div>
-    </Accordion>
+                <AddEquipmentModal
+                  character={character}
+                  addEquipment={addEquipment}
+                  addFeature={addFeature}
+                />
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+        </div>
+      </Accordion>
+    </Container>
   );
 };
 

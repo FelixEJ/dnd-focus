@@ -66,15 +66,14 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
         handleClose={handleClose}
       >
         <Item>
-          <h2>Add/Edit Equipment</h2>
+          <h2>Add Equipment</h2>
           <label>Equipment name:</label>
           <input
             type="text"
             id="equipment_name"
             name="equipment_name"
             value={equipment.equipment_name}
-            onChange={handleChange}
-            required
+            onChange={handleChange}            
           />
         </Item>
         <Item>
@@ -98,6 +97,7 @@ const AddEquipmentModal = ({ addEquipment, addFeature, character }) => {
               name="value"
               value={equipment.value}
               onChange={handleChange}
+              style={{ width: "20%" }}
             />
             <select
               id="value_currency"

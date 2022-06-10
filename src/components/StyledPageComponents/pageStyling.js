@@ -2,35 +2,19 @@ import React from "react";
 import styled from "styled-components";
 
 const WindowContentContainer = styled.div`
-  background: maroon;
-  width: 100vw;
-  max-width: 480px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-
-  @media only screen and (min-width: 480px) {
-    background: red;
-    max-width: 765px;
-  }
-  @media only screen and (min-width: 768px) {
-    background: orange;
-  }
-  @media only screen and (min-width: 1024px) {
-    background: yellow;
-  }
-  @media only screen and (min-width: 1800px) {
-    background: green;
-  }
+  background: black;
 `;
-export const WindowContent = ({ children }) => {
+export const Window = ({ children }) => {
   return <WindowContentContainer>{children}</WindowContentContainer>;
 };
 
 const PageContentContainer = styled.div`
   background: red;
-  width: 95%;
+  width: 98vw;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -47,82 +31,57 @@ const PageContentContainer = styled.div`
   }
   @media only screen and (min-width: 1800px) {
     background: blue;
+    flex-flow: column wrap;
   }
 `;
-export const PageContent = ({ children }) => {
+export const Page = ({ children }) => {
   return <PageContentContainer>{children}</PageContentContainer>;
 };
 
 const SectionContainer = styled.div`
-  text-align: center;
-  z-index: 1;
-  width: 100%;
+  background: maroon;
+  width: 95vw;
   max-width: 400px;
-  background-color: none;
-
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-
-  @media only screen and (min-width: 1300px) {
-    max-height: 90vh;
-  }
-`;
-export const Container = ({ children }) => {
-  return <Container>{children}</Container>;
-};
-
-const SectionColumnContainer = styled.div`
-  background-color: orange;
-  width: 95%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  margin: 10px 0 10px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 10px 0;
 
   @media only screen and (min-width: 480px) {
-    background: yellow;
+    background: red;
   }
   @media only screen and (min-width: 768px) {
-    background: green;
+    background: orange;
   }
   @media only screen and (min-width: 1024px) {
-    background: blue;
+    background: yellow;
   }
   @media only screen and (min-width: 1800px) {
-    background: pink;
+    background: green;
   }
 `;
-export const SectionColumn = ({ children }) => {
-  return <SectionColumnContainer>{children}</SectionColumnContainer>;
+export const Section = ({ children }) => {
+  return <SectionContainer>{children}</SectionContainer>;
 };
 
-const SectionRowContainer = styled.div`
-  background-color: orange;
-  width: 95%;
+const CardContainer = styled.div`
+  width: 95vw;
+  max-width: 99%;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  margin: 10px 0 10px 0;
-
-  @media only screen and (min-width: 480px) {
-    background: yellow;
-  }
-  @media only screen and (min-width: 768px) {
-    background: green;
-  }
-  @media only screen and (min-width: 1024px) {
-    background: blue;
-  }
-  @media only screen and (min-width: 1800px) {
-    background: pink;
-  }
+  border-style: inset;
+  border-radius: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
-export const SectionRow = ({ children }) => {
-  return <SectionRowContainer>{children}</SectionRowContainer>;
-};
+export const Card = ({ children }) => {
+  return <CardContainer>{children}</CardContainer>;
+}
 
 const CardColumnContainer = styled.div`
   background-color: yellow;
@@ -176,6 +135,8 @@ export const CardRow = ({ children }) => {
   return <CardRowContainer>{children}</CardRowContainer>;
 };
 
+
+
 const CardItemContainer = styled.div`
   background-color: green;
   display: flex;
@@ -201,7 +162,7 @@ export const CardItem = ({ children }) => {
 };
 
 const LabelStyle = styled.div`
-    clear:right;
+  clear: right;
 `;
 export const Label = ({ children }) => {
   return <LabelStyle>{children}</LabelStyle>;
@@ -210,13 +171,14 @@ export const Label = ({ children }) => {
 const BottomButtonContainer = styled.div`
   margin-bottom: 10px;
   margin-top: 10px;
+  clear: both;
 `;
 export const BotButton = ({ children }) => {
   return <BottomButtonContainer>{children}</BottomButtonContainer>;
 };
 
 const TopRightButtonContainer = styled.div`
-  float: right;
+  margin-left: 80%;
   margin-top: -30px;
   margin-right: 5px;
 `;
@@ -232,7 +194,7 @@ const ModalContentContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width:90vw;
+  width: 90vw;
   max-width: 400;
 `;
 export const ModalContent = ({ children }) => {
@@ -261,4 +223,62 @@ const ModalWindowContainer = styled.div`
 `;
 export const ModalWindow = ({ children }) => {
   return <ModalWindowContainer>{children}</ModalWindowContainer>;
+};
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+const SectionColumnContainer = styled.div`
+  background-color: orange;
+  width: 95%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0 10px 0;
+
+  @media only screen and (min-width: 480px) {
+    background: yellow;
+  }
+  @media only screen and (min-width: 768px) {
+    background: green;
+  }
+  @media only screen and (min-width: 1024px) {
+    background: blue;
+  }
+  @media only screen and (min-width: 1800px) {
+    background: pink;
+  }
+`;
+export const SectionColumn = ({ children }) => {
+  return <SectionColumnContainer>{children}</SectionColumnContainer>;
+};
+
+const SectionRowContainer = styled.div`
+  background-color: orange;
+  width: 95%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0 10px 0;
+
+  @media only screen and (min-width: 480px) {
+    background: yellow;
+  }
+  @media only screen and (min-width: 768px) {
+    background: green;
+  }
+  @media only screen and (min-width: 1024px) {
+    background: blue;
+  }
+  @media only screen and (min-width: 1800px) {
+    background: pink;
+  }
+`;
+export const SectionRow = ({ children }) => {
+  return <SectionRowContainer>{children}</SectionRowContainer>;
 };

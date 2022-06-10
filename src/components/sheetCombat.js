@@ -10,7 +10,6 @@ const Container = styled.div`
   width: 100%;
   max-width: 400px;
   background-color: none;
-  max-height: 50vh;
 
   display: grid;
   grid-template-columns: 32% 32% 32%;
@@ -20,6 +19,7 @@ const Container = styled.div`
 const Row = styled.div`
   text-align: center;
   z-index: 1;
+  width: 90vw;
   max-width: 400px;
   background-color: none;
   border-style: inset;

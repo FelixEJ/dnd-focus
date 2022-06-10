@@ -5,12 +5,15 @@ import { Button, ButtonGroup } from "@material-ui/core";
 import CreateProficiencies from "./createProficiencies";
 
 import Inventory from "../inventory";
-import Features from "../features";
+
+import FeatureAccordion from "../featuresAccordion";
+import AddFeatureModal from "../addFeatureModal";
+import AddSkillModal from "../addSkillModal";
 
 import {
-  WindowContent,
-  PageContent,
-  SectionColumn,
+  Page,
+  Section,
+  Card,
   SectionRow,
   CardColumn,
   CardRow,
@@ -43,7 +46,7 @@ const ChooseBackgroundGrid = ({
   // console.log("character:", character);
 
   return (
-    <WindowContent>
+    <Page>
       <h1>Choose Background:</h1>
       <ButtonGroup variant="contained">
         <Button onClick={Previous}>Back</Button>
@@ -52,28 +55,34 @@ const ChooseBackgroundGrid = ({
       <Label>
         {character.name}, lvl:{character.level}
       </Label>
-      <PageContent>
-        <SectionColumn>
-          <CardColumn>
-            <Label>Title:</Label>
-            <input
-              type="text"
-              id="title"
-              placeholder="Noble, Orphan..."
-              name="background.title"
-              value={character.background.title}
-              onChange={onCharacterChange}
-              required
-            />
-          </CardColumn>
-        </SectionColumn>
-        <SectionColumn>
+      <Section>
+        <CardColumn>
+          <Label>Title:</Label>
+          <input
+            type="text"
+            id="title"
+            placeholder="Noble, Orphan..."
+            name="background.title"
+            value={character.background.title}
+            onChange={onCharacterChange}
+          />
+        </CardColumn>
+      </Section>
+      <Section>
+        <h3>Proficiencies</h3>
+        <AddSkillModal
+          character={character}
+          onCharacterChange={onCharacterChange}
+        />
+        <Card>
           <CreateProficiencies
             character={character}
             onCharacterChange={onCharacterChange}
           />
-        </SectionColumn>
-        <SectionColumn>
+        </Card>
+      </Section>
+      <Section>
+        <h4>Inventory</h4>
           <Inventory
             character={character}
             onCharacterChange={onCharacterChange}
@@ -82,17 +91,20 @@ const ChooseBackgroundGrid = ({
             updateInventory={updateInventory}
             addEquipment={addEquipment}
           />
-        </SectionColumn>
-        <SectionColumn>
-          <Features
+      </Section>
+      <Section>
+        <h4>Features & Abilities</h4>
+        <AddFeatureModal addFeature={addFeature} />
+        <Card>
+          <FeatureAccordion
             character={character}
-            onCharacterChange={onCharacterChange}
-            addFeature={addFeature}
             updateFeatures={updateFeatures}
           />
-        </SectionColumn>
-        <SectionColumn>
-          <h3>Characteristics</h3>
+        </Card>
+      </Section>
+      <Section>
+        <h3>Characteristics</h3>
+        <Card>
           <CardColumn>
             <Label>Personality:</Label>
             <textarea
@@ -155,15 +167,15 @@ const ChooseBackgroundGrid = ({
               rows="2"
             />
           </CardColumn>
-        </SectionColumn>
-      </PageContent>
+        </Card>
+      </Section>
       <BotButton>
         <ButtonGroup variant="contained">
           <Button onClick={Previous}>Back</Button>
           <Button onClick={Continue}>Next</Button>
         </ButtonGroup>
       </BotButton>
-    </WindowContent>
+    </Page>
   );
 };
 

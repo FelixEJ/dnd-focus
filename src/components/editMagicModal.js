@@ -77,8 +77,8 @@ const EditMagicModal = ({ character, onCharacterChange }) => {
             name="magic.save_dc"
             value={character.magic.save_dc}
             onChange={onCharacterChange}
-            size="3"
-            required
+            style={{ width: "20%" }}
+            
           />
           <br />
           <label>Spell attack modifier:</label>
@@ -88,8 +88,8 @@ const EditMagicModal = ({ character, onCharacterChange }) => {
             name="magic.spell_attack_mod"
             value={character.magic.spell_attack_mod}
             onChange={onCharacterChange}
-            size="3"
-            required
+            style={{ width: "20%" }}
+            
           />
           <br />
           <label>Cantrips known:</label>
@@ -99,8 +99,8 @@ const EditMagicModal = ({ character, onCharacterChange }) => {
             name="magic.cantrips_known"
             value={character.magic.cantrips_known}
             onChange={onCharacterChange}
-            size="2"
-            required
+            style={{ width: "20%" }}
+            
           />
           <br />
           <label>Spells known/preparable:</label>
@@ -110,8 +110,8 @@ const EditMagicModal = ({ character, onCharacterChange }) => {
             name="magic.spells_known"
             value={character.magic.spells_known}
             onChange={onCharacterChange}
-            size="2"
-            required
+            style={{ width: "20%" }}
+            
           />
           <br />
           <label>Spell slots:</label>
@@ -123,8 +123,8 @@ const EditMagicModal = ({ character, onCharacterChange }) => {
             name="spellslots.first"
             value={character.spellslots.first}
             onChange={onCharacterChange}
-            size="2"
-            required
+            style={{ width: "15%" }}
+            
           />
           &emsp;<label>2nd:</label>
           <input
@@ -133,8 +133,8 @@ const EditMagicModal = ({ character, onCharacterChange }) => {
             name="spellslots.second"
             value={character.spellslots.second}
             onChange={onCharacterChange}
-            size="2"
-            required
+            style={{ width: "15%" }}
+            
           />
           &emsp;<label>3rd:</label>
           <input
@@ -143,8 +143,8 @@ const EditMagicModal = ({ character, onCharacterChange }) => {
             name="spellslots.third"
             value={character.spellslots.third}
             onChange={onCharacterChange}
-            size="2"
-            required
+            style={{ width: "15%" }}
+            
           />
           <br />
           &emsp;<label>4th:</label>
@@ -154,8 +154,8 @@ const EditMagicModal = ({ character, onCharacterChange }) => {
             name="spellslots.fourth"
             value={character.spellslots.fourth}
             onChange={onCharacterChange}
-            size="2"
-            required
+            style={{ width: "15%" }}
+            
           />
           &emsp;<label>5th:</label>
           <input
@@ -164,8 +164,8 @@ const EditMagicModal = ({ character, onCharacterChange }) => {
             name="spellslots.fifth"
             value={character.spellslots.fifth}
             onChange={onCharacterChange}
-            size="2"
-            required
+            style={{ width: "15%" }}
+            
           />
           &emsp;<label>6th:</label>
           <input
@@ -174,8 +174,8 @@ const EditMagicModal = ({ character, onCharacterChange }) => {
             name="spellslots.sixth"
             value={character.spellslots.sixth}
             onChange={onCharacterChange}
-            size="2"
-            required
+            style={{ width: "15%" }}
+            
           />
           <br />
           &emsp;<label>7th:</label>
@@ -185,8 +185,8 @@ const EditMagicModal = ({ character, onCharacterChange }) => {
             name="spellslots.seventh"
             value={character.spellslots.seventh}
             onChange={onCharacterChange}
-            size="2"
-            required
+            style={{ width: "15%" }}
+            
           />
           &emsp;<label>8th:</label>
           <input
@@ -195,8 +195,8 @@ const EditMagicModal = ({ character, onCharacterChange }) => {
             name="spellslots.eighth"
             value={character.spellslots.eighth}
             onChange={onCharacterChange}
-            size="2"
-            required
+            style={{ width: "15%" }}
+            
           />
           &emsp;<label>9th:</label>
           <input
@@ -205,8 +205,8 @@ const EditMagicModal = ({ character, onCharacterChange }) => {
             name="spellslots.ninth"
             value={character.spellslots.ninth}
             onChange={onCharacterChange}
-            size="2"
-            required
+            style={{ width: "15%" }}
+            
           />
         </Item>
         <Button variant="contained" onClick={handleClose}>

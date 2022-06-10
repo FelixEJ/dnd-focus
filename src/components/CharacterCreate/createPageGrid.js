@@ -157,6 +157,10 @@ function CreatePageGrid() {
     localStorage.setItem(character.name, JSON.stringify(tempChar));
   }
 
+  function saveLocalCharacter(character) {
+    localStorage.setItem(character.name, JSON.stringify(character));
+  }
+
   switch (step) {
     case 1:
       return (
@@ -199,19 +203,11 @@ function CreatePageGrid() {
           updateInventory={updateInventory}
           addAttack={addAttack}
           updateAttacks={updateAttacks}
-        />
-      );
-    case 4:
-      return (
-        <ConfirmCharacter
-          prevStep={prevStep}
-          nextStep={nextStep}
-          onCharacterChange={onCharacterChange}
-          character={character}
+          saveLocalCharacter={saveLocalCharacter}
           saveCharacter={saveCharacter}
         />
-      );
-    case 5:
+      );    
+    case 4:
       return <Success prevStep={prevStep} />;
     default:
     //nothing

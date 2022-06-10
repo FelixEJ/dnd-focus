@@ -5,13 +5,17 @@ import { Button, ButtonGroup, Select } from "@material-ui/core";
 
 import CreateProficiencies from "./createProficiencies";
 
-import Features from "../features";
+import FeatureAccordion from "../featuresAccordion";
+import AddFeatureModal from "../addFeatureModal";
+import AddSkillModal from "../addSkillModal";
 
 import { getModifier } from "../utils";
 
 import {
-  WindowContent,
-  PageContent,
+  Window,
+  Page,
+  Section,
+  Card,
   SectionColumn,
   SectionRow,
   CardColumn,
@@ -34,7 +38,7 @@ const ChooseRaceGrid = ({
   };
 
   return (
-    <WindowContent>
+    <Page>
       <h1>Choose Race</h1>
       <p>
         <a
@@ -52,8 +56,8 @@ const ChooseRaceGrid = ({
       <Label>
         {character.name}, lvl:{character.level}
       </Label>
-      <PageContent>
-        <SectionColumn>
+      <Section>
+        <Card>
           <CardColumn>
             <Label>Name</Label>
             <input
@@ -62,6 +66,16 @@ const ChooseRaceGrid = ({
               name="name"
               fullWidth={true}
               value={character.name}
+              onChange={onCharacterChange}
+            />
+          </CardColumn>
+          <CardColumn>
+            <Label>Race:</Label>
+            <input
+              type="text"
+              id="race"
+              name="race"
+              value={character.race}
               onChange={onCharacterChange}
             />
           </CardColumn>
@@ -97,19 +111,15 @@ const ChooseRaceGrid = ({
             </Select>
           </CardColumn>
           <CardColumn>
-            <Label>Proficiency Bonus:</Label>
-            <Select
-              id="proficiency_bonus"
-              name="proficiency_bonus"
-              value={character.proficiency_bonus}
+            <Label>Age:</Label>
+            <input
+              type="text"
+              id="age"
+              name="age"
+              value={character.age}
               onChange={onCharacterChange}
-            >
-              <option value={2}>2</option>
-              <option value={3}>3</option>
-              <option value={4}>4</option>
-              <option value={5}>5</option>
-              <option value={6}>6</option>
-            </Select>
+              style={{ width: "20%" }}
+            />
           </CardColumn>
           <CardColumn>
             <Label>Alignment:</Label>
@@ -118,16 +128,6 @@ const ChooseRaceGrid = ({
               id="alignment"
               name="alignment"
               value={character.alignment}
-              onChange={onCharacterChange}
-            />
-          </CardColumn>
-          <CardColumn>
-            <Label>Race:</Label>
-            <input
-              type="text"
-              id="race"
-              name="race"
-              value={character.race}
               onChange={onCharacterChange}
             />
           </CardColumn>
@@ -165,9 +165,11 @@ const ChooseRaceGrid = ({
               onChange={onCharacterChange}
             />
           </CardColumn>
-        </SectionColumn>
-        <SectionColumn>
-          <h3>Ability Scores</h3>
+        </Card>
+      </Section>
+      <Section>
+        <h3>Ability Scores</h3>
+        <Card>
           <CardRow>
             <CardColumn>
               <Label>Strength:</Label>
@@ -258,17 +260,21 @@ const ChooseRaceGrid = ({
               </CardItem>
             </CardColumn>
           </CardRow>
-        </SectionColumn>
-        <SectionColumn>
-          <Features
+        </Card>
+      </Section>
+      <Section>
+        <h4>Features & Abilities</h4>
+        <AddFeatureModal addFeature={addFeature} />
+        <Card>
+          <FeatureAccordion
             character={character}
-            onCharacterChange={onCharacterChange}
-            addFeature={addFeature}
             updateFeatures={updateFeatures}
           />
-        </SectionColumn>
-        <SectionColumn>
-          <h3>Defences</h3>
+        </Card>
+      </Section>
+      <Section>
+        <h3>Defences</h3>
+        <Card>
           <CardColumn>
             <Label>Resistances:</Label>
             <input
@@ -299,21 +305,28 @@ const ChooseRaceGrid = ({
               onChange={onCharacterChange}
             />
           </CardColumn>
-        </SectionColumn>
-        <SectionColumn>
+        </Card>
+      </Section>
+      <Section>
+        <h3>Proficiencies</h3>
+        <AddSkillModal
+          character={character}
+          onCharacterChange={onCharacterChange}
+        />
+        <Card>
           <CreateProficiencies
             character={character}
             onCharacterChange={onCharacterChange}
           />
-        </SectionColumn>
-      </PageContent>
+        </Card>
+      </Section>
 
       <BotButton>
         <Button variant="contained" onClick={Continue}>
           Next
         </Button>
       </BotButton>
-    </WindowContent>
+    </Page>
   );
 };
 

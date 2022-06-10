@@ -8,7 +8,6 @@ import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import AddItemModal from "./addItemModal";
 import EditInventoryModal from "./editInventoryModal";
 
-
 function CustomToggle({ children, eventKey }) {
   const decoratedOnClick = useAccordionButton(eventKey, () =>
     console.log("totally custom!")
@@ -32,11 +31,32 @@ const ButtonRight = styled.div`
   text-transform: uppercase;
 `;
 
-const TextLeft = styled.div`
+const Header = styled.div`
   float: left;
   font-size: 0.9em;
   text-decoration: underline;
   text-transform: uppercase;
+`;
+
+const ItemRow = styled.div`
+  width: 90%
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  clear: both;
+`;
+
+const Item = styled.div`
+  float: left;
+  font-size: 0.9em;
+  margin: 5px 5px;
+  max-width: 85%;
+`;
+
+const Container = styled.div`
+  width: 95vw;
+  max-width: 400px;
+  padding: 2%;
 `;
 
 const InventoryAccordion = ({ character, addItem, updateInventory }) => {
@@ -51,49 +71,50 @@ const InventoryAccordion = ({ character, addItem, updateInventory }) => {
   // };
 
   return (
-    <div>
+    <Container>
       <Accordion>
         <div>
           <Card>
             <Card.Header>
-              <TextLeft>
-                <b>Inventory:</b> 
+              <Header>
+                <b>Inventory:</b>
                 {/* total value = {getInventoryValue()} gp */}
-              </TextLeft>
+              </Header>
               <ButtonRight>
                 <CustomToggle eventKey={0}>EXPAND</CustomToggle>
               </ButtonRight>
             </Card.Header>
             <Accordion.Collapse eventKey={0}>
               <Card.Body
-                style={{ backgroundColor: "lightgrey", maxHeight: "20vh" }}
+                style={{ backgroundColor: "lightgrey" }}
                 class="overflow-auto"
               >
-                {character.inventory.map((item, index) => (
-                  <p key={index}>
-                    <b>{item.item_name}</b> x{item.quantity}, value=
-                    {item.quantity * item.value_each}
-                    {item.value_currency} ({item.value_each}
-                    {item.value_currency}/ea)                    
-                    <EditInventoryModal
-                      character={character}
-                      updateInventory={updateInventory}
-                      index={index}
-                      name={item.item_name}
-                      item={{item}}
-                    />
-                  </p>
-                ))}
-                <AddItemModal 
-                  character={character}
-                  addItem={addItem}
-                />
+                <>
+                  {character.inventory.map((item, index) => (
+                    <ItemRow>
+                      <Item key={index}>
+                        <b>{item.item_name}</b> x{item.quantity}, value=
+                        {item.quantity * item.value_each}
+                        {item.value_currency} ({item.value_each}
+                        {item.value_currency}/ea)
+                      </Item>
+                      <EditInventoryModal
+                        character={character}
+                        updateInventory={updateInventory}
+                        index={index}
+                        name={item.item_name}
+                        item={{ item }}
+                      />
+                    </ItemRow>
+                  ))}
+                </>
+                <AddItemModal character={character} addItem={addItem} />
               </Card.Body>
             </Accordion.Collapse>
           </Card>
         </div>
       </Accordion>
-    </div>
+    </Container>
   );
 };
 

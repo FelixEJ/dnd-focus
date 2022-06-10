@@ -28,11 +28,31 @@ const ButtonRight = styled.div`
   text-transform: uppercase;
 `;
 
-const TextLeft = styled.div`
+const Header = styled.div`
   float: left;
   font-size: 0.9em;
   text-decoration: underline;
   text-transform: uppercase;
+`;
+
+const ItemRow = styled.div`
+  width: 90%
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  clear: both;
+`;
+
+const Item = styled.div`
+  font-size: 0.9em;
+  margin: 5px 5px;
+  max-width: 85%;
+`;
+
+const Container = styled.div`
+  width: 95vw;
+  max-width: 400px;
+  max-height: 60vh;
 `;
 
 const FeatureAccordion = ({ character, updateFeatures }) => {
@@ -45,96 +65,95 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
   const handleChange = (e, index, name) => {
     e.preventDefault();
     let feats = [...character.features];
-    // console.log("uses", e.target.value);
 
     let featIndex = feats.findIndex((feat) => feat.feature_name === name);
-    // console.log("name", name);
-    // console.log("index", featIndex);
-    // console.log("name2", feats[featIndex].feature_name);
     feats[featIndex].current_uses = e.target.value;
 
-    // console.log("feats", feats);
     updateFeatures(tempFeats);
   };
 
   return (
-    <Accordion >
-      <div>
-        {character.features.map((feature, index) => (
-          <Card>
-            <Card.Header>
-              <TextLeft>
-                {/* {feature.level_acquired} - {feature.feature_name}: */}
-                {feature.feature_name}:
-              </TextLeft>
-              {feature.max_uses > 0 && (
-                <>
-                  Uses:
-                  <input
-                    type="number"
-                    max={feature.max_uses}
-                    min="0"
-                    id="current_uses"
-                    name="current_uses"
-                    value={feature.current_uses}
-                    onChange={(e) =>
-                      handleChange(e, index, feature.feature_name)
-                    }
-                    size="2"
-                    display="none"
+    <Container>
+      <Accordion>
+        <div>
+          {character.features.map((feature, index) => (
+            <Card>
+              <Card.Header>
+                <ItemRow>
+                  <Item>
+                    <Header>{feature.feature_name}:</Header>
+                    {feature.max_uses > 0 && (
+                      <>
+                        Uses:
+                        <input
+                          type="number"
+                          max={feature.max_uses}
+                          min="0"
+                          id="current_uses"
+                          name="current_uses"
+                          value={feature.current_uses}
+                          onChange={(e) =>
+                            handleChange(e, index, feature.feature_name)
+                          }
+                          size="2"
+                          display="none"
+                        />
+                        /{feature.max_uses}
+                      </>
+                    )}
+                  </Item>
+                  <ButtonRight>
+                    <CustomToggle eventKey={feature.feature_id}>
+                      EXPAND
+                    </CustomToggle>
+                  </ButtonRight>
+                </ItemRow>
+              </Card.Header>
+
+              <Accordion.Collapse eventKey={feature.feature_id}>
+                <Card.Body
+                  style={{ backgroundColor: "lightgrey" }}
+                  class="overflow-auto"
+                >
+                  <>
+                    Source: <b>{feature.source}</b>
+                    <br />
+                  </>
+                  {feature.max_uses > 0 && (
+                    <text>
+                      <>
+                        Uses:{" "}
+                        <input
+                          type="number"
+                          max={feature.max_uses}
+                          min="0"
+                          id="current_uses"
+                          name="current_uses"
+                          value={feature.current_uses}
+                          onChange={(e) => handleChange(e, index)}
+                          size="2"
+                          display="none"
+                        />
+                        /{feature.max_uses}
+                      </>
+                      <> Recharge: {feature.recharge}</>
+                    </text>
+                  )}
+                  <p>{feature.description}</p>
+                  <EditFeatureModal
+                    character={character}
+                    updateFeatures={updateFeatures}
+                    index={index}
+                    name={feature.feature_name}
+                    feat={{ feature }}
                   />
-                  /{feature.max_uses}
-                </>
-              )}
-              <ButtonRight>
-                <CustomToggle eventKey={feature.feature_id}>
-                  EXPAND
-                </CustomToggle>
-              </ButtonRight>
-            </Card.Header>
-            <Accordion.Collapse eventKey={feature.feature_id}>
-              <Card.Body
-                style={{ backgroundColor: "lightgrey", maxHeight: "25vh" }}
-                class="overflow-auto"
-              >
-                <>
-                  Source: <b>{feature.source}</b>
-                  <br />
-                </>
-                {feature.max_uses > 0 && (
-                  <text>
-                    <>
-                      Uses:{" "}
-                      <input
-                        type="number"
-                        max={feature.max_uses}
-                        min="0"
-                        id="current_uses"
-                        name="current_uses"
-                        value={feature.current_uses}
-                        onChange={(e) => handleChange(e, index)}
-                        size="2"
-                        display="none"
-                      />
-                      /{feature.max_uses}
-                    </>
-                    <> Recharge: {feature.recharge}</>
-                  </text>
-                )}
-                <p>{feature.description}</p>
-                <EditFeatureModal
-                  character={character}
-                  updateFeatures={updateFeatures}
-                  index={index}
-                  name={feature.feature_name}
-                  feat={{ feature }}
-                />
-              </Card.Body>
-            </Accordion.Collapse>
-          </Card>
-        ))}
-      </div>
-    </Accordion>
+                </Card.Body>
+              </Accordion.Collapse>
+            </Card>
+          ))}
+        </div>
+      </Accordion>
+    </Container>
   );
 };
 
