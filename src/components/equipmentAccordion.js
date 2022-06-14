@@ -62,7 +62,6 @@ const Container = styled.div`
 const EquipmentAccordion = ({
   character,
   addEquipment,
-  addFeature,
   updateEquipment,
 }) => {
   const getEquipmentValue = () => {
@@ -112,7 +111,6 @@ const EquipmentAccordion = ({
                 <AddEquipmentModal
                   character={character}
                   addEquipment={addEquipment}
-                  addFeature={addFeature}
                 />
               </Card.Body>
             </Accordion.Collapse>

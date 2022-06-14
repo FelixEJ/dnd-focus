@@ -38,7 +38,6 @@ const Inventory = ({
   updateInventory,
   updateEquipment,
   addItem,
-  addFeature,
   addEquipment,
 }) => {
   const getTotalMoney = () => {
@@ -57,7 +56,6 @@ const Inventory = ({
         character={character}
         updateEquipment={updateEquipment}
         addEquipment={addEquipment}
-        addFeature={addFeature}
       />
       <InventoryAccordion
         character={character}

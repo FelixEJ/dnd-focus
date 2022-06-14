@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import EditCombatModal from "./editCombatModal";
+
 import DamageHealingModal from "./damageHealingModal";
 
 const Container = styled.div`
@@ -67,11 +67,7 @@ const NumbersBold = styled.div`
 const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
   return (
     <div>
-      <h4>Combat</h4>
-      <EditCombatModal
-        character={character}
-        onCharacterChange={onCharacterChange}
-      />
+      
       <Container>
         <Row>
           <BoxTrio>
@@ -105,7 +101,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
                 name="hp.current"
                 value={character.hp.current}
                 onChange={onCharacterChange}
-                size="2"
+                style={{ width: "20%" }}
                 display="none"
               />
               +
@@ -116,7 +112,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
                 name="hp.temp"
                 value={character.hp.temp}
                 onChange={onCharacterChange}
-                size="1"
+                style={{ width: "20%" }}
                 display="none"
               />
               /
@@ -166,7 +162,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
                 name="hit_dice.current"
                 value={character.hit_dice.current}
                 onChange={onCharacterChange}
-                size="1"
+                style={{ width: "35%" }}
                 display="none"
               />
               {character.hit_dice.dice}/{character.hit_dice.max}
@@ -181,7 +177,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
                   name="hit_dice.mult1_current"
                   value={character.hit_dice.mult1_current}
                   onChange={onCharacterChange}
-                  size="1"
+                  style={{ width: "20%" }}
                   display="none"
                 />
                 {character.hit_dice.mult1_dice}/{character.hit_dice.mult1_max}
@@ -197,7 +193,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
                   name="hit_dice.mult2_current"
                   value={character.hit_dice.mult2_current}
                   onChange={onCharacterChange}
-                  size="1"
+                  style={{ width: "20%" }}
                   display="none"
                 />
                 {character.hit_dice.mult2_dice}/{character.hit_dice.mult2_max}
@@ -216,7 +212,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
                 name="death_saves.pass"
                 value={character.death_saves.pass}
                 onChange={onCharacterChange}
-                size="2"
+                style={{ width: "20%" }}
                 display="none"
               />
             </Text>
@@ -230,7 +226,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
                 name="death_saves.fail"
                 value={character.death_saves.fail}
                 onChange={onCharacterChange}
-                size="2"
+                style={{ width: "20%" }}
                 display="none"
               />
             </Text>
@@ -243,7 +239,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
             name="exhaustion"
             value={character.exhaustion}
             onChange={onCharacterChange}
-            size="1"
+            style={{ width: "20%" }}
           >
             <option value={0}>-</option>
             <option value={1}>1</option>

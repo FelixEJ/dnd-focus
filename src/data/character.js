@@ -259,4 +259,11 @@ export const blankCharacter = {
     bond: "",
     flaw: "",
   },
+  notes: [
+    // {
+    //   note_id: 0,
+    //   title: "",
+    //   note_body: "",   
+    // },
+  ],
 };

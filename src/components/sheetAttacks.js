@@ -32,8 +32,7 @@ const Box = styled.div`
 
 const Attacks = ({ character, updateAttacks, addAttack }) => {
   return (
-    <Container>
-      
+    <Container>      
         <Box>
           <AttackAccordion
             character={character}

@@ -8,8 +8,6 @@ import ConfirmDeleteFeatureModal from "./confirmDeleteFeatureModal";
 
 import EditModalWindow from "./StyledPageComponents/editModalWindow";
 
-import { BotButton, TopRightButton } from "./StyledPageComponents/pageStyling";
-
 import {
   Window,
   Page,
@@ -19,7 +17,7 @@ import {
   CardRow,
   CardItem,
   Label,
-  BotButtons,
+  BotButton,
 } from "./StyledPageComponents/pageStyling";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -83,7 +81,6 @@ const EditFeatureModal = ({ character, updateFeatures, index, name }) => {
             value={feature.level_acquired}
             onChange={handleChange}
             style={{ width: "20%" }}
-            required
           />
         </Item>
         <Item>
@@ -95,7 +92,6 @@ const EditFeatureModal = ({ character, updateFeatures, index, name }) => {
               name="feature_name"
               value={feature.feature_name}
               onChange={handleChange}
-              required
             />
           </label>
         </Item>
@@ -126,7 +122,6 @@ const EditFeatureModal = ({ character, updateFeatures, index, name }) => {
               name="description"
               value={feature.description}
               onChange={handleChange}
-              required
               cols="35"
               rows="5"
             />
@@ -175,7 +170,7 @@ const EditFeatureModal = ({ character, updateFeatures, index, name }) => {
           </label>
         </Item>
         <Item>
-          <Label>Damage Dice:</Label>
+          <Label>Damage:</Label>
           <input
             type="number"
             id="damage_dice_amount"

@@ -136,7 +136,7 @@ const DamageHealingModal = ({ character, onCharacterChange, updateHealth }) => {
                   name="hit_amount"
                   value={hit.hit_amount}
                   onChange={handleChange}
-                  size="3"
+                  style={{ width: "20%" }}
                   display="none"
                 />{" "}
                 <select

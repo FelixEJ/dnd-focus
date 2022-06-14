@@ -9,7 +9,19 @@ import Grid from "@material-ui/core/Grid";
 
 import EditModalWindow from "./StyledPageComponents/editModalWindow";
 
-import { TopRightButton } from "./StyledPageComponents/pageStyling";
+import {
+  Window,
+  PageContent,
+  Container,
+  SectionColumn,
+  SectionRow,
+  CardColumn,
+  CardRow,
+  CardItem,
+  Label,
+  BotButton,
+  TopRightButton,
+} from "../components/StyledPageComponents/pageStyling";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -71,21 +83,19 @@ const EditAbilitiesModal = ({ character, onCharacterChange }) => {
         handleClose={handleClose}
       >
         <Item>
-          <label>
-            Proficiency Bonus:
-            <select
-              id="proficiency_bonus"
-              name="proficiency_bonus"
-              value={character.proficiency_bonus}
-              onChange={onCharacterChange}
-            >
-              <option value={2}>2</option>
-              <option value={3}>3</option>
-              <option value={4}>4</option>
-              <option value={5}>5</option>
-              <option value={6}>6</option>
-            </select>
-          </label>
+          <Label>Proficiency Bonus:</Label>
+          <select
+            id="proficiency_bonus"
+            name="proficiency_bonus"
+            value={character.proficiency_bonus}
+            onChange={onCharacterChange}
+          >
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+            <option value={6}>6</option>
+          </select>
         </Item>
         <Item>
           <h3>Ability Scores</h3>
@@ -736,17 +746,15 @@ const EditAbilitiesModal = ({ character, onCharacterChange }) => {
         <Item>
           <h3>Passives</h3>
           <Item>
-            <label>
-              Senses:
-              <input
-                type="text"
-                id="senses"
-                placeholder="Darkvision?"
-                name="passives.senses"
-                value={character.passives.senses}
-                onChange={onCharacterChange}
-              />
-            </label>
+            <Label>Senses:</Label>
+            <input
+              type="text"
+              id="senses"
+              placeholder="Darkvision?"
+              name="passives.senses"
+              value={character.passives.senses}
+              onChange={onCharacterChange}
+            />
           </Item>
           <Item>
             <label>

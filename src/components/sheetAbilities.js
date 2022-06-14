@@ -84,6 +84,9 @@ const SkillRow = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  &:nth-child(odd) {
+    background-color: rgba(203, 203, 203, 0.3);
+  }
 `;
 
 const SkillModifier = styled.div`
@@ -94,6 +97,9 @@ const SkillModifier = styled.div`
 const SkillName = styled.div`
   font-size: 0.8em;
   text-transform: uppercase;
+  width: 99%;
+  display: inline-block;
+  margin: 1% 1% 1% 1%;
 `;
 
 const Bar = styled.div`
@@ -134,6 +140,14 @@ const TextRight = styled.div`
   margin-right: auto;
   margin-top: auto;
   margin-bottom: auto;
+`;
+
+const Skill = styled.div`
+  & {
+  }
+  &:nth-child(odd) {
+    background-color: rgba(203, 203, 203, 0.4);
+  }
 `;
 
 const SheetAbilities = ({ character, onCharacterChange }) => {

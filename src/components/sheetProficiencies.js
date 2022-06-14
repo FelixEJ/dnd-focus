@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import EditProficienciesModal from "./editProficienciesModal";
+
 
 const Container = styled.div`
   text-align: center;
@@ -32,13 +32,7 @@ const Text = styled.div`
 
 const SheetProficiencies = ({ character, onCharacterChange }) => {
   return (
-    <div>
-      <h4>Profs & Languages</h4>
-      <EditProficienciesModal
-        character={character}
-        onCharacterChange={onCharacterChange}
-      />
-      <Container>
+    <>
         <Box>
           <Text>
             <b>WEAPONS: </b>
@@ -63,8 +57,7 @@ const SheetProficiencies = ({ character, onCharacterChange }) => {
             {character.proficiencies.other}
           </Text>
         </Box>
-      </Container>
-    </div>
+    </>
   );
 };
 

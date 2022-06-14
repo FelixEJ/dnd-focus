@@ -39,12 +39,7 @@ const Text = styled.p`
 
 const Personality = ({ character, onCharacterChange }) => {
   return (
-    <div>
-      <h4>Personality</h4>
-      <EditPersonalitiesModal
-        character={character}
-        onCharacterChange={onCharacterChange}
-      />
+    <div>      
     <Container>
       <Box>
         <Title>Traits</Title>

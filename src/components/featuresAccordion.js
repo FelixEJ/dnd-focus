@@ -4,6 +4,18 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
+import {
+  Window,
+  Page,
+  SectionColumn,
+  SectionRow,
+  CardColumn,
+  CardRow,
+  CardItem,
+  Label,
+  BotButton,
+  TopRightButton,
+} from "./StyledPageComponents/pageStyling";
 
 import EditFeatureModal from "./editFeatureModal";
 
@@ -36,7 +48,6 @@ const Header = styled.div`
 `;
 
 const ItemRow = styled.div`
-  width: 90%
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -46,7 +57,7 @@ const ItemRow = styled.div`
 const Item = styled.div`
   font-size: 0.9em;
   margin: 5px 5px;
-  max-width: 85%;
+  max-width: 75%;
 `;
 
 const Container = styled.div`
@@ -82,8 +93,13 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                 <ItemRow>
                   <Item>
                     <Header>{feature.feature_name}:</Header>
+                    {feature.damage_dice_amount !== "" && (
+                      <>{feature.damage_dice_amount}</>
+                    )}
+                    {feature.damage_dice !== "" && <>{feature.damage_dice}</>}
+                    {feature.damage_type !== "" && <>{feature.damage_type}</>}
                     {feature.max_uses > 0 && (
-                      <>
+                      <Label>
                         Uses:
                         <input
                           type="number"
@@ -99,7 +115,7 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                           display="none"
                         />
                         /{feature.max_uses}
-                      </>
+                      </Label>
                     )}
                   </Item>
                   <ButtonRight>
@@ -130,7 +146,9 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                           id="current_uses"
                           name="current_uses"
                           value={feature.current_uses}
-                          onChange={(e) => handleChange(e, index)}
+                          onChange={(e) =>
+                            handleChange(e, index, feature.feature_name)
+                          }
                           size="2"
                           display="none"
                         />

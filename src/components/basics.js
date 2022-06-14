@@ -73,7 +73,7 @@ const Basics = ({ character, onCharacterChange }) => {
           name="xp"
           value={character.xp}
           onChange={onCharacterChange}
-          size="7"
+          style={{ width: "30%" }}
         />
       </Text>
       <EditBasicsModal

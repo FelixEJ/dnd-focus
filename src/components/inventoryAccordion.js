@@ -93,6 +93,9 @@ const InventoryAccordion = ({ character, addItem, updateInventory }) => {
                   {character.inventory.map((item, index) => (
                     <ItemRow>
                       <Item key={index}>
+                        {item.group_loot !== "" && (
+                          <b>(G)</b>
+                        )}
                         <b>{item.item_name}</b> x{item.quantity}, value=
                         {item.quantity * item.value_each}
                         {item.value_currency} ({item.value_each}

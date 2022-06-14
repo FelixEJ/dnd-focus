@@ -59,6 +59,7 @@ const EditEquipmentModal = ({
     text-decoration: underline;
     float:right;
     font-size: .7em;
+    padding-right: 5px;
   `;
 
   return (

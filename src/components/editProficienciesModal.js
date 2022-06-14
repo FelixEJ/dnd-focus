@@ -9,7 +9,11 @@ import Grid from "@material-ui/core/Grid";
 
 import EditModalWindow from "./StyledPageComponents/editModalWindow";
 
-import { BotButton, TopRightButton } from "./StyledPageComponents/pageStyling";
+import {
+  Label,
+  BotButton,
+  TopRightButton,
+} from "./StyledPageComponents/pageStyling";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -41,65 +45,56 @@ const EditProficienciesModal = ({ character, onCharacterChange }) => {
         handleClose={handleClose}
       >
         <Item>
-          <label>
-            Weapons:
-            <textarea
-              type="text"
-              id="weapons"
-              placeholder="Simple and...?"
-              name="proficiencies.weapons"
-              value={character.proficiencies.weapons}
-              onChange={onCharacterChange}
-              cols="30"
-              rows="2"
-            />
-          </label>
+          <Label>Weapons:</Label>
+          <textarea
+            type="text"
+            id="weapons"
+            placeholder="Simple and...?"
+            name="proficiencies.weapons"
+            value={character.proficiencies.weapons}
+            onChange={onCharacterChange}
+            cols="30"
+            rows="2"
+          />
         </Item>
         <Item>
-          <label>
-            Armour:
-            <textarea
-              type="text"
-              id="armour"
-              placeholder="Light and...?"
-              name="proficiencies.armour"
-              value={character.proficiencies.armour}
-              onChange={onCharacterChange}
-              cols="30"
-              rows="2"
-            />
-          </label>
+          <Label>Armour:</Label>
+          <textarea
+            type="text"
+            id="armour"
+            placeholder="Light and...?"
+            name="proficiencies.armour"
+            value={character.proficiencies.armour}
+            onChange={onCharacterChange}
+            cols="30"
+            rows="2"
+          />
         </Item>
         <Item>
-          <label>
-            Languages:
-            <textarea
-              type="text"
-              id="languages"
-              placeholder="Common and...?"
-              name="proficiencies.languages"
-              value={character.proficiencies.languages}
-              onChange={onCharacterChange}
-              cols="30"
-              rows="2"
-            />
-          </label>
+          <Label>Languages:</Label>
+          <textarea
+            type="text"
+            id="languages"
+            placeholder="Common and...?"
+            name="proficiencies.languages"
+            value={character.proficiencies.languages}
+            onChange={onCharacterChange}
+            cols="30"
+            rows="2"
+          />
         </Item>
         <Item>
-          <label>
-            Other:
-            <br />
-            <textarea
-              type="text"
-              id="other"
-              placeholder="Instruments, games, vehicles...?"
-              name="proficiencies.other"
-              value={character.proficiencies.other}
-              onChange={onCharacterChange}
-              cols="30"
-              rows="2"
-            />
-          </label>
+          <Label>Other:</Label>
+          <textarea
+            type="text"
+            id="other"
+            placeholder="Instruments, games, vehicles...?"
+            name="proficiencies.other"
+            value={character.proficiencies.other}
+            onChange={onCharacterChange}
+            cols="30"
+            rows="2"
+          />
         </Item>
         <Button variant="contained" onClick={handleClose}>
           Close

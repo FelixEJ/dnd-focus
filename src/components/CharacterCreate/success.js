@@ -11,12 +11,20 @@ import Features from "../features";
 import Inventory from "../inventory";
 import SheetMagic from "../sheetMagic";
 import Personality from "../personality";
+import NotesAccordion from "../notesAccordion";
 
 import { blankCharacter } from "../../data/character";
 
 import RollDiceModal from "../rollDiceModal";
 import RestModal from "../restModal";
 import EditAbilitiesModal from "../editAbilitiesModal";
+import EditProficienciesModal from "../editProficienciesModal";
+import EditCombatModal from "../editCombatModal";
+import AddAttackModal from "../addAttackModal";
+import EditMagicModal from "../editMagicModal";
+import AddFeatureModal from "../addFeatureModal";
+import EditPersonalitiesModal from "../editPersonalitiesModal";
+import AddNoteModal from "../addNoteModal";
 
 import {
   Window,
@@ -124,6 +132,15 @@ const Success = () => {
     // console.log("new Feature", updatedCharacter);
   }
 
+  function updateNotes(newNote) {
+    const tempNote = newNote;
+    const updatedCharacter = { ...character };
+    updatedCharacter.notes = tempNote;
+    setLoadedChar(updatedCharacter);
+    saveLocalCharacter(updatedCharacter);
+    // console.log("new Feature", updatedCharacter);
+  }
+
   function updateHealth(newHealth) {
     const tempHealth = newHealth;
     const updatedCharacter = { ...character };
@@ -176,6 +193,17 @@ const Success = () => {
     const newCharacter = { ...character };
     const oldAttacks = newCharacter.attacks;
     oldAttacks.push(newAttack);
+    setLoadedChar(newCharacter);
+    saveLocalCharacter(newCharacter);
+    // console.log("new attack", loadedChar);
+  
+  }
+  function addNote(newnote) {
+    const newNote = newnote;
+    newnote.note_id = character.notes.length + 1;
+    const newCharacter = { ...character };
+    const oldNotes = newCharacter.notes;
+    oldNotes.push(newNote);
     setLoadedChar(newCharacter);
     saveLocalCharacter(newCharacter);
     // console.log("new attack", loadedChar);
@@ -250,6 +278,11 @@ const Success = () => {
             </Card>
           </Section>
           <Section>
+            <h4>Profs & Languages</h4>
+            <EditProficienciesModal
+              character={character}
+              onCharacterChange={onCharacterChange}
+            />
             <Card>
               <SheetProficiencies
                 character={character}
@@ -258,6 +291,11 @@ const Success = () => {
             </Card>
           </Section>
           <Section>
+            <h4>Combat</h4>
+            <EditCombatModal
+              character={character}
+              onCharacterChange={onCharacterChange}
+            />
             <Card>
               <SheetCombat
                 character={character}
@@ -267,6 +305,8 @@ const Success = () => {
             </Card>
           </Section>
           <Section>
+            <h4>Attacks</h4>
+            <AddAttackModal addAttack={addAttack} character={character} />
             <Card>
               <SheetAttacks
                 character={character}
@@ -276,6 +316,11 @@ const Success = () => {
             </Card>
           </Section>
           <Section>
+            <h4>Magic</h4>
+            <EditMagicModal
+              character={character}
+              onCharacterChange={onCharacterChange}
+            />
             <Card>
               <SheetMagic
                 character={character}
@@ -284,6 +329,8 @@ const Success = () => {
             </Card>
           </Section>
           <Section>
+            <h4>Features & Abilities</h4>
+            <AddFeatureModal addFeature={addFeature} />
             <Card>
               <Features
                 character={character}
@@ -294,6 +341,7 @@ const Success = () => {
             </Card>
           </Section>
           <Section>
+            <h4>Inventory</h4>
             <Card>
               <Inventory
                 character={character}
@@ -301,16 +349,31 @@ const Success = () => {
                 updateInventory={updateInventory}
                 updateEquipment={updateEquipment}
                 addItem={addItem}
-                addFeature={addFeature}
                 addEquipment={addEquipment}
               />
             </Card>
           </Section>
           <Section>
+            <h4>Personality</h4>
+            <EditPersonalitiesModal
+              character={character}
+              onCharacterChange={onCharacterChange}
+            />
             <Card>
               <Personality
                 character={character}
                 onCharacterChange={onCharacterChange}
+              />
+            </Card>
+          </Section>
+          <Section>
+            <h4>Notes</h4>
+            <AddNoteModal addNote={addNote} />
+            <Card>
+              <NotesAccordion
+                character={character}
+                onCharacterChange={onCharacterChange}
+                updateNotes={updateNotes}
               />
             </Card>
           </Section>

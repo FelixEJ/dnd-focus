@@ -178,7 +178,7 @@ const AddFeatureModal = ({ addFeature }) => {
           </select>
         </Item>
         <Item>
-          <Label>Damage Dice:</Label>
+          <Label>Damage:</Label>
           <input
             type="number"
             id="damage_dice_amount"
