@@ -54,9 +54,8 @@ const Item = styled.div`
 `;
 
 const Container = styled.div`
-  width: 95vw;
-  max-width: 400px;
-  padding: 2%;
+  width: 99%;
+  margin-top: 1%;
 `;
 
 const InventoryAccordion = ({ character, addItem, updateInventory }) => {

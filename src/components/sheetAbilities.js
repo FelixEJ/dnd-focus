@@ -8,7 +8,6 @@ import { getModifier, getSave, getSkill, getPassive } from "./utils";
 import {
   Window,
   PageContent,
-  Container,
   SectionColumn,
   SectionRow,
   CardColumn,
@@ -18,21 +17,13 @@ import {
   BotButton,
 } from "../components/StyledPageComponents/pageStyling";
 
-// const Container = styled.div`
-//   text-align: center;
-//   z-index: 1;
-//   width: 100%;
-//   max-width: 400px;
-//   background-color: none;
-
-//   display: block;
-//   margin-left: auto;
-//   margin-right: auto;
-
-//   @media only screen and (min-width: 1300px) {
-//     max-height: 90vh;
-//   }
-// `;
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+`;
 
 const AbilityBox = styled.div`
   width: 98%;
@@ -142,17 +133,9 @@ const TextRight = styled.div`
   margin-bottom: auto;
 `;
 
-const Skill = styled.div`
-  & {
-  }
-  &:nth-child(odd) {
-    background-color: rgba(203, 203, 203, 0.4);
-  }
-`;
-
 const SheetAbilities = ({ character, onCharacterChange }) => {
   return (
-    <>
+    <CardColumn>
       <Bar>
         <NumberLeft>+{character.proficiency_bonus}</NumberLeft>
         <TextRight>proficiency bonus</TextRight>
@@ -772,7 +755,7 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
         </NumberLeft>
         <TextRight>passive intelligence (investigation)</TextRight>
       </Bar>
-    </>
+    </CardColumn>
   );
 };
 

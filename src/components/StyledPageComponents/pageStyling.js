@@ -30,17 +30,43 @@ const PageContentContainer = styled.div`
     background: green;
   }
   @media only screen and (min-width: 1800px) {
-    background: blue;
-    flex-flow: column wrap;
+    background: white;
   }
 `;
 export const Page = ({ children }) => {
   return <PageContentContainer>{children}</PageContentContainer>;
 };
 
+const LayoutContainer = styled.div`
+  background: red;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 99vh;
+
+  @media only screen and (min-width: 480px) {
+    background: orange;
+  }
+  @media only screen and (min-width: 768px) {
+    background: yellow;
+  }
+  @media only screen and (min-width: 1024px) {
+    background: red;
+    column-count: 3;
+    column-gap: 0;
+    width: 98vw;
+  }
+  @media only screen and (min-width: 1800px) {
+    background: lightblue;
+  }
+`;
+export const Layout = ({ children }) => {
+  return <LayoutContainer>{children}</LayoutContainer>;
+};
+
 const SectionContainer = styled.div`
   background: maroon;
-  width: 95vw;
+  width: 99%;
   max-width: 400px;
   display: flex;
   flex-flow: column nowrap;
@@ -58,39 +84,48 @@ const SectionContainer = styled.div`
   }
   @media only screen and (min-width: 1024px) {
     background: yellow;
+    margin: 0 0;
   }
   @media only screen and (min-width: 1800px) {
     background: green;
   }
 `;
-export const Section = ({ children }) => {
-  return <SectionContainer>{children}</SectionContainer>;
+export const Section = ({ children, className }) => {
+  return <SectionContainer className={className}>{children}</SectionContainer>;
 };
 
 const CardContainer = styled.div`
-  width: 95vw;
-  max-width: 99%;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+  width: 99%;
+  max-height: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   border-style: inset;
   border-radius: 5px;
   overflow-y: auto;
   overflow-x: hidden;
+
+  @media only screen and (min-width: 480px) {
+  }
+  @media only screen and (min-width: 768px) {
+  }
+  @media only screen and (min-width: 1024px) {
+    background: lightblue;
+  }
+  @media only screen and (min-width: 1800px) {
+  }
 `;
 export const Card = ({ children }) => {
   return <CardContainer>{children}</CardContainer>;
-}
+};
 
 const CardColumnContainer = styled.div`
   background-color: yellow;
-  width: 95%;
+  width: 99%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  margin: 0.5em;
 
   @media only screen and (min-width: 480px) {
     background: green;
@@ -134,8 +169,6 @@ const CardRowContainer = styled.div`
 export const CardRow = ({ children }) => {
   return <CardRowContainer>{children}</CardRowContainer>;
 };
-
-
 
 const CardItemContainer = styled.div`
   background-color: green;

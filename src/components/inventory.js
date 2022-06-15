@@ -21,8 +21,7 @@ const MoneyBox = styled.div`
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  width: 95vw;
-  max-width: 99%;
+  width: 99%;
 `;
 
 const MoneyUnit = styled.div`
@@ -30,6 +29,8 @@ const MoneyUnit = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  width: 70px;
+  padding: 2px;
 `;
 
 const Inventory = ({
@@ -73,7 +74,7 @@ const Inventory = ({
             name="currency.copper"
             value={character.currency.copper}
             onChange={onCharacterChange}
-            style={{ width: "18vw", maxWidth: "80px" }}
+            style={{ width: "18vw", maxWidth: "70px" }}
           />
         </MoneyUnit>
         <MoneyUnit>
@@ -85,7 +86,7 @@ const Inventory = ({
             name="currency.silver"
             value={character.currency.silver}
             onChange={onCharacterChange}
-            style={{ width: "18vw", maxWidth: "80px" }}
+            style={{ width: "18vw", maxWidth: "70px" }}
           />
         </MoneyUnit>
         <MoneyUnit>
@@ -97,7 +98,7 @@ const Inventory = ({
             name="currency.electrum"
             value={character.currency.electrum}
             onChange={onCharacterChange}
-            style={{ width: "18vw", maxWidth: "80px" }}
+            style={{ width: "18vw", maxWidth: "70px" }}
           />
         </MoneyUnit>
         <MoneyUnit>
@@ -109,7 +110,7 @@ const Inventory = ({
             name="currency.gold"
             value={character.currency.gold}
             onChange={onCharacterChange}
-            style={{ width: "18vw", maxWidth: "80px" }}
+            style={{ width: "18vw", maxWidth: "70px" }}
           />
         </MoneyUnit>
         <MoneyUnit>
@@ -121,7 +122,7 @@ const Inventory = ({
             name="currency.platinum"
             value={character.currency.platinum}
             onChange={onCharacterChange}
-            style={{ width: "18vw", maxWidth: "80px" }}
+            style={{ width: "18vw", maxWidth: "70px" }}
           />
         </MoneyUnit>
       </MoneyBox>

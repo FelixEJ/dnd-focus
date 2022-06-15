@@ -1,21 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-
-
-const Container = styled.div`
-  text-align: center;
-  z-index: 1;
-  width: 100%;
-  max-width: 400px;
-  background-color: none;
-
-  display: table;
-  margin-left: auto;
-  margin-right: auto;
-  border-style: inset;
-  border-radius: 5px;
-`;
+import {
+  Window,
+  PageContent,
+  SectionColumn,
+  SectionRow,
+  CardColumn,
+  CardRow,
+  CardItem,
+  Label,
+  BotButton,
+} from "../components/StyledPageComponents/pageStyling";
 
 const Box = styled.div`
   width: 98%;
@@ -32,32 +28,32 @@ const Text = styled.div`
 
 const SheetProficiencies = ({ character, onCharacterChange }) => {
   return (
-    <>
-        <Box>
-          <Text>
-            <b>WEAPONS: </b>
-            {character.proficiencies.weapons}
-          </Text>
-        </Box>
-        <Box>
-          <Text>
-            <b>ARMOUR: </b>
-            {character.proficiencies.armour}
-          </Text>
-        </Box>
-        <Box>
-          <Text>
-            <b>LANGUAGES: </b>
-            {character.proficiencies.languages}
-          </Text>
-        </Box>
-        <Box>
-          <Text>
-            <b>OTHER: </b>
-            {character.proficiencies.other}
-          </Text>
-        </Box>
-    </>
+    <CardColumn>
+      <Box>
+        <Text>
+          <b>WEAPONS: </b>
+          {character.proficiencies.weapons}
+        </Text>
+      </Box>
+      <Box>
+        <Text>
+          <b>ARMOUR: </b>
+          {character.proficiencies.armour}
+        </Text>
+      </Box>
+      <Box>
+        <Text>
+          <b>LANGUAGES: </b>
+          {character.proficiencies.languages}
+        </Text>
+      </Box>
+      <Box>
+        <Text>
+          <b>OTHER: </b>
+          {character.proficiencies.other}
+        </Text>
+      </Box>
+    </CardColumn>
   );
 };
 

@@ -1,19 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 
-import EditMagicModal from "./editMagicModal";
+import {
+  Window,
+  PageContent,
+  SectionColumn,
+  SectionRow,
+  CardColumn,
+  CardRow,
+  CardItem,
+  Label,
+  BotButton,
+} from "../components/StyledPageComponents/pageStyling";
 
 const FlexContainer = styled.div`
   text-align: center;
   z-index: 1;
-  width: 95vw;
-  max-width: 400px;
+  width: 99%;
   background-color: none;
 
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
-  align-items: center;
+  border-style: inset;
+  border-radius: 10px;
 
   margin-top: 2px;
   margin-bottom: 2px;
@@ -48,9 +55,9 @@ const Title = styled.p`
 
 const SheetMagic = ({ character, onCharacterChange }) => {
   return (
-    <div>
+    <CardColumn>
       {character.magic.ability !== "" && (
-        <div>
+        <>
           <FlexContainer>
             <Box>
               <Title>Spellcasting Ability</Title>
@@ -88,10 +95,11 @@ const SheetMagic = ({ character, onCharacterChange }) => {
               </Box>
             </FlexContainer>
           )}
-          {character.spellslots.first !== 0 && (
-            <>
-              <h4>Spell Slots</h4>
-              <FlexContainer>
+          <FlexContainer>
+            {character.spellslots.first !== 0 && (
+              <>
+                {/* <h4>Spell Slots</h4> */}
+
                 <Slot>
                   {character.spellslots.first > 0 ? (
                     <div>
@@ -284,12 +292,12 @@ const SheetMagic = ({ character, onCharacterChange }) => {
                     </div>
                   )}
                 </Slot>
-              </FlexContainer>
-            </>
-          )}
-        </div>
+              </>
+            )}
+          </FlexContainer>
+        </>
       )}
-    </div>
+    </CardColumn>
   );
 };
 

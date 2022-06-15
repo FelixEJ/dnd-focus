@@ -4,6 +4,17 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
+import {
+  Window,
+  PageContent,
+  SectionColumn,
+  SectionRow,
+  CardColumn,
+  CardRow,
+  CardItem,
+  Label,
+  BotButton,
+} from "../components/StyledPageComponents/pageStyling";
 
 import AddEquipmentModal from "./addEquipmentModal";
 import EditEquipmentModal from "./editEquipmentModal";
@@ -54,9 +65,7 @@ const Item = styled.div`
 `;
 
 const Container = styled.div`
-  width: 95vw;
-  max-width: 400px;
-  padding: 2%;
+  width: 99%;
 `;
 
 const EquipmentAccordion = ({
@@ -77,7 +86,6 @@ const EquipmentAccordion = ({
   return (
     <Container>
       <Accordion>
-        <div>
           <Card>
             <Card.Header>
               <Header>
@@ -89,7 +97,7 @@ const EquipmentAccordion = ({
             </Card.Header>
             <Accordion.Collapse eventKey={0}>
               <Card.Body
-                style={{ backgroundColor: "lightgrey" }}
+                style={{ backgroundColor: "rgba(203, 203, 203, 0.6)" }}
                 class="overflow-auto"
               >
                 <>
@@ -115,7 +123,6 @@ const EquipmentAccordion = ({
               </Card.Body>
             </Accordion.Collapse>
           </Card>
-        </div>
       </Accordion>
     </Container>
   );

@@ -63,7 +63,7 @@ const Item = styled.div`
 const Container = styled.div`
   width: 95vw;
   max-width: 400px;
-  max-height: 60vh;
+  max-height: 30vh;
 `;
 
 const FeatureAccordion = ({ character, updateFeatures }) => {
@@ -84,7 +84,7 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
   };
 
   return (
-    <Container>
+    <CardColumn>
       <Accordion>
         <div>
           {character.features.map((feature, index) => (
@@ -171,7 +171,7 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
           ))}
         </div>
       </Accordion>
-    </Container>
+    </CardColumn>
   );
 };
 

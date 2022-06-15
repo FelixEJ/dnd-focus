@@ -1,6 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
+import {
+  Window,
+  PageContent,
+  SectionColumn,
+  SectionRow,
+  CardColumn,
+  CardRow,
+  CardItem,
+  Label,
+  BotButton,
+} from "../components/StyledPageComponents/pageStyling";
 
 import DamageHealingModal from "./damageHealingModal";
 
@@ -19,14 +30,13 @@ const Container = styled.div`
 const Row = styled.div`
   text-align: center;
   z-index: 1;
-  width: 90vw;
-  max-width: 400px;
+  width: 99%;
   background-color: none;
-  border-style: inset;
-  border-radius: 5px;
-  margin: 1% 1% 1% 1%;
 
-  grid-column: 1 / span 3;
+  border-style: inset;
+  border-radius: 10px;
+  margin-top: 2px;
+  margin-bottom: 2px;
 `;
 const BoxTrio = styled.div`
   width: 33%;
@@ -66,9 +76,7 @@ const NumbersBold = styled.div`
 
 const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
   return (
-    <div>
-      
-      <Container>
+    <CardColumn>
         <Row>
           <BoxTrio>
             <Title>AC</Title>
@@ -177,7 +185,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
                   name="hit_dice.mult1_current"
                   value={character.hit_dice.mult1_current}
                   onChange={onCharacterChange}
-                  style={{ width: "20%" }}
+                  style={{ width: "35%" }}
                   display="none"
                 />
                 {character.hit_dice.mult1_dice}/{character.hit_dice.mult1_max}
@@ -193,7 +201,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
                   name="hit_dice.mult2_current"
                   value={character.hit_dice.mult2_current}
                   onChange={onCharacterChange}
-                  style={{ width: "20%" }}
+                  style={{ width: "35%" }}
                   display="none"
                 />
                 {character.hit_dice.mult2_dice}/{character.hit_dice.mult2_max}
@@ -305,8 +313,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
             )}
           </>
         </Row>
-      </Container>
-    </div>
+    </CardColumn>
   );
 };
 

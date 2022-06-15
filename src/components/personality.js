@@ -1,7 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-import EditPersonalitiesModal from "./editPersonalitiesModal";
+import {
+  Window,
+  PageContent,
+  SectionColumn,
+  SectionRow,
+  CardColumn,
+  CardRow,
+  CardItem,
+  Label,
+  BotButton,
+} from "../components/StyledPageComponents/pageStyling";
 
 const Container = styled.div`
   text-align: center;
@@ -24,7 +34,7 @@ const Box = styled.div`
   display: inline-block;
   border-style: inset;
   border-radius: 5px;
-  
+
   margin: 1% 1% 1% 1%;
 `;
 const Title = styled.p`
@@ -39,8 +49,7 @@ const Text = styled.p`
 
 const Personality = ({ character, onCharacterChange }) => {
   return (
-    <div>      
-    <Container>
+    <CardColumn>
       <Box>
         <Title>Traits</Title>
         <Text>{character.personality.trait1}</Text>
@@ -58,9 +67,7 @@ const Personality = ({ character, onCharacterChange }) => {
         <Title>Flaw</Title>
         <Text>{character.personality.flaw}</Text>
       </Box>
-      
-    </Container>
-    </div>
+    </CardColumn>
   );
 };
 

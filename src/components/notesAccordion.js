@@ -7,6 +7,18 @@ import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
 import EditNoteModal from "./editNoteModal";
 
+import {
+  Window,
+  PageContent,
+  SectionColumn,
+  SectionRow,
+  CardColumn,
+  CardRow,
+  CardItem,
+  Label,
+  BotButton,
+} from "../components/StyledPageComponents/pageStyling";
+
 function CustomToggle({ children, eventKey }) {
   const decoratedOnClick = useAccordionButton(eventKey, () => console.log(""));
 
@@ -50,9 +62,7 @@ const Item = styled.div`
 `;
 
 const Container = styled.div`
-  width: 95vw;
-  max-width: 400px;
-  max-height: 60vh;
+  width: 99%;
 `;
 
 const NotesAccordion = ({ character, updateNotes }) => {
