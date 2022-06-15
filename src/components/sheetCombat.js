@@ -220,7 +220,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
                 name="death_saves.pass"
                 value={character.death_saves.pass}
                 onChange={onCharacterChange}
-                style={{ width: "20%" }}
+                style={{ width: "40px" }}
                 display="none"
               />
             </Text>
@@ -234,7 +234,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
                 name="death_saves.fail"
                 value={character.death_saves.fail}
                 onChange={onCharacterChange}
-                style={{ width: "20%" }}
+                style={{ width: "40px" }}
                 display="none"
               />
             </Text>

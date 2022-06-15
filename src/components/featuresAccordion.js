@@ -88,7 +88,7 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
       <Accordion>
         <div>
           {character.features.map((feature, index) => (
-            <Card>
+            <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
               <Card.Header>
                 <ItemRow>
                   <Item>
@@ -111,7 +111,7 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                           onChange={(e) =>
                             handleChange(e, index, feature.feature_name)
                           }
-                          size="2"
+                          style={{ width: "40px" }}
                           display="none"
                         />
                         /{feature.max_uses}
@@ -128,7 +128,7 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
 
               <Accordion.Collapse eventKey={feature.feature_id}>
                 <Card.Body
-                  style={{ backgroundColor: "lightgrey" }}
+                  style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
                   class="overflow-auto"
                 >
                   <>

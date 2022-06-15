@@ -19,7 +19,7 @@ const Box = styled.div`
   display: inline-block;
   margin: 1% 1% 1% 1%;
   &:nth-child(odd) {
-    background-color: lightgrey;
+    background-color: rgba(203, 203, 203, 0.3);
   }
 `;
 const Text = styled.div`

@@ -86,7 +86,7 @@ const EquipmentAccordion = ({
   return (
     <Container>
       <Accordion>
-          <Card>
+          <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
             <Card.Header>
               <Header>
                 <b>Equipment:</b>
@@ -97,7 +97,7 @@ const EquipmentAccordion = ({
             </Card.Header>
             <Accordion.Collapse eventKey={0}>
               <Card.Body
-                style={{ backgroundColor: "rgba(203, 203, 203, 0.6)" }}
+                style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
                 class="overflow-auto"
               >
                 <>

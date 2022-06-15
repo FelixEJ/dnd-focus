@@ -88,7 +88,7 @@ const NotesAccordion = ({ character, updateNotes }) => {
         <div>
           {character.notes.length > 0 &&
             character.notes.map((note, index) => (
-              <Card>
+              <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
                 <Card.Header>
                   <ItemRow>
                     <Item>
@@ -104,7 +104,7 @@ const NotesAccordion = ({ character, updateNotes }) => {
 
                 <Accordion.Collapse eventKey={note.title}>
                   <Card.Body
-                    style={{ backgroundColor: "lightgrey" }}
+                    style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
                     class="overflow-auto"
                   >
                     <p>{note.note_body}</p>

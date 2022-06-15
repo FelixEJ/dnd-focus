@@ -33,6 +33,10 @@ const MoneyUnit = styled.div`
   padding: 2px;
 `;
 
+const Container = styled.div`
+  width: 99%;
+`;
+
 const Inventory = ({
   character,
   onCharacterChange,
@@ -64,68 +68,68 @@ const Inventory = ({
         updateInventory={updateInventory}
       />
       <b>Money</b>
-      <MoneyBox>
-        <MoneyUnit>
-          CP
-          <input
-            type="number"
-            min="0"
-            id="currency.copper"
-            name="currency.copper"
-            value={character.currency.copper}
-            onChange={onCharacterChange}
-            style={{ width: "18vw", maxWidth: "70px" }}
-          />
-        </MoneyUnit>
-        <MoneyUnit>
-          SP
-          <input
-            type="number"
-            min="0"
-            id="currency.silver"
-            name="currency.silver"
-            value={character.currency.silver}
-            onChange={onCharacterChange}
-            style={{ width: "18vw", maxWidth: "70px" }}
-          />
-        </MoneyUnit>
-        <MoneyUnit>
-          EP
-          <input
-            type="number"
-            min="0"
-            id="currency.electrum"
-            name="currency.electrum"
-            value={character.currency.electrum}
-            onChange={onCharacterChange}
-            style={{ width: "18vw", maxWidth: "70px" }}
-          />
-        </MoneyUnit>
-        <MoneyUnit>
-          GP
-          <input
-            type="number"
-            min="0"
-            id="currency.gold"
-            name="currency.gold"
-            value={character.currency.gold}
-            onChange={onCharacterChange}
-            style={{ width: "18vw", maxWidth: "70px" }}
-          />
-        </MoneyUnit>
-        <MoneyUnit>
-          PP
-          <input
-            type="number"
-            min="0"
-            id="currency.platinum"
-            name="currency.platinum"
-            value={character.currency.platinum}
-            onChange={onCharacterChange}
-            style={{ width: "18vw", maxWidth: "70px" }}
-          />
-        </MoneyUnit>
-      </MoneyBox>
+        <MoneyBox>
+          <MoneyUnit>
+            CP
+            <input
+              type="number"
+              min="0"
+              id="currency.copper"
+              name="currency.copper"
+              value={character.currency.copper}
+              onChange={onCharacterChange}
+              style={{ width: "60px", maxWidth: "70px" }}
+            />
+          </MoneyUnit>
+          <MoneyUnit>
+            SP
+            <input
+              type="number"
+              min="0"
+              id="currency.silver"
+              name="currency.silver"
+              value={character.currency.silver}
+              onChange={onCharacterChange}
+              style={{ width: "60px", maxWidth: "70px" }}
+            />
+          </MoneyUnit>
+          <MoneyUnit>
+            EP
+            <input
+              type="number"
+              min="0"
+              id="currency.electrum"
+              name="currency.electrum"
+              value={character.currency.electrum}
+              onChange={onCharacterChange}
+              style={{ width: "60px", maxWidth: "70px" }}
+            />
+          </MoneyUnit>
+          <MoneyUnit>
+            GP
+            <input
+              type="number"
+              min="0"
+              id="currency.gold"
+              name="currency.gold"
+              value={character.currency.gold}
+              onChange={onCharacterChange}
+              style={{ width: "60px", maxWidth: "70px" }}
+            />
+          </MoneyUnit>
+          <MoneyUnit>
+            PP
+            <input
+              type="number"
+              min="0"
+              id="currency.platinum"
+              name="currency.platinum"
+              value={character.currency.platinum}
+              onChange={onCharacterChange}
+              style={{ width: "60px", maxWidth: "70px" }}
+            />
+          </MoneyUnit>
+        </MoneyBox>
       Total: <b>{getTotalMoney()} gp</b>
     </Card>
   );

@@ -41,7 +41,7 @@ const Container = stylish.div`
 
 const ButtonContainer = stylish.div`
   float: right;
-  margin-top: -30px;
+  margin-top: -90px;
 `;
 
 const DamageHealingModal = ({ character, onCharacterChange, updateHealth }) => {

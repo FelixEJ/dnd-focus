@@ -73,7 +73,7 @@ const InventoryAccordion = ({ character, addItem, updateInventory }) => {
     <Container>
       <Accordion>
         <div>
-          <Card>
+        <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
             <Card.Header>
               <Header>
                 <b>Pack:</b>
@@ -85,7 +85,7 @@ const InventoryAccordion = ({ character, addItem, updateInventory }) => {
             </Card.Header>
             <Accordion.Collapse eventKey={0}>
               <Card.Body
-                style={{ backgroundColor: "lightgrey" }}
+                style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
                 class="overflow-auto"
               >
                 <>

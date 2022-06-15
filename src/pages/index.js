@@ -3,6 +3,7 @@ import NavBar from "../components/navBar";
 import "../App.css";
 import Success from "../components/CharacterCreate/success";
 
+
 import {
   Window,
   Page,
@@ -22,7 +23,9 @@ const IndexPage = () => {
   return (
     <div>
       <NavBar />
-      <Page><h1>hello</h1></Page>
+      <Page>
+        <h1>hello</h1>
+      </Page>
     </div>
   );
 };

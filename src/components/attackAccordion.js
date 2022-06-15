@@ -49,7 +49,7 @@ const AttackAccordion = ({ character, updateAttacks }) => {
     <Accordion >
       <div>
         {character.attacks.map((attack, index) => (
-          <Card>
+          <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
             <Card.Header>
               <TextLeft>
                 {attack.attack_name}:{" "}
@@ -66,7 +66,8 @@ const AttackAccordion = ({ character, updateAttacks }) => {
             </Card.Header>
             <Accordion.Collapse eventKey={attack.attack_id}>
               <Card.Body
-                style={{ backgroundColor: "lightgrey" }}
+                style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
+                // style={{ backgroundColor: "none" }}
                 class="overflow-auto"
               >
                 <>
