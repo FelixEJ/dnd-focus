@@ -29,7 +29,7 @@ const PageContentContainer = styled.div`
   @media only screen and (min-width: 1024px) {
     background: green;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
     background: white;
   }
 `;
@@ -49,15 +49,21 @@ const LayoutContainer = styled.div`
   }
   @media only screen and (min-width: 768px) {
     background: yellow;
+    column-count: 2;
+    column-gap: 0;
+    width: 98vw;
   }
   @media only screen and (min-width: 1024px) {
     background: red;
     column-count: 3;
     column-gap: 0;
-    width: 98vw;
+    width: 99%;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
     background: lightblue;
+    column-count: 4;
+    column-gap: 0;
+    width: 99%;
   }
 `;
 export const Layout = ({ children }) => {
@@ -86,7 +92,7 @@ const SectionContainer = styled.div`
     background: yellow;
     margin: 0 0;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
     background: green;
   }
 `;
@@ -112,7 +118,7 @@ const CardContainer = styled.div`
   @media only screen and (min-width: 1024px) {
     background: lightblue;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
   }
 `;
 export const Card = ({ children }) => {
@@ -136,7 +142,7 @@ const CardColumnContainer = styled.div`
   @media only screen and (min-width: 1024px) {
     background: pink;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
     background: purple;
   }
 `;
@@ -162,7 +168,7 @@ const CardRowContainer = styled.div`
   @media only screen and (min-width: 1024px) {
     background: pink;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
     background: purple;
   }
 `;
@@ -186,7 +192,7 @@ const CardItemContainer = styled.div`
   @media only screen and (min-width: 1024px) {
     background: purple;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
     background: teal;
   }
 `;
@@ -250,7 +256,7 @@ const ModalWindowContainer = styled.div`
   @media only screen and (min-width: 1024px) {
     background: green;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
     background: blue;
   }
 `;
@@ -282,7 +288,7 @@ const SectionColumnContainer = styled.div`
   @media only screen and (min-width: 1024px) {
     background: blue;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
     background: pink;
   }
 `;
@@ -308,7 +314,7 @@ const SectionRowContainer = styled.div`
   @media only screen and (min-width: 1024px) {
     background: blue;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
     background: pink;
   }
 `;

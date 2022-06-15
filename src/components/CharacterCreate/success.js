@@ -42,6 +42,21 @@ import {
   BotButton,
 } from "../StyledPageComponents/pageStyling";
 
+const BasicSection = styled(Section)`
+  @media only screen and (min-width: 480px) {
+  }
+  @media only screen and (min-width: 768px) {
+  }
+  @media only screen and (min-width: 1024px) {
+    width: 50vw;
+    flex-flow: row nowrap;
+    max-width: 50vw;
+    justify-content: flex-end;
+  }
+  @media only screen and (min-width: 1600px) {
+    flex-flow: row nowrap;
+  }
+`;
 const AbilitySection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
@@ -50,7 +65,8 @@ const AbilitySection = styled(Section)`
   @media only screen and (min-width: 1024px) {
     height: 70vh;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
+    height: 99vh;
   }
 `;
 const ProfsSection = styled(Section)`
@@ -61,7 +77,8 @@ const ProfsSection = styled(Section)`
   @media only screen and (min-width: 1024px) {
     height: 29vh;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
+    height: 19vh;
   }
 `;
 const CombatSection = styled(Section)`
@@ -72,7 +89,8 @@ const CombatSection = styled(Section)`
   @media only screen and (min-width: 1024px) {
     height: 33vh;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
+    height: 40vh;
   }
 `;
 const AttackSection = styled(Section)`
@@ -83,7 +101,8 @@ const AttackSection = styled(Section)`
   @media only screen and (min-width: 1024px) {
     height: 33vh;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
+    height: 40vh;
   }
 `;
 const MagicSection = styled(Section)`
@@ -94,7 +113,8 @@ const MagicSection = styled(Section)`
   @media only screen and (min-width: 1024px) {
     height: 33vh;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
+    height: 45vh;
   }
 `;
 const FeatSection = styled(Section)`
@@ -105,7 +125,8 @@ const FeatSection = styled(Section)`
   @media only screen and (min-width: 1024px) {
     height: 35vh;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
+    height: 54vh;
   }
 `;
 const InvSection = styled(Section)`
@@ -116,7 +137,8 @@ const InvSection = styled(Section)`
   @media only screen and (min-width: 1024px) {
     height: 25vh;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
+    height: 40vh;
   }
 `;
 const PersSection = styled(Section)`
@@ -127,7 +149,8 @@ const PersSection = styled(Section)`
   @media only screen and (min-width: 1024px) {
     height: 19vh;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
+    height: 19vh;
   }
 `;
 const NotesSection = styled(Section)`
@@ -138,7 +161,8 @@ const NotesSection = styled(Section)`
   @media only screen and (min-width: 1024px) {
     height: 20vh;
   }
-  @media only screen and (min-width: 1800px) {
+  @media only screen and (min-width: 1600px) {
+    height: 40vh;
   }
 `;
 
@@ -319,12 +343,10 @@ const Success = () => {
 
   return (
     <Page>
-      <h1>
+      {/* <h1>
         Character Sheet for {character.name}, lvl:{character.level}
-      </h1>
+      </h1> */}
 
-      <RollDiceModal />
-      <RestModal character={character} updateCharacter={updateCharacter} />
       <LoadCharacterFromJSON
         loadFromJson={loadFromJson}
         character={character}
@@ -355,99 +377,109 @@ const Success = () => {
         </select>
       </FormControl>
       {character.name != "" && (
-        <Layout>
-          {/* <Section>
+        <>
+          <BasicSection>
+            {/* <CardRow> */}
+            <RollDiceModal />
             <Card>
               <Basics
                 character={character}
                 onCharacterChange={onCharacterChange}
               />
             </Card>
-          </Section> */}
-          <AbilitySection>
-            <h4>Ability Scores</h4>
-            <EditAbilitiesModal
+
+            <RestModal
               character={character}
-              onCharacterChange={onCharacterChange}
+              updateCharacter={updateCharacter}
             />
-            <Card>
-              <SheetAbilities
-                character={character}
-                setLoadedChar={setLoadedChar}
-                onCharacterChange={onCharacterChange}
-              />
-            </Card>
-          </AbilitySection>
-          <ProfsSection>
-            <h4>Profs & Languages</h4>
-            <EditProficienciesModal
-              character={character}
-              onCharacterChange={onCharacterChange}
-            />
-            <Card>
-              <SheetProficiencies
+            {/* </CardRow> */}
+          </BasicSection>
+
+          <Layout>
+            <AbilitySection>
+              <h4>Ability Scores</h4>
+              <EditAbilitiesModal
                 character={character}
                 onCharacterChange={onCharacterChange}
               />
-            </Card>
-          </ProfsSection>
-          <CombatSection>
-            <h4>Combat</h4>
-            <EditCombatModal
-              character={character}
-              onCharacterChange={onCharacterChange}
-            />
-            <Card>
-              <SheetCombat
-                character={character}
-                onCharacterChange={onCharacterChange}
-                updateHealth={updateHealth}
-              />
-            </Card>
-          </CombatSection>
-          <AttackSection>
-            <h4>Attacks</h4>
-            <AddAttackModal addAttack={addAttack} character={character} />
-            <Card>
-              <SheetAttacks
-                character={character}
-                updateAttacks={updateAttacks}
-                addAttack={addAttack}
-              />
-            </Card>
-          </AttackSection>
-          <MagicSection>
-            <h4>Magic</h4>
-            <EditMagicModal
-              character={character}
-              onCharacterChange={onCharacterChange}
-            />
-            <Card>
-              <SheetMagic
+              <Card>
+                <SheetAbilities
+                  character={character}
+                  setLoadedChar={setLoadedChar}
+                  onCharacterChange={onCharacterChange}
+                />
+              </Card>
+            </AbilitySection>
+            <ProfsSection>
+              <h4>Profs & Languages</h4>
+              <EditProficienciesModal
                 character={character}
                 onCharacterChange={onCharacterChange}
               />
-            </Card>
-          </MagicSection>
-          <FeatSection>
-            <h4>Features & Abilities</h4>
-            <AddFeatureModal addFeature={addFeature} />
-            <Card>
-              <FeaturesAccordion
+              <Card>
+                <SheetProficiencies
+                  character={character}
+                  onCharacterChange={onCharacterChange}
+                />
+              </Card>
+            </ProfsSection>
+            <CombatSection>
+              <h4>Combat</h4>
+              <EditCombatModal
                 character={character}
-                updateFeatures={updateFeatures}
+                onCharacterChange={onCharacterChange}
               />
-              {/* <Features
+              <Card>
+                <SheetCombat
+                  character={character}
+                  onCharacterChange={onCharacterChange}
+                  updateHealth={updateHealth}
+                />
+              </Card>
+            </CombatSection>
+            <AttackSection>
+              <h4>Attacks</h4>
+              <AddAttackModal addAttack={addAttack} character={character} />
+              <Card>
+                <SheetAttacks
+                  character={character}
+                  updateAttacks={updateAttacks}
+                  addAttack={addAttack}
+                />
+              </Card>
+            </AttackSection>
+            <MagicSection>
+              <h4>Magic</h4>
+              <EditMagicModal
+                character={character}
+                onCharacterChange={onCharacterChange}
+              />
+              <Card>
+                <SheetMagic
+                  character={character}
+                  onCharacterChange={onCharacterChange}
+                />
+              </Card>
+            </MagicSection>
+            <FeatSection>
+              <h4>Features & Abilities</h4>
+              <AddFeatureModal addFeature={addFeature} />
+              <Card>
+                <FeaturesAccordion
+                  character={character}
+                  updateFeatures={updateFeatures}
+                />
+                {/* <Features
                 character={character}
                 updateFeatures={updateFeatures}
                 onCharacterChange={onCharacterChange}
                 addFeature={addFeature}
               /> */}
-            </Card>
-          </FeatSection>
-          <InvSection>
-            <h4>Inventory</h4>
-            {/* <Card> */}
+              </Card>
+            </FeatSection>
+            <InvSection>
+              <h4>Inventory</h4>
+              {/* <Card> */}
               <Inventory
                 character={character}
                 onCharacterChange={onCharacterChange}
@@ -456,33 +488,34 @@ const Success = () => {
                 addItem={addItem}
                 addEquipment={addEquipment}
               />
-            {/* </Card> */}
-          </InvSection>
-          <PersSection>
-            <h4>Personality</h4>
-            <EditPersonalitiesModal
-              character={character}
-              onCharacterChange={onCharacterChange}
-            />
-            <Card>
-              <Personality
+              {/* </Card> */}
+            </InvSection>
+            <PersSection>
+              <h4>Personality</h4>
+              <EditPersonalitiesModal
                 character={character}
                 onCharacterChange={onCharacterChange}
               />
-            </Card>
-          </PersSection>
-          <NotesSection>
-            <h4>Notes</h4>
-            <AddNoteModal addNote={addNote} />
-            <Card>
-              <NotesAccordion
-                character={character}
-                onCharacterChange={onCharacterChange}
-                updateNotes={updateNotes}
-              />
-            </Card>
-          </NotesSection>
-        </Layout>
+              <Card>
+                <Personality
+                  character={character}
+                  onCharacterChange={onCharacterChange}
+                />
+              </Card>
+            </PersSection>
+            <NotesSection>
+              <h4>Notes</h4>
+              <AddNoteModal addNote={addNote} />
+              <Card>
+                <NotesAccordion
+                  character={character}
+                  onCharacterChange={onCharacterChange}
+                  updateNotes={updateNotes}
+                />
+              </Card>
+            </NotesSection>
+          </Layout>
+        </>
       )}
     </Page>
   );

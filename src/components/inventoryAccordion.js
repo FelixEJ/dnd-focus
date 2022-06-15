@@ -76,7 +76,7 @@ const InventoryAccordion = ({ character, addItem, updateInventory }) => {
           <Card>
             <Card.Header>
               <Header>
-                <b>Inventory:</b>
+                <b>Pack:</b>
                 {/* total value = {getInventoryValue()} gp */}
               </Header>
               <ButtonRight>

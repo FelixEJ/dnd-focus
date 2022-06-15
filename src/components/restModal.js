@@ -6,6 +6,17 @@ import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 // import { ButtonGroup } from "@material-ui/core";
+import {
+  Window,
+  PageContent,
+  SectionColumn,
+  SectionRow,
+  CardColumn,
+  CardRow,
+  CardItem,
+  Label,
+  BotButton,
+} from "../components/StyledPageComponents/pageStyling";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -25,6 +36,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
 
 // gets stuck on previous loaded char
 const RestModal = ({character, updateCharacter}) => {
@@ -77,9 +89,19 @@ const RestModal = ({character, updateCharacter}) => {
       tempChar.hp.current = tempChar.hp.max;
       tempChar.hp.temp = 0;
       // restore hit dice
-      tempChar.hit_dice.current += Math.floor(tempChar.hit_dice.max / 2);      
+      tempChar.hit_dice.current = parseInt(tempChar.hit_dice.current) + Math.floor(tempChar.hit_dice.max / 2);
       if (tempChar.hit_dice.current > tempChar.hit_dice.max) {
         tempChar.hit_dice.current = tempChar.hit_dice.max;
+      }
+      // restore multiclass1 hit dice
+      tempChar.hit_dice.mult1_current = parseInt(tempChar.hit_dice.mult1_current) + Math.floor(tempChar.hit_dice.mult1_max / 2);
+      if (tempChar.hit_dice.mult1_current > tempChar.hit_dice.mult1_max) {
+        tempChar.hit_dice.mult1_current = tempChar.hit_dice.mult1_max;
+      }
+      // restore multiclass2 hit dice
+      tempChar.hit_dice.mult2_current = parseInt(tempChar.hit_dice.mult2_current) + Math.floor(tempChar.hit_dice.mult2_max / 2);
+      if (tempChar.hit_dice.mult2_current > tempChar.hit_dice.mult2_max) {
+        tempChar.hit_dice.mult2_current = tempChar.hit_dice.mult2_max;
       }
       // reduce exhaustion
       if(tempChar.exhaustion > 0) {
@@ -113,7 +135,7 @@ const RestModal = ({character, updateCharacter}) => {
   }
 
   return (
-    <div>
+    <CardItem>
       <Button variant="contained" onClick={handleOpen}>
         Rest
       </Button>
@@ -172,7 +194,7 @@ const RestModal = ({character, updateCharacter}) => {
           </Button>
         </Box>
       </Modal>
-    </div>
+    </CardItem>
   );
 };
 

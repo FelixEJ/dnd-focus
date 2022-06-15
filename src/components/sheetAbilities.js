@@ -101,13 +101,9 @@ const Bar = styled.div`
 
 const NumberLeft = styled.div`
   font-size: 2em;
-  margin: 0;
+  margin: -5px;
   grid-column: 1;
-  grid-row: 1;
-
-  @media only screen and (min-width: 1600px) {
-    grid-row: 1;
-  }
+  grid-row: 1;  
 `;
 const TextLeft = styled.div`
   font-size: 1em;
