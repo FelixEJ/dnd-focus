@@ -6,31 +6,31 @@ const WindowContentContainer = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  background: black;
+  background: none;
 `;
 export const Window = ({ children }) => {
   return <WindowContentContainer>{children}</WindowContentContainer>;
 };
 
 const PageContentContainer = styled.div`
-  background: red;
-  width: 98vw;
+  background: none;
+  width: 99vw;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
 
   @media only screen and (min-width: 480px) {
-    background: orange;
+    background: none;
   }
   @media only screen and (min-width: 768px) {
-    background: yellow;
+    background: none;
   }
   @media only screen and (min-width: 1024px) {
-    background: green;
+    background: none;
   }
   @media only screen and (min-width: 1600px) {
-    background: white;
+    background: none;
   }
 `;
 export const Page = ({ children }) => {
@@ -38,32 +38,36 @@ export const Page = ({ children }) => {
 };
 
 const LayoutContainer = styled.div`
-  background: red;
+  background: none;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 99vh;
+  column-break-inside: avoid;
+  break-inside: avoid-column;
 
   @media only screen and (min-width: 480px) {
-    background: orange;
+    background: none;
   }
   @media only screen and (min-width: 768px) {
-    background: yellow;
+    background: none;
     column-count: 2;
     column-gap: 0;
-    width: 98vw;
+    width: 99%;
+    height: 200vh;
   }
   @media only screen and (min-width: 1024px) {
-    background: red;
+    background: none;
     column-count: 3;
     column-gap: 0;
     width: 99%;
+    height: 99vh;
   }
   @media only screen and (min-width: 1600px) {
-    background: lightblue;
+    background: none;
     column-count: 4;
     column-gap: 0;
     width: 99%;
+    height: 99vh;
   }
 `;
 export const Layout = ({ children }) => {
@@ -71,7 +75,7 @@ export const Layout = ({ children }) => {
 };
 
 const SectionContainer = styled.div`
-  background: maroon;
+  background: none;
   width: 99%;
   max-width: 400px;
   display: flex;
@@ -83,17 +87,18 @@ const SectionContainer = styled.div`
   margin: 10px 0;
 
   @media only screen and (min-width: 480px) {
-    background: red;
+    background: none;
   }
   @media only screen and (min-width: 768px) {
-    background: orange;
+    background: none;
   }
   @media only screen and (min-width: 1024px) {
-    background: yellow;
+    background: none;
     margin: 0 0;
   }
   @media only screen and (min-width: 1600px) {
-    background: green;
+    background: none;
+    margin: 0 0;
   }
 `;
 export const Section = ({ children, className }) => {
@@ -102,7 +107,7 @@ export const Section = ({ children, className }) => {
 
 const CardContainer = styled.div`
   width: 99%;
-  max-height: 100%;
+  max-height: 99%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -114,9 +119,9 @@ const CardContainer = styled.div`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
+    height: 100%;
   }
   @media only screen and (min-width: 1024px) {
-    background: lightblue;
   }
   @media only screen and (min-width: 1600px) {
   }
@@ -126,7 +131,7 @@ export const Card = ({ children }) => {
 };
 
 const CardColumnContainer = styled.div`
-  background-color: yellow;
+  background-color: none;
   width: 99%;
   display: flex;
   flex-flow: column nowrap;
@@ -134,16 +139,16 @@ const CardColumnContainer = styled.div`
   align-items: center;
 
   @media only screen and (min-width: 480px) {
-    background: green;
+    background: none;
   }
   @media only screen and (min-width: 768px) {
-    background: blue;
+    background: none;
   }
   @media only screen and (min-width: 1024px) {
-    background: pink;
+    background: none;
   }
   @media only screen and (min-width: 1600px) {
-    background: purple;
+    background: none;
   }
 `;
 export const CardColumn = ({ children }) => {
@@ -151,7 +156,7 @@ export const CardColumn = ({ children }) => {
 };
 
 const CardRowContainer = styled.div`
-  background-color: yellow;
+  background-color: none;
   width: 95%;
   display: flex;
   flex-flow: row nowrap;
@@ -160,16 +165,16 @@ const CardRowContainer = styled.div`
   margin: 0.5em;
 
   @media only screen and (min-width: 480px) {
-    background: green;
+    background: none;
   }
   @media only screen and (min-width: 768px) {
-    background: blue;
+    background: none;
   }
   @media only screen and (min-width: 1024px) {
-    background: pink;
+    background: none;
   }
   @media only screen and (min-width: 1600px) {
-    background: purple;
+    background: none;
   }
 `;
 export const CardRow = ({ children }) => {
@@ -177,23 +182,23 @@ export const CardRow = ({ children }) => {
 };
 
 const CardItemContainer = styled.div`
-  background-color: green;
+  background-color: none;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
 
   @media only screen and (min-width: 480px) {
-    background: blue;
+    background: none;
   }
   @media only screen and (min-width: 768px) {
-    background: pink;
+    background: none;
   }
   @media only screen and (min-width: 1024px) {
-    background: purple;
+    background: none;
   }
   @media only screen and (min-width: 1600px) {
-    background: teal;
+    background: none;
   }
 `;
 export const CardItem = ({ children }) => {
@@ -228,7 +233,7 @@ export const TopRightButton = ({ children }) => {
 const ModalContentContainer = styled.div`
   max-height: 90vh;
   overflow: auto;
-  background: red;
+  background: none;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -241,23 +246,23 @@ export const ModalContent = ({ children }) => {
 };
 
 const ModalWindowContainer = styled.div`
-  background: red;
+  background: none;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
 
   @media only screen and (min-width: 480px) {
-    background: orange;
+    background: none;
   }
   @media only screen and (min-width: 768px) {
-    background: yellow;
+    background: none;
   }
   @media only screen and (min-width: 1024px) {
-    background: green;
+    background: none;
   }
   @media only screen and (min-width: 1600px) {
-    background: blue;
+    background: none;
   }
 `;
 export const ModalWindow = ({ children }) => {
@@ -271,7 +276,7 @@ export const ModalWindow = ({ children }) => {
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 const SectionColumnContainer = styled.div`
-  background-color: orange;
+  background-color: none;
   width: 95%;
   display: flex;
   flex-flow: column nowrap;
@@ -280,16 +285,16 @@ const SectionColumnContainer = styled.div`
   margin: 10px 0 10px 0;
 
   @media only screen and (min-width: 480px) {
-    background: yellow;
+    background: none;
   }
   @media only screen and (min-width: 768px) {
-    background: green;
+    background: none;
   }
   @media only screen and (min-width: 1024px) {
-    background: blue;
+    background: none;
   }
   @media only screen and (min-width: 1600px) {
-    background: pink;
+    background: none;
   }
 `;
 export const SectionColumn = ({ children }) => {
@@ -297,7 +302,7 @@ export const SectionColumn = ({ children }) => {
 };
 
 const SectionRowContainer = styled.div`
-  background-color: orange;
+  background-color: none;
   width: 95%;
   display: flex;
   flex-flow: row nowrap;
@@ -306,16 +311,16 @@ const SectionRowContainer = styled.div`
   margin: 10px 0 10px 0;
 
   @media only screen and (min-width: 480px) {
-    background: yellow;
+    background: none;
   }
   @media only screen and (min-width: 768px) {
-    background: green;
+    background: none;
   }
   @media only screen and (min-width: 1024px) {
-    background: blue;
+    background: none;
   }
   @media only screen and (min-width: 1600px) {
-    background: pink;
+    background: none;
   }
 `;
 export const SectionRow = ({ children }) => {

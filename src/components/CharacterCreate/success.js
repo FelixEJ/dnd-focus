@@ -7,7 +7,6 @@ import SheetAbilities from "../sheetAbilities";
 import SheetProficiencies from "../sheetProficiencies";
 import SheetAttacks from "../sheetAttacks";
 import SheetCombat from "../sheetCombat";
-import Features from "../features";
 import Inventory from "../inventory";
 import SheetMagic from "../sheetMagic";
 import Personality from "../personality";
@@ -43,24 +42,24 @@ import {
 } from "../StyledPageComponents/pageStyling";
 
 const BasicSection = styled(Section)`
+flex-flow: row nowrap;
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
   }
   @media only screen and (min-width: 1024px) {
     width: 50vw;
-    flex-flow: row nowrap;
     max-width: 50vw;
-    justify-content: flex-end;
   }
   @media only screen and (min-width: 1600px) {
-    flex-flow: row nowrap;
   }
 `;
 const AbilitySection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
+    height: 90vh;
+    max-height: 90vh;
   }
   @media only screen and (min-width: 1024px) {
     height: 70vh;
@@ -73,6 +72,7 @@ const ProfsSection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
+    height: 30vh;
   }
   @media only screen and (min-width: 1024px) {
     height: 29vh;
@@ -85,6 +85,7 @@ const CombatSection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
+    height: 40vh;
   }
   @media only screen and (min-width: 1024px) {
     height: 33vh;
@@ -97,6 +98,7 @@ const AttackSection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
+    height: 30vh;
   }
   @media only screen and (min-width: 1024px) {
     height: 33vh;
@@ -109,6 +111,7 @@ const MagicSection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
+    height: 40vh;
   }
   @media only screen and (min-width: 1024px) {
     height: 33vh;
@@ -121,6 +124,7 @@ const FeatSection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
+    height: 50vh;
   }
   @media only screen and (min-width: 1024px) {
     height: 35vh;
@@ -133,6 +137,7 @@ const InvSection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
+    height: 30vh;
   }
   @media only screen and (min-width: 1024px) {
     height: 25vh;
@@ -145,6 +150,7 @@ const PersSection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
+    height: 30vh;
   }
   @media only screen and (min-width: 1024px) {
     height: 19vh;
@@ -157,6 +163,7 @@ const NotesSection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
+    height: 40vh;
   }
   @media only screen and (min-width: 1024px) {
     height: 20vh;
@@ -343,10 +350,6 @@ const Success = () => {
 
   return (
     <Page>
-      {/* <h1>
-        Character Sheet for {character.name}, lvl:{character.level}
-      </h1> */}
-
       <LoadCharacterFromJSON
         loadFromJson={loadFromJson}
         character={character}

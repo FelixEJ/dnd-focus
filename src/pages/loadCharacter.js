@@ -6,8 +6,8 @@ import Success from "../components/CharacterCreate/success";
 const LoadCharacter = () => {
   return (
     <div>
-        <NavBar />
-        <Success />
+      <NavBar />
+      <Success />
     </div>
   );
 };

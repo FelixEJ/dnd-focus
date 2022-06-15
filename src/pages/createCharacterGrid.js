@@ -8,7 +8,6 @@ const CreateCharacterGrid = () => {
     <div>
         <NavBar />
         <CreatePageGrid />
-        {/* <h1>Hello</h1> */}
     </div>
   );
 };
