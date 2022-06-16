@@ -77,6 +77,13 @@ const ChooseClassGrid = ({
     Continue(e);
   }
 
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  var yyyy = today.getFullYear();
+
+  today = mm + "/" + dd + "/" + yyyy;
+
   var data =
     "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(character));
 
@@ -96,7 +103,7 @@ const ChooseClassGrid = ({
         <Button>
           <a
             href={"data:" + data}
-            download={character.name + "_lvl" + character.level + ".json"}
+            download={character.name + "_lvl" + character.level + "_" + today + ".json"}
           >
             Download Character
           </a>

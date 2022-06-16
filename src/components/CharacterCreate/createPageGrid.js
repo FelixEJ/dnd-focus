@@ -11,7 +11,7 @@ import { testCharacter } from "../../data/testCharacter";
 
 function CreatePageGrid() {
   const [step, setStep] = useState(1);
-  const [character, setCharacter] = useState(testCharacter);
+  const [character, setCharacter] = useState(blankCharacter);
 
   function onCharacterChange(e) {
     // if (e === null) {

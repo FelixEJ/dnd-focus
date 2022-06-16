@@ -71,7 +71,7 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
 
   useEffect(() => {
     setTempFeats([...character.features]);
-  }, [character]);
+  }, [character.features]);
 
   const handleChange = (e, index, name) => {
     e.preventDefault();
@@ -85,7 +85,7 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
 
   return (
     <CardColumn>
-      <Accordion>
+      <Accordion style={{ width: "100%" }}>
         <div>
           {character.features.map((feature, index) => (
             <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>

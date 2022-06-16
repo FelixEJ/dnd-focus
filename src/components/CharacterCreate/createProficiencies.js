@@ -140,7 +140,7 @@ export const CreateProficiencies = ({ onCharacterChange, character }) => {
           value={character.proficiencies.other}
           onChange={onCharacterChange}
           cols="30"
-          rows="1"
+          rows="2"
         />
       </CardColumn>
     </Container>

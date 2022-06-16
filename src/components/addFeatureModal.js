@@ -60,13 +60,15 @@ const AddFeatureModal = ({ addFeature }) => {
   function clearFeature() {
     setFeature({
       feature_id: 0,
-      level_acquired: 0,
       feature_name: "",
-      source: "",
       description: "",
       max_uses: 0,
       current_uses: 0,
       recharge: "",
+      action_type: "",
+      damage_dice: "",
+      damage_dice_amount: "",
+      damage_type: "",
     });
   }
 

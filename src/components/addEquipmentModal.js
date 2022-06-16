@@ -144,7 +144,7 @@ const AddEquipmentModal = ({ addEquipment }) => {
             </select>
           </label>
         </Item>
-        <Item>
+        {/* <Item>
           <label>Uses/Charges</label>
           <input
             type="number"
@@ -170,7 +170,7 @@ const AddEquipmentModal = ({ addEquipment }) => {
               <option value={"daily"}>Daily/Dawn</option>
             </select>
           </label>
-        </Item>
+        </Item> */}
         <Item>
           <Button
             variant="contained"

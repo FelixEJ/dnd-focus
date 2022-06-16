@@ -42,7 +42,7 @@ import {
 } from "../StyledPageComponents/pageStyling";
 
 const BasicSection = styled(Section)`
-flex-flow: row nowrap;
+  flex-flow: row nowrap;
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
@@ -348,6 +348,13 @@ const Success = () => {
   var data =
     "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(character));
 
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  var yyyy = today.getFullYear();
+
+  today = mm + "/" + dd + "/" + yyyy;
+
   return (
     <Page>
       <LoadCharacterFromJSON
@@ -357,7 +364,9 @@ const Success = () => {
       <button>
         <a
           href={"data:" + data}
-          download={character.name + "_lvl" + character.level + ".json"}
+          download={
+            character.name + "_lvl" + character.level + "_" + today + ".json"
+          }
         >
           Download Character
         </a>
