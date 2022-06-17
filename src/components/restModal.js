@@ -130,7 +130,6 @@ const RestModal = ({character, updateCharacter}) => {
         }
       });
     }
-    // console.log("rest", rest);
     updateCharacter(tempChar);
   }
 
@@ -148,7 +147,6 @@ const RestModal = ({character, updateCharacter}) => {
         <Box sx={style}>
           <Grid>
             <h2>Give {character.name} a rest?</h2>
-            {/* <h2>Give {tempChar.name} a rest?</h2> */}
             <Item>
               <label>
                 Rest type:

@@ -25,6 +25,7 @@ const AddEquipmentModal = ({ addEquipment }) => {
     equipment_id: 0,
     equipment_name: "",
     equipment_type: "",
+    rarity: "common",
     desc: "",
     value: 0,
     value_currency: "",
@@ -42,6 +43,7 @@ const AddEquipmentModal = ({ addEquipment }) => {
       equipment_id: 0,
       equipment_name: "",
       equipment_type: "",
+      rarity: "common",
       desc: "",
       value: 0,
       value_currency: "",
@@ -132,6 +134,23 @@ const AddEquipmentModal = ({ addEquipment }) => {
         </Item>
         <Item>
           <label>
+            Rarity:
+            <select
+              id="rarity"
+              name="rarity"
+              value={equipment.rarity}
+              onChange={handleChange}
+            >
+              <option value={"common"}>Common</option>
+              <option value={"uncommon"}>Uncommon</option>
+              <option value={"rare"}>Rare</option>
+              <option value={"veryrare"}>Very Rare</option>
+              <option value={"legendary"}>Legendary</option>
+            </select>
+          </label>
+        </Item>
+        <Item>
+          <label>
             Attuned:
             <select
               id="attuned"
@@ -177,6 +196,7 @@ const AddEquipmentModal = ({ addEquipment }) => {
             onClick={() => {
               addEquipment(equipment);
               clearEquipment();
+              handleClose();
             }}
           >
             Confirm Equipment

@@ -77,242 +77,251 @@ const NumbersBold = styled.div`
 const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
   return (
     <CardColumn>
-        <Row>
-          <BoxTrio>
-            <Title>AC</Title>
+      <Row>
+        <BoxTrio>
+          <Title>AC</Title>
+          {character.hp.temp_ac > 0 ? (
+            <Numbers>{character.hp.temp_ac}</Numbers>
+          ) : (
             <Numbers>{character.ac}</Numbers>
-          </BoxTrio>
-          <BoxTrio>
-            <Title>Initiative</Title>
-            <Numbers>
-              {character.initiative > 0 ? (
-                <span>+{character.initiative}</span>
-              ) : (
-                "0"
-              )}
-            </Numbers>
-          </BoxTrio>
-          <BoxTrio>
-            <Title>Speed</Title>
+          )}
+        </BoxTrio>
+        <BoxTrio>
+          <Title>Initiative</Title>
+          <Numbers>
+            {character.initiative > 0 ? (
+              <span>+{character.initiative}</span>
+            ) : (
+              "0"
+            )}
+          </Numbers>
+        </BoxTrio>
+        <BoxTrio>
+          <Title>Speed</Title>
+          {character.hp.temp_speed > 0 ? (
+            <Numbers>{character.hp.temp_speed}</Numbers>
+          ) : (
             <Numbers>{character.speed}</Numbers>
-          </BoxTrio>
-        </Row>
-        <Row>
-          <BoxSolo>
-            <Title>hit points</Title>
-            <Text>Base + Temp / Max</Text>
-            <Numbers>
-              <input
-                type="number"
-                min="0"
-                id="hp.current"
-                name="hp.current"
-                value={character.hp.current}
-                onChange={onCharacterChange}
-                style={{ width: "20%" }}
-                display="none"
-              />
-              +
-              <input
-                type="number"
-                min="0"
-                id="hp.temp"
-                name="hp.temp"
-                value={character.hp.temp}
-                onChange={onCharacterChange}
-                style={{ width: "20%" }}
-                display="none"
-              />
-              /
-              {character.hp.temp_max === "0" && (
-                <NumbersBold>{character.hp.max}</NumbersBold>
-              )}
-              {character.hp.temp_max > 0 && (
-                <NumbersBold>{character.hp.temp_max}</NumbersBold>
-              )}
-            </Numbers>
-            <DamageHealingModal
-              character={character}
+          )}
+          {/* <Numbers>{character.speed}</Numbers> */}
+        </BoxTrio>
+      </Row>
+      <Row>
+        <BoxSolo>
+          <Title>hit points</Title>
+          <Text>Base + Temp / Max</Text>
+          <Numbers>
+            <input
+              type="number"
+              min="0"
+              max={character.hp.max}
+              id="hp.current"
+              name="hp.current"
+              value={character.hp.current}
               onChange={onCharacterChange}
-              updateHealth={updateHealth}
+              style={{ width: "20%" }}
+              display="none"
             />
-            <Row>
-              {character.defences.resistances.length > 0 ? (
-                <BoxTrio>
-                  <Title>Resistances</Title>
-                  <Text>{character.defences.resistances}</Text>
-                </BoxTrio>
-              ) : null}
-              {character.defences.immunities.length > 0 ? (
-                <BoxTrio>
-                  <Title>Immunities</Title>
-                  <Text>{character.defences.immunities}</Text>
-                </BoxTrio>
-              ) : null}
-              {character.defences.vulnerabilities.length > 0 ? (
-                <BoxTrio>
-                  <Title>Vulnerabilities</Title>
-                  <Text>{character.defences.vulnerabilities}</Text>
-                </BoxTrio>
-              ) : null}
-            </Row>
-          </BoxSolo>
-        </Row>
-        <Row>
-          <BoxDuo>
-            <Title>Hit Dice</Title>
+            +
+            <input
+              type="number"
+              min="0"
+              id="hp.temp"
+              name="hp.temp"
+              value={character.hp.temp}
+              onChange={onCharacterChange}
+              style={{ width: "20%" }}
+              display="none"
+            />
+            /
+            {character.hp.temp_max > 0 ? (
+              <NumbersBold>{character.hp.temp_max}</NumbersBold>
+            ) : (
+              <NumbersBold>{character.hp.max}</NumbersBold>
+            )}
+          </Numbers>
+          <DamageHealingModal
+            character={character}
+            onChange={onCharacterChange}
+            updateHealth={updateHealth}
+          />
+          <Row>
+            {character.defences.resistances.length > 0 ? (
+              <BoxTrio>
+                <Title>Resistances</Title>
+                <Text>{character.defences.resistances}</Text>
+              </BoxTrio>
+            ) : null}
+            {character.defences.immunities.length > 0 ? (
+              <BoxTrio>
+                <Title>Immunities</Title>
+                <Text>{character.defences.immunities}</Text>
+              </BoxTrio>
+            ) : null}
+            {character.defences.vulnerabilities.length > 0 ? (
+              <BoxTrio>
+                <Title>Vulnerabilities</Title>
+                <Text>{character.defences.vulnerabilities}</Text>
+              </BoxTrio>
+            ) : null}
+          </Row>
+        </BoxSolo>
+      </Row>
+      <Row>
+        <BoxDuo>
+          <Title>Hit Dice</Title>
+          <Numbers>
+            <input
+              type="number"
+              max={character.hit_dice.max}
+              min="0"
+              id="hit_dice.current"
+              name="hit_dice.current"
+              value={character.hit_dice.current}
+              onChange={onCharacterChange}
+              style={{ width: "35%" }}
+              display="none"
+            />
+            {character.hit_dice.dice}/{character.hit_dice.max}
+          </Numbers>
+          {character.hit_dice.mult1_dice != "" && (
             <Numbers>
               <input
                 type="number"
-                max={character.hit_dice.max}
+                max={character.hit_dice.mult1_max}
                 min="0"
-                id="hit_dice.current"
-                name="hit_dice.current"
-                value={character.hit_dice.current}
+                id="hit_dice.mult1_current"
+                name="hit_dice.mult1_current"
+                value={character.hit_dice.mult1_current}
                 onChange={onCharacterChange}
                 style={{ width: "35%" }}
                 display="none"
               />
-              {character.hit_dice.dice}/{character.hit_dice.max}
+              {character.hit_dice.mult1_dice}/{character.hit_dice.mult1_max}
             </Numbers>
-            {character.hit_dice.mult1_dice != "" && (
-              <Numbers>
-                <input
-                  type="number"
-                  max={character.hit_dice.mult1_max}
-                  min="0"
-                  id="hit_dice.mult1_current"
-                  name="hit_dice.mult1_current"
-                  value={character.hit_dice.mult1_current}
-                  onChange={onCharacterChange}
-                  style={{ width: "35%" }}
-                  display="none"
-                />
-                {character.hit_dice.mult1_dice}/{character.hit_dice.mult1_max}
-              </Numbers>
-            )}
-            {character.hit_dice.mult2_dice != "" && (
-              <Numbers>
-                <input
-                  type="number"
-                  max={character.hit_dice.mult2_max}
-                  min="0"
-                  id="hit_dice.mult2_current"
-                  name="hit_dice.mult2_current"
-                  value={character.hit_dice.mult2_current}
-                  onChange={onCharacterChange}
-                  style={{ width: "35%" }}
-                  display="none"
-                />
-                {character.hit_dice.mult2_dice}/{character.hit_dice.mult2_max}
-              </Numbers>
-            )}
-          </BoxDuo>
-          <BoxDuo>
-            <Title>Death Saves</Title>
-            <Text>
-              Passes:{" "}
+          )}
+          {character.hit_dice.mult2_dice != "" && (
+            <Numbers>
               <input
                 type="number"
-                max="3"
+                max={character.hit_dice.mult2_max}
                 min="0"
-                id="death_saves.pass"
-                name="death_saves.pass"
-                value={character.death_saves.pass}
+                id="hit_dice.mult2_current"
+                name="hit_dice.mult2_current"
+                value={character.hit_dice.mult2_current}
                 onChange={onCharacterChange}
-                style={{ width: "40px" }}
+                style={{ width: "35%" }}
                 display="none"
               />
-            </Text>
+              {character.hit_dice.mult2_dice}/{character.hit_dice.mult2_max}
+            </Numbers>
+          )}
+        </BoxDuo>
+        <BoxDuo>
+          <Title>Death Saves</Title>
+          <Text>
+            Passes:{" "}
+            <input
+              type="number"
+              max="3"
+              min="0"
+              id="death_saves.pass"
+              name="death_saves.pass"
+              value={character.death_saves.pass}
+              onChange={onCharacterChange}
+              style={{ width: "40px" }}
+              display="none"
+            />
+          </Text>
+          <Text>
+            Failures:{" "}
+            <input
+              type="number"
+              max="3"
+              min="0"
+              id="death_saves.fail"
+              name="death_saves.fail"
+              value={character.death_saves.fail}
+              onChange={onCharacterChange}
+              style={{ width: "40px" }}
+              display="none"
+            />
+          </Text>
+        </BoxDuo>
+      </Row>
+      <Row>
+        <Title>Exhaustion</Title>
+        <select
+          id="exhaustion"
+          name="exhaustion"
+          value={character.exhaustion}
+          onChange={onCharacterChange}
+          style={{ width: "20%" }}
+        >
+          <option value={0}>-</option>
+          <option value={1}>1</option>
+          <option value={2}>2</option>
+          <option value={3}>3</option>
+          <option value={4}>4</option>
+          <option value={5}>5</option>
+          <option value={6}>6</option>
+        </select>
+        <>
+          {character.exhaustion === "1" && (
+            <Text>- Disadvantage on ability checks</Text>
+          )}
+          {character.exhaustion === "2" && (
             <Text>
-              Failures:{" "}
-              <input
-                type="number"
-                max="3"
-                min="0"
-                id="death_saves.fail"
-                name="death_saves.fail"
-                value={character.death_saves.fail}
-                onChange={onCharacterChange}
-                style={{ width: "40px" }}
-                display="none"
-              />
+              - Disadvantage on ability checks
+              <br />- Speed Halved
             </Text>
-          </BoxDuo>
-        </Row>
-        <Row>
-          <Title>Exhaustion</Title>
-          <select
-            id="exhaustion"
-            name="exhaustion"
-            value={character.exhaustion}
-            onChange={onCharacterChange}
-            style={{ width: "20%" }}
-          >
-            <option value={0}>-</option>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-            <option value={6}>6</option>
-          </select>
-          <>
-            {character.exhaustion === "1" && (
-              <Text>- Disadvantage on ability checks</Text>
-            )}
-            {character.exhaustion === "2" && (
-              <Text>
-                - Disadvantage on ability checks
-                <br />- Speed Halved
-              </Text>
-            )}
-            {character.exhaustion === "3" && (
-              <Text>
-                - Disadvantage on ability checks
-                <br />
-                - Speed Halved
-                <br />- Disadvantage on attack rolls & saving throws
-              </Text>
-            )}
-            {character.exhaustion === "4" && (
-              <Text>
-                - Disadvantage on ability checks
-                <br />
-                - Speed Halved
-                <br />
-                - Disadvantage on attack rolls & saving throws
-                <br />- HP maximum halved
-              </Text>
-            )}
-            {character.exhaustion === "5" && (
-              <Text>
-                - Disadvantage on ability checks
-                <br />
-                - Speed Halved
-                <br />
-                - Disadvantage on attack rolls & saving throws
-                <br />
-                - HP maximum halved
-                <br />- Speeed reduced to 0
-              </Text>
-            )}
-            {character.exhaustion === "6" && (
-              <Text>
-                - Disadvantage on ability checks
-                <br />
-                - Speed Halved
-                <br />
-                - Disadvantage on attack rolls & saving throws
-                <br />
-                - HP maximum halved
-                <br />
-                - Speeed reduced to 0
-                <br />- Death
-              </Text>
-            )}
-          </>
-        </Row>
+          )}
+          {character.exhaustion === "3" && (
+            <Text>
+              - Disadvantage on ability checks
+              <br />
+              - Speed Halved
+              <br />- Disadvantage on attack rolls & saving throws
+            </Text>
+          )}
+          {character.exhaustion === "4" && (
+            <Text>
+              - Disadvantage on ability checks
+              <br />
+              - Speed Halved
+              <br />
+              - Disadvantage on attack rolls & saving throws
+              <br />- HP maximum halved
+            </Text>
+          )}
+          {character.exhaustion === "5" && (
+            <Text>
+              - Disadvantage on ability checks
+              <br />
+              - Speed Halved
+              <br />
+              - Disadvantage on attack rolls & saving throws
+              <br />
+              - HP maximum halved
+              <br />- Speeed reduced to 0
+            </Text>
+          )}
+          {character.exhaustion === "6" && (
+            <Text>
+              - Disadvantage on ability checks
+              <br />
+              - Speed Halved
+              <br />
+              - Disadvantage on attack rolls & saving throws
+              <br />
+              - HP maximum halved
+              <br />
+              - Speeed reduced to 0
+              <br />- Death
+            </Text>
+          )}
+        </>
+      </Row>
     </CardColumn>
   );
 };

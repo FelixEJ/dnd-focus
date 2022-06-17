@@ -109,6 +109,7 @@ const EditFeatureModal = ({ character, updateFeatures, index, name }) => {
               <option value={"background"}>Background</option>
               <option value={"class"}>Class</option>
               <option value={"multiclass"}>Multiclass</option>
+              <option value={"feat"}>Feat</option>
               <option value={"equipment"}>Equipment/Item</option>
             </select>
           </label>

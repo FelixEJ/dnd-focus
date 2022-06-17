@@ -103,7 +103,7 @@ const NumberLeft = styled.div`
   font-size: 2em;
   margin: -5px;
   grid-column: 1;
-  grid-row: 1;  
+  grid-row: 1;
 `;
 const TextLeft = styled.div`
   font-size: 1em;
@@ -150,10 +150,9 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
       </Bar>
       <AbilityBox>
         <AbilityGroup>
-          {character.stats.temp_str > 0 && (
+          {character.stats.temp_str > 0 ? (
             <AbilityScore>{character.stats.temp_str}</AbilityScore>
-          )}
-          {character.stats.temp_str < 1 && (
+          ) : (
             <AbilityScore>{character.stats.str}</AbilityScore>
           )}
           <AbilityModifier>
@@ -210,10 +209,9 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
       </AbilityBox>
       <AbilityBox>
         <AbilityGroup>
-          {character.stats.temp_dex > 0 && (
+          {character.stats.temp_dex > 0 ? (
             <AbilityScore>{character.stats.temp_dex}</AbilityScore>
-          )}
-          {character.stats.temp_dex < 1 && (
+          ) : (
             <AbilityScore>{character.stats.dex}</AbilityScore>
           )}
           <AbilityModifier>
@@ -252,7 +250,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.Acrobatics,
                 character.skills.Acrobatics_bonus,
-                character.stats.dex
+                character.stats.dex,
+                character.stats.temp_dex
               )}{" "}
             </SkillModifier>
             {character.skills.Acrobatics === "" && (
@@ -271,7 +270,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.SleightOfHand,
                 character.skills.SleightOfHand_bonus,
-                character.stats.dex
+                character.stats.dex,
+                character.stats.temp_dex
               )}{" "}
             </SkillModifier>
             {character.skills.SleightOfHand === "" && (
@@ -290,7 +290,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.Stealth,
                 character.skills.Stealth_bonus,
-                character.stats.dex
+                character.stats.dex,
+                character.stats.temp_dex
               )}{" "}
             </SkillModifier>
             {character.skills.Stealth === "" && <SkillName>Stealth</SkillName>}
@@ -305,10 +306,9 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
       </AbilityBox>
       <AbilityBox>
         <AbilityGroup>
-          {character.stats.temp_con > 0 && (
+          {character.stats.temp_con > 0 ? (
             <AbilityScore>{character.stats.temp_con}</AbilityScore>
-          )}
-          {character.stats.temp_con < 1 && (
+          ) : (
             <AbilityScore>{character.stats.con}</AbilityScore>
           )}
           <AbilityModifier>
@@ -345,10 +345,9 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
       </AbilityBox>
       <AbilityBox>
         <AbilityGroup>
-          {character.stats.temp_int > 0 && (
+          {character.stats.temp_int > 0 ? (
             <AbilityScore>{character.stats.temp_int}</AbilityScore>
-          )}
-          {character.stats.temp_int < 1 && (
+          ) : (
             <AbilityScore>{character.stats.int}</AbilityScore>
           )}
           <AbilityModifier>
@@ -387,7 +386,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.Arcana,
                 character.skills.Arcana_bonus,
-                character.stats.int
+                character.stats.int,
+                character.stats.temp_int
               )}{" "}
             </SkillModifier>
             {character.skills.Arcana === "" && <SkillName>Arcana</SkillName>}
@@ -404,7 +404,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.History,
                 character.skills.History_bonus,
-                character.stats.int
+                character.stats.int,
+                character.stats.temp_int
               )}{" "}
             </SkillModifier>
             {character.skills.History === "" && <SkillName>History</SkillName>}
@@ -421,7 +422,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.Investigation,
                 character.skills.Investigation_bonus,
-                character.stats.int
+                character.stats.int,
+                character.stats.temp_int
               )}{" "}
             </SkillModifier>
             {character.skills.Investigation === "" && (
@@ -440,7 +442,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.Nature,
                 character.skills.Nature_bonus,
-                character.stats.int
+                character.stats.int,
+                character.stats.temp_int
               )}{" "}
             </SkillModifier>
             {character.skills.Nature === "" && <SkillName>Nature</SkillName>}
@@ -457,7 +460,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.Religion,
                 character.skills.Religion_bonus,
-                character.stats.int
+                character.stats.int,
+                character.stats.temp_int
               )}{" "}
             </SkillModifier>
             {character.skills.Religion === "" && (
@@ -474,10 +478,9 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
       </AbilityBox>
       <AbilityBox>
         <AbilityGroup>
-          {character.stats.temp_wis > 0 && (
+          {character.stats.temp_wis > 0 ? (
             <AbilityScore>{character.stats.temp_wis}</AbilityScore>
-          )}
-          {character.stats.temp_wis < 1 && (
+          ) : (
             <AbilityScore>{character.stats.wis}</AbilityScore>
           )}
           <AbilityModifier>
@@ -516,7 +519,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.AnimalHandling,
                 character.skills.AnimalHandling_bonus,
-                character.stats.wis
+                character.stats.wis,
+                character.stats.temp_wis
               )}{" "}
             </SkillModifier>
             {character.skills.AnimalHandling === "" && (
@@ -535,7 +539,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.Insight,
                 character.skills.Insight_bonus,
-                character.stats.wis
+                character.stats.wis,
+                character.stats.temp_wis
               )}{" "}
             </SkillModifier>
             {character.skills.Insight === "" && <SkillName>Insight</SkillName>}
@@ -552,7 +557,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.Medicine,
                 character.skills.Medicine_bonus,
-                character.stats.wis
+                character.stats.wis,
+                character.stats.temp_wis
               )}{" "}
             </SkillModifier>
             {character.skills.Medicine === "" && (
@@ -571,7 +577,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.Perception,
                 character.skills.Perception_bonus,
-                character.stats.wis
+                character.stats.wis,
+                character.stats.temp_wis
               )}{" "}
             </SkillModifier>
             {character.skills.Perception === "" && (
@@ -590,7 +597,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.Survival,
                 character.skills.Survival_bonus,
-                character.stats.wis
+                character.stats.wis,
+                character.stats.temp_wis
               )}{" "}
             </SkillModifier>
             {character.skills.Survival === "" && (
@@ -607,10 +615,9 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
       </AbilityBox>
       <AbilityBox>
         <AbilityGroup>
-          {character.stats.temp_cha > 0 && (
+          {character.stats.temp_cha > 0 ? (
             <AbilityScore>{character.stats.temp_cha}</AbilityScore>
-          )}
-          {character.stats.temp_cha < 1 && (
+          ) : (
             <AbilityScore>{character.stats.cha}</AbilityScore>
           )}
           <AbilityModifier>
@@ -649,7 +656,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.Deception,
                 character.skills.Deception_bonus,
-                character.stats.cha
+                character.stats.cha,
+                character.stats.temp_cha
               )}{" "}
             </SkillModifier>
             {character.skills.Deception === "" && (
@@ -668,7 +676,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.Intimidation,
                 character.skills.Intimidation_bonus,
-                character.stats.cha
+                character.stats.cha,
+                character.stats.temp_cha
               )}{" "}
             </SkillModifier>
             {character.skills.Intimidation === "" && (
@@ -687,7 +696,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.Performance,
                 character.skills.Performance_bonus,
-                character.stats.cha
+                character.stats.cha,
+                character.stats.temp_cha
               )}{" "}
             </SkillModifier>
             {character.skills.Performance === "" && (
@@ -706,7 +716,8 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
                 character,
                 character.skills.Persuasion,
                 character.skills.Persuasion_bonus,
-                character.stats.cha
+                character.stats.cha,
+                character.stats.temp_cha
               )}{" "}
             </SkillModifier>
             {character.skills.Persuasion === "" && (

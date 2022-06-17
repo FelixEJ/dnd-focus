@@ -391,7 +391,6 @@ const Success = () => {
       {character.name != "" && (
         <>
           <BasicSection>
-            {/* <CardRow> */}
             <RollDiceModal />
             <Card>
               <Basics
@@ -399,14 +398,11 @@ const Success = () => {
                 onCharacterChange={onCharacterChange}
               />
             </Card>
-
             <RestModal
               character={character}
               updateCharacter={updateCharacter}
             />
-            {/* </CardRow> */}
           </BasicSection>
-
           <Layout>
             <AbilitySection>
               <h4>Ability Scores</h4>

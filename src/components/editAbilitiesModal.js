@@ -15,6 +15,7 @@ import {
   Container,
   SectionColumn,
   SectionRow,
+  InnerContainer,
   CardColumn,
   CardRow,
   CardItem,

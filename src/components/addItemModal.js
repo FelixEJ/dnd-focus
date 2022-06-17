@@ -25,10 +25,13 @@ const AddItemModal = ({ addItem, character }) => {
   const [item, setItem] = useState({
     item_id: 0,
     item_name: "",
+    item_description: "",
     quantity: 0,
+    rarity: "common",
     value_each: 0,
     value_currency: "cp",
     value_total: 0,
+    group_loot: "",
   });
 
   const handleChange = (e) => {
@@ -44,6 +47,7 @@ const AddItemModal = ({ addItem, character }) => {
       item_name: "",
       item_description: "",
       quantity: 0,
+      rarity: "common",
       value_each: 0,
       value_currency: "cp",
       value_total: 0,
@@ -100,6 +104,23 @@ const AddItemModal = ({ addItem, character }) => {
           />
         </Item>
         <Item>
+          <label>
+            Rarity:
+            <select
+              id="rarity"
+              name="rarity"
+              value={item.rarity}
+              onChange={handleChange}
+            >
+              <option value={"common"}>Common</option>
+              <option value={"uncommon"}>Uncommon</option>
+              <option value={"rare"}>Rare</option>
+              <option value={"veryrare"}>Very Rare</option>
+              <option value={"legendary"}>Legendary</option>
+            </select>
+          </label>
+        </Item>
+        <Item>
           <label>Quantity</label>
           <input
             type="number"
@@ -154,6 +175,7 @@ const AddItemModal = ({ addItem, character }) => {
             variant="contained"
             onClick={() => {
               saveItem();
+              handleClose();
             }}
           >
             Confirm Item

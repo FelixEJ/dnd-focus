@@ -117,6 +117,23 @@ const EditInventoryModal = ({
           />
         </Item>
         <Item>
+          <label>
+            Rarity:
+            <select
+              id="rarity"
+              name="rarity"
+              value={item.rarity}
+              onChange={handleChange}
+            >
+              <option value={"common"}>Common</option>
+              <option value={"uncommon"}>Uncommon</option>
+              <option value={"rare"}>Rare</option>
+              <option value={"veryrare"}>Very Rare</option>
+              <option value={"legendary"}>Legendary</option>
+            </select>
+          </label>
+        </Item>
+        <Item>
           <label>Quantity</label>
           <input
             type="number"

@@ -71,7 +71,7 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
 
   useEffect(() => {
     setTempFeats([...character.features]);
-  }, [character.features]);
+  }, [character]);
 
   const handleChange = (e, index, name) => {
     e.preventDefault();

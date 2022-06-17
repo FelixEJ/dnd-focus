@@ -124,6 +124,7 @@ const AddFeatureModal = ({ addFeature }) => {
             <option value={"background"}>Background</option>
             <option value={"class"}>Class</option>
             <option value={"multiclass"}>Multiclass</option>
+            <option value={"feat"}>Feat</option>
             <option value={"equipment"}>Equipment/Item</option>
           </select>
         </Item>
@@ -217,6 +218,7 @@ const AddFeatureModal = ({ addFeature }) => {
             onClick={() => {
               addFeature(feature);
               clearFeature();
+              handleClose();
             }}
           >
             Confirm Feature

@@ -103,6 +103,7 @@ const AddNoteModal = ({ addNote }) => {
             onClick={() => {
               addNote(note);
               clearNote();
+              handleClose();
             }}
           >
             Confirm Note

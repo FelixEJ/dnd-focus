@@ -5,15 +5,9 @@ import stylish from "styled-components";
 
 import { ModalContent, ModalWindow, CardColumn } from "./pageStyling";
 
-const ButtonContainer = stylish.div`
-  float: right;
-  margin-top: -30px;
-  margin-right: 5px;
-`;
-
 const EditModalWindow = ({ children, open, handleOpen, handleClose }) => {
   return (
-    <div>      
+    // <div>
       <ModalWindow>
         <Modal
           open={open}
@@ -24,7 +18,7 @@ const EditModalWindow = ({ children, open, handleOpen, handleClose }) => {
           <ModalContent>{children}</ModalContent>
         </Modal>
       </ModalWindow>
-    </div>
+    // </div>
   );
 };
 

@@ -19,7 +19,7 @@ const PageContentContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
 
   @media only screen and (min-width: 480px) {
   }
@@ -214,7 +214,7 @@ const ModalContentContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90vw;
-  max-width: 400;
+  max-width: 400px;
 `;
 export const ModalContent = ({ children }) => {
   return <ModalContentContainer>{children}</ModalContentContainer>;
@@ -225,6 +225,7 @@ const ModalWindowContainer = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  max-width: 400px;
 
   @media only screen and (min-width: 480px) {
   }

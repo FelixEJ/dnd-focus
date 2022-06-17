@@ -276,6 +276,7 @@ const AddAttackModal = ({ addAttack, character }) => {
             onClick={() => {
               addAttack(attack);
               clearAttack();
+              handleClose();
             }}
           >
             Confirm Attack

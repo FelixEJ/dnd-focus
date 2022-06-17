@@ -45,6 +45,8 @@ export const blankCharacter = {
     current: 0,
     temp: 0,
     temp_max: "0",
+    temp_ac: 0,
+    temp_speed: 0,
   },
   defences: {
     resistances: "",

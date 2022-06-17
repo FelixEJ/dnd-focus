@@ -54,7 +54,7 @@ const AttackAccordion = ({ character, updateAttacks }) => {
 
   useEffect(() => {
     setTempAttacks([...character.attacks]);
-  }, [character.attacks]);
+  }, [character]);
 
   const handleChange = (e, index, name) => {
     e.preventDefault();

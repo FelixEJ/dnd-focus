@@ -34,13 +34,6 @@ const EditBasicsModal = ({ character, onCharacterChange }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const X = stylish.div`
-    text-transform: uppercase;
-    text-decoration: underline;
-    float:right;
-    font-size: .7em;
-  `;
-
   return (
     <>
       <TopRightButton>

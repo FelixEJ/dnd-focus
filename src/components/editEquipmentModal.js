@@ -142,6 +142,23 @@ const EditEquipmentModal = ({
         </Item>
         <Item>
           <label>
+            Rarity:
+            <select
+              id="rarity"
+              name="rarity"
+              value={equipment.rarity}
+              onChange={handleChange}
+            >
+              <option value={"common"}>Common</option>
+              <option value={"uncommon"}>Uncommon</option>
+              <option value={"rare"}>Rare</option>
+              <option value={"veryrare"}>Very Rare</option>
+              <option value={"legendary"}>Legendary</option>
+            </select>
+          </label>
+        </Item>
+        <Item>
+          <label>
             Attuned:
             <select
               id="attuned"
