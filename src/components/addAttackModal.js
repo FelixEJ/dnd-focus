@@ -17,7 +17,6 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-
 const AddAttackModal = ({ addAttack, character }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -35,6 +34,11 @@ const AddAttackModal = ({ addAttack, character }) => {
     range: "",
     tags: "",
     ammo: 0,
+    magic: "",
+    description: "",
+    bonus_damage_dice: "",
+    bonus_damage_dice_num: "",
+    bonus_damage_dice_type: "",
   });
 
   const handleChange = (e) => {
@@ -57,6 +61,11 @@ const AddAttackModal = ({ addAttack, character }) => {
       range: "",
       tags: "",
       ammo: 0,
+      magic: "",
+      description: "",
+      bonus_damage_dice: "",
+      bonus_damage_dice_num: "",
+      bonus_damage_dice_type: "",
     });
   }
 
@@ -270,6 +279,66 @@ const AddAttackModal = ({ addAttack, character }) => {
             style={{ width: "20%" }}
           />
         </Item>
+        <Item>
+          <label>Magic?</label>
+          <select
+            id="magic"
+            name="magic"
+            value={attack.magic}
+            onChange={handleChange}
+          >
+            <option value={""}>-</option>
+            <option value={"yes"}>Yes</option>
+          </select>
+        </Item>
+        {attack.magic === "yes" && (
+          <>
+            <Item>
+              <label>Feature Description:</label>
+              <textarea
+                type="text"
+                id="description"
+                name="description"
+                value={attack.description}
+                onChange={handleChange}
+                cols="35"
+                rows="5"
+              />
+            </Item>
+            <Item>
+          <label>
+            Extra Damage:</label>
+            <input
+              type="number"
+              id="bonus_damage_dice_num"
+              name="bonus_damage_dice_num"
+              value={attack.bonus_damage_dice_num}
+              onChange={handleChange}
+              style={{ width: "50px" }}
+            />
+            <select
+              id="bonus_damage_dice"
+              name="bonus_damage_dice"
+              value={attack.bonus_damage_dice}
+              onChange={handleChange}
+            >
+              <option value={"d4"}>d4</option>
+              <option value={"d6"}>d6</option>
+              <option value={"d8"}>d8</option>
+              <option value={"d10"}>d10</option>
+              <option value={"d12"}>d12</option>
+            </select>
+            <input
+            type="text"
+            id="bonus_damage_dice_type"
+            name="bonus_damage_dice_type"
+            value={attack.bonus_damage_dice_type}
+            onChange={handleChange}
+            style={{ width: "40%" }}
+          />
+        </Item>
+          </>
+        )}
         <Item>
           <Button
             variant="contained"

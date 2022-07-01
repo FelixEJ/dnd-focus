@@ -103,7 +103,6 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
           ) : (
             <Numbers>{character.speed}</Numbers>
           )}
-          {/* <Numbers>{character.speed}</Numbers> */}
         </BoxTrio>
       </Row>
       <Row>
@@ -165,6 +164,9 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
               </BoxTrio>
             ) : null}
           </Row>
+          {character.hp.status !== "" && (
+            <Row><Title>Status Effects:</Title>{character.hp.status}</Row>
+          )}
         </BoxSolo>
       </Row>
       <Row>

@@ -64,11 +64,7 @@ const EditEquipmentModal = ({
 
   return (
     <>
-      <X
-        onClick={handleOpen}
-      >
-        Edit
-      </X>
+      <X onClick={handleOpen}>Edit</X>
       <EditModalWindow
         open={open}
         handleOpen={handleOpen}
@@ -88,14 +84,14 @@ const EditEquipmentModal = ({
         </Item>
         <Item>
           <label>Equipment description:</label>
-          <input
+          <textarea
             type="text"
             id="desc"
             name="desc"
             value={equipment.desc}
             onChange={handleChange}
-            cols="30"
-            rows="1"
+            cols="35"
+            rows="5"
           />
         </Item>
         <Item>

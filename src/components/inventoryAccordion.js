@@ -73,7 +73,7 @@ const InventoryAccordion = ({ character, addItem, updateInventory }) => {
     <Container>
       <Accordion>
         <div>
-        <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
+          <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
             <Card.Header>
               <Header>
                 <b>Pack:</b>
@@ -92,13 +92,17 @@ const InventoryAccordion = ({ character, addItem, updateInventory }) => {
                   {character.inventory.map((item, index) => (
                     <ItemRow>
                       <Item key={index}>
-                        {item.group_loot !== "" && (
-                          <b>(G)</b>
+                        {item.group_loot !== "" && <b>(G)</b>}
+                        <b>{item.item_name}</b>
+                        {item.quantity > 1 && <>x{item.quantity}</>}
+                        {item.value_each > 0 && (
+                          <>
+                            , value=
+                            {item.quantity * item.value_each}
+                            {item.value_currency} ({item.value_each}
+                            {item.value_currency}/ea)
+                          </>
                         )}
-                        <b>{item.item_name}</b> x{item.quantity}, value=
-                        {item.quantity * item.value_each}
-                        {item.value_currency} ({item.value_each}
-                        {item.value_currency}/ea)
                       </Item>
                       <EditInventoryModal
                         character={character}

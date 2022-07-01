@@ -222,6 +222,18 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
             />
           </label>
         </Item>
+        <Item>
+          <label>
+            Status effects:</label>
+            <input
+              type="text"
+              id="hp.status"
+              name="hp.status"
+              value={character.hp.status}
+              onChange={onCharacterChange}
+            />
+          
+        </Item>
         <Button variant="contained" onClick={handleClose}>
           Close
         </Button>

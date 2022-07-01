@@ -200,6 +200,7 @@ const EditFeatureModal = ({ character, updateFeatures, index, name }) => {
             name="damage_type"
             value={feature.damage_type}
             onChange={handleChange}
+            style={{ width: "40%" }}
           />
         </Item>
         <Item>

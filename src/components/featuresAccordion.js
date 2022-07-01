@@ -132,8 +132,18 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                   class="overflow-auto"
                 >
                   <>
-                    Source: <b>{feature.source}</b>
-                    <br />
+                    {feature.source !== "" && (
+                      <>
+                        Source: <b>{feature.source}</b>
+                        <br />
+                      </>
+                    )}
+                    {feature.action_type !== "" && (
+                      <>
+                        Action: <b>{feature.action_type}</b>
+                        <br />
+                      </>
+                    )}
                   </>
                   {feature.max_uses > 0 && (
                     <text>

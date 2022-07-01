@@ -75,19 +75,19 @@ const AddEquipmentModal = ({ addEquipment }) => {
             id="equipment_name"
             name="equipment_name"
             value={equipment.equipment_name}
-            onChange={handleChange}            
+            onChange={handleChange}
           />
         </Item>
         <Item>
           <label>Equipment description:</label>
-          <input
+          <textarea
             type="text"
             id="desc"
             name="desc"
             value={equipment.desc}
             onChange={handleChange}
-            cols="30"
-            rows="1"
+            cols="35"
+            rows="5"
           />
         </Item>
         <Item>
