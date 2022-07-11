@@ -98,7 +98,7 @@ const EquipmentAccordion = ({
             <Accordion.Collapse eventKey={0}>
               <Card.Body
                 style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
-                class="overflow-auto"
+                className="overflow-auto"
               >
                 <>
                   {character.equipment.map((item, index) => (

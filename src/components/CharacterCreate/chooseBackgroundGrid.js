@@ -4,7 +4,7 @@ import { Button, ButtonGroup } from "@material-ui/core";
 
 import CreateProficiencies from "./createProficiencies";
 
-import Inventory from "../inventory";
+import Inventory from "../sectionInventory";
 
 import FeatureAccordion from "../featuresAccordion";
 import AddFeatureModal from "../addFeatureModal";

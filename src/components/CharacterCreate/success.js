@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { FormControl } from "@material-ui/core";
 import styled from "styled-components";
 import LoadCharacterFromJSON from "../loadCharacterFromJSONModal";
-import Basics from "../basics";
-import SheetAbilities from "../sheetAbilities";
-import SheetProficiencies from "../sheetProficiencies";
-import SheetAttacks from "../sheetAttacks";
-import SheetCombat from "../sheetCombat";
-import Inventory from "../inventory";
-import SheetMagic from "../sheetMagic";
-import Personality from "../personality";
+import Basics from "../sectionBasics";
+import Abilities from "../sectionAbilities";
+import Proficiencies from "../sectionProficiencies";
+import Attacks from "../sectionAttacks";
+import Combat from "../sectionCombat";
+import Inventory from "../sectionInventory";
+import Magic from "../sectionMagic";
+import Personality from "../sectionPersonality";
 import NotesAccordion from "../notesAccordion";
 
 import { blankCharacter } from "../../data/character";
@@ -411,7 +411,7 @@ const Success = () => {
                 onCharacterChange={onCharacterChange}
               />
               <Card>
-                <SheetAbilities
+                <Abilities
                   character={character}
                   setLoadedChar={setLoadedChar}
                   onCharacterChange={onCharacterChange}
@@ -425,7 +425,7 @@ const Success = () => {
                 onCharacterChange={onCharacterChange}
               />
               <Card>
-                <SheetProficiencies
+                <Proficiencies
                   character={character}
                   onCharacterChange={onCharacterChange}
                 />
@@ -438,7 +438,7 @@ const Success = () => {
                 onCharacterChange={onCharacterChange}
               />
               <Card>
-                <SheetCombat
+                <Combat
                   character={character}
                   onCharacterChange={onCharacterChange}
                   updateHealth={updateHealth}
@@ -449,7 +449,7 @@ const Success = () => {
               <h4>Attacks</h4>
               <AddAttackModal addAttack={addAttack} character={character} />
               <Card>
-                <SheetAttacks
+                <Attacks
                   character={character}
                   updateAttacks={updateAttacks}
                   addAttack={addAttack}
@@ -463,7 +463,7 @@ const Success = () => {
                 onCharacterChange={onCharacterChange}
               />
               <Card>
-                <SheetMagic
+                <Magic
                   character={character}
                   onCharacterChange={onCharacterChange}
                 />

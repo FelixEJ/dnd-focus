@@ -5,10 +5,10 @@ import { Button, ButtonGroup, Select } from "@material-ui/core";
 import { getModifier, getSave, getSkill, getPassive } from "../utils";
 
 import CreateProficiencies from "./createProficiencies";
-import Inventory from "../inventory";
+import Inventory from "../sectionInventory";
 import Features from "../features";
-import SheetAttacks from "../sheetAttacks";
-import SheetMagic from "../sheetMagic";
+import Attacks from "../sectionAttacks";
+import SheetMagic from "../sectionMagic";
 import FeatureAccordion from "../featuresAccordion";
 import AddFeatureModal from "../addFeatureModal";
 import AddSkillModal from "../addSkillModal";

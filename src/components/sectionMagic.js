@@ -53,7 +53,7 @@ const Title = styled.p`
   text-transform: uppercase;
 `;
 
-const SheetMagic = ({ character, onCharacterChange }) => {
+const Magic = ({ character, onCharacterChange }) => {
   return (
     <CardColumn>
       {character.magic.ability !== "" && (
@@ -301,4 +301,4 @@ const SheetMagic = ({ character, onCharacterChange }) => {
   );
 };
 
-export default SheetMagic;
+export default Magic;

@@ -13,7 +13,7 @@ import {
   CardItem,
   Label,
   BotButton,
-} from "../components/StyledPageComponents/pageStyling";
+} from "./StyledPageComponents/pageStyling";
 
 
 const Container = styled.div`

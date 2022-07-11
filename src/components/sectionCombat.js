@@ -11,9 +11,9 @@ import {
   CardItem,
   Label,
   BotButton,
-} from "../components/StyledPageComponents/pageStyling";
+} from "./StyledPageComponents/pageStyling";
 
-import DamageHealingModal from "./damageHealingModal";
+import DamageHealingModal from "./healthChangeModal";
 
 const Container = styled.div`
   text-align: center;
