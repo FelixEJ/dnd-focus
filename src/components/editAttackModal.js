@@ -16,6 +16,8 @@ import EditModalWindow from "./StyledPageComponents/editModalWindow";
 
 import { BotButton, TopRightButton } from "./StyledPageComponents/pageStyling";
 
+import { getModifier, getAttackModifier, getDamageModifier } from "./utils";
+
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -50,14 +52,69 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
     handleClose();
   };
 
-  const getModifier = (stat) => {
-    let mod = Math.floor((stat - 10) / 2);
-    if (mod > 0) {
-      return "+" + mod;
-    } else {
-      return mod;
+  // const getModifier = (stat) => {
+  //   let mod = Math.floor((stat - 10) / 2);
+  //   if (mod > 0) {
+  //     return "+" + mod;
+  //   } else {
+  //     return mod;
+  //   }
+  // };
+
+  function setAttackMods() {
+    let attackBonus = 0;
+    let damageBonus = 0;
+    if (attack.mod_used === "str") {
+      attackBonus = getAttackModifier(
+        character,
+        getModifier(character.stats.str),
+        attack.bonus_attack_bonus
+      );
+      damageBonus = getDamageModifier(
+        getModifier(character.stats.str),
+        attack.bonus_damage_bonus
+      );
+    } else if (attack.mod_used === "dex") {
+      attackBonus = getAttackModifier(
+        character,
+        getModifier(character.stats.dex),
+        attack.bonus_attack_bonus
+      );
+      damageBonus = getDamageModifier(
+        getModifier(character.stats.dex),
+        attack.bonus_damage_bonus
+      );
+    } else if (attack.mod_used === "con") {
+      attackBonus = getAttackModifier(
+        character,
+        getModifier(character.stats.con),
+        attack.bonus_attack_bonus
+      );
+    } else if (attack.mod_used === "int") {
+      attackBonus = getAttackModifier(
+        character,
+        getModifier(character.stats.int),
+        attack.bonus_attack_bonus
+      );
+    } else if (attack.mod_used === "wis") {
+      attackBonus = getAttackModifier(
+        character,
+        getModifier(character.stats.wis),
+        attack.bonus_attack_bonus
+      );
+    } else if (attack.mod_used === "cha") {
+      attackBonus = getAttackModifier(
+        character,
+        getModifier(character.stats.cha),
+        attack.bonus_attack_bonus
+      );
     }
-  };
+    setAttack((prev) => ({
+      ...prev,
+      attack_bonus: attackBonus,
+      damage_bonus: damageBonus,
+    }));
+  }
 
   return (
     <>
@@ -109,35 +166,72 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
         </Item>
         <Item>
           <label>
-            Attack modifier (
+            Attack modifier = +
             {attack.mod_used === "str" ? (
-              <label>{getModifier(character.stats.str)}</label>
+              <label>
+                {getAttackModifier(
+                  character,
+                  getModifier(character.stats.str),
+                  attack.bonus_attack_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "dex" ? (
-              <label>{getModifier(character.stats.dex)}</label>
+              <label>
+                {getAttackModifier(
+                  character,
+                  getModifier(character.stats.dex),
+                  attack.bonus_attack_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "con" ? (
-              <label>{getModifier(character.stats.con)}</label>
+              <label>
+                {getAttackModifier(
+                  character,
+                  getModifier(character.stats.con),
+                  attack.bonus_attack_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "int" ? (
-              <label>{getModifier(character.stats.int)}</label>
+              <label>
+                {getAttackModifier(
+                  character,
+                  getModifier(character.stats.int),
+                  attack.bonus_attack_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "wis" ? (
-              <label>{getModifier(character.stats.wis)}</label>
+              <label>
+                {getAttackModifier(
+                  character,
+                  getModifier(character.stats.wis),
+                  attack.bonus_attack_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "cha" ? (
-              <label>{getModifier(character.stats.cha)}</label>
+              <label>
+                {getAttackModifier(
+                  character,
+                  getModifier(character.stats.cha),
+                  attack.bonus_attack_bonus
+                )}
+              </label>
             ) : null}{" "}
-            + {character.proficiency_bonus})
-            <input
-              type="number"
-              id="attack_bonus"
-              name="attack_bonus"
-              value={attack.attack_bonus}
-              onChange={handleChange}
-              style={{ width: "20%" }}
-            />
           </label>
+          <br />
+          <label>Attack bonus </label>
+          <input
+            type="number"
+            id="bonus_attack_bonus"
+            name="bonus_attack_bonus"
+            value={attack.bonus_attack_bonus}
+            onChange={handleChange}
+            style={{ width: "50px" }}
+          />
         </Item>
         <Item>
           <label>
@@ -166,33 +260,66 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
         </Item>
         <Item>
           <label>
-            Damage bonus (
+            Damage modifier =
             {attack.mod_used === "str" ? (
-              <label>{getModifier(character.stats.str)}</label>
+              <label>
+                {getDamageModifier(
+                  getModifier(character.stats.str),
+                  attack.bonus_damage_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "dex" ? (
-              <label>{getModifier(character.stats.dex)}</label>
+              <label>
+                {getDamageModifier(
+                  getModifier(character.stats.dex),
+                  attack.bonus_damage_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "con" ? (
-              <label>{getModifier(character.stats.con)}</label>
+              <label>
+                {getDamageModifier(
+                  getModifier(character.stats.con),
+                  attack.bonus_damage_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "int" ? (
-              <label>{getModifier(character.stats.int)}</label>
+              <label>
+                {getDamageModifier(
+                  getModifier(character.stats.int),
+                  attack.bonus_damage_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "wis" ? (
-              <label>{getModifier(character.stats.wis)}</label>
+              <label>
+                {getDamageModifier(
+                  getModifier(character.stats.wis),
+                  attack.bonus_damage_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "cha" ? (
-              <label>{getModifier(character.stats.cha)}</label>
+              <label>
+                {getDamageModifier(
+                  getModifier(character.stats.cha),
+                  attack.bonus_damage_bonus
+                )}
+              </label>
             ) : null}{" "}
-            )
+          </label>
+          <br />
+          <label>
+            Damage bonus
             <input
               type="number"
-              id="damage_bonus"
-              name="damage_bonus"
-              value={attack.damage_bonus}
+              id="bonus_damage_bonus"
+              name="bonus_damage_bonus"
+              value={attack.bonus_damage_bonus}
               onChange={handleChange}
-              style={{ width: "20%" }}
+              style={{ width: "50px" }}
             />
           </label>
         </Item>
@@ -242,7 +369,7 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
           />
         </Item>
         <Item>
-          <label>Magic?</label>
+          <label>Magic Effect?</label>
           <select
             id="magic"
             name="magic"
@@ -256,7 +383,7 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
         {attack.magic === "yes" && (
           <>
             <Item>
-              <label>Feature Description:</label>
+              <label>Description:</label>
               <textarea
                 type="text"
                 id="description"
@@ -283,6 +410,7 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
                 value={attack.bonus_damage_dice}
                 onChange={handleChange}
               >
+                <option value={""}>-</option>
                 <option value={"d4"}>d4</option>
                 <option value={"d6"}>d6</option>
                 <option value={"d8"}>d8</option>
@@ -304,6 +432,7 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
           <Button
             variant="contained"
             onClick={() => {
+              setAttackMods();
               editAttack();
             }}
             startIcon={<SaveIcon />}

@@ -58,18 +58,23 @@ const Capital = styled.h1`
 const TextContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  width: 60vw;
+  width: 90vw;
   @media only screen and (min-width: 480px) {
+    width: 80vw;
   }
   @media only screen and (min-width: 768px) {
+    width: 60vw;
   }
   @media only screen and (min-width: 1024px) {
+    width: 60vw;
   }
   @media only screen and (min-width: 1600px) {
+    width: 60vw;
   }
 `;
 const Text = styled.p`
   font-size: 1.2em;
+  text-align: left;
 `;
 const Question = styled.p`
   font-size: 1.4em;

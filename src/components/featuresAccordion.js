@@ -93,7 +93,7 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                 <ItemRow>
                   <Item>
                     <Header>{feature.feature_name}:</Header>
-                    {feature.damage_dice_amount !== "" && (
+                    {feature.damage_dice_amount > 0 && (
                       <>{feature.damage_dice_amount}</>
                     )}
                     {feature.damage_dice !== "" && <>{feature.damage_dice}</>}

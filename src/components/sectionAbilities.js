@@ -129,7 +129,7 @@ const TextRight = styled.div`
   margin-bottom: auto;
 `;
 
-const SheetAbilities = ({ character, onCharacterChange }) => {
+const Abilities = ({ character, onCharacterChange }) => {
   return (
     <CardColumn>
       <Bar>
@@ -766,4 +766,4 @@ const SheetAbilities = ({ character, onCharacterChange }) => {
   );
 };
 
-export default SheetAbilities;
+export default Abilities;

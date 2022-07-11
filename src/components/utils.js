@@ -90,3 +90,27 @@ export function getSpellModifier(character, spellStat) {
     }
   }
 }
+
+export function getAttackModifier(character, abilityMod, bonus) {
+  let totalMod = 0;
+  let AttBonus = 0;
+  if (bonus > 0) {
+    AttBonus = parseInt(bonus);
+  }
+  totalMod +=
+    parseInt(abilityMod) + parseInt(character.proficiency_bonus) + AttBonus;
+
+  return totalMod;
+}
+
+export function getDamageModifier(abilityMod, bonus) {
+  let totalMod = 0;
+  let DamBonus = 0;
+  if (bonus > 0) {
+    DamBonus = parseInt(bonus);
+  }
+  totalMod +=
+    parseInt(abilityMod) + DamBonus;
+
+  return totalMod;
+}

@@ -353,7 +353,7 @@ const Success = () => {
   var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
   var yyyy = today.getFullYear();
 
-  today = mm + "/" + dd + "/" + yyyy;
+  today = dd + "/" + mm + "/" + yyyy;
 
   return (
     <Page>
@@ -446,7 +446,7 @@ const Success = () => {
               </Card>
             </CombatSection>
             <AttackSection>
-              <h4>Attacks</h4>
+              <h4>Attacks & Spells</h4>
               <AddAttackModal addAttack={addAttack} character={character} />
               <Card>
                 <Attacks
@@ -477,12 +477,6 @@ const Success = () => {
                   character={character}
                   updateFeatures={updateFeatures}
                 />
-                {/* <Features
-                character={character}
-                updateFeatures={updateFeatures}
-                onCharacterChange={onCharacterChange}
-                addFeature={addFeature}
-              /> */}
               </Card>
             </FeatSection>
             <InvSection>

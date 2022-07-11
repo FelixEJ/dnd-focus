@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
@@ -9,6 +9,8 @@ import Grid from "@material-ui/core/Grid";
 import AddModalWindow from "./StyledPageComponents/addModalWindow";
 
 import { BotButton, TopRightButton } from "./StyledPageComponents/pageStyling";
+
+import { getAttackModifier, getDamageModifier } from "./utils";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -24,10 +26,13 @@ const AddAttackModal = ({ addAttack, character }) => {
 
   const [attack, setAttack] = useState({
     attack_id: 0,
+    attack_type: "wep",
     attack_name: "",
     mod_used: "",
     attack_bonus: 0,
+    bonus_attack_bonus: "0",
     damage_bonus: 0,
+    bonus_damage_bonus: 0,
     damage_dice: "",
     damage_dice_num: 1,
     damage_type: "",
@@ -51,11 +56,14 @@ const AddAttackModal = ({ addAttack, character }) => {
   function clearAttack() {
     setAttack({
       attack_id: 0,
+      attack_type: attack.attack_type,
       attack_name: "",
       mod_used: "",
       attack_bonus: 0,
+      bonus_attack_bonus: "0",
       damage_bonus: 0,
-      damage_dice: "d4",
+      bonus_damage_bonus: 0,
+      damage_dice: "",
       damage_dice_num: 1,
       damage_type: "",
       range: "",
@@ -97,6 +105,61 @@ const AddAttackModal = ({ addAttack, character }) => {
     }
   };
 
+  function setAttackMods() {
+    let attackBonus = 0;
+    let damageBonus = 0;
+    if (attack.mod_used === "str") {
+      attackBonus = getAttackModifier(
+        character,
+        getModifier(character.stats.str),
+        attack.bonus_attack_bonus
+      );
+      damageBonus = getDamageModifier(
+        getModifier(character.stats.str),
+        attack.bonus_damage_bonus
+      );
+    } else if (attack.mod_used === "dex") {
+      attackBonus = getAttackModifier(
+        character,
+        getModifier(character.stats.dex),
+        attack.bonus_attack_bonus
+      );
+      damageBonus = getDamageModifier(
+        getModifier(character.stats.dex),
+        attack.bonus_damage_bonus
+      );
+    } else if (attack.mod_used === "con") {
+      attackBonus = getAttackModifier(
+        character,
+        getModifier(character.stats.con),
+        attack.bonus_attack_bonus
+      );
+    } else if (attack.mod_used === "int") {
+      attackBonus = getAttackModifier(
+        character,
+        getModifier(character.stats.int),
+        attack.bonus_attack_bonus
+      );
+    } else if (attack.mod_used === "wis") {
+      attackBonus = getAttackModifier(
+        character,
+        getModifier(character.stats.wis),
+        attack.bonus_attack_bonus
+      );
+    } else if (attack.mod_used === "cha") {
+      attackBonus = getAttackModifier(
+        character,
+        getModifier(character.stats.cha),
+        attack.bonus_attack_bonus
+      );
+    }
+    setAttack((prev) => ({
+      ...prev,
+      attack_bonus: attackBonus,
+      damage_bonus: damageBonus,
+    }));
+  }
+
   return (
     <>
       <TopRightButton>
@@ -115,7 +178,9 @@ const AddAttackModal = ({ addAttack, character }) => {
         handleClose={handleClose}
       >
         <Item>
-          <h2>Add Attack</h2>
+          <h2>Add Attack/Spell</h2>
+        </Item>
+        <Item>
           <label>Attack name</label>
           <input
             type="text"
@@ -126,6 +191,18 @@ const AddAttackModal = ({ addAttack, character }) => {
             required
           />
         </Item>
+        {/* <Item>
+          <label>Weapon or Spell?</label>
+          <select
+            id="magic"
+            name="magic"
+            value={attack.magic}
+            onChange={handleChange}
+          >
+            <option value={"wep"}>Weapon</option>
+            <option value={"spell"}>Spell</option>
+          </select>
+        </Item> */}
         <Item>
           <label>
             Modifier used: &emsp;
@@ -147,35 +224,72 @@ const AddAttackModal = ({ addAttack, character }) => {
         </Item>
         <Item>
           <label>
-            Attack modifier (
+            Attack modifier = +
             {attack.mod_used === "str" ? (
-              <label>{getModifier(character.stats.str)}</label>
+              <label>
+                {getAttackModifier(
+                  character,
+                  getModifier(character.stats.str),
+                  attack.bonus_attack_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "dex" ? (
-              <label>{getModifier(character.stats.dex)}</label>
+              <label>
+                {getAttackModifier(
+                  character,
+                  getModifier(character.stats.dex),
+                  attack.bonus_attack_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "con" ? (
-              <label>{getModifier(character.stats.con)}</label>
+              <label>
+                {getAttackModifier(
+                  character,
+                  getModifier(character.stats.con),
+                  attack.bonus_attack_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "int" ? (
-              <label>{getModifier(character.stats.int)}</label>
+              <label>
+                {getAttackModifier(
+                  character,
+                  getModifier(character.stats.int),
+                  attack.bonus_attack_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "wis" ? (
-              <label>{getModifier(character.stats.wis)}</label>
+              <label>
+                {getAttackModifier(
+                  character,
+                  getModifier(character.stats.wis),
+                  attack.bonus_attack_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "cha" ? (
-              <label>{getModifier(character.stats.cha)}</label>
+              <label>
+                {getAttackModifier(
+                  character,
+                  getModifier(character.stats.cha),
+                  attack.bonus_attack_bonus
+                )}
+              </label>
             ) : null}{" "}
-            + {character.proficiency_bonus})
-            <input
-              type="number"
-              id="attack_bonus"
-              name="attack_bonus"
-              value={attack.attack_bonus}
-              onChange={handleChange}
-              style={{ width: "20%" }}
-            />
           </label>
+          <br />
+          <label>Attack bonus </label>
+          <input
+            type="number"
+            id="bonus_attack_bonus"
+            name="bonus_attack_bonus"
+            value={attack.bonus_attack_bonus}
+            onChange={handleChange}
+            style={{ width: "50px" }}
+          />
         </Item>
         <Item>
           <label>
@@ -194,6 +308,7 @@ const AddAttackModal = ({ addAttack, character }) => {
               value={attack.damage_dice}
               onChange={handleChange}
             >
+              <option value={""}>-</option>
               <option value={"d4"}>d4</option>
               <option value={"d6"}>d6</option>
               <option value={"d8"}>d8</option>
@@ -204,33 +319,66 @@ const AddAttackModal = ({ addAttack, character }) => {
         </Item>
         <Item>
           <label>
-            Damage bonus (
+            Damage modifier =
             {attack.mod_used === "str" ? (
-              <label>{getModifier(character.stats.str)}</label>
+              <label>
+                {getDamageModifier(
+                  getModifier(character.stats.str),
+                  attack.bonus_damage_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "dex" ? (
-              <label>{getModifier(character.stats.dex)}</label>
+              <label>
+                {getDamageModifier(
+                  getModifier(character.stats.dex),
+                  attack.bonus_damage_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "con" ? (
-              <label>{getModifier(character.stats.con)}</label>
+              <label>
+                {getDamageModifier(
+                  getModifier(character.stats.con),
+                  attack.bonus_damage_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "int" ? (
-              <label>{getModifier(character.stats.int)}</label>
+              <label>
+                {getDamageModifier(
+                  getModifier(character.stats.int),
+                  attack.bonus_damage_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "wis" ? (
-              <label>{getModifier(character.stats.wis)}</label>
+              <label>
+                {getDamageModifier(
+                  getModifier(character.stats.wis),
+                  attack.bonus_damage_bonus
+                )}
+              </label>
             ) : null}{" "}
             {attack.mod_used === "cha" ? (
-              <label>{getModifier(character.stats.cha)}</label>
+              <label>
+                {getDamageModifier(
+                  getModifier(character.stats.cha),
+                  attack.bonus_damage_bonus
+                )}
+              </label>
             ) : null}{" "}
-            )
+          </label>
+          <br />
+          <label>
+            Damage bonus
             <input
               type="number"
-              id="damage_bonus"
-              name="damage_bonus"
-              value={attack.damage_bonus}
+              id="bonus_damage_bonus"
+              name="bonus_damage_bonus"
+              value={attack.bonus_damage_bonus}
               onChange={handleChange}
-              style={{ width: "20%" }}
+              style={{ width: "50px" }}
             />
           </label>
         </Item>
@@ -280,7 +428,7 @@ const AddAttackModal = ({ addAttack, character }) => {
           />
         </Item>
         <Item>
-          <label>Magic?</label>
+          <label>Magic Effect?</label>
           <select
             id="magic"
             name="magic"
@@ -294,7 +442,7 @@ const AddAttackModal = ({ addAttack, character }) => {
         {attack.magic === "yes" && (
           <>
             <Item>
-              <label>Feature Description:</label>
+              <label>Description:</label>
               <textarea
                 type="text"
                 id="description"
@@ -306,43 +454,44 @@ const AddAttackModal = ({ addAttack, character }) => {
               />
             </Item>
             <Item>
-          <label>
-            Extra Damage:</label>
-            <input
-              type="number"
-              id="bonus_damage_dice_num"
-              name="bonus_damage_dice_num"
-              value={attack.bonus_damage_dice_num}
-              onChange={handleChange}
-              style={{ width: "50px" }}
-            />
-            <select
-              id="bonus_damage_dice"
-              name="bonus_damage_dice"
-              value={attack.bonus_damage_dice}
-              onChange={handleChange}
-            >
-              <option value={"d4"}>d4</option>
-              <option value={"d6"}>d6</option>
-              <option value={"d8"}>d8</option>
-              <option value={"d10"}>d10</option>
-              <option value={"d12"}>d12</option>
-            </select>
-            <input
-            type="text"
-            id="bonus_damage_dice_type"
-            name="bonus_damage_dice_type"
-            value={attack.bonus_damage_dice_type}
-            onChange={handleChange}
-            style={{ width: "40%" }}
-          />
-        </Item>
+              <label>Extra Damage:</label>
+              <input
+                type="number"
+                id="bonus_damage_dice_num"
+                name="bonus_damage_dice_num"
+                value={attack.bonus_damage_dice_num}
+                onChange={handleChange}
+                style={{ width: "50px" }}
+              />
+              <select
+                id="bonus_damage_dice"
+                name="bonus_damage_dice"
+                value={attack.bonus_damage_dice}
+                onChange={handleChange}
+              >
+                <option value={""}>-</option>
+                <option value={"d4"}>d4</option>
+                <option value={"d6"}>d6</option>
+                <option value={"d8"}>d8</option>
+                <option value={"d10"}>d10</option>
+                <option value={"d12"}>d12</option>
+              </select>
+              <input
+                type="text"
+                id="bonus_damage_dice_type"
+                name="bonus_damage_dice_type"
+                value={attack.bonus_damage_dice_type}
+                onChange={handleChange}
+                style={{ width: "40%" }}
+              />
+            </Item>
           </>
         )}
         <Item>
           <Button
             variant="contained"
             onClick={() => {
+              setAttackMods();
               addAttack(attack);
               clearAttack();
               handleClose();

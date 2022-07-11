@@ -104,7 +104,7 @@ const EquipmentAccordion = ({
                   {character.equipment.map((item, index) => (
                     <ItemRow>
                       <Item key={index}>
-                        <b>{item.equipment_name}</b> {item.desc}
+                        <b>{item.equipment_name}</b>
                       </Item>
                       <EditEquipmentModal
                         character={character}

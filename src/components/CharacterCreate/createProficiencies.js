@@ -60,7 +60,7 @@ export const CreateProficiencies = ({ onCharacterChange, character }) => {
             <Skill>Acrobatics</Skill>
           ) : null}
           {character.skills.SleightOfHand !== "" ? (
-            <Skill>SleightOfHand</Skill>
+            <Skill>Sleight Of Hand</Skill>
           ) : null}
           {character.skills.Stealth !== "" ? <Skill>Stealth</Skill> : null}
           {character.skills.Arcana !== "" ? <Skill>Arcana</Skill> : null}

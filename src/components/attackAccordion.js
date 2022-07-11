@@ -35,6 +35,8 @@ function CustomToggle({ children, eventKey }) {
   );
 }
 
+const Container = styled.div``;
+
 const ButtonRight = styled.div`
   float: right;
   font-size: 0.9em;
@@ -47,6 +49,14 @@ const TextLeft = styled.div`
   font-size: 0.9em;
   text-decoration: underline;
   text-transform: uppercase;
+`;
+const TextRight = styled.span`
+  font-size: 0.7em;
+  text-transform: uppercase;
+`;
+
+const LargeNumber = styled.span`
+  font-size: 1.6em;
 `;
 
 const AttackAccordion = ({ character, updateAttacks }) => {
@@ -69,21 +79,36 @@ const AttackAccordion = ({ character, updateAttacks }) => {
   };
 
   return (
-    <Accordion>
+    <Accordion style={{ width: "100%" }}>
       <div>
         {character.attacks.map((attack, index) => (
           <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
             <Card.Header>
-              <TextLeft>
-                {attack.attack_name}:{" "}
-                <b>
-                  +{attack.attack_bonus}; {attack.damage_dice_num}
-                  {attack.damage_dice}+{attack.damage_bonus}{" "}
-                  {attack.damage_type}{" "}
-                  {attack.range.length > 0 && <>({attack.range})</>}
-                  {attack.ammo > 0 && <>[{attack.ammo}]</>}
-                </b>
-              </TextLeft>
+              <TextLeft>{attack.attack_name}:</TextLeft>
+              <b>
+                <LargeNumber>+{attack.attack_bonus}</LargeNumber>;{" "}
+                <LargeNumber>
+                  {attack.damage_dice_num}
+                  {attack.damage_dice}+{attack.damage_bonus}
+                </LargeNumber>
+              </b>
+              <TextRight>
+                {attack.damage_type}{" "}
+                {attack.range.length > 0 && <>({attack.range})</>}
+                {attack.ammo > 0 && <>[{attack.ammo}]</>}
+              </TextRight>
+              <span>
+                {attack.bonus_damage_dice_num > 0 && (
+                  <>
+                    <br/>
+                    <LargeNumber>
+                      +{attack.bonus_damage_dice_num}
+                      {attack.bonus_damage_dice}
+                    </LargeNumber>
+                    <span>{attack.bonus_damage_dice_type}</span>
+                  </>
+                )}
+              </span>
               <ButtonRight>
                 <CustomToggle eventKey={attack.attack_id}>EXPAND</CustomToggle>
               </ButtonRight>
@@ -91,12 +116,13 @@ const AttackAccordion = ({ character, updateAttacks }) => {
             <Accordion.Collapse eventKey={attack.attack_id}>
               <Card.Body
                 style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
-                // style={{ backgroundColor: "none" }}
                 class="overflow-auto"
               >
                 <>
                   <p>{attack.attack_name}</p>
-                  Attack Bonus: <b>+{attack.attack_bonus}</b>; Damage:
+                  Attack Bonus: <b>+{attack.attack_bonus}</b>
+                  <br />
+                  Damage:
                   <b>
                     {attack.damage_dice_num}
                     {attack.damage_dice}+{attack.damage_bonus}
@@ -104,6 +130,7 @@ const AttackAccordion = ({ character, updateAttacks }) => {
                   </b>
                   {attack.tags !== "" && (
                     <span>
+                      <br />
                       Tags: <b>{attack.tags}</b>
                     </span>
                   )}
@@ -125,6 +152,18 @@ const AttackAccordion = ({ character, updateAttacks }) => {
                       />
                     </Label>
                   )}
+                  <p>{attack.description}</p>
+                  <p>
+                    {attack.bonus_damage_dice_num > 0 && (
+                      <>
+                        <LargeNumber>
+                          +{attack.bonus_damage_dice_num}
+                          {attack.bonus_damage_dice}
+                        </LargeNumber>
+                        <span>{attack.bonus_damage_dice_type}</span>
+                      </>
+                    )}
+                  </p>
                   <EditAttackModal
                     character={character}
                     updateAttacks={updateAttacks}

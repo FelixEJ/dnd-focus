@@ -47,6 +47,7 @@ const AddFeatureModal = ({ addFeature }) => {
     damage_dice: "",
     damage_dice_amount: "",
     damage_type: "",
+    dc: "",
   });
 
   const handleChange = (e) => {
@@ -60,7 +61,9 @@ const AddFeatureModal = ({ addFeature }) => {
   function clearFeature() {
     setFeature({
       feature_id: 0,
+      level_acquired: feature.level_acquired,
       feature_name: "",
+      source: feature.source,
       description: "",
       max_uses: 0,
       current_uses: 0,
@@ -69,6 +72,7 @@ const AddFeatureModal = ({ addFeature }) => {
       damage_dice: "",
       damage_dice_amount: "",
       damage_type: "",
+      dc: "",
     });
   }
 
@@ -210,6 +214,17 @@ const AddFeatureModal = ({ addFeature }) => {
             name="damage_type"
             value={feature.damage_type}
             onChange={handleChange}
+          />
+        </Item>
+        <Item>
+          <Label>DC:</Label>
+          <input
+            type="number"
+            id="dc"
+            name="dc"
+            value={feature.dc}
+            onChange={handleChange}
+            style={{ width: "20%" }}
           />
         </Item>
         <Item>

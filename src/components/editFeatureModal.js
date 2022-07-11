@@ -204,6 +204,17 @@ const EditFeatureModal = ({ character, updateFeatures, index, name }) => {
           />
         </Item>
         <Item>
+          <Label>DC:</Label>
+          <input
+            type="number"
+            id="dc"
+            name="dc"
+            value={feature.dc}
+            onChange={handleChange}
+            style={{ width: "20%" }}
+          />
+        </Item>
+        <Item>
           <Button
             variant="contained"
             onClick={() => {

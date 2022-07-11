@@ -124,6 +124,7 @@ const AddEquipmentModal = ({ addEquipment }) => {
               value={equipment.equipment_type}
               onChange={handleChange}
             >
+              <option value={""}>-</option>
               <option value={"armour"}>Armour</option>
               <option value={"weapon"}>Weapon</option>
               <option value={"tool"}>Tool</option>
