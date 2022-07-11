@@ -56,7 +56,7 @@ const EditNoteModal = ({ character, updateNotes, index, name, oldNote }) => {
     <>
       <BotButton>
         <Button
-          variant="outlined"
+          variant="contained"
           size="small"
           onClick={handleOpen}
           color="primary"

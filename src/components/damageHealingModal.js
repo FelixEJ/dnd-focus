@@ -104,7 +104,7 @@ const DamageHealingModal = ({ character, onCharacterChange, updateHealth }) => {
     <div>
       <ButtonContainer>
         <Button
-          variant="outlined"
+          variant="contained"
           size="small"
           onClick={handleOpen}
           color="primary"

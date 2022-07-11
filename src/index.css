@@ -21,3 +21,11 @@ body.dark-mode {
   color: #999;
   transition: background-color 0.3s ease;
 }
+
+.MuiInputBase-root {
+  background-color: #e0e0e0;
+}
+
+.MuiButtonGroup-contained {
+  background-color: #e0e0e0;
+}

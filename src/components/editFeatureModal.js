@@ -58,7 +58,7 @@ const EditFeatureModal = ({ character, updateFeatures, index, name }) => {
     <>
       <BotButton>
         <Button
-          variant="outlined"
+          variant="contained"
           size="small"
           onClick={handleOpen}
           color="primary"

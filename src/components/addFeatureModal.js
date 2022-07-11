@@ -76,7 +76,7 @@ const AddFeatureModal = ({ addFeature }) => {
     <>
       <TopRightButton>
         <Button
-          variant="outlined"
+          variant="contained"
           size="small"
           onClick={handleOpen}
           color="primary"

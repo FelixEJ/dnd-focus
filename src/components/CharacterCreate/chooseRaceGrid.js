@@ -1,6 +1,5 @@
 // import React from "react";
 import * as React from "react";
-import stylish from "styled-components";
 import { Button, ButtonGroup, Select } from "@material-ui/core";
 
 import CreateProficiencies from "./createProficiencies";
@@ -86,6 +85,7 @@ const ChooseRaceGrid = ({
               name="level"
               value={character.level}
               onChange={onCharacterChange}
+              // variant="outlined"
             >
               <option value={0}>-</option>
               <option value={1}>1</option>

@@ -38,7 +38,7 @@ const EditBasicsModal = ({ character, onCharacterChange }) => {
     <>
       <TopRightButton>
         <Button
-          variant="outlined"
+          variant="contained"
           size="small"
           onClick={handleOpen}
           color="primary"

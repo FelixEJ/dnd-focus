@@ -54,7 +54,7 @@ const AddEquipmentModal = ({ addEquipment }) => {
     <>
       <BotButton>
         <Button
-          variant="outlined"
+          variant="contained"
           size="small"
           onClick={handleOpen}
           color="primary"

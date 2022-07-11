@@ -63,7 +63,7 @@ const EditAttackModal = ({ character, updateAttacks, index, name }) => {
     <>
       <BotButton>
         <Button
-          variant="outlined"
+          variant="contained"
           size="small"
           onClick={handleOpen}
           color="primary"
