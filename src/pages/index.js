@@ -86,7 +86,7 @@ const Answer = styled.p`
 const IndexPage = () => {
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
       <Page>
         <TitleContainer>
           <Word>

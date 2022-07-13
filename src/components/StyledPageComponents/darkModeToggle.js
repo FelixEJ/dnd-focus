@@ -1,13 +1,18 @@
-import React from 'react';
-import useDarkMode from 'use-dark-mode';
+import React from "react";
+import useDarkMode from "use-dark-mode";
+import styled from "styled-components";
 
-import { Toggle } from '@react-ui-org/react-ui';
+import { Toggle } from "@react-ui-org/react-ui";
+
+const Container = styled.div`
+  float: left;
+`;
 
 const DarkModeToggle = () => {
   const darkMode = useDarkMode(false);
 
   return (
-    <div>
+    <Container>
       <button type="button" onClick={darkMode.disable}>
         ☀
       </button>
@@ -15,7 +20,7 @@ const DarkModeToggle = () => {
       <button type="button" onClick={darkMode.enable}>
         ☾
       </button>
-    </div>
+    </Container>
   );
 };
 

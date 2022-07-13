@@ -3,13 +3,13 @@ import NavBar from "../components/navBar";
 import "../App.css";
 import CreatePageGrid from '../components/CharacterCreate/createPageGrid'
 
-const CreateCharacterGrid = () => {
+const CreateCharacter = () => {
   return (
     <div>
-        <NavBar />
+        {/* <NavBar /> */}
         <CreatePageGrid />
     </div>
   );
 };
 
-export default CreateCharacterGrid;
+export default CreateCharacter;

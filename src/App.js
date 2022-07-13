@@ -2,7 +2,8 @@ import React from "react";
 import "./App.css";
 import styled from "styled-components";
 import { BrowserRouter } from "react-router-dom";
-import Routes from "./components/routes";
+// import Routes from "./components/routes";
+import Navbar from "./components/multilevel-dropdown-menu/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Window } from "./components/StyledPageComponents/pageStyling";
@@ -23,8 +24,9 @@ function App() {
     <BrowserRouter>
       <Window>
         <div className="App">
-        <DarkModeToggle />
-          <Routes />
+          {/* <DarkModeToggle /> */}
+          <Navbar />
+          {/* <Routes /> */}
           <Logo src={LogoImage}/>
         </div>
       </Window>
