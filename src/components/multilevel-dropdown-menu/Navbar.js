@@ -57,7 +57,8 @@ const BurgerNav = styled.div`
 const Menus = styled.ul`
   display: flex;
   list-style: none;
-  padding: 0;
+  padding: 5px 0;
+  margin: 0;
 `;
 
 const Navbar = () => {
