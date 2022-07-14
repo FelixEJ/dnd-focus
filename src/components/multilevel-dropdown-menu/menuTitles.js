@@ -6,17 +6,22 @@ export const menuTitles = [
   },
   {
     title: "Create Character",
-    path: "/create",
+    path: "/createCharacter",
     submenu: [],
   },
   {
     title: "Load Character",
-    path: "/load",
+    path: "/loadCharacter",
     submenu: [],
   },  
   {
     title: "Pre-made Characters",
-    path: "/premade",
+    path: "/premadeCharacters",
+    submenu: [],
+  },  
+  {
+    title: "Pre-made Characters",
+    path: "",
     submenu: [
       {
         title: "Henry's Class",

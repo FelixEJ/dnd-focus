@@ -182,7 +182,6 @@ export const CardItem = ({ children }) => {
 
 const LabelStyle = styled.div`
   clear: right;
-  text-align: left;
 `;
 export const Label = ({ children }) => {
   return <LabelStyle>{children}</LabelStyle>;

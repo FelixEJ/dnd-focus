@@ -14,6 +14,7 @@ import Index from "../../pages/index";
 import Create from "../../pages/createCharacter";
 import Load from "../../pages/loadCharacter";
 import Premade from "../../pages/premadeCharacters";
+import Henry from "../../pages/henry";
 
 const Bar = styled.div`
   width: 70vw;
@@ -57,7 +58,7 @@ const BurgerNav = styled.div`
 const Menus = styled.ul`
   display: flex;
   list-style: none;
-  padding: 5px 0;
+  padding: 7px 0;
   margin: 0;
 `;
 
@@ -146,9 +147,10 @@ const Navbar = () => {
       </Bar>
       <Routes>
         <Route exact path="/" element={<Index />}></Route>
-        <Route path="/create" element={<Create />}></Route>
-        <Route path="/load" element={<Load />}></Route>
-        <Route path="/premade" element={<Premade />}></Route>
+        <Route path="/createCharacter" element={<Create />}></Route>
+        <Route path="/loadCharacter" element={<Load />}></Route>
+        <Route path="/premadeCharacters" element={<Premade />}></Route>
+        <Route path="/henry" element={<Henry />}></Route>
       </Routes>
     </>
   );

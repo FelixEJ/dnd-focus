@@ -3,7 +3,7 @@ import NavBar from "../components/navBar";
 import "../App.css";
 import Success from "../components/CharacterCreate/success";
 
-const Premade = () => {
+const Henry = () => {
   return (
     <div>
       {/* <NavBar /> */}
@@ -12,4 +12,4 @@ const Premade = () => {
   );
 };
 
-export default Premade;
+export default Henry;

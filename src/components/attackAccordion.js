@@ -35,22 +35,40 @@ function CustomToggle({ children, eventKey }) {
   );
 }
 
-const Container = styled.div``;
+const RowContainer = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+`;
+
+const ColContainer = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  width: 33%;
+`;
 
 const ButtonRight = styled.div`
-  float: right;
+  margin-left: auto;
+  margin-right: 0;
   font-size: 0.9em;
   text-decoration: underline;
   text-transform: uppercase;
 `;
 
-const TextLeft = styled.div`
+const Title = styled.div`
   float: left;
   font-size: 0.9em;
   text-decoration: underline;
   text-transform: uppercase;
 `;
-const TextRight = styled.span`
+const Text = styled.div`
+  font-size: 0.9em;
+  text-transform: uppercase;
+  &:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+`;
+const TextRight = styled.div`
   font-size: 0.7em;
   text-transform: uppercase;
 `;
@@ -83,97 +101,207 @@ const AttackAccordion = ({ character, updateAttacks }) => {
       <div>
         {character.attacks.map((attack, index) => (
           <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
-            <Card.Header>
-              <TextLeft>{attack.attack_name}:</TextLeft>
-              <b>
-                <LargeNumber>+{attack.attack_bonus}</LargeNumber>;{" "}
-                <LargeNumber>
-                  {attack.damage_dice_num}
-                  {attack.damage_dice}+{attack.damage_bonus}
-                </LargeNumber>
-              </b>
-              <TextRight>
-                {attack.damage_type}{" "}
-                {attack.range.length > 0 && <>({attack.range})</>}
-                {attack.ammo > 0 && <>[{attack.ammo}]</>}
-              </TextRight>
-              <span>
-                {attack.bonus_damage_dice_num > 0 && (
-                  <>
-                    <br/>
-                    <LargeNumber>
-                      +{attack.bonus_damage_dice_num}
-                      {attack.bonus_damage_dice}
-                    </LargeNumber>
-                    <span>{attack.bonus_damage_dice_type}</span>
-                  </>
-                )}
-              </span>
-              <ButtonRight>
-                <CustomToggle eventKey={attack.attack_id}>EXPAND</CustomToggle>
-              </ButtonRight>
-            </Card.Header>
-            <Accordion.Collapse eventKey={attack.attack_id}>
-              <Card.Body
-                style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
-                class="overflow-auto"
-              >
-                <>
-                  <p>{attack.attack_name}</p>
-                  Attack Bonus: <b>+{attack.attack_bonus}</b>
-                  <br />
-                  Damage:
-                  <b>
-                    {attack.damage_dice_num}
-                    {attack.damage_dice}+{attack.damage_bonus}
-                    {attack.damage_type};
-                  </b>
-                  {attack.tags !== "" && (
-                    <span>
-                      <br />
-                      Tags: <b>{attack.tags}</b>
-                    </span>
-                  )}
-                  {attack.range.length > 0 && <p>Range: {attack.range}</p>}
-                  {attack.ammo > 0 && (
-                    <Label>
-                      Ammo:
-                      <input
-                        type="number"
-                        min="0"
-                        id="ammo"
-                        name="ammo"
-                        value={attack.ammo}
-                        onChange={(e) =>
-                          handleChange(e, index, attack.attack_name)
-                        }
-                        style={{ width: "60px" }}
-                        display="none"
-                      />
-                    </Label>
-                  )}
-                  <p>{attack.description}</p>
-                  <p>
+            {attack.attack_type !== "spell" && (
+              <>
+                <RowContainer
+                  style={{ backgroundColor: "rgba(203, 203, 203, 0.1)" }}
+                >
+                  <ColContainer>
+                    <Title>{attack.attack_name}:</Title>
                     {attack.bonus_damage_dice_num > 0 && (
                       <>
                         <LargeNumber>
                           +{attack.bonus_damage_dice_num}
                           {attack.bonus_damage_dice}
                         </LargeNumber>
-                        <span>{attack.bonus_damage_dice_type}</span>
+                        <TextRight>{attack.bonus_damage_dice_type}</TextRight>
                       </>
                     )}
-                  </p>
-                  <EditAttackModal
-                    character={character}
-                    updateAttacks={updateAttacks}
-                    index={index}
-                    name={attack.attack_name}
-                    attack={{ attack }}
-                  />
-                </>
-              </Card.Body>
-            </Accordion.Collapse>
+                  </ColContainer>
+                  <ColContainer>
+                    <b>
+                      <LargeNumber>
+                        +{attack.attack_bonus}; {attack.damage_dice_num}
+                        {attack.damage_dice}+{attack.damage_bonus}
+                      </LargeNumber>
+                    </b>
+                    <TextRight>{attack.damage_type} </TextRight>
+                  </ColContainer>
+                  <ColContainer>
+                    <ButtonRight>
+                      <CustomToggle eventKey={attack.attack_name}>
+                        EXPAND
+                      </CustomToggle>
+                    </ButtonRight>
+                    {attack.range.length > 0 && <>({attack.range})</>}
+                    {attack.ammo > 0 && <>[{attack.ammo}]</>}
+                  </ColContainer>
+                </RowContainer>
+                <Accordion.Collapse eventKey={attack.attack_name}>
+                  <Card.Body
+                    style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
+                    class="overflow-auto"
+                  >
+                    <>
+                      <p>{attack.attack_name}</p>
+                      Attack Bonus: <b>+{attack.attack_bonus}</b>
+                      <br />
+                      Damage:
+                      <b>
+                        {attack.damage_dice_num}
+                        {attack.damage_dice}+{attack.damage_bonus}
+                        {attack.damage_type};
+                      </b>
+                      {attack.tags !== "" && (
+                        <span>
+                          <br />
+                          Tags: <b>{attack.tags}</b>
+                        </span>
+                      )}
+                      {attack.range.length > 0 && <p>Range: {attack.range}</p>}
+                      {attack.ammo > 0 && (
+                        <Label>
+                          Ammo:
+                          <input
+                            type="number"
+                            min="0"
+                            id="ammo"
+                            name="ammo"
+                            value={attack.ammo}
+                            onChange={(e) =>
+                              handleChange(e, index, attack.attack_name)
+                            }
+                            style={{ width: "60px" }}
+                            display="none"
+                          />
+                        </Label>
+                      )}
+                      <p>{attack.description}</p>
+                      <p>
+                        {attack.bonus_damage_dice_num > 0 && (
+                          <>
+                            <LargeNumber>
+                              +{attack.bonus_damage_dice_num}
+                              {attack.bonus_damage_dice}
+                            </LargeNumber>
+                            <span>{attack.bonus_damage_dice_type}</span>
+                          </>
+                        )}
+                      </p>
+                      <EditAttackModal
+                        character={character}
+                        updateAttacks={updateAttacks}
+                        index={index}
+                        name={attack.attack_name}
+                        attack={{ attack }}
+                      />
+                    </>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </>
+            )}
+            {attack.attack_type === "spell" && (
+              <>
+                <RowContainer
+                  style={{ backgroundColor: "rgba(50, 150, 150, 0.2)" }}
+                >
+                  <ColContainer>
+                    <Title>{attack.attack_name}:</Title>
+                    <b>
+                      <LargeNumber>
+                        {attack.damage_dice_num}
+                        {attack.damage_dice}
+                        {attack.bonus_damage_bonus > 0 && (
+                          <span>+{attack.bonus_damage_bonus}</span>
+                        )}
+                      </LargeNumber>
+                    </b>
+                    <TextRight>{attack.damage_type}</TextRight>
+                    {attack.bonus_damage_dice_num > 0 && (
+                      <>
+                        <LargeNumber>
+                          +{attack.bonus_damage_dice_num}
+                          {attack.bonus_damage_dice}
+                        </LargeNumber>
+                        <TextRight>{attack.bonus_damage_dice_type}</TextRight>
+                      </>
+                    )}
+                  </ColContainer>
+                  <ColContainer>
+                    <Text> {attack.components}</Text>
+                    <Text>
+                      {attack.range.length > 0 && <>{attack.range}</>}
+                    </Text>
+                    <Text>{attack.casting_time}</Text>
+                    <Text>{attack.duration}</Text>
+                  </ColContainer>
+                  <ColContainer>
+                    <ButtonRight>
+                      <CustomToggle eventKey={attack.attack_id}>
+                        EXPAND
+                      </CustomToggle>
+                    </ButtonRight>
+                    <Text>{attack.effect_summary}</Text>
+                    {attack.ritual === "yes" && <Text>Ritual</Text>}
+                    {attack.concentration === "yes" && (
+                      <Text>Concentration</Text>
+                    )}
+                  </ColContainer>
+                </RowContainer>
+                <Accordion.Collapse eventKey={attack.attack_id}>
+                  <Card.Body
+                    style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
+                    class="overflow-auto"
+                  >
+                    <>
+                      <p>{attack.attack_name}</p>
+                      <br />
+                      Casting Time: {attack.casting_time}
+                      <br />
+                      Range: {attack.range}
+                      <br />
+                      Components: {attack.components}
+                      <br />
+                      Duration: {attack.duration}
+                      <br />
+                      <br />
+                      <p>{attack.description}</p>
+                      <p>
+                        <b>At higher levels:</b> {attack.upcasting}
+                      </p>
+                      <p>
+                        <Text>Damage:</Text>
+                        <LargeNumber>
+                          {attack.damage_dice_num}
+                          {attack.damage_dice}
+                          {attack.bonus_damage_bonus > 0 && (
+                            <span>+{attack.bonus_damage_bonus}</span>
+                          )}
+                          
+                        </LargeNumber>
+                        <TextRight>{attack.damage_type}</TextRight>
+                        {attack.bonus_damage_dice_num > 0 && (
+                          <span>
+                            <LargeNumber>
+                              +{attack.bonus_damage_dice_num}
+                              {attack.bonus_damage_dice}
+                            </LargeNumber>
+                            <TextRight>{attack.bonus_damage_dice_type}</TextRight>
+                          </span>
+                        )}
+                        </p>
+                      <EditAttackModal
+                        character={character}
+                        updateAttacks={updateAttacks}
+                        index={index}
+                        name={attack.attack_name}
+                        attack={{ attack }}
+                      />
+                    </>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </>
+            )}
           </Card>
         ))}
       </div>
