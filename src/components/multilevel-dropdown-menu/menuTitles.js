@@ -14,11 +14,11 @@ export const menuTitles = [
     path: "/loadCharacter",
     submenu: [],
   },  
-  {
-    title: "Pre-made Characters",
-    path: "/premadeCharacters",
-    submenu: [],
-  },  
+  // {
+  //   title: "Pre-made Characters",
+  //   path: "/premadeCharacters",
+  //   submenu: [],
+  // },
   {
     title: "Pre-made Characters",
     path: "",
@@ -34,5 +34,5 @@ export const menuTitles = [
         submenu: [],
       },      
     ],
-  },   
+  },
 ];

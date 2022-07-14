@@ -193,13 +193,10 @@ const Success = () => {
   function handleChange(e) {
     let charNum = e.target.value;
     setLoadedChar(allChars[charNum]);
-    // console.log(loadedChar);
   }
 
   function loadFromJson(character) {
     const newChar = character;
-    // const newCharacter = { ...loadedChar };
-    // const oldCharacter = newCharacter;
     setLoadedChar(newChar);
     console.log(newChar);
   }
@@ -376,15 +373,18 @@ const Success = () => {
         <select
           id="char_select"
           name="char_select"
-          // value={loadedChar.char_select}
           value={character.name}
           onChange={handleChange}
         >
           <option value={character}>Select character</option>
           {allChars.map((char, index) => (
-            <option key={index} value={index}>
-              {char.name} lvl{char.level}
-            </option>
+            <>
+              {char.name && (
+                <option key={index} value={index}>
+                  {char.name} lvl{char.level}
+                </option>
+              )}
+            </>
           ))}
         </select>
       </FormControl>

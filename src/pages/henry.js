@@ -1,13 +1,22 @@
 import React from "react";
-import NavBar from "../components/navBar";
 import "../App.css";
-import Success from "../components/CharacterCreate/success";
+import Button from "@material-ui/core/Button";
+
+const swashbuckler = require("../data/premade/Swashbuckler_lvl5.json");
+
+function saveLocalCharacter(character) {
+  localStorage.setItem(character.name, JSON.stringify(character));
+}
 
 const Henry = () => {
   return (
     <div>
-      {/* <NavBar /> */}
-      <Success />
+      <h1>Henry's D&D class</h1>
+      <h2>{swashbuckler.class}</h2>
+
+      <Button variant="contained" onClick={saveLocalCharacter(swashbuckler)}>
+        Save Swashbuckler to local storage
+      </Button>
     </div>
   );
 };

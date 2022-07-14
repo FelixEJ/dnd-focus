@@ -15,6 +15,7 @@ import Create from "../../pages/createCharacter";
 import Load from "../../pages/loadCharacter";
 import Premade from "../../pages/premadeCharacters";
 import Henry from "../../pages/henry";
+import Pirates from "../../pages/pirates";
 
 const Bar = styled.div`
   width: 70vw;
@@ -151,6 +152,7 @@ const Navbar = () => {
         <Route path="/loadCharacter" element={<Load />}></Route>
         <Route path="/premadeCharacters" element={<Premade />}></Route>
         <Route path="/henry" element={<Henry />}></Route>
+        <Route path="/pirates" element={<Pirates />}></Route>
       </Routes>
     </>
   );
