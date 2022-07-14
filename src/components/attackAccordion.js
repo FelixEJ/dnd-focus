@@ -35,10 +35,18 @@ function CustomToggle({ children, eventKey }) {
   );
 }
 
+const Custom = styled.div`background-color: red;
+&:nth-child(odd) {
+  background-color: rgba(203, 203, 203, 0.2);
+}
+&:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1);
+}`;
+
 const RowContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between;
+  justify-content: space-between;  
 `;
 
 const ColContainer = styled.div`
@@ -100,11 +108,12 @@ const AttackAccordion = ({ character, updateAttacks }) => {
     <Accordion style={{ width: "100%" }}>
       <div>
         {character.attacks.map((attack, index) => (
-          <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
+          // <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
+            <Custom>
             {attack.attack_type !== "spell" && (
               <>
                 <RowContainer
-                  style={{ backgroundColor: "rgba(203, 203, 203, 0.1)" }}
+                  // style={{ backgroundColor: "rgba(203, 203, 203, 0.1)" }}
                 >
                   <ColContainer>
                     <Title>{attack.attack_name}:</Title>
@@ -302,7 +311,8 @@ const AttackAccordion = ({ character, updateAttacks }) => {
                 </Accordion.Collapse>
               </>
             )}
-          </Card>
+            </Custom>
+          // {/* </Card> */}
         ))}
       </div>
     </Accordion>
