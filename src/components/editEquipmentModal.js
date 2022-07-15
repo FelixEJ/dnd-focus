@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import stylish from "styled-components";
-import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import Modal from "@material-ui/core/Modal";
 import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import DeleteIcon from "@material-ui/icons/Delete";
 import SaveIcon from "@material-ui/icons/Save";
 // import { ButtonGroup } from "@material-ui/core";
 
@@ -20,6 +16,14 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
+
+const X = stylish.div`
+text-transform: uppercase;
+text-decoration: underline;
+float:right;
+font-size: .7em;
+padding-right: 5px;
+`;
 
 const EditEquipmentModal = ({
   character,
@@ -53,14 +57,6 @@ const EditEquipmentModal = ({
     updateEquipment(equipments);
     handleClose();
   };
-
-  const X = stylish.div`
-    text-transform: uppercase;
-    text-decoration: underline;
-    float:right;
-    font-size: .7em;
-    padding-right: 5px;
-  `;
 
   return (
     <>

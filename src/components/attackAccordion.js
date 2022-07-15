@@ -35,18 +35,20 @@ function CustomToggle({ children, eventKey }) {
   );
 }
 
-const Custom = styled.div`background-color: red;
-&:nth-child(odd) {
-  background-color: rgba(203, 203, 203, 0.2);
-}
-&:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.1);
-}`;
+const Custom = styled.div`
+  background-color: red;
+  &:nth-child(odd) {
+    background-color: rgba(203, 203, 203, 0.2);
+  }
+  &:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+`;
 
 const RowContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between;  
+  justify-content: space-between;
 `;
 
 const ColContainer = styled.div`
@@ -109,11 +111,11 @@ const AttackAccordion = ({ character, updateAttacks }) => {
       <div>
         {character.attacks.map((attack, index) => (
           // <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
-            <Custom>
+          <Custom>
             {attack.attack_type !== "spell" && (
               <>
                 <RowContainer
-                  // style={{ backgroundColor: "rgba(203, 203, 203, 0.1)" }}
+                // style={{ backgroundColor: "rgba(203, 203, 203, 0.1)" }}
                 >
                   <ColContainer>
                     <Title>{attack.attack_name}:</Title>
@@ -216,15 +218,20 @@ const AttackAccordion = ({ character, updateAttacks }) => {
                 >
                   <ColContainer>
                     <Title>{attack.attack_name}:</Title>
-                    <b>
-                      <LargeNumber>
-                        {attack.damage_dice_num}
-                        {attack.damage_dice}
-                        {attack.bonus_damage_bonus > 0 && (
-                          <span>+{attack.bonus_damage_bonus}</span>
-                        )}
-                      </LargeNumber>
-                    </b>
+                    <Text>Lvl: {attack.spell_level}</Text>
+
+                    {attack.damage_dice_num > 0 && (
+                      <b>
+                        <LargeNumber>
+                          {attack.damage_dice_num}
+                          {attack.damage_dice}
+                          {attack.bonus_damage_bonus > 0 && (
+                            <span>+{attack.bonus_damage_bonus}</span>
+                          )}
+                        </LargeNumber>
+                      </b>
+                    )}
+
                     <TextRight>{attack.damage_type}</TextRight>
                     {attack.bonus_damage_dice_num > 0 && (
                       <>
@@ -263,7 +270,7 @@ const AttackAccordion = ({ character, updateAttacks }) => {
                     class="overflow-auto"
                   >
                     <>
-                      <p>{attack.attack_name}</p>
+                      {/* <p>{attack.attack_name}</p> */}
                       <br />
                       Casting Time: {attack.casting_time}
                       <br />
@@ -273,32 +280,45 @@ const AttackAccordion = ({ character, updateAttacks }) => {
                       <br />
                       Duration: {attack.duration}
                       <br />
+                      {attack.save_required !== "" && (
+                        <span>Save required: {attack.save_required}</span> 
+                      )}
+                      <br />
+                      {attack.half_damage_save !== "" && (
+                        <span>Half damage on successfull save<br /></span> 
+                      )}
+                      
                       <br />
                       <p>{attack.description}</p>
-                      <p>
-                        <b>At higher levels:</b> {attack.upcasting}
-                      </p>
-                      <p>
-                        <Text>Damage:</Text>
-                        <LargeNumber>
-                          {attack.damage_dice_num}
-                          {attack.damage_dice}
-                          {attack.bonus_damage_bonus > 0 && (
-                            <span>+{attack.bonus_damage_bonus}</span>
-                          )}
-                          
-                        </LargeNumber>
-                        <TextRight>{attack.damage_type}</TextRight>
-                        {attack.bonus_damage_dice_num > 0 && (
-                          <span>
-                            <LargeNumber>
-                              +{attack.bonus_damage_dice_num}
-                              {attack.bonus_damage_dice}
-                            </LargeNumber>
-                            <TextRight>{attack.bonus_damage_dice_type}</TextRight>
-                          </span>
-                        )}
+                      {attack.upcasting !== "" && (
+                        <p>
+                          <b>At higher levels:</b> {attack.upcasting}
                         </p>
+                      )}
+                      {attack.damage_dice > 0 && (
+                        <p>
+                          <Text>Damage:</Text>
+                          <LargeNumber>
+                            {attack.damage_dice_num}
+                            {attack.damage_dice}
+                            {attack.bonus_damage_bonus > 0 && (
+                              <span>+{attack.bonus_damage_bonus}</span>
+                            )}
+                          </LargeNumber>
+                          <TextRight>{attack.damage_type}</TextRight>
+                          {attack.bonus_damage_dice_num > 0 && (
+                            <span>
+                              <LargeNumber>
+                                +{attack.bonus_damage_dice_num}
+                                {attack.bonus_damage_dice}
+                              </LargeNumber>
+                              <TextRight>
+                                {attack.bonus_damage_dice_type}
+                              </TextRight>
+                            </span>
+                          )}
+                        </p>
+                      )}
                       <EditAttackModal
                         character={character}
                         updateAttacks={updateAttacks}
@@ -311,7 +331,7 @@ const AttackAccordion = ({ character, updateAttacks }) => {
                 </Accordion.Collapse>
               </>
             )}
-            </Custom>
+          </Custom>
           // {/* </Card> */}
         ))}
       </div>

@@ -139,8 +139,8 @@ const EditFeatureModal = ({ character, updateFeatures, index, name }) => {
             <option value={""}></option>
             <option value={"free"}>Free Action</option>
             <option value={"bonus"}>Bonus Action</option>
-            <option value={"action"}>Short Rest</option>
-            <option value={"reaction"}>Long Rest</option>
+            <option value={"action"}>Action</option>
+            <option value={"reaction"}>Reaction</option>
           </select>
         </Item>
         <Item>

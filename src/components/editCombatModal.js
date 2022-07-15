@@ -44,7 +44,7 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
           <label>
             Armour Class (AC):{" "}
             <input
-              type="number"
+              type="text"
               id="ac"
               name="ac"
               value={character.ac}

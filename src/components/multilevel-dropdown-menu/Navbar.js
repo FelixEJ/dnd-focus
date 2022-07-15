@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { menuTitles } from "./menuTitles";
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
-import {keyframes} from "styled-components";
+import { keyframes } from "styled-components";
 import { MdClose } from "react-icons/md";
 import { FiMenu } from "react-icons/fi";
 
@@ -63,41 +63,41 @@ const Menus = styled.ul`
   margin: 0;
 `;
 
+const MenuAnimation = keyframes`
+  0% {max-width: 0%;}
+`;
+
+const BurgerButton = styled.button`
+  position: relative;
+  left: 30vw;
+  z-index: 10;
+  background: transparent;
+  border: none;
+`;
+
+const BurgerMenu = styled.ul`
+  overflow-y: scroll;
+  list-style: none;
+  position: fixed;
+  background: #e0e0e0;
+  padding-top: 20px;
+  left: -35px;
+  bottom: 0;
+  height: 100vh;
+  width: ${(burgerOpen) => (burgerOpen ? "100%" : "0")};
+  animation-name: ${MenuAnimation};
+  animation-duration: 0.2s;
+  overflow: hidden;
+  max-width: 290px;
+  z-index: 9;
+`;
+
 const Navbar = () => {
   const [burgerOpen, setBurgerOpen] = useState(false);
 
   const handleToggle = () => {
     setBurgerOpen((prev) => !prev);
   };
-
-  const MenuAnimation = keyframes`
-    0% {max-width: 0%;}
-  `;
-
-  const BurgerButton = styled.button`
-    position: relative;
-    left: 30vw;
-    z-index: 10;
-    background: transparent;
-    border: none;
-  `;
-
-  const BurgerMenu = styled.ul`
-    overflow-y: scroll;
-    list-style: none;
-    position: fixed;
-    background: #e0e0e0;
-    padding-top: 20px;
-    left: -35px;
-    bottom: 0;
-    height: 100vh;
-    width: ${burgerOpen ? "100%" : "0"};
-    animation-name: ${MenuAnimation};
-    animation-duration: .5s;
-    overflow: hidden;
-    max-width: 290px;
-    z-index: 9;
-  `;
 
   return (
     <>
@@ -116,19 +116,21 @@ const Navbar = () => {
               />
             )}
           </BurgerButton>
-          <BurgerMenu>
-            {menuTitles.map((menu, index) => {
-              const depthLevel = 0;
-              return (
-                <MenuItems
-                  items={menu}
-                  key={index}
-                  depthLevel={depthLevel}
-                  handleToggle={handleToggle}
-                />
-              );
-            })}
-          </BurgerMenu>
+          {burgerOpen && (
+            <BurgerMenu>
+              {menuTitles.map((menu, index) => {
+                const depthLevel = 0;
+                return (
+                  <MenuItems
+                    items={menu}
+                    key={index}
+                    depthLevel={depthLevel}
+                    handleToggle={handleToggle}
+                  />
+                );
+              })}
+            </BurgerMenu>
+          )}
         </BurgerNav>
         <Nav>
           <Menus>

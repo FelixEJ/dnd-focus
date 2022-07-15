@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 
 import AddModalWindow from "./StyledPageComponents/addModalWindow";
 
-import { BotButton, TopRightButton } from "./StyledPageComponents/pageStyling";
+import { BotButton, TopRightButton, Label } from "./StyledPageComponents/pageStyling";
 
 import { getAttackModifier, getDamageModifier } from "./utils";
 
@@ -34,7 +34,7 @@ const AddAttackModal = ({ addAttack, character }) => {
     damage_bonus: 0,
     bonus_damage_bonus: 0,
     damage_dice: "",
-    damage_dice_num: 1,
+    damage_dice_num: 0,
     damage_type: "",
     range: "",
     tags: "",
@@ -47,6 +47,7 @@ const AddAttackModal = ({ addAttack, character }) => {
     components: "",
     duration: "",
     upcasting: "",
+    save_required: "",
     half_damage_save: "",
     effect_summary: "",
     ritual: "",
@@ -74,7 +75,7 @@ const AddAttackModal = ({ addAttack, character }) => {
       damage_bonus: 0,
       bonus_damage_bonus: 0,
       damage_dice: "",
-      damage_dice_num: 1,
+      damage_dice_num: 0,
       damage_type: "",
       range: "",
       tags: "",
@@ -88,6 +89,7 @@ const AddAttackModal = ({ addAttack, character }) => {
       duration: "",
       upcasting: "",
       half_damage_save: "",
+      save_required: "",
       effect_summary: "",
       ritual: "",
       concentration: "",
@@ -173,11 +175,8 @@ const AddAttackModal = ({ addAttack, character }) => {
         attack.bonus_attack_bonus
       );
     }
-    setAttack((prev) => ({
-      ...prev,
-      attack_bonus: attackBonus,
-      damage_bonus: damageBonus,
-    }));
+    attack.attack_bonus = attackBonus;
+    attack.damage_bonus = damageBonus;
   }
 
   return (
@@ -208,7 +207,6 @@ const AddAttackModal = ({ addAttack, character }) => {
             name="attack_name"
             value={attack.attack_name}
             onChange={handleChange}
-            required
           />
         </Item>
         <Item>
@@ -290,6 +288,19 @@ const AddAttackModal = ({ addAttack, character }) => {
                 </select>
               </label>
             </Item>
+            {attack.attack_type === "spell" && (
+              <Item>
+                <label>Range</label>
+                <input
+                  type="text"
+                  id="range"
+                  name="range"
+                  placeholder="..60/120.."
+                  value={attack.range}
+                  onChange={handleChange}
+                />
+              </Item>
+            )}
             <Item>
               <label>Components:</label>
               <input
@@ -346,6 +357,10 @@ const AddAttackModal = ({ addAttack, character }) => {
                   name="mod_used"
                   value={attack.mod_used}
                   onChange={handleChange}
+                  // onChange={(e) => {
+                  //   setAttackMods();
+                  //   handleChange(e);
+                  // }}
                 >
                   <option value={""}>-</option>
                   <option value={"str"}>Strength</option>
@@ -518,6 +533,22 @@ const AddAttackModal = ({ addAttack, character }) => {
         )}
         {attack.attack_type === "spell" && (
           <Item>
+            <label>Save required?&emsp;</label>
+            <select
+              id="save_required"
+              name="save_required"
+              value={attack.save_required}
+              onChange={handleChange}
+            >
+              <option value={""}>-</option>
+              <option value={"str"}>Strength</option>
+              <option value={"dex"}>Dexterity</option>
+              <option value={"con"}>Constitution</option>
+              <option value={"int"}>Intelligence</option>
+              <option value={"wis"}>Wisdom</option>
+              <option value={"cha"}>Charisma</option>
+            </select>
+            <br />
             <label>Half damage on save?&emsp;</label>
             <select
               id="half_damage_save"
@@ -570,47 +601,52 @@ const AddAttackModal = ({ addAttack, character }) => {
             />
           </Item>
         )}
-        <Item>
-          <label>Range</label>
-          <input
-            type="text"
-            id="range"
-            name="range"
-            placeholder="..60/120.."
-            value={attack.range}
-            onChange={handleChange}
-          />
-        </Item>
         {attack.attack_type !== "spell" && (
           <Item>
-            <label>Ammo</label>
+            <label>Range</label>
             <input
-              type="number"
-              id="ammo"
-              name="ammo"
-              placeholder="..30.."
-              value={attack.ammo}
+              type="text"
+              id="range"
+              name="range"
+              placeholder="..60/120.."
+              value={attack.range}
               onChange={handleChange}
-              style={{ width: "20%" }}
             />
           </Item>
         )}
-        <Item>
-          <label>Magic/Effect?&emsp;</label>
-          <select
-            id="magic"
-            name="magic"
-            value={attack.magic}
-            onChange={handleChange}
-          >
-            <option value={""}>-</option>
-            <option value={"yes"}>Yes</option>
-          </select>
-        </Item>
-        {attack.magic === "yes" && (
+        {attack.attack_type !== "spell" && (
           <>
             <Item>
-              <label>Description:</label>
+              <label>Ammo</label>
+              <input
+                type="number"
+                id="ammo"
+                name="ammo"
+                placeholder="..30.."
+                value={attack.ammo}
+                onChange={handleChange}
+                style={{ width: "20%" }}
+              />
+            </Item>
+
+            <Item>
+              <label>Magic/Effect?&emsp;</label>
+              <select
+                id="magic"
+                name="magic"
+                value={attack.magic}
+                onChange={handleChange}
+              >
+                <option value={""}>-</option>
+                <option value={"yes"}>Yes</option>
+              </select>
+            </Item>
+          </>
+        )}
+        {(attack.magic === "yes" || attack.attack_type === "spell") && (
+          <>
+            <Item>
+              <Label>Description:</Label>
               <textarea
                 type="text"
                 id="description"
@@ -623,7 +659,7 @@ const AddAttackModal = ({ addAttack, character }) => {
             </Item>
             {attack.attack_type === "spell" && (
               <Item>
-                <label>At higher levels: </label>
+                <Label>At higher levels: </Label>
                 <textarea
                   type="text"
                   id="upcasting"
@@ -637,7 +673,7 @@ const AddAttackModal = ({ addAttack, character }) => {
             )}
             {attack.attack_type === "spell" && (
               <Item>
-                <label>Effect summary:</label>
+                <Label>Effect summary:</Label>
                 <textarea
                   type="text"
                   id="effect_summary"
@@ -649,38 +685,40 @@ const AddAttackModal = ({ addAttack, character }) => {
                 />
               </Item>
             )}
-            <Item>
-              <label>Extra Damage:</label>
-              <input
-                type="number"
-                id="bonus_damage_dice_num"
-                name="bonus_damage_dice_num"
-                value={attack.bonus_damage_dice_num}
-                onChange={handleChange}
-                style={{ width: "50px" }}
-              />
-              <select
-                id="bonus_damage_dice"
-                name="bonus_damage_dice"
-                value={attack.bonus_damage_dice}
-                onChange={handleChange}
-              >
-                <option value={""}>-</option>
-                <option value={"d4"}>d4</option>
-                <option value={"d6"}>d6</option>
-                <option value={"d8"}>d8</option>
-                <option value={"d10"}>d10</option>
-                <option value={"d12"}>d12</option>
-              </select>
-              <input
-                type="text"
-                id="bonus_damage_dice_type"
-                name="bonus_damage_dice_type"
-                value={attack.bonus_damage_dice_type}
-                onChange={handleChange}
-                style={{ width: "40%" }}
-              />
-            </Item>
+            {attack.attack_type !== "spell" && (
+              <Item>
+                <label>Extra Damage:</label>
+                <input
+                  type="number"
+                  id="bonus_damage_dice_num"
+                  name="bonus_damage_dice_num"
+                  value={attack.bonus_damage_dice_num}
+                  onChange={handleChange}
+                  style={{ width: "50px" }}
+                />
+                <select
+                  id="bonus_damage_dice"
+                  name="bonus_damage_dice"
+                  value={attack.bonus_damage_dice}
+                  onChange={handleChange}
+                >
+                  <option value={""}>-</option>
+                  <option value={"d4"}>d4</option>
+                  <option value={"d6"}>d6</option>
+                  <option value={"d8"}>d8</option>
+                  <option value={"d10"}>d10</option>
+                  <option value={"d12"}>d12</option>
+                </select>
+                <input
+                  type="text"
+                  id="bonus_damage_dice_type"
+                  name="bonus_damage_dice_type"
+                  value={attack.bonus_damage_dice_type}
+                  onChange={handleChange}
+                  style={{ width: "40%" }}
+                />
+              </Item>
+            )}
           </>
         )}
         <Item>

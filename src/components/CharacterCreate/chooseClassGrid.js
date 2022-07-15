@@ -391,7 +391,7 @@ const ChooseClassGrid = ({
           <CardColumn>
             <Label>Armour Class (AC):</Label>
             <input
-              type="number"
+              type="text"
               id="ac"
               name="ac"
               value={character.ac}
