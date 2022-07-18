@@ -86,7 +86,7 @@ const EditInventoryModal = ({
             type="text"
             id="item_description"
             name="item_description"
-            value={item.item_description}
+            value={invItem.item_description}
             onChange={handleChange}
           />
         </Item>
@@ -96,7 +96,7 @@ const EditInventoryModal = ({
             <select
               id="rarity"
               name="rarity"
-              value={item.rarity}
+              value={invItem.rarity}
               onChange={handleChange}
             >
               <option value={"common"}>Common</option>
