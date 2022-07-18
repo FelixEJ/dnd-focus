@@ -4,6 +4,7 @@ import styled from "styled-components";
 import EditAbilitiesModal from "./editAbilitiesModal";
 
 import { getModifier, getSave, getSkill, getPassive } from "./utils";
+import { AbilityGroup} from "../components/StyledPageComponents/abilityGroup";
 
 import {
   Window,
@@ -33,31 +34,8 @@ const AbilityBox = styled.div`
   flex-flow: row nowrap;
 `;
 
-const AbilityGroup = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  width: 40%;
-`;
-
-const AbilityScore = styled.div`
-  font-size: 2em;
-  margin: 0 0 0 10px;
-  grid-area: abilityscore;
-  align-self: flex-start;
-`;
-
-const AbilityModifier = styled.div`
-  font-size: 6em;
-  margin: -40px 0 -30px 0;
-  font-weight: bold;
-`;
-
-const AbilityName = styled.div`
-  margin: 0;
-  font-size: 0.8em;
-  grid-area: abilityname;
-  text-transform: uppercase;
-  align-self: flex-end;
+const Gap = styled.div`
+  width: 5%;
 `;
 
 const SkillGroup = styled.div`
@@ -65,10 +43,6 @@ const SkillGroup = styled.div`
   flex-flow: column nowrap;
   width: 45%;
   float: right;
-`;
-
-const Gap = styled.div`
-  width: 10%;
 `;
 
 const SkillRow = styled.div`
@@ -149,19 +123,13 @@ const Abilities = ({ character, onCharacterChange }) => {
         <TextRight>inspiration</TextRight>
       </Bar>
       <AbilityBox>
-        <AbilityGroup>
-          {character.stats.temp_str > 0 ? (
-            <AbilityScore>{character.stats.temp_str}</AbilityScore>
-          ) : (
-            <AbilityScore>{character.stats.str}</AbilityScore>
-          )}
-          <AbilityModifier>
-            {getModifier(character.stats.str, character.stats.temp_str)}
-          </AbilityModifier>
-          <AbilityName>
-            <b>STRENGTH</b>
-          </AbilityName>
-        </AbilityGroup>
+        <AbilityGroup
+          ability={character.stats.str}
+          tempAbility={character.stats.temp_str}
+          mod={getModifier(character.stats.str, character.stats.temp_str)}
+          name="STRENGTH"
+          abrev="STR"
+        />
         <Gap />
         <SkillGroup>
           <SkillRow>
@@ -208,19 +176,13 @@ const Abilities = ({ character, onCharacterChange }) => {
         </SkillGroup>
       </AbilityBox>
       <AbilityBox>
-        <AbilityGroup>
-          {character.stats.temp_dex > 0 ? (
-            <AbilityScore>{character.stats.temp_dex}</AbilityScore>
-          ) : (
-            <AbilityScore>{character.stats.dex}</AbilityScore>
-          )}
-          <AbilityModifier>
-            {getModifier(character.stats.dex, character.stats.temp_dex)}
-          </AbilityModifier>
-          <AbilityName>
-            <b>DEXTERITY</b>
-          </AbilityName>
-        </AbilityGroup>
+        <AbilityGroup
+          ability={character.stats.dex}
+          tempAbility={character.stats.temp_dex}
+          mod={getModifier(character.stats.dex, character.stats.temp_dex)}
+          name="dexterity"
+          abrev="dex"
+        />
         <Gap />
         <SkillGroup>
           <SkillRow>
@@ -305,19 +267,13 @@ const Abilities = ({ character, onCharacterChange }) => {
         </SkillGroup>
       </AbilityBox>
       <AbilityBox>
-        <AbilityGroup>
-          {character.stats.temp_con > 0 ? (
-            <AbilityScore>{character.stats.temp_con}</AbilityScore>
-          ) : (
-            <AbilityScore>{character.stats.con}</AbilityScore>
-          )}
-          <AbilityModifier>
-            {getModifier(character.stats.con, character.stats.temp_con)}
-          </AbilityModifier>
-          <AbilityName>
-            <b>constitution</b>
-          </AbilityName>
-        </AbilityGroup>
+        <AbilityGroup
+          ability={character.stats.con}
+          tempAbility={character.stats.temp_con}
+          mod={getModifier(character.stats.con, character.stats.temp_con)}
+          name="constitution"
+          abrev="con"
+        />
         <Gap />
         <SkillGroup>
           <SkillRow>
@@ -344,19 +300,13 @@ const Abilities = ({ character, onCharacterChange }) => {
         </SkillGroup>
       </AbilityBox>
       <AbilityBox>
-        <AbilityGroup>
-          {character.stats.temp_int > 0 ? (
-            <AbilityScore>{character.stats.temp_int}</AbilityScore>
-          ) : (
-            <AbilityScore>{character.stats.int}</AbilityScore>
-          )}
-          <AbilityModifier>
-            {getModifier(character.stats.int, character.stats.temp_int)}
-          </AbilityModifier>
-          <AbilityName>
-            <b>intelligence</b>
-          </AbilityName>
-        </AbilityGroup>
+        <AbilityGroup
+          ability={character.stats.int}
+          tempAbility={character.stats.temp_int}
+          mod={getModifier(character.stats.int, character.stats.temp_int)}
+          name="intelligence"
+          abrev="int"
+        />
         <Gap />
         <SkillGroup>
           <SkillRow>
@@ -477,19 +427,13 @@ const Abilities = ({ character, onCharacterChange }) => {
         </SkillGroup>
       </AbilityBox>
       <AbilityBox>
-        <AbilityGroup>
-          {character.stats.temp_wis > 0 ? (
-            <AbilityScore>{character.stats.temp_wis}</AbilityScore>
-          ) : (
-            <AbilityScore>{character.stats.wis}</AbilityScore>
-          )}
-          <AbilityModifier>
-            {getModifier(character.stats.wis, character.stats.temp_wis)}
-          </AbilityModifier>
-          <AbilityName>
-            <b>wisdom</b>
-          </AbilityName>
-        </AbilityGroup>
+        <AbilityGroup
+          ability={character.stats.wis}
+          tempAbility={character.stats.temp_wis}
+          mod={getModifier(character.stats.wis, character.stats.temp_wis)}
+          name="wisdom"
+          abrev="wis"
+        />
         <Gap />
         <SkillGroup>
           <SkillRow>
@@ -614,19 +558,13 @@ const Abilities = ({ character, onCharacterChange }) => {
         </SkillGroup>
       </AbilityBox>
       <AbilityBox>
-        <AbilityGroup>
-          {character.stats.temp_cha > 0 ? (
-            <AbilityScore>{character.stats.temp_cha}</AbilityScore>
-          ) : (
-            <AbilityScore>{character.stats.cha}</AbilityScore>
-          )}
-          <AbilityModifier>
-            {getModifier(character.stats.cha, character.stats.temp_cha)}
-          </AbilityModifier>
-          <AbilityName>
-            <b>charisma</b>
-          </AbilityName>
-        </AbilityGroup>
+        <AbilityGroup
+          ability={character.stats.cha}
+          tempAbility={character.stats.temp_cha}
+          mod={getModifier(character.stats.cha, character.stats.temp_cha)}
+          name="charisma"
+          abrev="cha"
+        />
         <Gap />
         <SkillGroup>
           <SkillRow>

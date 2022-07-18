@@ -379,7 +379,7 @@ const Success = () => {
           <option value={character}>Select character</option>
           {allChars.map((char, index) => (
             <>
-              {char.name && (
+              {char.size && (
                 <option key={index} value={index}>
                   {char.name} lvl{char.level}
                 </option>
@@ -388,7 +388,7 @@ const Success = () => {
           ))}
         </select>
       </FormControl>
-      {character.name != "" && (
+      {character.size != "" && (
         <>
           <BasicSection>
             <RollDiceModal />
@@ -456,19 +456,23 @@ const Success = () => {
                 />
               </Card>
             </AttackSection>
+
             <MagicSection>
               <h4>Magic</h4>
               <EditMagicModal
                 character={character}
                 onCharacterChange={onCharacterChange}
               />
-              <Card>
-                <Magic
-                  character={character}
-                  onCharacterChange={onCharacterChange}
-                />
-              </Card>
+              {character.magic.ability !== "" && (
+                <Card>
+                  <Magic
+                    character={character}
+                    onCharacterChange={onCharacterChange}
+                  />
+                </Card>
+              )}
             </MagicSection>
+
             <FeatSection>
               <h4>Features & Abilities</h4>
               <AddFeatureModal addFeature={addFeature} />
