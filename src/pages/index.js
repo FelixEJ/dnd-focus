@@ -156,6 +156,10 @@ const IndexPage = () => {
             No! Heck no! Data collection, in this economy? You gotta be kidding
             me.
           </Answer>
+          <Question>Q: The layout isn't exactly suited to my character, can you change it for me?</Question>
+          <Answer>
+            Kind of! I'm currently working with a 'single page' character sheet design, similar to an A4 page character sheet as this project started as a way to replace and digitise those. I realise that there are sections that don't need to be displayed at all times and will be creating more refined displays, please let me know your suggestions and wants.
+          </Answer>
           <Question>Q: How can I help?</Question>
           <Answer>Tell your friends, have fun, be good to one another.</Answer>
         </TextContainer>

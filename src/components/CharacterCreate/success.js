@@ -66,6 +66,7 @@ const AbilitySection = styled(Section)`
   }
   @media only screen and (min-width: 1600px) {
     height: 99vh;
+    max-height: 99vh;
   }
 `;
 const ProfsSection = styled(Section)`
