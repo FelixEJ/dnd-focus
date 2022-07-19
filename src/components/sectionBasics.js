@@ -17,18 +17,13 @@ import {
 
 
 const Container = styled.div`
-  text-align: center;
-  z-index: 1;
+  
   width: 100%;
-  max-width: 400px;
-  background-color: lightpurple;
-
+  max-width: 380px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-
-  column-count: 3;
-  column-gap: 1%;
+  
 `;
 
 const Text = styled.div`
@@ -39,7 +34,7 @@ const Text = styled.div`
 
 const Basics = ({ character, onCharacterChange }) => {
   return (
-    <>
+    <Container>
       <Text>
         Name: <b>{character.name}</b>
       </Text>
@@ -59,6 +54,9 @@ const Basics = ({ character, onCharacterChange }) => {
         Race: <b>{character.race}</b>
       </Text>
       <Text>
+        Age: <b>{character.age}</b>
+      </Text>
+      <Text>
         Background: <b>{character.background.title}</b>
       </Text>
       <Text>
@@ -72,15 +70,16 @@ const Basics = ({ character, onCharacterChange }) => {
           id="xp"
           name="xp"
           value={character.xp}
+          defaultValue="0"
           onChange={onCharacterChange}
-          style={{ width: "30%" }}
+          style={{ width: "80px" }}
         />
       </Text>
       <EditBasicsModal
         character={character}
         onCharacterChange={onCharacterChange}
       />
-    </>
+    </Container>
   );
 };
 

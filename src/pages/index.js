@@ -77,10 +77,10 @@ const Text = styled.p`
   text-align: left;
 `;
 const Question = styled.p`
-  font-size: 1.4em;
+  font-size: 1.6em;
 `;
 const Answer = styled.p`
-  font-size: 1.2em;
+  font-size: 1.1em;
 `;
 
 const IndexPage = () => {
@@ -153,8 +153,7 @@ const IndexPage = () => {
           </Answer>
           <Question>Q: Do I need to sign in or something?</Question>
           <Answer>
-            No! Heck no! Data collection, in this economy? You gotta be kidding
-            me.
+            No! Heck no! Data collection, in this economy? You gotta be kidding me. If you want to change device or browser, simply send your downloaded character json to yourself (email, messenger, whatever) and then load it up.
           </Answer>
           <Question>Q: The layout isn't exactly suited to my character, can you change it for me?</Question>
           <Answer>

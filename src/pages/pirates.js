@@ -70,7 +70,7 @@ const Pirates = () => {
               </p>
               <Button
                 variant="contained"
-                onClick={saveLocalCharacter(character)}
+                onClick={() => saveLocalCharacter(character)}
               >
                 Save to local storage
               </Button>

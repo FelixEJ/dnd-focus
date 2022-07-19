@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { FormControl } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Button, FormControl } from "@material-ui/core";
 import styled from "styled-components";
 import LoadCharacterFromJSON from "../loadCharacterFromJSONModal";
 import Basics from "../sectionBasics";
@@ -176,6 +176,12 @@ const NotesSection = styled(Section)`
 
 const Success = () => {
   const [character, setLoadedChar] = useState(blankCharacter);
+  let allChars = getAllCharacters();
+
+  // useEffect(() => {
+  //   // allChars = getAllCharacters();
+  //   console.log("new chars");
+  // }, [allChars]);
 
   function getAllCharacters() {
     var arrayOfChars = [];
@@ -189,7 +195,7 @@ const Success = () => {
     }
     return arrayOfChars;
   }
-  let allChars = getAllCharacters();
+  
 
   function handleChange(e) {
     let charNum = e.target.value;
@@ -214,7 +220,7 @@ const Success = () => {
     pointer[finalProp] =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
     setLoadedChar(newCharacter);
-    saveLocalCharacter(newCharacter);
+    // saveLocalCharacter(newCharacter);
     // console.log("new char", newCharacter);
   }
 
@@ -339,8 +345,8 @@ const Success = () => {
     // console.log("new attack", loadedChar);
   }
 
-  function saveLocalCharacter(character) {
-    localStorage.setItem(character.name, JSON.stringify(character));
+  function saveLocalCharacter(char) {
+    localStorage.setItem(char.name, JSON.stringify(char));
   }
 
   var data =
@@ -359,18 +365,8 @@ const Success = () => {
         loadFromJson={loadFromJson}
         character={character}
       />
-      <button>
-        <a
-          href={"data:" + data}
-          download={
-            character.name + "_lvl" + character.level + "_" + today + ".json"
-          }
-        >
-          Download Character
-        </a>
-      </button>
       <FormControl>
-        <label>Select Character&emsp;</label>
+        {/* <label>Select Character&emsp;</label> */}
         <select
           id="char_select"
           name="char_select"
@@ -404,6 +400,27 @@ const Success = () => {
               updateCharacter={updateCharacter}
             />
           </BasicSection>
+          <Button
+            variant="contained"
+            onClick={() => saveLocalCharacter(character)}
+          >
+            Save to local storage
+          </Button>
+          <button>
+            <a
+              href={"data:" + data}
+              download={
+                character.name +
+                "_lvl" +
+                character.level +
+                "_" +
+                today +
+                ".json"
+              }
+            >
+              Download Character
+            </a>
+          </button>
           <Layout>
             <AbilitySection>
               <h4>Ability Scores</h4>
