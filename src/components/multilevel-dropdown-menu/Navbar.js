@@ -69,6 +69,8 @@ const MenuAnimation = keyframes`
 
 const BurgerButton = styled.button`
   position: relative;
+  width: 40px;
+  height: 40px;
   left: 30vw;
   z-index: 10;
   background: transparent;
@@ -102,19 +104,18 @@ const Navbar = () => {
   return (
     <>
       <Bar>
-        {/* <Logo /> */}
         <DarkModeToggle />
         <BurgerNav>
           <BurgerButton onClick={handleToggle}>
-            {burgerOpen ? (
-              <MdClose
+              {burgerOpen ? (
+                <MdClose
                 style={{ color: "black", width: "40px", height: "40px" }}
-              />
-            ) : (
-              <FiMenu
+                />
+              ) : (
+                <FiMenu
                 style={{ color: "black", width: "40px", height: "40px" }}
-              />
-            )}
+                />
+              )}
           </BurgerButton>
           {burgerOpen && (
             <BurgerMenu>

@@ -195,7 +195,6 @@ const Success = () => {
     }
     return arrayOfChars;
   }
-  
 
   function handleChange(e) {
     let charNum = e.target.value;
@@ -360,188 +359,190 @@ const Success = () => {
   today = dd + "/" + mm + "/" + yyyy;
 
   return (
-    <Page>
-      <LoadCharacterFromJSON
-        loadFromJson={loadFromJson}
-        character={character}
-      />
-      <FormControl>
-        {/* <label>Select Character&emsp;</label> */}
-        <select
-          id="char_select"
-          name="char_select"
-          value={character.name}
-          onChange={handleChange}
-        >
-          <option value={character}>Select character</option>
-          {allChars.map((char, index) => (
-            <>
-              {char.size && (
-                <option key={index} value={index}>
-                  {char.name} lvl{char.level}
-                </option>
-              )}
-            </>
-          ))}
-        </select>
-      </FormControl>
-      {character.size != "" && (
-        <>
-          <BasicSection>
-            <RollDiceModal />
-            <Card>
-              <Basics
-                character={character}
-                onCharacterChange={onCharacterChange}
-              />
-            </Card>
-            <RestModal
-              character={character}
-              updateCharacter={updateCharacter}
-            />
-          </BasicSection>
-          <Button
-            variant="contained"
-            onClick={() => saveLocalCharacter(character)}
+    <div>
+      <Page>
+        <LoadCharacterFromJSON
+          loadFromJson={loadFromJson}
+          character={character}
+        />
+        <FormControl>
+          {/* <label>Select Character&emsp;</label> */}
+          <select
+            id="char_select"
+            name="char_select"
+            value={character.name}
+            onChange={handleChange}
           >
-            Save to local storage
-          </Button>
-          <button>
-            <a
-              href={"data:" + data}
-              download={
-                character.name +
-                "_lvl" +
-                character.level +
-                "_" +
-                today +
-                ".json"
-              }
+            <option value={character}>Select character</option>
+            {allChars.map((char, index) => (
+              <>
+                {char.size && (
+                  <option key={index} value={index}>
+                    {char.name} lvl{char.level}
+                  </option>
+                )}
+              </>
+            ))}
+          </select>
+        </FormControl>
+        {character.level != 0 && (
+          <>
+            <BasicSection>
+              <RollDiceModal />
+              <Card>
+                <Basics
+                  character={character}
+                  onCharacterChange={onCharacterChange}
+                />
+              </Card>
+              <RestModal
+                character={character}
+                updateCharacter={updateCharacter}
+              />
+            </BasicSection>
+            <Button
+              variant="contained"
+              onClick={() => saveLocalCharacter(character)}
             >
-              Download Character
-            </a>
-          </button>
-          <Layout>
-            <AbilitySection>
-              <h4>Ability Scores</h4>
-              <EditAbilitiesModal
-                character={character}
-                onCharacterChange={onCharacterChange}
-              />
-              <Card>
-                <Abilities
-                  character={character}
-                  setLoadedChar={setLoadedChar}
-                  onCharacterChange={onCharacterChange}
-                />
-              </Card>
-            </AbilitySection>
-            <ProfsSection>
-              <h4>Profs & Languages</h4>
-              <EditProficienciesModal
-                character={character}
-                onCharacterChange={onCharacterChange}
-              />
-              <Card>
-                <Proficiencies
+              Save to local storage
+            </Button>
+            <button>
+              <a
+                href={"data:" + data}
+                download={
+                  character.name +
+                  "_lvl" +
+                  character.level +
+                  "_" +
+                  today +
+                  ".json"
+                }
+              >
+                Download Character
+              </a>
+            </button>
+            <Layout>
+              <AbilitySection>
+                <h4>Ability Scores</h4>
+                <EditAbilitiesModal
                   character={character}
                   onCharacterChange={onCharacterChange}
                 />
-              </Card>
-            </ProfsSection>
-            <CombatSection>
-              <h4>Combat</h4>
-              <EditCombatModal
-                character={character}
-                onCharacterChange={onCharacterChange}
-              />
-              <Card>
-                <Combat
-                  character={character}
-                  onCharacterChange={onCharacterChange}
-                  updateHealth={updateHealth}
-                />
-              </Card>
-            </CombatSection>
-            <AttackSection>
-              <h4>Attacks & Spells</h4>
-              <AddAttackModal addAttack={addAttack} character={character} />
-              <Card>
-                <Attacks
-                  character={character}
-                  updateAttacks={updateAttacks}
-                  addAttack={addAttack}
-                />
-              </Card>
-            </AttackSection>
-
-            <MagicSection>
-              <h4>Magic</h4>
-              <EditMagicModal
-                character={character}
-                onCharacterChange={onCharacterChange}
-              />
-              {character.magic.ability !== "" && (
                 <Card>
-                  <Magic
+                  <Abilities
+                    character={character}
+                    setLoadedChar={setLoadedChar}
+                    onCharacterChange={onCharacterChange}
+                  />
+                </Card>
+              </AbilitySection>
+              <ProfsSection>
+                <h4>Profs & Languages</h4>
+                <EditProficienciesModal
+                  character={character}
+                  onCharacterChange={onCharacterChange}
+                />
+                <Card>
+                  <Proficiencies
                     character={character}
                     onCharacterChange={onCharacterChange}
                   />
                 </Card>
-              )}
-            </MagicSection>
+              </ProfsSection>
+              <CombatSection>
+                <h4>Combat</h4>
+                <EditCombatModal
+                  character={character}
+                  onCharacterChange={onCharacterChange}
+                />
+                <Card>
+                  <Combat
+                    character={character}
+                    onCharacterChange={onCharacterChange}
+                    updateHealth={updateHealth}
+                  />
+                </Card>
+              </CombatSection>
+              <AttackSection>
+                <h4>Attacks & Spells</h4>
+                <AddAttackModal addAttack={addAttack} character={character} />
+                <Card>
+                  <Attacks
+                    character={character}
+                    updateAttacks={updateAttacks}
+                    addAttack={addAttack}
+                  />
+                </Card>
+              </AttackSection>
 
-            <FeatSection>
-              <h4>Features & Abilities</h4>
-              <AddFeatureModal addFeature={addFeature} />
-              <Card>
-                <FeaturesAccordion
-                  character={character}
-                  updateFeatures={updateFeatures}
-                />
-              </Card>
-            </FeatSection>
-            <InvSection>
-              <h4>Inventory</h4>
-              {/* <Card> */}
-              <Inventory
-                character={character}
-                onCharacterChange={onCharacterChange}
-                updateInventory={updateInventory}
-                updateEquipment={updateEquipment}
-                addItem={addItem}
-                addEquipment={addEquipment}
-              />
-              {/* </Card> */}
-            </InvSection>
-            <PersSection>
-              <h4>Personality</h4>
-              <EditPersonalitiesModal
-                character={character}
-                onCharacterChange={onCharacterChange}
-              />
-              <Card>
-                <Personality
+              <MagicSection>
+                <h4>Magic</h4>
+                <EditMagicModal
                   character={character}
                   onCharacterChange={onCharacterChange}
                 />
-              </Card>
-            </PersSection>
-            <NotesSection>
-              <h4>Notes</h4>
-              <AddNoteModal addNote={addNote} />
-              <Card>
-                <NotesAccordion
+                {character.magic.ability !== "" && (
+                  <Card>
+                    <Magic
+                      character={character}
+                      onCharacterChange={onCharacterChange}
+                    />
+                  </Card>
+                )}
+              </MagicSection>
+
+              <FeatSection>
+                <h4>Features & Abilities</h4>
+                <AddFeatureModal addFeature={addFeature} />
+                <Card>
+                  <FeaturesAccordion
+                    character={character}
+                    updateFeatures={updateFeatures}
+                  />
+                </Card>
+              </FeatSection>
+              <InvSection>
+                <h4>Inventory</h4>
+                {/* <Card> */}
+                <Inventory
                   character={character}
                   onCharacterChange={onCharacterChange}
-                  updateNotes={updateNotes}
+                  updateInventory={updateInventory}
+                  updateEquipment={updateEquipment}
+                  addItem={addItem}
+                  addEquipment={addEquipment}
                 />
-              </Card>
-            </NotesSection>
-          </Layout>
-        </>
-      )}
-    </Page>
+                {/* </Card> */}
+              </InvSection>
+              <PersSection>
+                <h4>Personality</h4>
+                <EditPersonalitiesModal
+                  character={character}
+                  onCharacterChange={onCharacterChange}
+                />
+                <Card>
+                  <Personality
+                    character={character}
+                    onCharacterChange={onCharacterChange}
+                  />
+                </Card>
+              </PersSection>
+              <NotesSection>
+                <h4>Notes</h4>
+                <AddNoteModal addNote={addNote} />
+                <Card>
+                  <NotesAccordion
+                    character={character}
+                    onCharacterChange={onCharacterChange}
+                    updateNotes={updateNotes}
+                  />
+                </Card>
+              </NotesSection>
+            </Layout>
+          </>
+        )}
+      </Page>
+    </div>
   );
 };
 

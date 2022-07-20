@@ -6,6 +6,21 @@ import ChooseRaceGrid from "./chooseRaceGrid";
 import ConfirmCharacter from "./confirmCharacter";
 import Success from "./success";
 
+import {
+  Window,
+  Page,
+  Layout,
+  Section,
+  Card,
+  SectionColumn,
+  SectionRow,
+  CardColumn,
+  CardRow,
+  CardItem,
+  Label,
+  BotButton,
+} from "../StyledPageComponents/pageStyling";
+
 import { blankCharacter } from "../../data/character";
 import { testCharacter } from "../../data/testCharacter";
 
@@ -164,13 +179,15 @@ function CreatePageGrid() {
   switch (step) {
     case 1:
       return (
-        <ChooseRaceGrid
-          nextStep={nextStep}
-          onCharacterChange={onCharacterChange}
-          character={character}
-          addFeature={addFeature}
-          updateFeatures={updateFeatures}
-        />
+        <Page>
+          <ChooseRaceGrid
+            nextStep={nextStep}
+            onCharacterChange={onCharacterChange}
+            character={character}
+            addFeature={addFeature}
+            updateFeatures={updateFeatures}
+          />
+        </Page>
       );
     case 2:
       return (
@@ -206,7 +223,7 @@ function CreatePageGrid() {
           saveLocalCharacter={saveLocalCharacter}
           saveCharacter={saveCharacter}
         />
-      );    
+      );
     case 4:
       return <Success prevStep={prevStep} />;
     default:

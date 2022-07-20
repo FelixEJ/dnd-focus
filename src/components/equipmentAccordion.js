@@ -61,18 +61,14 @@ const Item = styled.div`
   float: left;
   font-size: 0.9em;
   margin: 5px 5px;
-  max-width: 85%
+  max-width: 85%;
 `;
 
 const Container = styled.div`
   width: 99%;
 `;
 
-const EquipmentAccordion = ({
-  character,
-  addEquipment,
-  updateEquipment,
-}) => {
+const EquipmentAccordion = ({ character, addEquipment, updateEquipment }) => {
   const getEquipmentValue = () => {
     let total = 0;
     character.equipment.forEach(myFunc);
@@ -86,43 +82,46 @@ const EquipmentAccordion = ({
   return (
     <Container>
       <Accordion>
-          <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
-            <Card.Header>
-              <Header>
-                <b>Equipment:</b>
-              </Header>
-              <ButtonRight>
-                <CustomToggle eventKey={0}>EXPAND</CustomToggle>
-              </ButtonRight>
-            </Card.Header>
-            <Accordion.Collapse eventKey={0}>
-              <Card.Body
-                style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
-                className="overflow-auto"
-              >
-                <>
-                  {character.equipment.map((item, index) => (
-                    <ItemRow>
-                      <Item key={index}>
-                        <b>{item.equipment_name}</b>
-                      </Item>
-                      <EditEquipmentModal
-                        character={character}
-                        updateEquipment={updateEquipment}
-                        index={index}
-                        name={item.equipment_name}
-                        equip={{ item }}
-                      />
-                    </ItemRow>
-                  ))}
-                </>
-                <AddEquipmentModal
-                  character={character}
-                  addEquipment={addEquipment}
-                />
-              </Card.Body>
-            </Accordion.Collapse>
-          </Card>
+        <Card
+          style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}
+          
+        >
+          <Card.Header>
+            <Header>
+              <b>Equipment:</b>
+            </Header>
+            <ButtonRight>
+              <CustomToggle eventKey={0}>EXPAND</CustomToggle>
+            </ButtonRight>
+          </Card.Header>
+          <Accordion.Collapse eventKey={0}>
+            <Card.Body
+              style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
+              className="overflow-auto"
+            >
+              <>
+                {character.equipment.map((item, index) => (
+                  <ItemRow key={index}>
+                    <Item >
+                      <b>{item.equipment_name}</b>
+                    </Item>
+                    <EditEquipmentModal
+                      character={character}
+                      updateEquipment={updateEquipment}
+                      index={index}
+                      name={item.equipment_name}
+                      equip={{ item }}
+                    />
+                  </ItemRow>
+                ))}
+              </>
+              <AddEquipmentModal
+                character={character}
+                addEquipment={addEquipment}
+              />
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
       </Accordion>
     </Container>
   );

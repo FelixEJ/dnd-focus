@@ -88,7 +88,10 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
       <Accordion style={{ width: "100%" }}>
         <div>
           {character.features.map((feature, index) => (
-            <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
+            <Card
+              style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}
+              key={index}
+            >
               <Card.Header>
                 <ItemRow>
                   <Item>
@@ -146,7 +149,7 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                     )}
                   </>
                   {feature.max_uses > 0 && (
-                    <text>
+                    <>
                       <>
                         Uses:{" "}
                         <input
@@ -165,7 +168,7 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                         /{feature.max_uses}
                       </>
                       <> Recharge: {feature.recharge}</>
-                    </text>
+                    </>
                   )}
                   <p>{feature.description}</p>
                   <EditFeatureModal
