@@ -195,7 +195,7 @@ const RollDiceModal = () => {
           </Item>
           <Item>Results:
           {rollsRecord.map((roll, index) => (
-            <>d{roll.dSize}:{roll.result},</>
+            <div key={index}>d{roll.dSize}:{roll.result},</div>
           ))}
           </Item>
           <Item>

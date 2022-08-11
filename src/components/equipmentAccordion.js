@@ -79,17 +79,22 @@ const EquipmentAccordion = ({ character, addEquipment, updateEquipment }) => {
     return total;
   };
 
+  let attunedTotal = 0;
+  character.equipment.forEach((item) => {
+    if (item.attuned === "yes") {
+      attunedTotal++;
+    }
+  });
+
   return (
     <Container>
       <Accordion>
-        <Card
-          style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}
-          
-        >
+        <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
           <Card.Header>
             <Header>
               <b>Equipment:</b>
             </Header>
+            <span>{attunedTotal} attuned items</span>
             <ButtonRight>
               <CustomToggle eventKey={0}>EXPAND</CustomToggle>
             </ButtonRight>
@@ -102,7 +107,8 @@ const EquipmentAccordion = ({ character, addEquipment, updateEquipment }) => {
               <>
                 {character.equipment.map((item, index) => (
                   <ItemRow key={index}>
-                    <Item >
+                    <Item>
+                      {item.attuned === "yes" && <>[Att] </>}
                       <b>{item.equipment_name}</b>
                     </Item>
                     <EditEquipmentModal

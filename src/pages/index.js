@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import NavBar from "../components/navBar";
 import "../App.css";
 import styled from "styled-components";
@@ -86,6 +87,10 @@ const Answer = styled.p`
 const IndexPage = () => {
   return (
     <Page>
+      <Helmet>
+            <meta charSet="utf-8" />
+            <title>DnD FOCUS Free Online Character Upkeep Sheet</title>
+          </Helmet>
       <TitleContainer>
         <Word>
           <Capital>F</Capital>

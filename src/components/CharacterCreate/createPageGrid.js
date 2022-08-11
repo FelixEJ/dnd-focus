@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Helmet } from "react-helmet";
 import ChooseBackgroundGrid from "./chooseBackgroundGrid";
 import ChooseClassGrid from "./chooseClassGrid";
 import ChooseRaceGrid from "./chooseRaceGrid";
@@ -180,6 +180,10 @@ function CreatePageGrid() {
     case 1:
       return (
         <Page>
+          <Helmet>
+            <meta charSet="utf-8" />
+            <title>DnD FOCUS Free Online Character Upkeep Sheet</title>
+          </Helmet>
           <ChooseRaceGrid
             nextStep={nextStep}
             onCharacterChange={onCharacterChange}

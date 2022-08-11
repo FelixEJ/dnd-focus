@@ -103,7 +103,9 @@ const ChooseClassGrid = ({
         <Button>
           <a
             href={"data:" + data}
-            download={character.name + "_lvl" + character.level + "_" + today + ".json"}
+            download={
+              character.name + "_lvl" + character.level + "_" + today + ".json"
+            }
           >
             Download Character
           </a>
@@ -221,6 +223,15 @@ const ChooseClassGrid = ({
               value={character.speed}
               onChange={onCharacterChange}
               style={{ width: "15%" }}
+            />
+            <Label>Other Speeds:</Label>
+            <input
+              type="text"
+              id="hp.other_speeds"
+              name="hp.other_speeds"
+              value={character.hp.other_speeds}
+              onChange={onCharacterChange}
+              style={{ width: "80%" }}
             />
           </CardColumn>
         </Card>

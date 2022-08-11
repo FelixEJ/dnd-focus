@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { Button, FormControl } from "@material-ui/core";
 import styled from "styled-components";
 import LoadCharacterFromJSON from "../loadCharacterFromJSONModal";
@@ -385,6 +386,10 @@ const Success = () => {
             ))}
           </select>
         </FormControl>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>{character.name}</title>
+        </Helmet>
         {character.level != 0 && (
           <>
             <BasicSection>

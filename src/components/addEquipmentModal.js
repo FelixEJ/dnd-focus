@@ -29,6 +29,7 @@ const AddEquipmentModal = ({ addEquipment }) => {
     desc: "",
     value: 0,
     value_currency: "",
+    attuned: "",
   });
 
   const handleChange = (e) => {
@@ -47,6 +48,7 @@ const AddEquipmentModal = ({ addEquipment }) => {
       desc: "",
       value: 0,
       value_currency: "",
+      attuned: "",
     });
   }
 
@@ -159,8 +161,8 @@ const AddEquipmentModal = ({ addEquipment }) => {
               value={equipment.attuned}
               onChange={handleChange}
             >
-              <option value={"false"}>False</option>
-              <option value={"true"}>True</option>
+              <option value={""}>No</option>
+              <option value={"yes"}>Yes</option>
             </select>
           </label>
         </Item>

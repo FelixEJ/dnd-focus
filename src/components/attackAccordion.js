@@ -157,10 +157,10 @@ const AttackAccordion = ({ character, updateAttacks }) => {
                       <p>{attack.attack_name}</p>
                       Attack Bonus: <b>+{attack.attack_bonus}</b>
                       <br />
-                      Damage:
+                      Damage:{" "}
                       <b>
                         {attack.damage_dice_num}
-                        {attack.damage_dice}+{attack.damage_bonus}
+                        {attack.damage_dice}+{attack.damage_bonus}{" "}
                         {attack.damage_type};
                       </b>
                       {attack.tags !== "" && (

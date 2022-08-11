@@ -153,6 +153,15 @@ const ChooseRaceGrid = ({
               onChange={onCharacterChange}
               style={{ width: "20%" }}
             />
+            <Label>Other Speeds:</Label>
+            <input
+              type="text"
+              id="hp.other_speeds"
+              name="hp.other_speeds"
+              value={character.hp.other_speeds}
+              onChange={onCharacterChange}
+              style={{ width: "80%" }}
+            />
           </CardColumn>
           <CardColumn>
             <Label>Senses:</Label>

@@ -42,7 +42,7 @@ const ButtonRight = styled.div`
 
 const Header = styled.div`
   float: left;
-  font-size: 0.9em;
+  font-size: 1em;
   text-decoration: underline;
   text-transform: uppercase;
 `;
@@ -95,14 +95,27 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
               <Card.Header>
                 <ItemRow>
                   <Item>
-                    <Header>{feature.feature_name}:</Header>
-                    {feature.damage_dice_amount > 0 && (
-                      <>{feature.damage_dice_amount}</>
-                    )}
-                    {feature.damage_dice !== "" && <>{feature.damage_dice}</>}
-                    {feature.damage_type !== "" && <>{feature.damage_type}</>}
+                    <ItemRow>
+                      {feature.action_type === "action" && <>[A] -</>}
+                      {feature.action_type === "bonus" && <>[BA] -</>}
+                      {feature.action_type === "reaction" && <>[R] -</>}
+                      <Header>{feature.feature_name}:</Header>
+                      {feature.dc > 0 && <Item> DC{feature.dc} </Item>}
+                      <Item>
+                        {feature.damage_dice_amount > 0 && (
+                          <>+{feature.damage_dice_amount}</>
+                        )}
+                        {feature.damage_dice !== "" && (
+                          <>{feature.damage_dice}</>
+                        )}
+                        {feature.damage_type !== "" && (
+                          <>{feature.damage_type}</>
+                        )}
+                      </Item>
+                    </ItemRow>
                     {feature.max_uses > 0 && (
                       <Label>
+                        <br />
                         Uses:
                         <input
                           type="number"
@@ -122,14 +135,14 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                     )}
                   </Item>
                   <ButtonRight>
-                    <CustomToggle eventKey={feature.feature_id}>
+                    <CustomToggle eventKey={feature.feature_name}>
                       EXPAND
                     </CustomToggle>
                   </ButtonRight>
                 </ItemRow>
               </Card.Header>
 
-              <Accordion.Collapse eventKey={feature.feature_id}>
+              <Accordion.Collapse eventKey={feature.feature_name}>
                 <Card.Body
                   style={{ backgroundColor: "rgba(0, 0, 0, 0.1)" }}
                   class="overflow-auto"
@@ -167,6 +180,7 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                         />
                         /{feature.max_uses}
                       </>
+                      <br/>
                       <> Recharge: {feature.recharge}</>
                     </>
                   )}

@@ -86,7 +86,7 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
               name="speed"
               value={character.speed}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "30%" }}
             />
           </label>
           <label>
@@ -98,6 +98,17 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
               value={character.hp.temp_speed}
               onChange={onCharacterChange}
               style={{ width: "20%" }}
+            />
+          </label>
+          <label>
+            Other Speeds:{" "}
+            <input
+              type="text"
+              id="hp.other_speeds"
+              name="hp.other_speeds"
+              value={character.hp.other_speeds}
+              onChange={onCharacterChange}
+              style={{ width: "80%" }}
             />
           </label>
         </Item>

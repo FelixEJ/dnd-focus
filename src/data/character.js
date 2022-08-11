@@ -47,6 +47,7 @@ export const blankCharacter = {
     temp_max: "0",
     temp_ac: 0,
     temp_speed: 0,
+    other_speeds: "",
     status: "",
   },
   defences: {

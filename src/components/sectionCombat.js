@@ -104,6 +104,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
             <Numbers>{character.speed}</Numbers>
           )}
         </BoxTrio>
+        {character.hp.other_speeds !== "" && <>{character.hp.other_speeds}</>}
       </Row>
       <Row>
         <BoxSolo>

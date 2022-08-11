@@ -73,7 +73,7 @@ const Magic = ({ character, onCharacterChange }) => {
               <Numbers>{character.magic.save_dc}</Numbers>
             </Box>
           </FlexContainer>
-          {character.magic.cantrips_known !== 0 && (
+          {character.magic.cantrips_known > 0 && (
             <FlexContainer>
               <Box>
                 <Title>Cantrips Known</Title>
