@@ -138,6 +138,21 @@ const EditCombatModal = ({ character, onCharacterChange }) => {
           />
         </Item>
         <Item>
+          <label>Hit Dice:</label>{" "}
+          <select
+            id="hit_dice.dice"
+            name="hit_dice.dice"
+            value={character.hit_dice.dice}
+            onChange={onCharacterChange}
+          >
+            <option value="">-</option>
+            <option value={"d6"}>d6</option>
+            <option value={"d8"}>d8</option>
+            <option value={"d10"}>d10</option>
+            <option value={"d12"}>d12</option>
+          </select>
+        </Item>
+        <Item>
           <label>Hit Dice Max:</label>{" "}
           <input
             type="number"

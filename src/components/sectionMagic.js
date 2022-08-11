@@ -73,28 +73,31 @@ const Magic = ({ character, onCharacterChange }) => {
               <Numbers>{character.magic.save_dc}</Numbers>
             </Box>
           </FlexContainer>
-          {character.magic.cantrips_known > 0 && (
-            <FlexContainer>
+          <FlexContainer>
+            {character.magic.cantrips_known > 0 && (
               <Box>
                 <Title>Cantrips Known</Title>
                 <Numbers>{character.magic.cantrips_known}</Numbers>
               </Box>
-              <Box>
-                <Title>Prepared/known Spells</Title>
-                <Numbers>{character.magic.spells_known}</Numbers>
-              </Box>
-              <Box>
-                <Title>Concentrating</Title>
-                <input
-                  type="checkbox"
-                  id="magic.concentrating"
-                  name="magic.concentrating"
-                  checked={character.magic.concentrating}
-                  onChange={onCharacterChange}
-                />
-              </Box>
-            </FlexContainer>
-          )}
+            )}
+            {character.magic.spells_known > 0 && (
+            <Box>
+              <Title>Prepared/known Spells</Title>
+              <Numbers>{character.magic.spells_known}</Numbers>
+            </Box>
+            )}
+            <Box>
+              <Title>Concentrating</Title>
+              <input
+                type="checkbox"
+                id="magic.concentrating"
+                name="magic.concentrating"
+                checked={character.magic.concentrating}
+                onChange={onCharacterChange}
+              />
+            </Box>
+          </FlexContainer>
+
           <FlexContainer>
             {character.spellslots.first !== 0 && (
               <>

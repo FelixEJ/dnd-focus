@@ -67,13 +67,12 @@ const ButtonRight = styled.div`
 
 const Title = styled.div`
   float: left;
-  font-size: 0.9em;
+  font-size: 1em;
   text-decoration: underline;
   text-transform: uppercase;
 `;
 const Text = styled.div`
-  font-size: 0.9em;
-  text-transform: uppercase;
+  font-size: 0.8em;
   &:nth-child(odd) {
     background-color: rgba(0, 0, 0, 0.1);
   }
@@ -119,6 +118,7 @@ const AttackAccordion = ({ character, updateAttacks }) => {
                 >
                   <ColContainer>
                     <Title>{attack.attack_name}:</Title>
+                    <Text>{attack.tags}</Text>
                     {attack.bonus_damage_dice_num > 0 && (
                       <>
                         <LargeNumber>

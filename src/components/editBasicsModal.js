@@ -123,6 +123,16 @@ const EditBasicsModal = ({ character, onCharacterChange }) => {
           />
         </Item>
         <Item>
+          <Label>Age:</Label>
+          <input
+            type="text"
+            id="age"
+            name="age"
+            value={character.age}
+            onChange={onCharacterChange}
+          />
+        </Item>
+        <Item>
           <Label>Background:</Label>
           <input
             type="text"
