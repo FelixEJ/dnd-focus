@@ -111,7 +111,20 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
           <Title>hit points</Title>
           <Text>Base + Temp / Max</Text>
           <Numbers>
-            <input
+          {character.hp.temp_max > 0 ? (
+              <input
+              type="number"
+              min="0"
+              max={character.hp.temp_max}
+              id="hp.current"
+              name="hp.current"
+              value={character.hp.current}
+              onChange={onCharacterChange}
+              style={{ width: "20%" }}
+              display="none"
+            />
+            ) : (
+              <input
               type="number"
               min="0"
               max={character.hp.max}
@@ -122,6 +135,18 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
               style={{ width: "20%" }}
               display="none"
             />
+            )}
+            {/* <input
+              type="number"
+              min="0"
+              max={character.hp.max}
+              id="hp.current"
+              name="hp.current"
+              value={character.hp.current}
+              onChange={onCharacterChange}
+              style={{ width: "20%" }}
+              display="none"
+            /> */}
             +
             <input
               type="number"

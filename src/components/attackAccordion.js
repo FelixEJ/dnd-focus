@@ -110,7 +110,7 @@ const AttackAccordion = ({ character, updateAttacks }) => {
       <div>
         {character.attacks.map((attack, index) => (
           // <Card style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}>
-          <Custom>
+          <Custom key={index}>
             {attack.attack_type !== "spell" && (
               <>
                 <RowContainer

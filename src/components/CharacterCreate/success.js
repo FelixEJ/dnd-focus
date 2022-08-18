@@ -26,6 +26,7 @@ import AddFeatureModal from "../addFeatureModal";
 import FeaturesAccordion from "../featuresAccordion";
 import EditPersonalitiesModal from "../editPersonalitiesModal";
 import AddNoteModal from "../addNoteModal";
+import RollAttacks from "../rollAttacksModal";
 
 import {
   Window,
@@ -469,6 +470,7 @@ const Success = () => {
                 </Card>
               </CombatSection>
               <AttackSection>
+                <RollAttacks character={character}/>
                 <h4>Attacks & Spells</h4>
                 <AddAttackModal addAttack={addAttack} character={character} />
                 <Card>

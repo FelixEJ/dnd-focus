@@ -74,9 +74,12 @@ const DamageHealingModal = ({ character, onCharacterChange, updateHealth }) => {
   const editHealth = () => {
     // let hp = { ...health };
     let hpTotal = parseInt(health.current) + parseInt(health.temp);
+    let hitAmount = parseInt(hit.hit_amount);
+    let tempHP = parseInt(health.temp);
+    let currHP = parseInt(health.current);
     // console.log("total",hpTotal);
     if (hit.hit_type === "heal") {
-      health.current = parseInt(health.current) + parseInt(hit.hit_amount);
+      health.current = currHP + hitAmount;
       if (health.temp_max > 0) {
         if (health.current > health.temp_max) {
           health.current = parseInt(health.temp_max);
@@ -85,11 +88,15 @@ const DamageHealingModal = ({ character, onCharacterChange, updateHealth }) => {
         health.current = parseInt(health.max);
       }
     } else {
-      if (hit.hit_amount < health.temp) {
-        health.temp = parseInt(health.temp - hit.hit_amount);
+      // console.log("hptotal", hpTotal);
+      if (hitAmount < health.temp) {
+        health.temp = tempHP - hitAmount;
       } else {
-        health.current = parseInt(hpTotal - hit.hit_amount);
+        health.current = hpTotal - hitAmount;
         health.temp = 0;
+        // console.log("hptotal", hpTotal);
+        // console.log("hit", hitAmount);
+        // console.log("temp", health.temp);
       }
     }
     updateHealth(health);

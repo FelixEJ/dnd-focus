@@ -205,6 +205,16 @@ export const TopRightButton = ({ children }) => {
   return <TopRightButtonContainer>{children}</TopRightButtonContainer>;
 };
 
+const TopLeftButtonContainer = styled.div`
+  margin-right: 80%;
+  margin-top: 0px;
+  margin-left: 5px;
+  margin-bottom: -35px;
+`;
+export const TopLeftButton = ({ children }) => {
+  return <TopLeftButtonContainer>{children}</TopLeftButtonContainer>;
+};
+
 const ModalContentContainer = styled.div`
   max-height: 90vh;
   overflow: auto;
