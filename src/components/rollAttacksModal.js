@@ -73,27 +73,27 @@ const RollAttacksModal = ({ character }) => {
   };
 
   function RollDice() {
-    console.log("RollDice");
+    // console.log("RollDice");
     let attackRoll1 = 0;
     let attackRoll2 = 0;
     let attackMod = parseInt(attackRoll.mod);
     let result = 0;
     // roll d20
     attackRoll1 = Math.ceil(Math.random() * 20);
-    console.log("roll1", attackRoll1);
+    // console.log("roll1", attackRoll1);
     result = attackRoll1 + attackMod;
     // if adv/dis, roll 2d20 take high/low
     if (attackRoll.adv !== "") {
       attackRoll2 = Math.ceil(Math.random() * 20);
-      console.log("roll2", attackRoll2);
+      // console.log("roll2", attackRoll2);
       if (attackRoll.adv === "adv") {
         result = Math.max(attackRoll1, attackRoll2) + attackMod;
       } else {
         result = Math.min(attackRoll1, attackRoll2) + attackMod;
       }
-      console.log("rolls", attackRoll1, ",", attackRoll2);
+      // console.log("rolls", attackRoll1, ",", attackRoll2);
     }
-    console.log("result", result);
+    // console.log("result", result);
 
     // roll damage
     let damRoll1 = 0;
@@ -161,9 +161,16 @@ const RollAttacksModal = ({ character }) => {
       }
     }
 
-    totalDamage = damRoll1 + damRoll2 + damRoll3 + damRoll4 + damRoll5 + damRoll6 + damBonus1;
-    console.log("totDam", totalDamage);
-    console.log("+++++++++++++++++++++++");
+    totalDamage =
+      damRoll1 +
+      damRoll2 +
+      damRoll3 +
+      damRoll4 +
+      damRoll5 +
+      damRoll6 +
+      damBonus1;
+    // console.log("totDam", totalDamage);
+    // console.log("+++++++++++++++++++++++");
 
     setAttack({
       result: result,
@@ -172,6 +179,67 @@ const RollAttacksModal = ({ character }) => {
       roll2: attackRoll2,
       damages: damRolls,
     });
+  }
+
+  function Reset() {
+    setAttack({
+      result: 0,
+      damage: 0,
+      roll1: "",
+      roll2: "",
+      damages: [],
+    });
+
+    setAttackRoll({
+      adv: "",
+      mod: "0",
+      result: "",
+      attackNum: 1,
+    });
+
+    setDamageRoll({
+      dNum1: "1",
+      dSize1: "",
+      dNum2: "1",
+      dSize2: "",
+      dNum3: "1",
+      dSize3: "",
+      dNum4: "1",
+      dSize4: "",
+      dNum5: "1",
+      dSize5: "",
+      dNum6: "1",
+      dSize6: "",
+      bonus1: "0",
+      result: "",
+    });
+  }
+
+  function selectAttack(e) {
+    let attackName = e.target.value;
+    const roll = { ...attackRoll };
+    const dam = { ...damageRoll };
+
+    character.attacks.forEach((att) => {
+      if (att.attack_name === attackName) {
+        // console.log(att);
+        roll.mod = att.attack_bonus;
+        dam.dNum1 = att.damage_dice_num;
+        dam.dSize1 = att.damage_dice.substring(1);
+        dam.bonus1 = att.damage_bonus;
+
+        if (att.bonus_damage_dice_num) {
+          dam.dNum2 = att.bonus_damage_dice_num;
+          dam.dSize2 = att.bonus_damage_dice.substring(1);
+        }
+        else{
+          dam.dNum2 = "1";
+          dam.dSize2 = "";
+        }
+      }
+    });
+    setAttackRoll(roll);
+    setDamageRoll(dam);
   }
 
   return (
@@ -193,6 +261,14 @@ const RollAttacksModal = ({ character }) => {
       >
         <Item>
           <h2>Dice Simulator</h2>
+          <Label>Select attack:</Label>
+          <select id="attack" name="attack" onChange={selectAttack}>
+            <option key={0}>-</option>
+            {character.attacks.map((att, index) => (
+              <option key={index}>{att.attack_name}</option>
+            ))}
+          </select>
+          <br />
           <label>Attack modifier: +</label>
           <input
             type="number"
@@ -386,11 +462,12 @@ const RollAttacksModal = ({ character }) => {
           <h2>
             Attack({attack.roll1}
             {attack.roll2 > 0 && <>,{attack.roll2}</>}): {attack.result} <br />{" "}
-            Damage({attack.damages.map((roll, i) => (
+            Damage(
+            {attack.damages.map((roll, i) => (
               <span key={i}>{roll},</span>
-            ))}): {attack.damage}
+            ))}
+            ): {attack.damage}
           </h2>
-
         </Item>
         <Item>
           <Button
@@ -402,7 +479,12 @@ const RollAttacksModal = ({ character }) => {
           >
             Roll!
           </Button>
-        </Item>        
+        </Item>
+        <Item>
+          <Button variant="contained" onClick={Reset} color="primary">
+            Reset
+          </Button>
+        </Item>
         <Button variant="contained" onClick={handleClose}>
           Close
         </Button>
