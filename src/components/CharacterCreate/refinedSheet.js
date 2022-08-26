@@ -62,125 +62,90 @@ const AbilitySection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
-    height: 90vh;
-    max-height: 90vh;
+    height: 99vh;
   }
   @media only screen and (min-width: 1024px) {
-    height: 70vh;
+    height: 60vh;
   }
   @media only screen and (min-width: 1600px) {
     height: 99vh;
-    max-height: 99vh;
   }
 `;
-const ProfsSection = styled(Section)`
-  @media only screen and (min-width: 480px) {
-  }
-  @media only screen and (min-width: 768px) {
-    height: 30vh;
-  }
-  @media only screen and (min-width: 1024px) {
-    height: 29vh;
-  }
-  @media only screen and (min-width: 1600px) {
-    height: 19vh;
-  }
-`;
+
 const CombatSection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
-    height: 40vh;
+    height: 48vh;
   }
   @media only screen and (min-width: 1024px) {
-    height: 33vh;
+    height: 39vh;
   }
   @media only screen and (min-width: 1600px) {
-    height: 40vh;
+    height: 45vh;
   }
 `;
 const AttackSection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
-    height: 30vh;
+    height: 48vh;
   }
   @media only screen and (min-width: 1024px) {
-    height: 33vh;
+    height: 64vh;
   }
   @media only screen and (min-width: 1600px) {
-    height: 40vh;
+    height: 54vh;
   }
 `;
 const MagicSection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
-    height: 40vh;
+    max-height: 40vh;
   }
   @media only screen and (min-width: 1024px) {
-    height: 33vh;
+    max-height: 35vh;
   }
   @media only screen and (min-width: 1600px) {
-    height: 45vh;
+    max-height: 48vh;
   }
 `;
 const FeatSection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
-    height: 50vh;
+    height: 99vh;
   }
   @media only screen and (min-width: 1024px) {
-    height: 35vh;
+    height: 60vh;
   }
   @media only screen and (min-width: 1600px) {
-    height: 54vh;
+    height: 99vh;
   }
 `;
 const InvSection = styled(Section)`
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
-    height: 30vh;
+    height: 50vh;
   }
   @media only screen and (min-width: 1024px) {
-    height: 25vh;
+    height: 39vh;
   }
   @media only screen and (min-width: 1600px) {
-    height: 40vh;
-  }
-`;
-const PersSection = styled(Section)`
-  @media only screen and (min-width: 480px) {
-  }
-  @media only screen and (min-width: 768px) {
-    height: 30vh;
-  }
-  @media only screen and (min-width: 1024px) {
-    height: 19vh;
-  }
-  @media only screen and (min-width: 1600px) {
-    height: 19vh;
-  }
-`;
-const NotesSection = styled(Section)`
-  @media only screen and (min-width: 480px) {
-  }
-  @media only screen and (min-width: 768px) {
-    height: 40vh;
-  }
-  @media only screen and (min-width: 1024px) {
-    height: 20vh;
-  }
-  @media only screen and (min-width: 1600px) {
-    height: 40vh;
+    height: 48vh;
   }
 `;
 
-const Success = () => {
+const RefinedSheet = () => {
   const [character, setLoadedChar] = useState(blankCharacter);
   let allChars = getAllCharacters();
+
+  // useEffect(() => {
+  //   // allChars = getAllCharacters();
+  //   console.log("new chars");
+  // }, [allChars]);
 
   function getAllCharacters() {
     var arrayOfChars = [];
@@ -411,7 +376,6 @@ const Success = () => {
             >
               Save to local storage
             </Button>
-
             <button>
               <a
                 href={"data:" + data}
@@ -428,7 +392,7 @@ const Success = () => {
               </a>
             </button>
             <Layout>
-            <div id="abilities" />
+              <div id="abilities" />
               <AbilitySection>
                 <h4>Ability Scores</h4>
                 <EditAbilitiesModal
@@ -443,8 +407,7 @@ const Success = () => {
                   />
                 </Card>
               </AbilitySection>
-              <div id="proficiencies" />
-              <ProfsSection>
+              {/* <ProfsSection>
                 <h4>Profs & Languages</h4>
                 <EditProficienciesModal
                   character={character}
@@ -456,7 +419,7 @@ const Success = () => {
                     onCharacterChange={onCharacterChange}
                   />
                 </Card>
-              </ProfsSection>
+              </ProfsSection> */}
               <div id="combat"></div>
               <CombatSection>
                 <h4>Combat</h4>
@@ -501,6 +464,18 @@ const Success = () => {
                   </Card>
                 )}
               </MagicSection>
+              <div id="inventory"></div>
+              <InvSection>
+                <h4>Inventory</h4>
+                <Inventory
+                  character={character}
+                  onCharacterChange={onCharacterChange}
+                  updateInventory={updateInventory}
+                  updateEquipment={updateEquipment}
+                  addItem={addItem}
+                  addEquipment={addEquipment}
+                />
+              </InvSection>
               <div id="features"></div>
               <FeatSection>
                 <h4>Features & Abilities</h4>
@@ -512,22 +487,8 @@ const Success = () => {
                   />
                 </Card>
               </FeatSection>
-              <div id="inventory"></div>
-              <InvSection>
-                <h4>Inventory</h4>
-                {/* <Card> */}
-                <Inventory
-                  character={character}
-                  onCharacterChange={onCharacterChange}
-                  updateInventory={updateInventory}
-                  updateEquipment={updateEquipment}
-                  addItem={addItem}
-                  addEquipment={addEquipment}
-                />
-                {/* </Card> */}
-              </InvSection>
-              <div id="personality"></div>
-              <PersSection>
+
+              {/* <PersSection>
                 <h4>Personality</h4>
                 <EditPersonalitiesModal
                   character={character}
@@ -539,9 +500,8 @@ const Success = () => {
                     onCharacterChange={onCharacterChange}
                   />
                 </Card>
-              </PersSection>
-              <div id="notes"></div>
-              <NotesSection>
+              </PersSection> */}
+              {/* <NotesSection>
                 <h4>Notes</h4>
                 <AddNoteModal addNote={addNote} />
                 <Card>
@@ -551,7 +511,7 @@ const Success = () => {
                     updateNotes={updateNotes}
                   />
                 </Card>
-              </NotesSection>
+              </NotesSection> */}
             </Layout>
           </>
         )}
@@ -560,4 +520,4 @@ const Success = () => {
   );
 };
 
-export default Success;
+export default RefinedSheet;

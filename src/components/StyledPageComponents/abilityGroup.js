@@ -31,7 +31,7 @@ const AbilityName = styled.div`
   align-self: flex-end;
 `;
 
-export const AbilityGroup = ({ ability, tempAbility, mod, name }) => {
+export const AbilityGroup = ({ ability, tempAbility, mod, name, colour }) => {
   return (
     <AbilityGroupCont>
       <AbilityRow>
@@ -40,7 +40,7 @@ export const AbilityGroup = ({ ability, tempAbility, mod, name }) => {
           <b>{name}</b>
         </AbilityName>
       </AbilityRow>
-        <AbilityModifier>{mod}</AbilityModifier>
+        <AbilityModifier style={{color: colour}}>{mod}</AbilityModifier>
     </AbilityGroupCont>
   );
 };

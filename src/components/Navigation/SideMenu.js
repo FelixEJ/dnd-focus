@@ -7,7 +7,6 @@ import AccordionSection from "./AccordionSection";
 import { menuTitles } from "./menuTitles";
 
 const StyledSideMenu = styled.div`
-  
   position: fixed;
   top: 14.1vw;
   z-index: 99;

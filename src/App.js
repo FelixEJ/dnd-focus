@@ -2,7 +2,7 @@ import * as React from "react";
 import "./App.css";
 import styled from "styled-components";
 // import { BrowserRouter } from "react-router-dom";
-import Navbar from "./components/multilevel-dropdown-menu/Navbar";
+import Navbar from "./components/Navigation/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Window } from "./components/StyledPageComponents/pageStyling";
@@ -20,12 +20,12 @@ const Logo = styled.img`
 function App() {
   return (
     // <BrowserRouter>
-      <Window>
-        <div className="App">
-          <Navbar />
-          <Logo src={LogoImage}/>
-        </div>
-      </Window>
+    <Window>
+      <div className="App">
+        <Navbar />
+        <Logo src={LogoImage} />
+      </div>
+    </Window>
     // </BrowserRouter>
   );
 }

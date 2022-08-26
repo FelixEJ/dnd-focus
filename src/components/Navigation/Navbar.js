@@ -7,12 +7,12 @@ import { MdClose } from "react-icons/md";
 import { FiMenu } from "react-icons/fi";
 
 import MenuItems from "./MenuItems";
-import Logo from "./Logo";
 import DarkModeToggle from "../StyledPageComponents/darkModeToggle";
 
 import Index from "../../pages/index";
 import Create from "../../pages/createCharacter";
 import Load from "../../pages/loadCharacter";
+import Refined from "../../pages/loadRefined";
 import Premade from "../../pages/premadeCharacters";
 import Henry from "../../pages/henry";
 import Pirates from "../../pages/pirates";
@@ -153,6 +153,7 @@ const Navbar = () => {
         <Route exact path="/" element={<Index />}></Route>
         <Route path="/createCharacter" element={<Create />}></Route>
         <Route path="/loadCharacter" element={<Load />}></Route>
+        <Route path="/loadRefined" element={<Refined />}></Route>
         <Route path="/premadeCharacters" element={<Premade />}></Route>
         <Route path="/henry" element={<Henry />}></Route>
         <Route path="/pirates" element={<Pirates />}></Route>

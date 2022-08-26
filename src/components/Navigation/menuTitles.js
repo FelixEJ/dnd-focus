@@ -10,8 +10,13 @@ export const menuTitles = [
     submenu: [],
   },
   {
-    title: "Load Character",
+    title: "Load Full Character",
     path: "/loadCharacter",
+    submenu: [],
+  },  
+  {
+    title: "Load Refined Character",
+    path: "/loadRefined",
     submenu: [],
   },  
   // {

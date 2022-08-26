@@ -216,7 +216,7 @@ export const TopLeftButton = ({ children }) => {
 };
 
 const ModalContentContainer = styled.div`
-  max-height: 90vh;
+  max-height: 80vh;
   overflow: auto;
 
   position: absolute;

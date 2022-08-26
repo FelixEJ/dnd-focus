@@ -17,6 +17,7 @@ import {
   Label,
   BotButton,
 } from "./StyledPageComponents/pageStyling";
+import { color } from "@mui/system";
 
 const Container = styled.div`
   width: 100%;
@@ -104,6 +105,13 @@ const TextRight = styled.div`
 `;
 
 const Abilities = ({ character, onCharacterChange }) => {
+  let strCol = "rgb(255,0,0, .7)";
+  let dexCol = "rgb(102,204,0, .7)";
+  let conCol = "rgb(192,192,192, .7)";
+  let intCol = "rgb(102,178,255, .7)";
+  let wisCol = "rgb(255,153,51, .7)";
+  let chaCol = "rgb(205,102,255, .7)";
+
   return (
     <CardColumn>
       <Bar>
@@ -122,13 +130,13 @@ const Abilities = ({ character, onCharacterChange }) => {
         </NumberLeft>
         <TextRight>inspiration</TextRight>
       </Bar>
-      <AbilityBox>
+      <AbilityBox style={{borderColor: strCol}}>
         <AbilityGroup
           ability={character.stats.str}
           tempAbility={character.stats.temp_str}
           mod={getModifier(character.stats.str, character.stats.temp_str)}
           name="STRENGTH"
-          abrev="STR"
+          colour={strCol}
         />
         <Gap />
         <SkillGroup>
@@ -175,13 +183,13 @@ const Abilities = ({ character, onCharacterChange }) => {
           </SkillRow>
         </SkillGroup>
       </AbilityBox>
-      <AbilityBox>
+      <AbilityBox style={{borderColor: dexCol}}>
         <AbilityGroup
           ability={character.stats.dex}
           tempAbility={character.stats.temp_dex}
           mod={getModifier(character.stats.dex, character.stats.temp_dex)}
           name="dexterity"
-          abrev="dex"
+          colour={dexCol}
         />
         <Gap />
         <SkillGroup>
@@ -266,13 +274,13 @@ const Abilities = ({ character, onCharacterChange }) => {
           </SkillRow>
         </SkillGroup>
       </AbilityBox>
-      <AbilityBox>
+      <AbilityBox style={{borderColor: conCol}}>
         <AbilityGroup
           ability={character.stats.con}
           tempAbility={character.stats.temp_con}
           mod={getModifier(character.stats.con, character.stats.temp_con)}
           name="constitution"
-          abrev="con"
+          colour={conCol}
         />
         <Gap />
         <SkillGroup>
@@ -299,13 +307,13 @@ const Abilities = ({ character, onCharacterChange }) => {
           </SkillRow>
         </SkillGroup>
       </AbilityBox>
-      <AbilityBox>
+      <AbilityBox style={{borderColor: intCol}}>
         <AbilityGroup
           ability={character.stats.int}
           tempAbility={character.stats.temp_int}
           mod={getModifier(character.stats.int, character.stats.temp_int)}
           name="intelligence"
-          abrev="int"
+          colour={intCol}
         />
         <Gap />
         <SkillGroup>
@@ -426,13 +434,13 @@ const Abilities = ({ character, onCharacterChange }) => {
           </SkillRow>
         </SkillGroup>
       </AbilityBox>
-      <AbilityBox>
+      <AbilityBox style={{borderColor: wisCol}}>
         <AbilityGroup
           ability={character.stats.wis}
           tempAbility={character.stats.temp_wis}
           mod={getModifier(character.stats.wis, character.stats.temp_wis)}
           name="wisdom"
-          abrev="wis"
+          colour={wisCol}
         />
         <Gap />
         <SkillGroup>
@@ -557,13 +565,13 @@ const Abilities = ({ character, onCharacterChange }) => {
           </SkillRow>
         </SkillGroup>
       </AbilityBox>
-      <AbilityBox>
+      <AbilityBox style={{borderColor: chaCol}}>
         <AbilityGroup
           ability={character.stats.cha}
           tempAbility={character.stats.temp_cha}
           mod={getModifier(character.stats.cha, character.stats.temp_cha)}
           name="charisma"
-          abrev="cha"
+          colour={chaCol}
         />
         <Gap />
         <SkillGroup>

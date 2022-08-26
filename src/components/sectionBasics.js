@@ -70,7 +70,6 @@ const Basics = ({ character, onCharacterChange }) => {
           id="xp"
           name="xp"
           value={character.xp}
-          defaultValue="0"
           onChange={onCharacterChange}
           style={{ width: "80px" }}
         />

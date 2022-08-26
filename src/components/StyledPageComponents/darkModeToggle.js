@@ -6,6 +6,9 @@ import { Toggle } from "@react-ui-org/react-ui";
 
 const Container = styled.div`
   float: left;
+  position: absolute;
+  top: 0px;
+  left: 0px;
 `;
 
 const DarkModeToggle = () => {
