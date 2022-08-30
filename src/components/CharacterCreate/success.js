@@ -189,8 +189,10 @@ const Success = () => {
       i = keys.length;
 
     while (i--) {
-      archive[keys[i]] = localStorage.getItem(keys[i]);
-      arrayOfChars[i] = JSON.parse(archive[keys[i]]);
+      if (keys[i] !== "darkMode") {
+        archive[keys[i]] = localStorage.getItem(keys[i]);
+        arrayOfChars[i] = JSON.parse(archive[keys[i]]);
+      }
     }
     return arrayOfChars;
   }
@@ -375,13 +377,9 @@ const Success = () => {
           >
             <option value={character}>Select character</option>
             {allChars.map((char, index) => (
-              <>
-                {char.size && (
-                  <option key={index} value={index}>
-                    {char.name} lvl{char.level}
-                  </option>
-                )}
-              </>
+              <option key={index} value={index}>
+                {char.name} lvl{char.level}
+              </option>
             ))}
           </select>
         </FormControl>
@@ -428,7 +426,7 @@ const Success = () => {
               </a>
             </button>
             <Layout>
-            <div id="abilities" />
+              <div id="abilities" />
               <AbilitySection>
                 <h4>Ability Scores</h4>
                 <EditAbilitiesModal

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { keyframes } from "styled-components";
 import { MdClose } from "react-icons/md";
 import { FiMenu } from "react-icons/fi";
+import Burger from "./burger";
 
 import MenuItems from "./MenuItems";
 import DarkModeToggle from "../StyledPageComponents/darkModeToggle";
@@ -97,41 +98,16 @@ const BurgerMenu = styled.ul`
 const Navbar = () => {
   const [burgerOpen, setBurgerOpen] = useState(false);
 
-  const handleToggle = () => {
+  function handleToggle() {
     setBurgerOpen((prev) => !prev);
-  };
+  }
 
   return (
     <>
       <Bar>
         <DarkModeToggle />
         <BurgerNav>
-          <BurgerButton onClick={handleToggle}>
-              {burgerOpen ? (
-                <MdClose
-                style={{ color: "black", width: "40px", height: "40px" }}
-                />
-              ) : (
-                <FiMenu
-                style={{ color: "black", width: "40px", height: "40px" }}
-                />
-              )}
-          </BurgerButton>
-          {burgerOpen && (
-            <BurgerMenu>
-              {menuTitles.map((menu, index) => {
-                const depthLevel = 0;
-                return (
-                  <MenuItems
-                    items={menu}
-                    key={index}
-                    depthLevel={depthLevel}
-                    handleToggle={handleToggle}
-                  />
-                );
-              })}
-            </BurgerMenu>
-          )}
+          <Burger />          
         </BurgerNav>
         <Nav>
           <Menus>

@@ -60,9 +60,9 @@ const Henry = () => {
       <TextContainer>
         <h1>Premade Character Sheets</h1>
 
-        {allChars.map((character) => {
+        {allChars.map((character, index) => {
           return (
-            <CharBox>
+            <CharBox key={index}>
               <h2>{character.name}</h2>
               <p>{character.summary}</p>
               <p>

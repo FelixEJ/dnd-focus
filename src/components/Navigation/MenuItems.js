@@ -40,7 +40,7 @@ const linkStyle = {
   color: "inherit",
 };
 
-const MenuItems = ({ items, depthLevel, handleToggle }) => {
+const MenuItems = ({ items, depthLevel, handleToggle, index }) => {
   const [dropdown, setDropdown] = useState(false);
   let ref = useRef();
   useEffect(() => {
