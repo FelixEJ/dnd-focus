@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
+import parchment from "../../images/parchment.png";
+import parchmentFade from "../../images/parchmentFade.png";
+
 const WindowContentContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -20,6 +23,7 @@ const PageContentContainer = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  margin-bottom: 30px;
 
   @media only screen and (min-width: 480px) {
   }
@@ -98,10 +102,11 @@ const CardContainer = styled.div`
   display: block;
   margin-left: auto;
   margin-right: auto;
-  border-style: inset;
-  border-radius: 5px;
   overflow-y: auto;
   overflow-x: hidden;
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: cover;
 
   @media only screen and (min-width: 480px) {
   }
@@ -113,8 +118,8 @@ const CardContainer = styled.div`
   @media only screen and (min-width: 1600px) {
   }
 `;
-export const Card = ({ children }) => {
-  return <CardContainer>{children}</CardContainer>;
+export const Card = ({ children, bg }) => {
+  return <CardContainer style={{backgroundImage: `url(${bg})`}}>{children}</CardContainer>;
 };
 
 const CardColumnContainer = styled.div`

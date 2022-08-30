@@ -16,6 +16,7 @@ const AbilityRow = styled.div`
 const AbilityScore = styled.div`
   font-size: 2em;
   align-self: flex-start;
+  margin-top: -40px;
 `;
 
 const AbilityModifier = styled.div`
@@ -35,12 +36,12 @@ export const AbilityGroup = ({ ability, tempAbility, mod, name, colour }) => {
   return (
     <AbilityGroupCont>
       <AbilityRow>
-        <AbilityScore>{tempAbility > 0 ? tempAbility : ability}</AbilityScore>
         <AbilityName>
           <b>{name}</b>
         </AbilityName>
       </AbilityRow>
-        <AbilityModifier style={{color: colour}}>{mod}</AbilityModifier>
+      <AbilityModifier style={{ color: colour }}>{mod}</AbilityModifier>
+      <AbilityScore>{tempAbility > 0 ? tempAbility : ability}</AbilityScore>
     </AbilityGroupCont>
   );
 };

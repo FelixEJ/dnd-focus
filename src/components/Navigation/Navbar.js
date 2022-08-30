@@ -50,7 +50,6 @@ const BurgerNav = styled.div`
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 7px;
 
   @media only screen and (min-width: 768px) {
     display: none;

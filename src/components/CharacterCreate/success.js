@@ -30,6 +30,11 @@ import EditPersonalitiesModal from "../editPersonalitiesModal";
 import AddNoteModal from "../addNoteModal";
 import RollAttacks from "../rollAttacksModal";
 
+import parchment from "../../images/parchmentFade.png";
+import grid from "../../images/grid.png";
+import lined from "../../images/lined.png";
+import scroll from "../../images/scroll.png";
+
 import {
   Window,
   Page,
@@ -180,6 +185,7 @@ const NotesSection = styled(Section)`
 
 const Success = () => {
   const [character, setLoadedChar] = useState(blankCharacter);
+  const [cardBG, setCardBG] = useState(parchment);
   let allChars = getAllCharacters();
 
   function getAllCharacters() {
@@ -200,6 +206,11 @@ const Success = () => {
   function handleChange(e) {
     let charNum = e.target.value;
     setLoadedChar(allChars[charNum]);
+  }
+
+  function setCardBGImage(e){
+    let bg = e.target.value;
+    setCardBG(bg);
   }
 
   function loadFromJson(character) {
@@ -374,7 +385,7 @@ const Success = () => {
             name="char_select"
             value={character.name}
             onChange={handleChange}
-            style={{width: "60vw"}}
+            // style={{width: "60vw"}}
           >
             <option value={character}>Select character</option>
             {allChars.map((char, index) => (
@@ -382,6 +393,22 @@ const Success = () => {
                 {char.name} lvl{char.level}
               </option>
             ))}
+          </select>
+        </FormControl>
+        <FormControl>
+          <select
+            id="bg_select"
+            name="bg_select"
+            value={cardBG}
+            onChange={setCardBGImage}
+            // style={{width: "60vw"}}
+          >
+            {/* <option value={cardBG}>Select style</option> */}
+            <option value={parchment}>Parchment</option>
+            <option value={grid}>Grid</option>
+            <option value={scroll}>Scroll</option>
+            <option value={lined}>Lined</option>
+            
           </select>
         </FormControl>
         <Helmet>
@@ -393,7 +420,7 @@ const Success = () => {
             <div id="top" />
             <BasicSection>
               <RollDiceModal />
-              <Card>
+              <Card bg={cardBG}>
                 <Basics
                   character={character}
                   onCharacterChange={onCharacterChange}
@@ -434,7 +461,7 @@ const Success = () => {
                   character={character}
                   onCharacterChange={onCharacterChange}
                 />
-                <Card>
+                <Card bg={cardBG}>
                   <Abilities
                     character={character}
                     setLoadedChar={setLoadedChar}
@@ -449,7 +476,7 @@ const Success = () => {
                   character={character}
                   onCharacterChange={onCharacterChange}
                 />
-                <Card>
+                <Card bg={cardBG}>
                   <Proficiencies
                     character={character}
                     onCharacterChange={onCharacterChange}
@@ -463,7 +490,7 @@ const Success = () => {
                   character={character}
                   onCharacterChange={onCharacterChange}
                 />
-                <Card>
+                <Card bg={cardBG}>
                   <Combat
                     character={character}
                     onCharacterChange={onCharacterChange}
@@ -476,7 +503,7 @@ const Success = () => {
                 <RollAttacks character={character} />
                 <h4>Attacks & Spells</h4>
                 <AddAttackModal addAttack={addAttack} character={character} />
-                <Card>
+                <Card bg={cardBG}>
                   <Attacks
                     character={character}
                     updateAttacks={updateAttacks}
@@ -492,7 +519,7 @@ const Success = () => {
                   onCharacterChange={onCharacterChange}
                 />
                 {character.magic.ability !== "" && (
-                  <Card>
+                  <Card bg={cardBG}>
                     <Magic
                       character={character}
                       onCharacterChange={onCharacterChange}
@@ -504,7 +531,7 @@ const Success = () => {
               <FeatSection>
                 <h4>Features & Abilities</h4>
                 <AddFeatureModal addFeature={addFeature} />
-                <Card>
+                <Card bg={cardBG}>
                   <FeaturesAccordion
                     character={character}
                     updateFeatures={updateFeatures}
@@ -514,7 +541,7 @@ const Success = () => {
               <div id="inventory"></div>
               <InvSection>
                 <h4>Inventory</h4>
-                {/* <Card> */}
+                <Card bg={cardBG}>
                 <Inventory
                   character={character}
                   onCharacterChange={onCharacterChange}
@@ -523,7 +550,7 @@ const Success = () => {
                   addItem={addItem}
                   addEquipment={addEquipment}
                 />
-                {/* </Card> */}
+                </Card>
               </InvSection>
               <div id="personality"></div>
               <PersSection>
@@ -532,7 +559,7 @@ const Success = () => {
                   character={character}
                   onCharacterChange={onCharacterChange}
                 />
-                <Card>
+                <Card bg={cardBG}>
                   <Personality
                     character={character}
                     onCharacterChange={onCharacterChange}
@@ -543,7 +570,7 @@ const Success = () => {
               <NotesSection>
                 <h4>Notes</h4>
                 <AddNoteModal addNote={addNote} />
-                <Card>
+                <Card bg={cardBG}>
                   <NotesAccordion
                     character={character}
                     onCharacterChange={onCharacterChange}

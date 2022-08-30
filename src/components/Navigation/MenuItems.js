@@ -6,6 +6,7 @@ import styled from "styled-components";
 const MenuItemList = styled.li`
   position: relative;
   font-size: 14px;
+  list-style-type: none;
 `;
 
 const MenuItemButton = styled.button`

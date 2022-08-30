@@ -15,6 +15,13 @@ const Logo = styled.img`
   position: absolute;
   top: 70px;
   left: 0;
+
+  @media only screen and (max-width: 490px) {
+    top: 0;
+    left: 40vw;
+    width: 15vw;
+    height: 15vw;
+  }
 `;
 
 function App() {

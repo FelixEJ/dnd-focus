@@ -20,7 +20,11 @@ const SideBarStyle = styled.div`
 
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
+  height: 35px;
   background: rgb(255,255,255, .7);
 
   @media only screen and (min-width: 480px) {
@@ -36,7 +40,7 @@ const SideBarStyle = styled.div`
 
 const Icon = styled.img`
   width: 30px;
-  margin: 0px 3px;
+  margin: 0px 5px;
 `;
 const Button = styled.button`
   width: 30px;
@@ -61,10 +65,10 @@ const SideBar = () => {
 
   return (
     <SideBarStyle>
-      <Opt>
+      {/* <Opt>
         <Button onClick={() => setExpand(!expand)}>&#8614;</Button>
         {expand && <Text>Expand</Text>}
-      </Opt>
+      </Opt> */}
       <Link to="top" spy={true} smooth={true}>
         <Opt>
           <Icon src={dice} />

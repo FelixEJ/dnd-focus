@@ -12,13 +12,13 @@ code {
     monospace;
 }
 body.light-mode {
-  background-color: #f2f3f4;
+  background-color: #dbdbdb;
   color: #333;
   transition: background-color 0.3s ease;
 }
 body.dark-mode {
-  background-color: #1a1919;
-  color: #999;
+  background-color: #464545;
+  color: #1a1919;
   transition: background-color 0.3s ease;
 }
 
