@@ -14,14 +14,14 @@ import dice from "../../images/og/dice.png";
 
 const SideBarStyle = styled.div`
   position: fixed;
-  top: 5vh;
+  bottom: 0;
   left: 0;
   z-index: 999;
 
   display: flex;
-  flex-flow: column nowrap;
-  width: 30px;
-  background: rgb(255,255,255, .3);
+  flex-flow: row nowrap;
+  width: 100%;
+  background: rgb(255,255,255, .7);
 
   @media only screen and (min-width: 480px) {
   }
@@ -36,7 +36,7 @@ const SideBarStyle = styled.div`
 
 const Icon = styled.img`
   width: 30px;
-  margin: 2px 0;
+  margin: 0px 3px;
 `;
 const Button = styled.button`
   width: 30px;
@@ -44,14 +44,15 @@ const Button = styled.button`
 `;
 
 const Text = styled.span`
-  display: block;
+display: flex;
+flex-flow: column wrap;
   float: right;
   background: white;
 `;
 
 const Opt = styled.div`
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column wrap;
   align-items: center;
 `;
 

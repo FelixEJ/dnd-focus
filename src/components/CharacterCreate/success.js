@@ -374,6 +374,7 @@ const Success = () => {
             name="char_select"
             value={character.name}
             onChange={handleChange}
+            style={{width: "60vw"}}
           >
             <option value={character}>Select character</option>
             {allChars.map((char, index) => (
