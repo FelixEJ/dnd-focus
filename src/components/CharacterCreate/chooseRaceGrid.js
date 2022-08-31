@@ -30,6 +30,7 @@ const ChooseRaceGrid = ({
   character,
   addFeature,
   updateFeatures,
+  cardBG,
 }) => {
   const Continue = (e) => {
     e.preventDefault();
@@ -56,7 +57,7 @@ const ChooseRaceGrid = ({
         {character.name}, lvl:{character.level}
       </Label>
       <Section>
-        <Card>
+        <Card bg={cardBG}>
           <CardColumn>
             <Label>Name</Label>
             <input
@@ -178,7 +179,7 @@ const ChooseRaceGrid = ({
       </Section>
       <Section>
         <h3>Ability Scores</h3>
-        <Card>
+        <Card bg={cardBG}>
           <CardRow>
             <CardColumn>
               <Label>Strength:</Label>
@@ -274,7 +275,7 @@ const ChooseRaceGrid = ({
       <Section>
         <h4>Features & Abilities</h4>
         <AddFeatureModal addFeature={addFeature} />
-        <Card>
+        <Card bg={cardBG}>
           <FeatureAccordion
             character={character}
             updateFeatures={updateFeatures}
@@ -283,7 +284,7 @@ const ChooseRaceGrid = ({
       </Section>
       <Section>
         <h3>Defences</h3>
-        <Card>
+        <Card bg={cardBG}>
           <CardColumn>
             <Label>Resistances:</Label>
             <input
@@ -322,7 +323,7 @@ const ChooseRaceGrid = ({
           character={character}
           onCharacterChange={onCharacterChange}
         />
-        <Card>
+        <Card bg={cardBG}>
           <CreateProficiencies
             character={character}
             onCharacterChange={onCharacterChange}

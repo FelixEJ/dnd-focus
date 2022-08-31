@@ -31,12 +31,14 @@ const RollAttacksModal = ({ character }) => {
     damage: 0,
     roll1: "",
     roll2: "",
+    bonus: "",
     damages: [],
   });
 
   const [attackRoll, setAttackRoll] = useState({
     adv: "",
     mod: "0",
+    bonus: "",
     result: "",
     attackNum: 1,
   });
@@ -76,7 +78,9 @@ const RollAttacksModal = ({ character }) => {
     // console.log("RollDice");
     let attackRoll1 = 0;
     let attackRoll2 = 0;
+    let attackRollBonus = 0;
     let attackMod = parseInt(attackRoll.mod);
+    let attackBonus = parseInt(attackRoll.bonus);
     let result = 0;
     // roll d20
     attackRoll1 = Math.ceil(Math.random() * 20);
@@ -92,6 +96,10 @@ const RollAttacksModal = ({ character }) => {
         result = Math.min(attackRoll1, attackRoll2) + attackMod;
       }
       // console.log("rolls", attackRoll1, ",", attackRoll2);
+    }
+    if (attackRoll.bonus !== ""){
+      attackRollBonus = Math.ceil(Math.random() * attackBonus);
+      result += attackRollBonus;
     }
     // console.log("result", result);
 
@@ -177,6 +185,7 @@ const RollAttacksModal = ({ character }) => {
       damage: totalDamage,
       roll1: attackRoll1,
       roll2: attackRoll2,
+      bonus: attackRollBonus,
       damages: damRolls,
     });
   }
@@ -187,6 +196,7 @@ const RollAttacksModal = ({ character }) => {
       damage: 0,
       roll1: "",
       roll2: "",
+      bonus: "",
       damages: [],
     });
 
@@ -194,6 +204,7 @@ const RollAttacksModal = ({ character }) => {
       adv: "",
       mod: "0",
       result: "",
+      bonus: "",
       attackNum: 1,
     });
 
@@ -231,8 +242,7 @@ const RollAttacksModal = ({ character }) => {
         if (att.bonus_damage_dice_num) {
           dam.dNum2 = att.bonus_damage_dice_num;
           dam.dSize2 = att.bonus_damage_dice.substring(1);
-        }
-        else{
+        } else {
           dam.dNum2 = "1";
           dam.dSize2 = "";
         }
@@ -264,9 +274,11 @@ const RollAttacksModal = ({ character }) => {
           <Label>Select attack:</Label>
           <select id="attack" name="attack" onChange={selectAttack}>
             <option key={0}>-</option>
-            {character.attacks.map((att, index) => (
-              <option key={index}>{att.attack_name}</option>
-            ))}
+            {character.attacks.map((att, index) => {
+              if (att.damage_dice !== "") {
+                return <option key={index}>{att.attack_name}</option>;
+              }
+            })}
           </select>
           <br />
           <label>Attack modifier: +</label>
@@ -279,6 +291,21 @@ const RollAttacksModal = ({ character }) => {
             style={{ width: "50px" }}
           />
           <br />
+          <Label>Bonus dice to hit:</Label>          
+          <select
+            id="bonus"
+            name="bonus"
+            value={attackRoll.bonus}
+            onChange={handleAttack}
+          >
+            <option value={""}>-</option>
+            <option value={"4"}>d4</option>
+            <option value={"6"}>d6</option>
+            <option value={"8"}>d8</option>
+            <option value={"10"}>d10</option>
+            <option value={"12"}>d12</option>
+          </select>
+          <br/>
           <label>Attack with Adv?</label>
           <select
             id="adv"
@@ -461,7 +488,10 @@ const RollAttacksModal = ({ character }) => {
           <Label>Result</Label>
           <h2>
             Attack({attack.roll1}
-            {attack.roll2 > 0 && <>,{attack.roll2}</>}): {attack.result} <br />{" "}
+            {attack.roll2 > 0 && <>,{attack.roll2}</>}
+            {attack.bonus > 0 && <>+{attack.bonus}</>}
+            ): {attack.result}
+            <br />
             Damage(
             {attack.damages.map((roll, i) => (
               <span key={i}>{roll},</span>

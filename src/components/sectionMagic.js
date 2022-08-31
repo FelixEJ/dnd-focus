@@ -116,7 +116,7 @@ const Magic = ({ character, onCharacterChange }) => {
                           name="spellslots.first_remaining"
                           value={character.spellslots.first_remaining}
                           onChange={onCharacterChange}
-                          style={{ width: 50 }}
+                          style={{ width: 50, backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
                           display="none"
                         />
                         /{character.spellslots.first}
@@ -137,7 +137,7 @@ const Magic = ({ character, onCharacterChange }) => {
                           name="spellslots.second_remaining"
                           value={character.spellslots.second_remaining}
                           onChange={onCharacterChange}
-                          style={{ width: 50 }}
+                          style={{ width: 50, backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
                           display="none"
                         />
                         /{character.spellslots.second}
@@ -160,7 +160,7 @@ const Magic = ({ character, onCharacterChange }) => {
                           name="spellslots.third_remaining"
                           value={character.spellslots.third_remaining}
                           onChange={onCharacterChange}
-                          style={{ width: 50 }}
+                          style={{ width: 50, backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
                           display="none"
                         />
                         /{character.spellslots.third}
@@ -182,7 +182,7 @@ const Magic = ({ character, onCharacterChange }) => {
                           name="spellslots.fourth_remaining"
                           value={character.spellslots.fourth_remaining}
                           onChange={onCharacterChange}
-                          style={{ width: 50 }}
+                          style={{ width: 50, backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
                           display="none"
                         />
                         /{character.spellslots.fourth}
@@ -203,7 +203,7 @@ const Magic = ({ character, onCharacterChange }) => {
                           name="spellslots.fifth_remaining"
                           value={character.spellslots.fifth_remaining}
                           onChange={onCharacterChange}
-                          style={{ width: 50 }}
+                          style={{ width: 50, backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
                           display="none"
                         />
                         /{character.spellslots.fifth}
@@ -224,7 +224,7 @@ const Magic = ({ character, onCharacterChange }) => {
                           name="spellslots.sixth_remaining"
                           value={character.spellslots.sixth_remaining}
                           onChange={onCharacterChange}
-                          style={{ width: 50 }}
+                          style={{ width: 50, backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
                           display="none"
                         />
                         /{character.spellslots.sixth}
@@ -245,7 +245,7 @@ const Magic = ({ character, onCharacterChange }) => {
                           name="spellslots.seventh_remaining"
                           value={character.spellslots.seventh_remaining}
                           onChange={onCharacterChange}
-                          style={{ width: 50 }}
+                          style={{ width: 50, backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
                           display="none"
                         />
                         /{character.spellslots.seventh}
@@ -266,7 +266,7 @@ const Magic = ({ character, onCharacterChange }) => {
                           name="spellslots.eighth_remaining"
                           value={character.spellslots.eighth_remaining}
                           onChange={onCharacterChange}
-                          style={{ width: 50 }}
+                          style={{ width: 50, backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
                           display="none"
                         />
                         /{character.spellslots.eighth}
@@ -287,7 +287,7 @@ const Magic = ({ character, onCharacterChange }) => {
                           name="spellslots.ninth_remaining"
                           value={character.spellslots.ninth_remaining}
                           onChange={onCharacterChange}
-                          style={{ width: 50 }}
+                          style={{ width: 50, backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
                           display="none"
                         />
                         /{character.spellslots.ninth}

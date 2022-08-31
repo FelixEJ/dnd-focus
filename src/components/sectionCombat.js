@@ -120,7 +120,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
               name="hp.current"
               value={character.hp.current}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "80px", backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
               display="none"
             />
             ) : (
@@ -132,21 +132,10 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
               name="hp.current"
               value={character.hp.current}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "80px", backgroundColor: "rgb(255,255,255, .1)", border: "none" }}
               display="none"
             />
-            )}
-            {/* <input
-              type="number"
-              min="0"
-              max={character.hp.max}
-              id="hp.current"
-              name="hp.current"
-              value={character.hp.current}
-              onChange={onCharacterChange}
-              style={{ width: "20%" }}
-              display="none"
-            /> */}
+            )}            
             +
             <input
               type="number"
@@ -155,7 +144,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
               name="hp.temp"
               value={character.hp.temp}
               onChange={onCharacterChange}
-              style={{ width: "20%" }}
+              style={{ width: "80px", backgroundColor: "rgb(255,255,255, .1)", border: "none" }}
               display="none"
             />
             /
@@ -207,7 +196,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
               name="hit_dice.current"
               value={character.hit_dice.current}
               onChange={onCharacterChange}
-              style={{ width: "35%" }}
+              style={{ width: "60px", backgroundColor: "rgb(255,255,255, .1)"}}
               display="none"
             />
             {character.hit_dice.dice}/{character.hit_dice.max}
@@ -222,7 +211,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
                 name="hit_dice.mult1_current"
                 value={character.hit_dice.mult1_current}
                 onChange={onCharacterChange}
-                style={{ width: "35%" }}
+                style={{ width: "60px", backgroundColor: "rgb(255,255,255, .1)"}}
                 display="none"
               />
               {character.hit_dice.mult1_dice}/{character.hit_dice.mult1_max}
@@ -238,7 +227,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
                 name="hit_dice.mult2_current"
                 value={character.hit_dice.mult2_current}
                 onChange={onCharacterChange}
-                style={{ width: "35%" }}
+                style={{ width: "60px", backgroundColor: "rgb(255,255,255, .1)"}}
                 display="none"
               />
               {character.hit_dice.mult2_dice}/{character.hit_dice.mult2_max}
@@ -257,7 +246,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
               name="death_saves.pass"
               value={character.death_saves.pass}
               onChange={onCharacterChange}
-              style={{ width: "40px" }}
+              style={{ width: "40px", backgroundColor: "rgb(255,255,255, .1)" }}
               display="none"
             />
           </Text>
@@ -271,7 +260,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
               name="death_saves.fail"
               value={character.death_saves.fail}
               onChange={onCharacterChange}
-              style={{ width: "40px" }}
+              style={{ width: "40px", backgroundColor: "rgb(255,255,255, .1)" }}
               display="none"
             />
           </Text>
@@ -284,7 +273,7 @@ const SheetCombat = ({ character, onCharacterChange, updateHealth }) => {
           name="exhaustion"
           value={character.exhaustion}
           onChange={onCharacterChange}
-          style={{ width: "20%" }}
+          style={{ width: "40px" }}
         >
           <option value={0}>-</option>
           <option value={1}>1</option>

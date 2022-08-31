@@ -33,6 +33,7 @@ const ChooseBackgroundGrid = ({
   updateEquipment,
   addItem,
   updateInventory,
+  cardBG,
 }) => {
   const Continue = (e) => {
     e.preventDefault();
@@ -74,7 +75,7 @@ const ChooseBackgroundGrid = ({
           character={character}
           onCharacterChange={onCharacterChange}
         />
-        <Card>
+        <Card bg={cardBG}>
           <CreateProficiencies
             character={character}
             onCharacterChange={onCharacterChange}
@@ -95,7 +96,7 @@ const ChooseBackgroundGrid = ({
       <Section>
         <h4>Features & Abilities</h4>
         <AddFeatureModal addFeature={addFeature} />
-        <Card>
+        <Card bg={cardBG}>
           <FeatureAccordion
             character={character}
             updateFeatures={updateFeatures}
@@ -104,7 +105,7 @@ const ChooseBackgroundGrid = ({
       </Section>
       <Section>
         <h3>Characteristics</h3>
-        <Card>
+        <Card bg={cardBG}>
           <CardColumn>
             <Label>Personality:</Label>
             <textarea

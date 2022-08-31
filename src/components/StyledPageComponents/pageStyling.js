@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import parchment from "../../images/parchment.png";
-import parchmentFade from "../../images/parchmentFade.png";
-
 const WindowContentContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -13,9 +10,6 @@ const WindowContentContainer = styled.div`
 export const Window = ({ children }) => {
   return <WindowContentContainer>{children}</WindowContentContainer>;
 };
-
-// background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url("https://aerrond.com/wp-content/uploads/2012/12/Seamless_Parchment_Texture_by_FantasyStock1.jpg");
-// background-image: url("http://3.bp.blogspot.com/-mvmaXN8reK4/UKSGrkaw-kI/AAAAAAAADNs/IiFdSWfVy3o/w1200-h630-p-nu/white_grid_paper-background_pattern.jpg");
 
 const PageContentContainer = styled.div`
   width: 99vw;
@@ -30,8 +24,10 @@ const PageContentContainer = styled.div`
   @media only screen and (min-width: 768px) {
   }
   @media only screen and (min-width: 1024px) {
+    margin-bottom: 0px;
   }
   @media only screen and (min-width: 1600px) {
+    margin-bottom: 0px;
   }
 `;
 export const Page = ({ children }) => {

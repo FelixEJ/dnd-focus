@@ -47,6 +47,7 @@ const ChooseClassGrid = ({
   updateAttacks,
   saveLocalCharacter,
   saveCharacter,
+  cardBG,
 }) => {
   const Continue = (e) => {
     e.preventDefault();
@@ -115,7 +116,7 @@ const ChooseClassGrid = ({
         {character.name}, lvl:{character.level}
       </Label>
       <Section>
-        <Card>
+        <Card bg={cardBG}>
           <CardColumn>
             <Label>Class:</Label>
             <input
@@ -242,7 +243,7 @@ const ChooseClassGrid = ({
           character={character}
           onCharacterChange={onCharacterChange}
         />
-        <Card>
+        <Card bg={cardBG}>
           <CreateProficiencies
             character={character}
             onCharacterChange={onCharacterChange}
@@ -251,7 +252,7 @@ const ChooseClassGrid = ({
       </Section>
       <Section>
         <h3>Saving Throws:</h3>
-        <Card>
+        <Card bg={cardBG}>
           <CardRow>
             <CardColumn>
               <CardItem>
@@ -398,7 +399,7 @@ const ChooseClassGrid = ({
         />
       </Section>
       <Section>
-        <Card>
+        <Card bg={cardBG}>
           <CardColumn>
             <Label>Armour Class (AC):</Label>
             <input
@@ -430,7 +431,7 @@ const ChooseClassGrid = ({
           character={character}
           onCharacterChange={onCharacterChange}
         />
-        <Card>
+        <Card bg={cardBG}>
           <CardColumn>
             <Label>
               if applicable:
@@ -457,7 +458,7 @@ const ChooseClassGrid = ({
       <Section>
         <h4>Features & Abilities</h4>
         <AddFeatureModal addFeature={addFeature} />
-        <Card>
+        <Card bg={cardBG}>
           <FeatureAccordion
             character={character}
             updateFeatures={updateFeatures}
@@ -468,7 +469,7 @@ const ChooseClassGrid = ({
       <Section>
         <h4>Attacks</h4>
         <AddAttackModal addAttack={addAttack} character={character} />
-        <Card>
+        <Card bg={cardBG}>
           <AttackAccordion
             character={character}
             updateAttacks={updateAttacks}
@@ -477,7 +478,7 @@ const ChooseClassGrid = ({
       </Section>
       <Section>
         <h3>Passives:</h3>
-        <Card>
+        <Card bg={cardBG}>
           <CardRow>
             <Label>Senses:</Label>
             <input

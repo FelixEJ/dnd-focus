@@ -60,10 +60,8 @@ const Item = styled.div`
   max-width: 75%;
 `;
 
-const Container = styled.div`
-  width: 95vw;
-  max-width: 400px;
-  max-height: 30vh;
+const Uses = styled.div`
+  float: left;
 `;
 
 const FeatureAccordion = ({ character, updateFeatures }) => {
@@ -114,9 +112,9 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                       </Item>
                     </ItemRow>
                     {feature.max_uses > 0 && (
-                      <Label>
+                      <Uses>
                         <br />
-                        Uses:
+                        <label>Uses:</label>
                         <input
                           type="number"
                           max={feature.max_uses}
@@ -127,11 +125,11 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                           onChange={(e) =>
                             handleChange(e, index, feature.feature_name)
                           }
-                          style={{ width: "40px" }}
+                          style={{ width: "40px", backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
                           display="none"
                         />
                         /{feature.max_uses}
-                      </Label>
+                      </Uses>
                     )}
                   </Item>
                   <ButtonRight>
@@ -182,6 +180,12 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                       </>
                       <br/>
                       <> Recharge: {feature.recharge}</>
+                    </>
+                  )}
+                  {feature.dc !== "" && (
+                    <>
+                    <br/>
+                    DC {feature.dc}
                     </>
                   )}
                   <p>{feature.description}</p>

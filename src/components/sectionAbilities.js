@@ -106,11 +106,11 @@ const TextRight = styled.div`
 
 const Abilities = ({ character, onCharacterChange }) => {
   let strCol = "rgb(158,5,5, .8)";
-  let dexCol = "rgb(102,204,0, .8)";
+  let dexCol = "rgb(4,127,11, .8)";
   let conCol = "rgb(64,64,64, .8)";
   let intCol = "rgb(4,130,183, .8)";
-  let wisCol = "rgb(255,153,51, .8)";
-  let chaCol = "rgb(205,102,255, .8)";
+  let wisCol = "rgb(165,83,0, .8)";
+  let chaCol = "rgb(199,21,133, .8)";
 
   return (
     <CardColumn>

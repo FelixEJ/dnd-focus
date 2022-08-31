@@ -379,13 +379,11 @@ const Success = () => {
           character={character}
         />
         <FormControl>
-          {/* <label>Select Character&emsp;</label> */}
           <select
             id="char_select"
             name="char_select"
             value={character.name}
             onChange={handleChange}
-            // style={{width: "60vw"}}
           >
             <option value={character}>Select character</option>
             {allChars.map((char, index) => (
@@ -401,9 +399,7 @@ const Success = () => {
             name="bg_select"
             value={cardBG}
             onChange={setCardBGImage}
-            // style={{width: "60vw"}}
           >
-            {/* <option value={cardBG}>Select style</option> */}
             <option value={parchment}>Parchment</option>
             <option value={grid}>Grid</option>
             <option value={scroll}>Scroll</option>

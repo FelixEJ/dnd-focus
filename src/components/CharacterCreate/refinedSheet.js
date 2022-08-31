@@ -30,6 +30,11 @@ import EditPersonalitiesModal from "../editPersonalitiesModal";
 import AddNoteModal from "../addNoteModal";
 import RollAttacks from "../rollAttacksModal";
 
+import parchment from "../../images/parchmentFade.png";
+import grid from "../../images/grid.png";
+import lined from "../../images/lined.png";
+import scroll from "../../images/scroll.png";
+
 import {
   Window,
   Page,
@@ -140,12 +145,8 @@ const InvSection = styled(Section)`
 
 const RefinedSheet = () => {
   const [character, setLoadedChar] = useState(blankCharacter);
+  const [cardBG, setCardBG] = useState(parchment);
   let allChars = getAllCharacters();
-
-  // useEffect(() => {
-  //   // allChars = getAllCharacters();
-  //   console.log("new chars");
-  // }, [allChars]);
 
   function getAllCharacters() {
     var arrayOfChars = [];
@@ -154,8 +155,10 @@ const RefinedSheet = () => {
       i = keys.length;
 
     while (i--) {
-      archive[keys[i]] = localStorage.getItem(keys[i]);
-      arrayOfChars[i] = JSON.parse(archive[keys[i]]);
+      if (keys[i] !== "darkMode") {
+        archive[keys[i]] = localStorage.getItem(keys[i]);
+        arrayOfChars[i] = JSON.parse(archive[keys[i]]);
+      }
     }
     return arrayOfChars;
   }
@@ -163,6 +166,11 @@ const RefinedSheet = () => {
   function handleChange(e) {
     let charNum = e.target.value;
     setLoadedChar(allChars[charNum]);
+  }
+
+  function setCardBGImage(e){
+    let bg = e.target.value;
+    setCardBG(bg);
   }
 
   function loadFromJson(character) {
@@ -350,6 +358,20 @@ const RefinedSheet = () => {
             ))}
           </select>
         </FormControl>
+        <FormControl>
+          <select
+            id="bg_select"
+            name="bg_select"
+            value={cardBG}
+            onChange={setCardBGImage}
+          >
+            <option value={parchment}>Parchment</option>
+            <option value={grid}>Grid</option>
+            <option value={scroll}>Scroll</option>
+            <option value={lined}>Lined</option>
+            
+          </select>
+        </FormControl>
         <Helmet>
           <meta charSet="utf-8" />
           <title>{character.name}</title>
@@ -359,7 +381,7 @@ const RefinedSheet = () => {
             <div id="top" />
             <BasicSection>
               <RollDiceModal />
-              <Card>
+              <Card bg={cardBG}>                
                 <Basics
                   character={character}
                   onCharacterChange={onCharacterChange}
@@ -399,7 +421,8 @@ const RefinedSheet = () => {
                   character={character}
                   onCharacterChange={onCharacterChange}
                 />
-                <Card>
+                <Card bg={cardBG}>
+
                   <Abilities
                     character={character}
                     setLoadedChar={setLoadedChar}
@@ -413,7 +436,8 @@ const RefinedSheet = () => {
                   character={character}
                   onCharacterChange={onCharacterChange}
                 />
-                <Card>
+                <Card bg={cardBG}>
+
                   <Proficiencies
                     character={character}
                     onCharacterChange={onCharacterChange}
@@ -427,7 +451,8 @@ const RefinedSheet = () => {
                   character={character}
                   onCharacterChange={onCharacterChange}
                 />
-                <Card>
+                <Card bg={cardBG}>
+
                   <Combat
                     character={character}
                     onCharacterChange={onCharacterChange}
@@ -440,7 +465,8 @@ const RefinedSheet = () => {
                 <RollAttacks character={character} />
                 <h4>Attacks & Spells</h4>
                 <AddAttackModal addAttack={addAttack} character={character} />
-                <Card>
+                <Card bg={cardBG}>
+
                   <Attacks
                     character={character}
                     updateAttacks={updateAttacks}
@@ -456,7 +482,8 @@ const RefinedSheet = () => {
                   onCharacterChange={onCharacterChange}
                 />
                 {character.magic.ability !== "" && (
-                  <Card>
+                  <Card bg={cardBG}>
+
                     <Magic
                       character={character}
                       onCharacterChange={onCharacterChange}
@@ -467,6 +494,7 @@ const RefinedSheet = () => {
               <div id="inventory"></div>
               <InvSection>
                 <h4>Inventory</h4>
+                <Card bg={cardBG}>
                 <Inventory
                   character={character}
                   onCharacterChange={onCharacterChange}
@@ -475,12 +503,14 @@ const RefinedSheet = () => {
                   addItem={addItem}
                   addEquipment={addEquipment}
                 />
+                </Card>
               </InvSection>
               <div id="features"></div>
               <FeatSection>
                 <h4>Features & Abilities</h4>
                 <AddFeatureModal addFeature={addFeature} />
-                <Card>
+                <Card bg={cardBG}>
+
                   <FeaturesAccordion
                     character={character}
                     updateFeatures={updateFeatures}
@@ -494,7 +524,8 @@ const RefinedSheet = () => {
                   character={character}
                   onCharacterChange={onCharacterChange}
                 />
-                <Card>
+                <Card bg={cardBG}>
+
                   <Personality
                     character={character}
                     onCharacterChange={onCharacterChange}
@@ -504,7 +535,8 @@ const RefinedSheet = () => {
               {/* <NotesSection>
                 <h4>Notes</h4>
                 <AddNoteModal addNote={addNote} />
-                <Card>
+                <Card bg={cardBG}>
+
                   <NotesAccordion
                     character={character}
                     onCharacterChange={onCharacterChange}

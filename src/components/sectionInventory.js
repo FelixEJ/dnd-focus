@@ -78,7 +78,7 @@ const Inventory = ({
               name="currency.copper"
               value={character.currency.copper}
               onChange={onCharacterChange}
-              style={{ width: "60px", maxWidth: "70px" }}
+              style={{ width: "60px", maxWidth: "70px", backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
             />
           </MoneyUnit>
           <MoneyUnit>
@@ -90,7 +90,7 @@ const Inventory = ({
               name="currency.silver"
               value={character.currency.silver}
               onChange={onCharacterChange}
-              style={{ width: "60px", maxWidth: "70px" }}
+              style={{ width: "60px", maxWidth: "70px", backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
             />
           </MoneyUnit>
           <MoneyUnit>
@@ -102,7 +102,7 @@ const Inventory = ({
               name="currency.electrum"
               value={character.currency.electrum}
               onChange={onCharacterChange}
-              style={{ width: "60px", maxWidth: "70px" }}
+              style={{ width: "60px", maxWidth: "70px", backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
             />
           </MoneyUnit>
           <MoneyUnit>
@@ -114,7 +114,7 @@ const Inventory = ({
               name="currency.gold"
               value={character.currency.gold}
               onChange={onCharacterChange}
-              style={{ width: "60px", maxWidth: "70px" }}
+              style={{ width: "60px", maxWidth: "70px", backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
             />
           </MoneyUnit>
           <MoneyUnit>
@@ -126,7 +126,7 @@ const Inventory = ({
               name="currency.platinum"
               value={character.currency.platinum}
               onChange={onCharacterChange}
-              style={{ width: "60px", maxWidth: "70px" }}
+              style={{ width: "60px", maxWidth: "70px", backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
             />
           </MoneyUnit>
         </MoneyBox>

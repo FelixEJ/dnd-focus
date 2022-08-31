@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
+import { Button, FormControl } from "@material-ui/core";
 import ChooseBackgroundGrid from "./chooseBackgroundGrid";
 import ChooseClassGrid from "./chooseClassGrid";
 import ChooseRaceGrid from "./chooseRaceGrid";
 import ConfirmCharacter from "./confirmCharacter";
 import Success from "./success";
+
+import parchment from "../../images/parchmentFade.png";
+import grid from "../../images/grid.png";
+import lined from "../../images/lined.png";
+import scroll from "../../images/scroll.png";
 
 import {
   Window,
@@ -27,6 +33,12 @@ import { testCharacter } from "../../data/testCharacter";
 function CreatePageGrid() {
   const [step, setStep] = useState(1);
   const [character, setCharacter] = useState(blankCharacter);
+  const [cardBG, setCardBG] = useState(parchment);
+
+  function setCardBGImage(e){
+    let bg = e.target.value;
+    setCardBG(bg);
+  }
 
   function onCharacterChange(e) {
     // if (e === null) {
@@ -180,6 +192,20 @@ function CreatePageGrid() {
     case 1:
       return (
         <Page>
+          <FormControl>
+          <select
+            id="bg_select"
+            name="bg_select"
+            value={cardBG}
+            onChange={setCardBGImage}
+          >
+            <option value={parchment}>Parchment</option>
+            <option value={grid}>Grid</option>
+            <option value={scroll}>Scroll</option>
+            <option value={lined}>Lined</option>
+            
+          </select>
+        </FormControl>
           <Helmet>
             <meta charSet="utf-8" />
             <title>DnD FOCUS Free Online Character Upkeep Sheet</title>
@@ -190,6 +216,7 @@ function CreatePageGrid() {
             character={character}
             addFeature={addFeature}
             updateFeatures={updateFeatures}
+            cardBG={cardBG}
           />
         </Page>
       );
@@ -206,6 +233,7 @@ function CreatePageGrid() {
           updateEquipment={updateEquipment}
           addItem={addItem}
           updateInventory={updateInventory}
+          cardBG={cardBG}
         />
       );
     case 3:
@@ -226,6 +254,7 @@ function CreatePageGrid() {
           updateAttacks={updateAttacks}
           saveLocalCharacter={saveLocalCharacter}
           saveCharacter={saveCharacter}
+          cardBG={cardBG}
         />
       );
     case 4:
