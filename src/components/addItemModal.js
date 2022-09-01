@@ -95,12 +95,14 @@ const AddItemModal = ({ addItem, character }) => {
         </Item>
         <Item>
           <label>Item Description</label>
-          <input
+          <textarea
             type="text"
             id="item_description"
             name="item_description"
             value={item.item_description}
             onChange={handleChange}
+            cols="35"
+            rows="3"
           />
         </Item>
         <Item>

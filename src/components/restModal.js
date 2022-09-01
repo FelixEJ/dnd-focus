@@ -149,7 +149,7 @@ const RestModal = ({character, updateCharacter}) => {
             <h2>Give {character.name} a rest?</h2>
             <Item>
               <label>
-                Rest type:
+                Rest type:</label>
                 <select
                   id="type"
                   name="type"
@@ -159,11 +159,16 @@ const RestModal = ({character, updateCharacter}) => {
                   <option value={"short"}>Short Rest</option>
                   <option value={"long"}>Long Rest</option>
                 </select>
-              </label>
+              {rest.type === "short" &&(
+                <><br/>Short rest will refresh any abilities that recharge on a short rest</>
+              )}
+              {rest.type === "long" &&(
+                <><br/>Long rest will refresh any abilities that recharge on a long or short rest, regain all your HP and spell slots, regain up to half your hit dice, and reduce your exhaustion by 1 level</>
+              )}
             </Item>
             <Item>
               <label>
-                Past dawn?
+                Past dawn?</label>
                 <select
                   id="dawn"
                   name="dawn"
@@ -173,7 +178,8 @@ const RestModal = ({character, updateCharacter}) => {
                   <option value={"false"}>No</option>
                   <option value={"true"}>Yes</option>
                 </select>
-              </label>
+              <br/>
+              This will reset any daily abilities
             </Item>
           </Grid>
           <Item>

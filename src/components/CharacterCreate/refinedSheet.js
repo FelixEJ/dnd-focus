@@ -70,7 +70,7 @@ const AbilitySection = styled(Section)`
     height: 99vh;
   }
   @media only screen and (min-width: 1024px) {
-    height: 60vh;
+    height: 69vh;
   }
   @media only screen and (min-width: 1600px) {
     height: 99vh;
@@ -84,7 +84,7 @@ const CombatSection = styled(Section)`
     height: 48vh;
   }
   @media only screen and (min-width: 1024px) {
-    height: 39vh;
+    height: 35vh;
   }
   @media only screen and (min-width: 1600px) {
     height: 45vh;
@@ -110,7 +110,7 @@ const MagicSection = styled(Section)`
     max-height: 40vh;
   }
   @media only screen and (min-width: 1024px) {
-    max-height: 35vh;
+    max-height: 30vh;
   }
   @media only screen and (min-width: 1600px) {
     max-height: 48vh;
@@ -430,6 +430,23 @@ const RefinedSheet = () => {
                   />
                 </Card>
               </AbilitySection>
+              <div id="magic"></div>
+              <MagicSection>
+                <h4>Magic</h4>
+                <EditMagicModal
+                  character={character}
+                  onCharacterChange={onCharacterChange}
+                />
+                {character.magic.ability !== "" && (
+                  <Card bg={cardBG}>
+
+                    <Magic
+                      character={character}
+                      onCharacterChange={onCharacterChange}
+                    />
+                  </Card>
+                )}
+              </MagicSection>
               {/* <ProfsSection>
                 <h4>Profs & Languages</h4>
                 <EditProficienciesModal
@@ -474,23 +491,7 @@ const RefinedSheet = () => {
                   />
                 </Card>
               </AttackSection>
-              <div id="magic"></div>
-              <MagicSection>
-                <h4>Magic</h4>
-                <EditMagicModal
-                  character={character}
-                  onCharacterChange={onCharacterChange}
-                />
-                {character.magic.ability !== "" && (
-                  <Card bg={cardBG}>
-
-                    <Magic
-                      character={character}
-                      onCharacterChange={onCharacterChange}
-                    />
-                  </Card>
-                )}
-              </MagicSection>
+              
               <div id="inventory"></div>
               <InvSection>
                 <h4>Inventory</h4>

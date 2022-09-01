@@ -26,6 +26,11 @@ const TitleContainer = styled.div`
   align-items: flex-start;
   width: 60vw;
   padding-left: 15vw;
+
+  .dark-mode &{
+    color: #dbdbdb;
+  }
+
   @media only screen and (min-width: 480px) {
   }
   @media only screen and (min-width: 768px) {
@@ -60,6 +65,12 @@ const TextContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   width: 90vw;
+  padding: 15px;
+
+  .dark-mode &{
+    color: #dbdbdb;
+  }
+
   @media only screen and (min-width: 480px) {
     width: 80vw;
   }
@@ -113,7 +124,8 @@ const IndexPage = () => {
           <TitleText>heet</TitleText>
         </Word>
       </TitleContainer>
-      <TextContainer>
+      <TextContainer >
+      {/* <TextContainer style={{ backgroundColor: "rgb(255,255,255, .3)"}}> */}
         <Text>
           Are you sick of being asked to re-buy all your cool physical D&D books
           to use online character tracking? Do you want to be able to remember

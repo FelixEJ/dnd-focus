@@ -19,8 +19,8 @@ const FlexContainer = styled.div`
   width: 99%;
   background-color: none;
 
-  border-style: inset;
-  border-radius: 10px;
+  border: 3px outset lightblue;
+  border-radius: 5px;
 
   margin-top: 2px;
   margin-bottom: 2px;

@@ -82,12 +82,14 @@ const EditInventoryModal = ({
         </Item>
         <Item>
           <label>Item Description</label>
-          <input
+          <textarea
             type="text"
             id="item_description"
             name="item_description"
             value={invItem.item_description}
             onChange={handleChange}
+            cols="35"
+            rows="3"
           />
         </Item>
         <Item>

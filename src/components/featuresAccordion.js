@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
+import { Button, FormControl } from "@material-ui/core";
 
 import { useAccordionButton } from "react-bootstrap/AccordionButton";
 import {
@@ -66,10 +67,11 @@ const Uses = styled.div`
 
 const FeatureAccordion = ({ character, updateFeatures }) => {
   const [tempFeats, setTempFeats] = useState([...character.features]);
+  const [sortType, setSortType] = useState("level");
 
   useEffect(() => {
     setTempFeats([...character.features]);
-  }, [character]);
+  }, [character, sortType]);
 
   const handleChange = (e, index, name) => {
     e.preventDefault();
@@ -81,13 +83,60 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
     updateFeatures(tempFeats);
   };
 
+  useEffect(() => {
+    sortFeatures(sortType);
+  }, [sortType]);
+
+  const sortFeatures = (type) => {
+    const types = {
+      level: "level_acquired",
+      action: "action_type",
+      charges: "max_uses",
+      recharge: "recharge",
+    };
+    const sortProperty = types[type];
+    if (sortProperty === "max_uses") {
+      const sorted = character.features.sort(
+        (a, b) => a[sortProperty] - b[sortProperty]
+      );
+      updateFeatures(sorted);
+    } else if (sortProperty === "level_acquired") {
+      const sorted = character.features.sort(
+        (a, b) => a[sortProperty] - b[sortProperty]
+      );
+      updateFeatures(sorted);
+    } else if (sortProperty === "action_type") {
+      const sorted = character.features.sort(
+        (a, b) => (a[sortProperty] < b[sortProperty] ? -1 : 1)
+      );
+      updateFeatures(sorted);
+    } else if (sortProperty === "recharge") {
+      const sorted = character.features.sort(
+        (a, b) => b[sortProperty].localeCompare(a[sortProperty])
+      );
+      updateFeatures(sorted);
+    }
+  };
+
+  function setFeatureSort(e) {
+    let featSort = e.target.value;
+    setSortType(featSort);
+  }
+
   return (
     <CardColumn>
       <Accordion style={{ width: "100%" }}>
         <div>
           {character.features.map((feature, index) => (
-            <Card
-              style={{ backgroundColor: "rgba(203, 203, 203, 0.2)" }}
+            <Card            
+              style={{
+                backgroundColor: "rgba(225, 225, 225, 0.1)",
+                borderStyle: "outset",
+                borderRadius: "5px",
+                borderWidth: "1px",
+                borderColor: "black",
+                margin: "1px",
+              }}
               key={index}
             >
               <Card.Header>
@@ -125,7 +174,11 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                           onChange={(e) =>
                             handleChange(e, index, feature.feature_name)
                           }
-                          style={{ width: "40px", backgroundColor: "rgb(255,255,255, .3)", border: "none" }}
+                          style={{
+                            width: "40px",
+                            backgroundColor: "rgb(255,255,255, .3)",
+                            border: "none",
+                          }}
                           display="none"
                         />
                         /{feature.max_uses}
@@ -146,6 +199,8 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                   class="overflow-auto"
                 >
                   <>
+                    Level acquired: <b>{feature.level_acquired}</b>
+                    <br />
                     {feature.source !== "" && (
                       <>
                         Source: <b>{feature.source}</b>
@@ -178,14 +233,14 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                         />
                         /{feature.max_uses}
                       </>
-                      <br/>
+                      <br />
                       <> Recharge: {feature.recharge}</>
                     </>
                   )}
-                  {feature.dc !== "" && (
+                  {feature.dc > 0 && (
                     <>
-                    <br/>
-                    DC {feature.dc}
+                      <br />
+                      DC {feature.dc}
                     </>
                   )}
                   <p>{feature.description}</p>
@@ -195,11 +250,26 @@ const FeatureAccordion = ({ character, updateFeatures }) => {
                     index={index}
                     name={feature.feature_name}
                     feat={{ feature }}
+                    sort={sortType}
                   />
                 </Card.Body>
               </Accordion.Collapse>
             </Card>
           ))}
+          <FormControl>
+            <label>Sort Features</label>
+            <select
+              id="sort"
+              name="sort"
+              value={sortType}
+              onChange={setFeatureSort}
+            >
+              <option value="level">Level</option>
+              <option value="action">Action type</option>
+              <option value="charges">Has Charges</option>
+              <option value="recharge">Recharge</option>
+            </select>
+          </FormControl>
         </div>
       </Accordion>
     </CardColumn>

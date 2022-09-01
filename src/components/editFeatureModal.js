@@ -27,7 +27,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const EditFeatureModal = ({ character, updateFeatures, index, name }) => {
+const EditFeatureModal = ({ character, updateFeatures, index, name, sort }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -38,7 +38,7 @@ const EditFeatureModal = ({ character, updateFeatures, index, name }) => {
     setFeature(
       ...character.features.filter((feat) => feat.feature_name === name)
     );
-  }, [character.features]);
+  }, [character, sort]);
 
   const handleChange = (e) => {
     let name = e.target.name;

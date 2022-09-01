@@ -29,8 +29,9 @@ const Container = styled.div`
 
 const AbilityBox = styled.div`
   width: 98%;
-  border-style: inset;
+  border-style: outset;
   border-radius: 5px;
+  border-width: 5px;
   display: flex;
   flex-flow: row nowrap;
 `;
