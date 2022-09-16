@@ -139,7 +139,7 @@ const InvSection = styled(Section)`
     height: 39vh;
   }
   @media only screen and (min-width: 1600px) {
-    height: 48vh;
+    height: 45vh;
   }
 `;
 

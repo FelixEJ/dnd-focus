@@ -62,7 +62,7 @@ const SkillModifier = styled.div`
 `;
 
 const SkillName = styled.div`
-  font-size: 0.8em;
+  font-size: 1em;
   text-transform: uppercase;
   width: 99%;
   display: inline-block;
@@ -94,10 +94,11 @@ const TextLeft = styled.div`
 `;
 
 const TextRight = styled.div`
-  font-size: 0.8em;
+  font-size: 0.9em;
   display: inherit;
   grid-column: 2;
   text-transform: uppercase;
+  width: 80%;
 
   margin-left: auto;
   margin-right: auto;
@@ -117,7 +118,7 @@ const Abilities = ({ character, onCharacterChange }) => {
     <CardColumn>
       <Bar>
         <NumberLeft>+{character.proficiency_bonus}</NumberLeft>
-        <TextRight>proficiency bonus</TextRight>
+        <TextRight><b>proficiency bonus</b></TextRight>
       </Bar>
       <Bar>
         <NumberLeft>
@@ -129,7 +130,7 @@ const Abilities = ({ character, onCharacterChange }) => {
             onChange={onCharacterChange}
           />
         </NumberLeft>
-        <TextRight>inspiration</TextRight>
+        <TextRight><b>inspiration</b></TextRight>
       </Bar>
       <AbilityBox style={{borderColor: strCol}}>
         <AbilityGroup
@@ -682,7 +683,7 @@ const Abilities = ({ character, onCharacterChange }) => {
       {character.passives.senses != "" && (
         <Bar>
           <TextLeft>{character.passives.senses}</TextLeft>
-          <TextRight>Senses</TextRight>
+          <TextRight><b>Senses</b></TextRight>
         </Bar>
       )}
       <Bar>
@@ -695,7 +696,7 @@ const Abilities = ({ character, onCharacterChange }) => {
             character.stats.wis
           )}
         </NumberLeft>
-        <TextRight>passive wisdom (perception)</TextRight>
+        <TextRight><b>passive wisdom </b>(perception)</TextRight>
       </Bar>
       <Bar>
         <NumberLeft>
@@ -707,7 +708,7 @@ const Abilities = ({ character, onCharacterChange }) => {
             character.stats.int
           )}
         </NumberLeft>
-        <TextRight>passive intelligence (investigation)</TextRight>
+        <TextRight><b>passive intelligence</b> (investigation)</TextRight>
       </Bar>
     </CardColumn>
   );
